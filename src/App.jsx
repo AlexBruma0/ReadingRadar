@@ -9,12 +9,16 @@ import Editable from "../components/Editable/Editable";
 import useLocalStorage from "use-local-storage";
 import "../bootstrap.css";
 function App() {
-  const [data, setData] = useState(
-    localStorage.getItem("kanban-board")
-      ? JSON.parse(localStorage.getItem("kanban-board"))
-      : [
-      ]
-  );
+  const remote = "https://myproject-382821.uc.r.appspot.com/";
+
+const local = "http://localhost:8081/"
+var uri = local;
+  const get = async () => {
+    const response = await fetch(uri);
+    const json = await response.json();
+    return json.result;
+  };
+  const [data, setData] = useState([]);
 
   const defaultDark = window.matchMedia(
     "(prefers-colors-scheme: dark)"
@@ -53,28 +57,20 @@ function App() {
     return tempData;
   };
 
-  // const dragCardInSameBoard = (source, destination) => {
-  //   let tempData = Array.from(data);
-  //   console.log("Data", tempData);
-  //   const index = tempData.findIndex(
-  //     (item) => item.id.toString() === source.droppableId
-  //   );
-  //   console.log(tempData[index], index);
-  //   let [removedCard] = tempData[index].card.splice(source.index, 1);
-  //   tempData[index].card.splice(destination.index, 0, removedCard);
-  //   setData(tempData);
-  // };
+  const addCard = async(title, bid) => {
+    await fetch(`${uri}${bid}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        card: {
+          id: uuidv4(),
+          title: title,
+          tags: [],
+          task: [],
+        }
 
-  const addCard = (title, bid) => {
-    const index = data.findIndex((item) => item.id === bid);
-    const tempData = [...data];
-    tempData[index].card.push({
-      id: uuidv4(),
-      title: title,
-      tags: [],
-      task: [],
+      }),
     });
-    setData(tempData);
   };
 
   const removeCard = (boardId, cardId) => {
@@ -83,16 +79,6 @@ function App() {
     const cardIndex = data[index].card.findIndex((item) => item.id === cardId);
 
     tempData[index].card.splice(cardIndex, 1);
-    setData(tempData);
-  };
-
-  const addBoard = (title) => {
-    const tempData = [...data];
-    tempData.push({
-      id: uuidv4(),
-      boardName: title,
-      card: [],
-    });
     setData(tempData);
   };
 
@@ -128,28 +114,9 @@ function App() {
   };
 
   useEffect(() => {
-    localStorage.getItem("kanban-board") === '[]'
-    ? localStorage.setItem("kanban-board", JSON.stringify([
-      {
-        "id": "acc522f6-aae8-4f83-b55d-c96ff406996a",
-        "boardName": "To be read",
-        "card": []
-      },
-      {
-        "id": "46ee9216-4c3e-4d9e-91fc-bd339ba4383c",
-        "boardName": "Reading",
-        "card": []
-      },
-      {
-        "id": "ab3b5d58-1ae6-4a9d-b4ab-14a4a1f7453d",
-        "boardName": "Read",
-        "card": []
-      }
-    ]))
-    :localStorage.setItem("kanban-board", JSON.stringify(data))
-    
-    
-    
+    get().then((data) =>{
+      setData(data)
+    })
   }, [data]);
 
   return (
@@ -160,8 +127,8 @@ function App() {
           <div className="app_boards">
             {data.map((item) => (
               <Board
-                key={item.id}
-                id={item.id}
+                key={item._id}
+                id={item._id}
                 name={item.boardName}
                 card={item.card}
                 setName={setName}

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import "./Board.css";
-import { MoreHorizontal } from "react-feather";
 import Editable from "../Editable/Editable";
-import Dropdown from "../Dropdown/Dropdown";
 import { Droppable } from "react-beautiful-dnd";
 export default function Board(props) {
   const [show, setShow] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
-
   useEffect(() => {
     document.addEventListener("keypress", (e) => {
       if (e.code === "Enter") setShow(false);

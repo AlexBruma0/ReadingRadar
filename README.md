@@ -1,4 +1,4 @@
-<h1 align="center">Kanban board</h1>
+<h1 align="center">Hannahs-books</h1>
 
 👉 [View Live](https://kanbann-board.netlify.app/)
 
