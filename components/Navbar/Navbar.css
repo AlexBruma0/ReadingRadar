@@ -1,11 +1,19 @@
 .navbar {
   padding-inline: 2rem;
   border-bottom: 1px solid #ccc;
-  max-height: 50px;
+  max-height: 10rem;
   display: flex;
-  align-items: center;
+  
   justify-content: space-between;
   color: var(--text-color);
+  font-family: 'Times New Roman', Times, serif;
+  background-color: rgb(235, 182, 208);
+
+}
+.title{
+  font-size: 5rem;
+  text-align: center;
+  margin: auto;
 }
 .checkbox {
   opacity: 0;

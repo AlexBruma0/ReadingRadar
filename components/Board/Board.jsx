@@ -47,23 +47,7 @@ export default function Board(props) {
             </p>
           </div>
         )}
-        <div
-          onClick={() => {
-            setDropdown(true);
-          }}
-        >
-          <MoreHorizontal />
-          {dropdown && (
-            <Dropdown
-              class="board__dropdown"
-              onClose={() => {
-                setDropdown(false);
-              }}
-            >
-              <p onClick={() => props.removeBoard(props.id)}>Delete Board</p>
-            </Dropdown>
-          )}
-        </div>
+        
       </div>
       <Droppable droppableId={props.id.toString()}>
         {(provided) => (
@@ -91,9 +75,9 @@ export default function Board(props) {
       </Droppable>
       <div className="board__footer">
         <Editable
-          name={"Add Card"}
-          btnName={"Add Card"}
-          placeholder={"Enter Card Title"}
+          name={"Add Book"}
+          btnName={"Add Book"}
+          placeholder={"Enter Book Title"}
           onSubmit={(value) => props.addCard(value, props.id)}
         />
       </div>

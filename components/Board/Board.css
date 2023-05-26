@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 290px;
+  width: 30vw;
   word-wrap: break-word;
   background-color: var(--board-color);
   background-clip: border-box;
@@ -11,6 +11,7 @@
   height: 100%;
   max-height: 82vh;
   color: var(--text-color);
+  margin-inline: auto;
 }
 .board__footer {
   display: flex;
@@ -22,10 +23,10 @@
 }
 .board__top {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   padding-inline: 0.5rem;
   margin-bottom: 0;
+  margin-block: auto;
 }
 .board__dropdown {
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.12);
@@ -51,7 +52,7 @@
   padding-inline: 0.6rem;
   border: 0.5px solid var(--card-box-shadow);
   background-color: var(--card-color);
-  margin-inline: 10px;
+  margin-inline: 1px;
 }
 .title__input {
   font-weight: 400;

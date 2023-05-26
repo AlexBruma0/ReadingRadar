@@ -168,80 +168,9 @@ export default function CardDetails(props) {
                   </span>
                 )}
               </div>
-              <div className="check__list mt-2">
-                <div className="d-flex align-items-end  justify-content-between">
-                  <div className="d-flex align-items-center gap-2">
-                    <CheckSquare className="icon__md" />
-                    <h6>Check List</h6>
-                  </div>
-                  <div className="card__action__btn">
-                    <button onClick={() => deleteAllTask()}>
-                      Delete all tasks
-                    </button>
-                  </div>
-                </div>
-                <div className="progress__bar mt-2 mb-2">
-                  <div className="progress flex-1">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style={{ width: calculatePercent() + "%" }}
-                      aria-valuenow="75"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      {calculatePercent() + "%"}
-                    </div>
-                  </div>
-                </div>
 
-                <div className="my-2">
-                  {values.task.length !== 0 ? (
-                    values.task.map((item, index) => (
-                      <div className="task__list d-flex align-items-start gap-2">
-                        <input
-                          className="task__checkbox"
-                          type="checkbox"
-                          defaultChecked={item.completed}
-                          onChange={() => {
-                            updateTask(item.id);
-                          }}
-                        />
-
-                        <h6
-                          className={`flex-grow-1 ${
-                            item.completed === true ? "strike-through" : ""
-                          }`}
-                        >
-                          {item.task}
-                        </h6>
-                        <Trash
-                          onClick={() => {
-                            removeTask(item.id);
-                          }}
-                          style={{
-                            cursor: "pointer",
-                            widht: "18px",
-                            height: "18px",
-                          }}
-                        />
-                      </div>
-                    ))
-                  ) : (
-                    <></>
-                  )}
-
-                  <Editable
-                    parentClass={"task__editable"}
-                    name={"Add Task"}
-                    btnName={"Add task"}
-                    onSubmit={addTask}
-                  />
-                </div>
-              </div>
             </div>
             <div className="col-4">
-              <h6>Add to card</h6>
               <div className="d-flex card__action__btn flex-column gap-2">
                 <button onClick={() => setLabelShow(true)}>
                   <span className="icon__sm">
@@ -257,18 +186,12 @@ export default function CardDetails(props) {
                     onClose={setLabelShow}
                   />
                 )}
-                <button>
-                  <span className="icon__sm">
-                    <Clock />
-                  </span>
-                  Date
-                </button>
 
                 <button onClick={() => props.removeCard(props.bid, values.id)}>
                   <span className="icon__sm">
                     <Trash />
                   </span>
-                  Delete Card
+                  Delete Book
                 </button>
               </div>
             </div>

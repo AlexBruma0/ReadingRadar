@@ -12,7 +12,8 @@ function App() {
   const [data, setData] = useState(
     localStorage.getItem("kanban-board")
       ? JSON.parse(localStorage.getItem("kanban-board"))
-      : []
+      : [
+      ]
   );
 
   const defaultDark = window.matchMedia(
@@ -127,7 +128,28 @@ function App() {
   };
 
   useEffect(() => {
-    localStorage.setItem("kanban-board", JSON.stringify(data));
+    localStorage.getItem("kanban-board") === '[]'
+    ? localStorage.setItem("kanban-board", JSON.stringify([
+      {
+        "id": "acc522f6-aae8-4f83-b55d-c96ff406996a",
+        "boardName": "To be read",
+        "card": []
+      },
+      {
+        "id": "46ee9216-4c3e-4d9e-91fc-bd339ba4383c",
+        "boardName": "Reading",
+        "card": []
+      },
+      {
+        "id": "ab3b5d58-1ae6-4a9d-b4ab-14a4a1f7453d",
+        "boardName": "Read",
+        "card": []
+      }
+    ]))
+    :localStorage.setItem("kanban-board", JSON.stringify(data))
+    
+    
+    
   }, [data]);
 
   return (
@@ -149,13 +171,7 @@ function App() {
                 updateCard={updateCard}
               />
             ))}
-            <Editable
-              class={"add__board"}
-              name={"Add Board"}
-              btnName={"Add Board"}
-              onSubmit={addBoard}
-              placeholder={"Enter Board  Title"}
-            />
+          
           </div>
         </div>
       </div>
