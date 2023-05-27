@@ -39,13 +39,15 @@ var uri = local;
     setData(tempData);
   };
 
-  const dragCardInBoard = (source, destination) => {
+  const dragCardInBoard = async(source, destination) => {
     let tempData = [...data];
+    console.log(tempData)
     const destinationBoardIdx = tempData.findIndex(
-      (item) => item.id.toString() === destination.droppableId
+      (item) => item._id.toString() === destination.droppableId
     );
+    
     const sourceBoardIdx = tempData.findIndex(
-      (item) => item.id.toString() === source.droppableId
+      (item) => item._id.toString() === source.droppableId
     );
     tempData[destinationBoardIdx].card.splice(
       destination.index,
@@ -53,7 +55,6 @@ var uri = local;
       tempData[sourceBoardIdx].card[source.index]
     );
     tempData[sourceBoardIdx].card.splice(source.index, 1);
-
     return tempData;
   };
 
@@ -73,13 +74,15 @@ var uri = local;
     });
   };
 
-  const removeCard = (boardId, cardId) => {
-    const index = data.findIndex((item) => item.id === boardId);
-    const tempData = [...data];
-    const cardIndex = data[index].card.findIndex((item) => item.id === cardId);
+  const removeCard = async(boardId, cardId) => {
+    await fetch(`${uri}${boardId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        cardId: cardId
 
-    tempData[index].card.splice(cardIndex, 1);
-    setData(tempData);
+      }),
+    });
   };
 
   const removeBoard = (bid) => {
@@ -94,8 +97,28 @@ var uri = local;
     if (!destination) return;
 
     if (source.droppableId === destination.droppableId) return;
-
-    setData(dragCardInBoard(source, destination));
+    dragCardInBoard(source, destination).then((data)=>{
+      const sindex = data.findIndex((item) => item._id === source.droppableId);
+      fetch(`${uri}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: source.droppableId,
+          board: data[sindex]
+        }),
+      });
+      const dindex = data.findIndex((item) => item._id === destination.droppableId);
+      fetch(`${uri}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: destination.droppableId,
+          board: data[dindex]
+        }),
+      });
+      
+    })
+    // setData(dragCardInBoard(source, destination));
   };
 
   const updateCard = (bid, cid, card) => {
@@ -109,7 +132,6 @@ var uri = local;
     if (cardIndex < 0) return;
 
     tempBoards[index].card[cardIndex] = card;
-    console.log(tempBoards);
     setData(tempBoards);
   };
 

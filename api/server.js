@@ -41,12 +41,22 @@ app.get("/", async(req,res) =>{
 })
 app.delete("/:id", async(req,res) =>{
     console.log(req.params.id)
-    await Item.deleteOne({ _id: req.params.id });
+    await Item.updateMany(
+        { _id: req.params.id },
+        { $pull: { card: {id: req.body.cardId} } }
+        );
 })
 app.put("/:id" ,async(req,res) =>{
     await Item.updateOne(
         { _id: req.params.id }, 
         { $push: { card: req.body.card } }
+        
+    );
+})
+app.put("/", async(req,res) =>{
+    await Item.updateOne(
+        { _id: req.body.id }, 
+        { $set: req.body.board  }
         
     );
 })
