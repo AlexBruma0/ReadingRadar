@@ -12,7 +12,7 @@ function App() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
 
 const local = "http://localhost:8081/"
-var uri = local;
+var uri = remote;
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
