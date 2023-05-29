@@ -43,7 +43,6 @@ export default function Board(props) {
             </p>
           </div>
         )}
-        
       </div>
       <Droppable droppableId={props.id.toString()}>
         {(provided) => (

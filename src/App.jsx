@@ -2,35 +2,21 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "../components/Navbar/Navbar";
 import Board from "../components/Board/Board";
-// import data from '../data'
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
-import Editable from "../components/Editable/Editable";
-import useLocalStorage from "use-local-storage";
 import "../bootstrap.css";
+import SearchBar from "../components/SearchBar/SearchBar";
 function App() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
 
-const local = "http://localhost:8081/"
-var uri = remote;
+  const local = "http://localhost:8081/";
+  var uri = remote;
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
     return json.result;
   };
   const [data, setData] = useState([]);
-
-  const defaultDark = window.matchMedia(
-    "(prefers-colors-scheme: dark)"
-  ).matches;
-  const [theme, setTheme] = useLocalStorage(
-    "theme",
-    defaultDark ? "dark" : "light"
-  );
-
-  const switchTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
 
   const setName = (title, bid) => {
     const index = data.findIndex((item) => item.id === bid);
@@ -39,13 +25,13 @@ var uri = remote;
     setData(tempData);
   };
 
-  const dragCardInBoard = async(source, destination) => {
+  const dragCardInBoard = async (source, destination) => {
     let tempData = [...data];
-    console.log(tempData)
+    console.log(tempData);
     const destinationBoardIdx = tempData.findIndex(
       (item) => item._id.toString() === destination.droppableId
     );
-    
+
     const sourceBoardIdx = tempData.findIndex(
       (item) => item._id.toString() === source.droppableId
     );
@@ -58,7 +44,7 @@ var uri = remote;
     return tempData;
   };
 
-  const addCard = async(title, bid) => {
+  const addCard = async (title, bid) => {
     await fetch(`${uri}${bid}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -68,19 +54,17 @@ var uri = remote;
           title: title,
           tags: [],
           task: [],
-        }
-
+        },
       }),
     });
   };
 
-  const removeCard = async(boardId, cardId) => {
+  const removeCard = async (boardId, cardId) => {
     await fetch(`${uri}${boardId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        cardId: cardId
-
+        cardId: cardId,
       }),
     });
   };
@@ -97,28 +81,28 @@ var uri = remote;
     if (!destination) return;
 
     if (source.droppableId === destination.droppableId) return;
-    dragCardInBoard(source, destination).then((data)=>{
+    dragCardInBoard(source, destination).then((data) => {
       const sindex = data.findIndex((item) => item._id === source.droppableId);
       fetch(`${uri}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: source.droppableId,
-          board: data[sindex]
+          board: data[sindex],
         }),
       });
-      const dindex = data.findIndex((item) => item._id === destination.droppableId);
+      const dindex = data.findIndex(
+        (item) => item._id === destination.droppableId
+      );
       fetch(`${uri}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: destination.droppableId,
-          board: data[dindex]
+          board: data[dindex],
         }),
       });
-      
-    })
-    // setData(dragCardInBoard(source, destination));
+    });
   };
 
   const updateCard = (bid, cid, card) => {
@@ -136,17 +120,18 @@ var uri = remote;
   };
 
   useEffect(() => {
-    get().then((data) =>{
-      setData(data)
-    })
+    get().then((data) => {
+      setData(data);
+    });
   }, [data]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="App" data-theme={theme}>
-        <Navbar switchTheme={switchTheme} />
+      <div className="App">
+        <Navbar />
         <div className="app_outer">
           <div className="app_boards">
+            <SearchBar></SearchBar>
             {data.map((item) => (
               <Board
                 key={item._id}
@@ -160,7 +145,6 @@ var uri = remote;
                 updateCard={updateCard}
               />
             ))}
-          
           </div>
         </div>
       </div>

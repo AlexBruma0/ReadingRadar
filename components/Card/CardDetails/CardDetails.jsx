@@ -168,7 +168,6 @@ export default function CardDetails(props) {
                   </span>
                 )}
               </div>
-
             </div>
             <div className="col-4">
               <div className="d-flex card__action__btn flex-column gap-2">
