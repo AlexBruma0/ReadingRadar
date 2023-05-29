@@ -129,9 +129,14 @@ function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
+        <div className="searchbar">
+          <SearchBar></SearchBar>
+          </div>
         <div className="app_outer">
+ 
+          
           <div className="app_boards">
-            <SearchBar></SearchBar>
+            
             {data.map((item) => (
               <Board
                 key={item._id}

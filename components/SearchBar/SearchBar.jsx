@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react";
+import "./SearchBar.css"
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
 
@@ -22,28 +23,32 @@ const SearchBar = () => {
     get().then((data) => {
       setData(data);
     });
-    console.log(data)
   }, [data]);
 
   return (
-    <div>
+    <div className="search">
       <input
+        className="input"
         type="search"
-        placeholder="Search here"
+        placeholder="Search here" 
         onChange={handleChange}
         value={searchInput}
       />
 
-      <table>
+      <table className="table">
+        <tbody>
+        <div>
         {data.map((board) => (
-          
-          <tr>
+          <tr className="">
             <td>{board.card.map((card) =>(
-              <div>{(card.title.match(new RegExp(searchInput, "i")) && searchInput != '') && card.title}</div>
+              <div className="item">{(card.title.match(new RegExp(searchInput, "i")) && searchInput != '') && card.title}</div>
             ))}</td>
           </tr>
 
         ))}
+        </div>
+        
+        </tbody>
       </table>
     </div>
   );

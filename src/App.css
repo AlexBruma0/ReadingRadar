@@ -8,11 +8,15 @@ body {
   margin-inline: auto;
   background-color: var(--background-color);
   transition: all 350ms;
+  z-index: -1;
 }
 .app_outer {
   width: 100%;
   overflow-x: auto;
   margin-inline: auto;
+}
+.searchbar{
+  width: 90vw;
 }
 
 .app_boards {
