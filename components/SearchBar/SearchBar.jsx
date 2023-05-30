@@ -11,7 +11,8 @@ const SearchBar = () => {
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
-    return json.result;
+    
+    return json.result[0].card.concat(json.result[1].card,json.result[2].card);
   };
   const [data, setData] = useState([]);
 
@@ -21,8 +22,10 @@ const SearchBar = () => {
   };
   useEffect(() => {
     get().then((data) => {
-      setData(data);
-    });
+      setData(data)
+      console.log(data)
+      
+    })
   }, [data]);
 
   return (
@@ -30,24 +33,19 @@ const SearchBar = () => {
       <input
         className="input"
         type="search"
-        placeholder="Search here" 
+        placeholder="Search for book:" 
         onChange={handleChange}
         value={searchInput}
       />
 
       <table className="table">
         <tbody>
-        <div>
-        {data.map((board) => (
-          <tr className="">
-            <td>{board.card.map((card) =>(
-              <div className="item">{(card.title.match(new RegExp(searchInput, "i")) && searchInput != '') && card.title}</div>
-            ))}</td>
+        {data.map((book) => (
+          <tr>
+            <td className="item">{(book.title.match(new RegExp(searchInput, "i")) && searchInput != '') && book.title}</td>
           </tr>
-
         ))}
-        </div>
-        
+
         </tbody>
       </table>
     </div>
