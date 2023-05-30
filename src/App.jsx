@@ -132,7 +132,6 @@ function App() {
         <div className="searchbar">
           <SearchBar></SearchBar>
           </div>
-        <div className="app_outer">
  
           
           <div className="app_boards">
@@ -152,7 +151,6 @@ function App() {
             ))}
           </div>
         </div>
-      </div>
     </DragDropContext>
   );
 }

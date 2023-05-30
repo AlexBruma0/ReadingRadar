@@ -21,11 +21,12 @@ const SearchBar = () => {
     setSearchInput(e.target.value);
   };
   useEffect(() => {
-    get().then((data) => {
-      setData(data)
-      console.log(data)
-      
-    })
+      get().then((data) => {
+        setData(data.filter((book) =>{
+          return (book.title.match(new RegExp(searchInput, "i")) && searchInput != '')
+        }))
+      })
+
   }, [data]);
 
   return (
@@ -38,16 +39,12 @@ const SearchBar = () => {
         value={searchInput}
       />
 
-      <table className="table">
-        <tbody>
+      <div className="table">
         {data.map((book) => (
-          <tr>
-            <td className="item">{(book.title.match(new RegExp(searchInput, "i")) && searchInput != '') && book.title}</td>
-          </tr>
+            <div className="item">{book.title}</div>
         ))}
 
-        </tbody>
-      </table>
+      </div>
     </div>
   );
 };

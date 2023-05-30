@@ -6,12 +6,12 @@
   word-wrap: break-word;
   background-color: var(--board-color);
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   height: 100%;
   max-height: 82vh;
   color: var(--text-color);
   margin-inline: auto;
+  
 }
 .board__footer {
   display: flex;
@@ -26,7 +26,6 @@
   justify-content: space-between;
   padding-inline: 0.5rem;
   margin-bottom: 0;
-  margin-block: auto;
 }
 .board__dropdown {
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.12);
@@ -69,12 +68,9 @@
 
 @media screen and (max-width: 800px) {
   .board {
-    position: relative;
-    display: flex;
     flex-direction: column;
     width: 80vw;
     word-wrap: break-word;
-    background-color: var(--board-color);
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
