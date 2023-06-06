@@ -132,8 +132,6 @@ function App() {
         <div className="searchbar">
           <SearchBar></SearchBar>
           </div>
- 
-          
           <div className="app_boards">
             
             {data.map((item) => (
