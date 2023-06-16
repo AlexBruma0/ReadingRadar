@@ -65,4 +65,17 @@ body {
 .cardinfo__editable {
   width: fit-content;
 }
+@media screen and (max-width: 800px) {
+  .app_boards {
+    min-width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding-inline: 2rem;
+    color: var(--text-color);
+    position: absolute;
+    top: 30%;
+    left: 0;
+  }
+}
 
