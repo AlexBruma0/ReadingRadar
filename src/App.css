@@ -8,7 +8,6 @@ body {
   margin-inline: auto;
   background-color: var(--background-color);
   transition: all 350ms;
-  z-index: -1;
 }
 .app_outer {
   width: 100%;
@@ -18,7 +17,9 @@ body {
 }
 .searchbar{
   width: 90vw;
+  z-index: 9;
 }
+
 
 .app_boards {
   min-width: fit-content;
@@ -27,8 +28,9 @@ body {
   gap: 30px;
   padding-inline: 2rem;
   color: var(--text-color);
-  position:relative;
-  z-index:-1;
+  position: absolute;
+  top: 20%;
+  left: 0;
 }
 
 ::-webkit-scrollbar {

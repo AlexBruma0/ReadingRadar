@@ -27,6 +27,7 @@ const SearchBar = () => {
         }))
       })
 
+
   }, [data]);
 
   return (
