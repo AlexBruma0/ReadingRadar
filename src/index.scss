@@ -2,12 +2,26 @@
   --backgroud-color: rgb(235, 182, 208);
   --board-color: #f2f2f3;
   --card-color: rgb(235, 182, 208);
+  --pink:rgb(235, 182, 208);
   --text-color: #000;
   --drop-down-color: #fff;
   --card-box-shadow: #e2dede;
   --add-btn-hover: #000;
   --modal-color: #fff;
   --task-hover: #091e4214;
+  --border-height: 6rem;
+  --boardsHeight: 85vh;
+  --navbarHeight: 4em;
+  --boardHeight: 33vh;
+  --navBarFont: "Times New Roman", Times, serif;
+  --searchBarWidth: 90vw;
+  --boardsWidth: 70vw
+  --boardWidth: 50vw;
+  --bw: 80vw;
+  --searchBarMargin: 2.2vw;
+  --cardHeight: 1.5rem;
+  --cardWidth: 35vw;
+  
 }
 [data-theme="dark"] {
   --background-color: #212121;

@@ -2,24 +2,33 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 30vw;
-  word-wrap: break-word;
+  width: calc(var(--bw) * 0.45);
   background-color: var(--board-color);
   background-clip: border-box;
   border-radius: 0.25rem;
   height: 100%;
-  max-height: 82vh;
+  height: calc(var(--boardsHeight) * 0.45);
+  margin-right: calc(var(--bw) * 0.03);
   color: var(--text-color);
-  margin-inline: auto;
-  
+
 }
+#board2 {
+  width: calc(var(--bw) * 0.935);
+}
+
 .board__footer {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  bottom: -1rem;
 }
 .board__cards {
-  padding: 0.5rem 0.5rem;
-  overflow-y: auto;
+  border: 1pt solid black;
+  display: flex;
+  flex-flow: column wrap;
+  column-gap: 0.2vw;
+  max-height: calc(var(--boardsHeight) * 0.32);
+  overflow-y: scroll;
 }
 .board__top {
   display: flex;

@@ -123,8 +123,10 @@ function App() {
     get().then((data) => {
       setData(data);
     });
+
   }, [data]);
 
+  let loggedIn = true; 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
@@ -132,20 +134,29 @@ function App() {
         <div className="searchbar">
           <SearchBar></SearchBar>
           </div>
+
           <div className="app_boards">
             
-            {data.map((item) => (
+            {data.map((item,index) => (
+              
+              <>
+              {index < 3 &&
               <Board
-                key={item._id}
-                id={item._id}
-                name={item.boardName}
-                card={item.card}
-                setName={setName}
-                addCard={addCard}
-                removeCard={removeCard}
-                removeBoard={removeBoard}
-                updateCard={updateCard}
-              />
+                  key={item._id}
+                  id={item._id}
+                  index={index}
+                  className = {`board${index}`}
+                  name={item.boardName}
+                  card={item.card}
+                  setName={setName}
+                  addCard={addCard}
+                  removeCard={removeCard}
+                  removeBoard={removeBoard}
+                  updateCard={updateCard}
+                />}
+
+            </>
+
             ))}
           </div>
         </div>

@@ -1,10 +1,8 @@
-.search{
-    width: 95.5vw;
+.searchBar{
+    width: var(--searchBarWidth);
     margin-top: 1rem;
-    margin-left: 2.2vw;
-    z-index: 100;
-    height: 3rem;
-    z-index: 9;
+    margin-left: var(--searchBarMargin);
+
 }
 .input{
     width: 100%;

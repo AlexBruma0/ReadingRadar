@@ -17,7 +17,7 @@ export default function Board(props) {
   });
 
   return (
-    <div className="board">
+    <div className="board" id={`board${props.index}`}>
       <div className="board__top">
         {show ? (
           <div>

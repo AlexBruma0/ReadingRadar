@@ -16,21 +16,22 @@ body {
 
 }
 .searchbar{
-  width: 90vw;
+  width: var(--searchBarWidth);
   z-index: 9;
 }
 
 
+
 .app_boards {
-  min-width: fit-content;
   display: flex;
-  flex-direction: row;
-  gap: 30px;
-  padding-inline: 2rem;
-  color: var(--text-color);
+  flex-wrap: wrap;
+  align-content: space;
+
   position: absolute;
-  top: 20%;
-  left: 0;
+  height: calc(var(--boardsHeight));
+  width: calc(var(--bw));
+  top: 15%;
+  left: var(--searchBarMargin);
 }
 
 ::-webkit-scrollbar {

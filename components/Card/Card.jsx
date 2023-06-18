@@ -36,24 +36,11 @@ const Card = (props) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
+
           >
-            <div className="card__text">
-              <p>{props.title}</p>
-              <MoreHorizontal
-                className="car__more"
-                onClick={() => {
-                  setDropdown(true);
-                }}
-              />
-            </div>
 
-            <div className="card__tags">
-              {props.tags?.map((item, index) => (
-                <Tag key={index} tagName={item.tagName} color={item.color} />
-              ))}
-            </div>
-
-            {provided.placeholder}
+            {props.title}
+     
           </div>
         </>
       )}
