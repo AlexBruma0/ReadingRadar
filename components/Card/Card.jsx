@@ -29,7 +29,8 @@ const Card = (props) => {
           )}
 
           <div
-            className="custom__card"
+            className={props.cn}
+            style={{ marginLeft: '100vw'}}
             onClick={() => {
               setModalShow(true);
             }}

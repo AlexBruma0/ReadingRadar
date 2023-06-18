@@ -15,6 +15,20 @@
 #board2 {
   width: calc(var(--bw) * 0.935);
 }
+#board3, #board4 {
+  width: calc(var(--bw) * 0.235);
+  overflow-y: scroll;
+  margin: auto;
+  background-color: var(--pink);
+
+}
+ #board4 .board__cards{
+  margin-left: 1vw;
+}
+
+#board3 .board__cards{
+  margin-left: 1vw;
+}
 
 .board__footer {
   display: flex;
@@ -23,7 +37,6 @@
   bottom: -1rem;
 }
 .board__cards {
-  border: 1pt solid black;
   display: flex;
   flex-flow: column wrap;
   column-gap: 0.2vw;
@@ -33,7 +46,7 @@
 .board__top {
   display: flex;
   justify-content: space-between;
-  padding-inline: 0.5rem;
+  padding-inline: 0.rem;
   margin-bottom: 0;
 }
 .board__dropdown {

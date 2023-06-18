@@ -19,6 +19,21 @@ body {
   width: var(--searchBarWidth);
   z-index: 9;
 }
+.leader_boards{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: space;
+
+  position: absolute;
+  height: calc(var(--boardsHeight)* 0.95 );
+  width: calc(var(--bw)* 0.25);
+  top: 18%;
+  left: calc(var(--searchBarMargin)*36);
+  background-color: var(--board-color);
+  border-radius: 0.5rem;
+}
+
 
 
 
@@ -30,7 +45,7 @@ body {
   position: absolute;
   height: calc(var(--boardsHeight));
   width: calc(var(--bw));
-  top: 15%;
+  top: 18%;
   left: var(--searchBarMargin);
 }
 

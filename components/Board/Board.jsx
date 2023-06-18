@@ -15,6 +15,7 @@ export default function Board(props) {
       });
     };
   });
+  const color = "black"
 
   return (
     <div className="board" id={`board${props.index}`}>
@@ -53,6 +54,8 @@ export default function Board(props) {
           >
             {props.card?.map((items, index) => (
               <Card
+                color="black"
+                cn = {props.cn}
                 bid={props.id}
                 id={items.id}
                 index={index}
