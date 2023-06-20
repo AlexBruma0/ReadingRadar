@@ -26,7 +26,7 @@
 } 
 @media screen and (max-width: 800px) {
   .custom__card {
-    width: calc(var(--bw) * 0.78);
+    width: calc(var(--bw) * 1.17);
   }
 }
 
