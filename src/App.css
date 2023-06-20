@@ -30,7 +30,6 @@ body {
   width: calc(var(--bw)* 0.25);
   top: 18%;
   left: calc(var(--searchBarMargin)*36);
-  background-color: var(--board-color);
   border-radius: 0.5rem;
 }
 
@@ -83,15 +82,11 @@ body {
 }
 @media screen and (max-width: 800px) {
   .app_boards {
-    min-width: fit-content;
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    padding-inline: 2rem;
-    color: var(--text-color);
-    position: absolute;
-    top: 30%;
-    left: 0;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  .leader_boards{
+    display: none;
   }
 }
 
