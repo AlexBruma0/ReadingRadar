@@ -19,14 +19,28 @@
   overflow-y: scroll;
   margin: auto;
   background-color: var(--pink);
+  overflow-x: hidden;
 
 }
  #board4 .board__cards{
+  max-height: 90%;
   margin-left: 1vw;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+  background-color: var(--pink);
+  width: 110%;
+  margin-right: 1rem;
+
 }
 
 #board3 .board__cards{
   margin-left: 1vw;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+  background-color: var(--pink);
+  width: 110%;
+  margin-right: 1rem;
+
 }
 
 .board__footer {

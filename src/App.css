@@ -28,7 +28,7 @@ body {
   position: absolute;
   height: calc(var(--boardsHeight)* 0.95 );
   width: calc(var(--bw)* 0.25);
-  top: 18%;
+  top: 21%;
   left: calc(var(--searchBarMargin)*36);
   border-radius: 0.5rem;
 }
@@ -44,7 +44,7 @@ body {
   position: absolute;
   height: calc(var(--boardsHeight));
   width: calc(var(--bw));
-  top: 18%;
+  top: 21%;
   left: var(--searchBarMargin);
 }
 
