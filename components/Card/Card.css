@@ -24,6 +24,11 @@
   padding-left: 0.2vw;
   width: calc(var(--bw) * 0.18);
 } 
+@media screen and (max-width: 800px) {
+  .custom__card {
+    width: calc(var(--bw) * 0.78);
+  }
+}
 
 
 

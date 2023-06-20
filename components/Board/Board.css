@@ -10,7 +10,6 @@
   height: calc(var(--boardsHeight) * 0.45);
   margin-right: calc(var(--bw) * 0.03);
   color: var(--text-color);
-
 }
 #board2 {
   width: calc(var(--bw) * 0.935);
@@ -90,15 +89,15 @@
 
 @media screen and (max-width: 800px) {
   .board {
-    flex-direction: column;
     width: 80vw;
-    word-wrap: break-word;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
-    height: 100%;
     max-height: 82vh;
-    color: var(--text-color);
-    margin-inline: auto;
+  }
+  #board2 {
+    width: 80vw;
+  }
+  .board__cards {
+    flex-wrap: nowrap;
+    max-height: calc(var(--boardsHeight) * 0.20);
+    overflow-y: scroll;
   }
 }
