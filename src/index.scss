@@ -18,7 +18,6 @@
   --boardsWidth: 70vw
   --boardWidth: 50vw;
   --bw: 80vw;
-  --cardHeight: 1.5rem;
   --cardWidth: 35vw;
   --marginWidth: 2vw;
   --topLeftBoardWidth: 35vw;
@@ -30,6 +29,7 @@
   --border-radius: 0.2vw;
   --cardHeight: calc(var(--topLeft_board_card_height)* (3/14));
   --card-font-size: calc(var(--cardHeight) * (2/5));
+  --border-width: 0.01vw;
   
   
 }

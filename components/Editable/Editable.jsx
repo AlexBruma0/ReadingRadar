@@ -32,6 +32,7 @@ const Editable = (props) => {
                 {`${props.btnName}` || "Add"}
               </button>
               <X
+              height='3.5vh'
                 className="close"
                 onClick={() => {
                   setShow(false);
@@ -47,7 +48,7 @@ const Editable = (props) => {
             setShow(true);
           }}
         >
-            {props.defaultValue === undefined ? <Plus  height='1vw' width='1vw' x1='1'/> : <></>}
+            {props.defaultValue === undefined ? <Plus  height='2vh'/> : <></>}
             {props?.name || "Add"}
 
         </p>
