@@ -5,51 +5,43 @@ body {
 .App {
   height: 100vh;
   width: 100%;
-  margin-inline: auto;
   background-color: var(--background-color);
   transition: all 350ms;
 }
 .app_outer {
   width: 100%;
-  overflow-x: auto;
-  margin-inline: auto;
-
 }
-.searchbar{
-  width: var(--searchBarWidth);
-  z-index: 9;
+
+.main_container {
+  --padding: 2%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+
+  display: flex;
 }
 .leader_boards{
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  align-content: space;
-
-  position: absolute;
   height: calc(var(--boardsHeight)* 0.95 );
   width: calc(var(--bw)* 0.25);
-  top: 21%;
-  left: calc(var(--searchBarMargin)*36);
   border-radius: 0.5rem;
 }
-
-
-
-
 .app_boards {
+  --mainBoardWidth: calc((var(--topLeftBoardWidth) * 2) + var(--topLeftBoardGap) + 3px);
+  --mainBoardHeight: calc((var(--topLeftBoardHeight) * 2) + var(--topLeftBoardGapY) );
+  background-clip: border-box;
   display: flex;
   flex-wrap: wrap;
-  align-content: space;
-
-  position: absolute;
-  height: calc(var(--boardsHeight));
-  width: calc(var(--bw));
-  top: 21%;
-  left: var(--searchBarMargin);
+  height: var(--mainBoardHeight);
+  width: var(--mainBoardWidth);
+  margin-right: 0;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 1px;
 }
 
 /* Track */

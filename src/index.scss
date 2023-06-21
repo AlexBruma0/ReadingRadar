@@ -18,9 +18,19 @@
   --boardsWidth: 70vw
   --boardWidth: 50vw;
   --bw: 80vw;
-  --searchBarMargin: 2.2vw;
   --cardHeight: 1.5rem;
   --cardWidth: 35vw;
+  --marginWidth: 2vw;
+  --topLeftBoardWidth: 35vw;
+  --topLeftBoardGap: calc(var(--topLeftBoardWidth) * (1/50));
+  --topLeftBoardHeight: 40.5vh;
+  --topLeftBoardGapY: calc(var(--topLeftBoardHeight) * (1/14));
+  --topLeft_board_card_height: calc(var(--topLeftBoardHeight) * (11/15));
+  --boardFooterHeight:calc(var(--topLeftBoardHeight) * (2/15));
+  --border-radius: 0.2vw;
+  --cardHeight: calc(var(--topLeft_board_card_height)* (3/14));
+  --card-font-size: calc(var(--cardHeight) * (2/5));
+  
   
 }
 [data-theme="dark"] {

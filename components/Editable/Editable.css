@@ -1,42 +1,38 @@
 .editable {
-  height: auto;
+  width: var(--topLeftBoardWidth);
+  height: var(--boardFooterHeight);
 }
 .editable > p {
   width: 90%;
   display: flex;
-  gap: 5px;
-  border-radius: 5px;
-  padding: 0.5rem;
-  transition: ease-in-out 200ms;
-  margin-inline: auto;
+  gap: var(--topLeftBoardGap);
+  height: calc(var(--boardFooterHeight) *(2/5));
+  width: calc(var(--topLeftBoardWidth) * (1/5));
+  font-size: calc(var(--boardFooterHeight) *(1/3));
+  border-radius: var(--border-radius);
+  padding: 1%;
+  padding-bottom: 1.3%;
 }
 .editable > p:hover {
   background-color: #ccc;
-  color: #000;
   cursor: pointer;
 }
 .editable__input {
   display: flex;
-  flex-direction: column;
-  padding-inline: 0.5rem;
-  gap: 10px;
+  flex-direction: row;
+  gap: var(--topLeftBoardGap)
 }
 .editable__input > textarea {
-  width: 98% !important;
-  -webkit-appearance: none;
+  width: calc(var(--topLeftBoardWidth) * (1/2));
+  height: calc(var(--boardFooterHeight) * (3/5));
+  font-size: calc(var(--boardFooterHeight) *(2/5));
   background-color: #fafbfc;
-  border: none;
-  border-radius: 3px;
-  box-shadow: inset 0 0 0 2px #dfe1e6;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 0.3vw;
   box-sizing: border-box;
-  display: block;
-  line-height: 20px;
-  margin-bottom: 12px;
-  outline: none;
-  padding: 8px 12px;
-  transition-duration: 85ms;
-  transition-property: background-color, border-color, box-shadow;
-  transition-timing-function: ease;
+  margin-top: 0.5vw;
+  margin-top: 1vw;
+
 }
 .editable__input > textarea:focus {
   border: none;
@@ -49,18 +45,22 @@
   padding-inline: 0.1rem;
 }
 .btn__control > button {
-  background-color: #0079bf;
-  height: 2rem;
-  color: white;
-  font-size: 15px;
+  background-color: var(--pink);
+  height: calc(var(--boardFooterHeight) * (3/5));
+  width: calc(var(--topLeftBoardWidth) * (1/5));
+  font-size: calc(var(--boardFooterHeight) *(1/3));
   border: none;
   border-radius: 3px;
-  margin-bottom: 5px;
+  margin-top: 1vw;
 }
 .btn__control > button:hover {
-  background-color: #026aa7;
+  background-color: var(--pink);
   cursor: pointer;
 }
 .close:hover {
   cursor: pointer;
 }
+.close{
+  margin-top: 1vw;
+}
+

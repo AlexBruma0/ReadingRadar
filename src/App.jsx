@@ -131,41 +131,17 @@ function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
-        <div className="searchbar">
-          <SearchBar></SearchBar>
-          </div>
 
-          <div className="app_boards">
-            
-            {data.map((item,index) => (
+          
+          <div className="main_container">
+            <div className="app_boards">
               
-              <>
-              {index < 3 &&
-              <Board
-                  cn = "custom__card"
-                  key={item._id}
-                  id={item._id}
-                  index={index}
-                  className = {`board${index}`}
-                  name={item.boardName}
-                  card={item.card}
-                  setName={setName}
-                  addCard={addCard}
-                  removeCard={removeCard}
-                  removeBoard={removeBoard}
-                  updateCard={updateCard}
-                />}
-            </>
-
-            ))}
-          </div>
-          <div className="leader_boards">
-            {data.map((item,index) => (
+              {data.map((item,index) => (
                 
                 <>
-                {index > 2 &&
+                {index < 3 &&
                 <Board
-                    cn = "lb"
+                    cn = "custom__card"
                     key={item._id}
                     id={item._id}
                     index={index}
@@ -181,9 +157,34 @@ function App() {
               </>
 
               ))}
+            </div>
+            <div className="leader_boards">
+              {data.map((item,index) => (
+                  
+                  <>
+                  {index > 2 &&
+                  <Board
+                      cn = "lb"
+                      key={item._id}
+                      id={item._id}
+                      index={index}
+                      className = {`board${index}`}
+                      name={item.boardName}
+                      card={item.card}
+                      setName={setName}
+                      addCard={addCard}
+                      removeCard={removeCard}
+                      removeBoard={removeBoard}
+                      updateCard={updateCard}
+                    />}
+                </>
 
+                ))}
+
+            </div>
           </div>
-        </div>
+ 
+      </div>
     </DragDropContext>
   );
 }

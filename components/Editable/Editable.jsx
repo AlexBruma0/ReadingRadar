@@ -16,7 +16,7 @@ const Editable = (props) => {
   };
 
   return (
-    <div className={`editable ${props.parentClass}`}>
+    <div className={`editable`}>
       {show ? (
         <form onSubmit={handleOnSubmit}>
           <div className={`editable__input ${props.class}`}>
@@ -47,8 +47,9 @@ const Editable = (props) => {
             setShow(true);
           }}
         >
-          {props.defaultValue === undefined ? <Plus /> : <></>}
-          {props?.name || "Add"}
+            {props.defaultValue === undefined ? <Plus  height='1vw' width='1vw' x1='1'/> : <></>}
+            {props?.name || "Add"}
+
         </p>
       )}
     </div>
