@@ -70,7 +70,6 @@
   column-gap: 0.2vw;
   height: var(--topLeft_board_card_height);
   overflow-y: scroll;
-  border: var(--border-width) solid black;
   border-radius: var(--border-radius);
 
 }

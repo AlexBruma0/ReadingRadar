@@ -1,8 +1,6 @@
 .custom__card {
-  
-  
-  background-color: rgb(0, 0, 0);
-  color: white;
+  background-color: rgb(218, 218, 218);
+  color: rgb(0, 0, 0);
   border-radius: var(--border-radius);
   box-shadow: 0px 2px var(--card-box-shadow);
   height: var(--cardHeight);
@@ -29,11 +27,16 @@
 .image{
   display: flex;
   align-items: center;
+  margin-inline: var(--topLeftBoardGap);
 
 }
+
+.author-container{
+  font-size: calc(var(--card-font-size)* (1/2));
+}
 img{
-  width: calc(var(--cardHeight) * 0.90);
-  height: calc(var(--cardHeight) * 0.90);
+  width: calc(var(--cardHeight) * 0.70);
+  height: calc(var(--cardHeight) * 0.70);
   border-radius: 10vw;
   
 }

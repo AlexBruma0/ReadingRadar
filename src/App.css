@@ -22,7 +22,7 @@ body {
   display: flex;
 }
 .leader_boards{
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   flex-direction: column;
   height: calc(var(--boardsHeight)* 0.95 );

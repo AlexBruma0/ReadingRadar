@@ -47,8 +47,14 @@ const Card = (props) => {
             <div className="image">
               <img src={props.img_url} alt=""  />
             </div>
-
-            {props.title}
+            <div className="text-container">
+              {props.title}
+              <div className="author-container">  
+                <i>{props.author}</i>
+              
+              </div>
+            </div>
+            
      
           </div>
         </>

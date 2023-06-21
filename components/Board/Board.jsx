@@ -59,6 +59,7 @@ export default function Board(props) {
                 id={items.id}
                 index={index}
                 key={items.id}
+                author={items.author}
                 title={items.title}
                 img_url={items.img_url}
                 tags={items.tags}
