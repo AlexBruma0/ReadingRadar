@@ -10,7 +10,7 @@ function App() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
 
   const local = "http://localhost:8081/";
-  var uri = remote;
+  var uri = local;
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
@@ -126,7 +126,6 @@ function App() {
 
   }, [data]);
 
-  let loggedIn = true; 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">

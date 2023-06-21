@@ -54,13 +54,13 @@ export default function Board(props) {
           >
             {props.card?.map((items, index) => (
               <Card
-                color="black"
                 cn = {props.cn}
                 bid={props.id}
                 id={items.id}
                 index={index}
                 key={items.id}
                 title={items.title}
+                img_url={items.img_url}
                 tags={items.tags}
                 updateCard={props.updateCard}
                 removeCard={props.removeCard}
@@ -75,7 +75,7 @@ export default function Board(props) {
         <Editable
           name={"Add Book"}
           btnName={"Add Book"}
-          placeholder={"Enter Book Title"}
+          placeholder={"Enter ISBN/ASIN"}
           onSubmit={(value) => props.addCard(value, props.id)}
         />
       </div>
