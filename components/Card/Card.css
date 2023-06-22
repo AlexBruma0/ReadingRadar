@@ -6,7 +6,7 @@
   height: var(--cardHeight);
   font-family: 'Times New Roman', Times, serif;
   font-weight:600;
-  margin-bottom: calc( var(--cardHeight) * 0.2);
+  margin-bottom: calc( var(--cardHeight) * 0.1);
   width: calc(var(--topLeftBoardWidth) * (0.97));
   font-size: var(--card-font-size);
   display: flex;

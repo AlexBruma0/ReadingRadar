@@ -6,11 +6,13 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
 import "../bootstrap.css";
 import SearchBar from "../components/SearchBar/SearchBar";
+import { SpinnerCircular } from 'spinners-react';
 function App() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
 
   const local = "http://localhost:8081/";
-  var uri = local;
+  const [loading, setLoading] = useState(true);
+  var uri = remote;
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
@@ -122,19 +124,23 @@ function App() {
   useEffect(() => {
     get().then((data) => {
       setData(data);
+      setLoading(false)
     });
 
   }, [data]);
 
   return (
+    <>
+    
+    
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
 
-          
           <div className="main_container">
             <div className="app_boards">
-              
+            {loading && <SpinnerCircular color='pink' size='20vw' />}
+            {!loading && <>
               {data.map((item,index) => (
                 
                 <>
@@ -156,6 +162,8 @@ function App() {
               </>
 
               ))}
+            </>
+              }
             </div>
             <div className="leader_boards">
               {data.map((item,index) => (
@@ -185,6 +193,11 @@ function App() {
  
       </div>
     </DragDropContext>
+    
+    
+    
+    </>
+
   );
 }
 
