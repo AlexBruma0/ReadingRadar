@@ -73,6 +73,12 @@
   border-radius: var(--border-radius);
 
 }
+.spinner-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
 
 .board__footer { 
   display: flex;

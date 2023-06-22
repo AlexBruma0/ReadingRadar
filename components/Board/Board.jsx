@@ -3,9 +3,11 @@ import Card from "../Card/Card";
 import "./Board.css";
 import Editable from "../Editable/Editable";
 import { Droppable } from "react-beautiful-dnd";
+import { SpinnerCircular } from 'spinners-react';
 export default function Board(props) {
   const [show, setShow] = useState(false);
   useEffect(() => {
+    //console.log(props.waitingAPI)
     document.addEventListener("keypress", (e) => {
       if (e.code === "Enter") setShow(false);
     });
@@ -14,8 +16,8 @@ export default function Board(props) {
         if (e.code === "Enter") setShow(false);
       });
     };
+    
   });
-  const color = "black"
 
   return (
     <div className="board" id={`board${props.index}`}>
@@ -52,7 +54,9 @@ export default function Board(props) {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {props.card?.map((items, index) => (
+            {props.waitingAPI && <div className="spinner-container"><SpinnerCircular color='pink' size='5vw'/></div>}
+            {!props.waitingAPI && <>
+              {props.card?.map((items, index) => (
               <Card
                 cn = {props.cn}
                 bid={props.id}
@@ -69,6 +73,9 @@ export default function Board(props) {
               />
             ))}
             {provided.placeholder}
+            
+            </>}
+
           </div>
         )}
       </Droppable>

@@ -5,14 +5,14 @@ import Board from "../components/Board/Board";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
 import "../bootstrap.css";
-import SearchBar from "../components/SearchBar/SearchBar";
 import { SpinnerCircular } from 'spinners-react';
 function App() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
 
   const local = "http://localhost:8081/";
   const [loading, setLoading] = useState(true);
-  var uri = remote;
+  const [waitingAPI, setWaitingAPI] = useState(false)
+  var uri = local;
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
@@ -47,6 +47,10 @@ function App() {
   };
 
   const addCard = async (title, bid) => {
+    await new Promise((resolve) =>{
+        setWaitingAPI(true)
+        resolve(null)
+    })
     await fetch(`${uri}${bid}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -59,6 +63,7 @@ function App() {
         },
       }),
     });
+    setWaitingAPI(false)
   };
 
   const removeCard = async (boardId, cardId) => {
@@ -122,6 +127,7 @@ function App() {
   };
 
   useEffect(() => {
+    console.log(waitingAPI)
     get().then((data) => {
       setData(data);
       setLoading(false)
@@ -131,18 +137,14 @@ function App() {
 
   return (
     <>
-    
-    
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
-
           <div className="main_container">
             <div className="app_boards">
             {loading && <div className="spinner-container"><SpinnerCircular color='pink' size='20vw' /></div> }
             {!loading && <>
               {data.map((item,index) => (
-                
                 <>
                 {index < 3 &&
                 <Board
@@ -151,6 +153,7 @@ function App() {
                     id={item._id}
                     index={index}
                     className = {`board${index}`}
+                    waitingAPI = {waitingAPI}
                     name={item.boardName}
                     card={item.card}
                     setName={setName}
@@ -160,14 +163,12 @@ function App() {
                     updateCard={updateCard}
                   />}
               </>
-
               ))}
             </>
               }
             </div>
             <div className="leader_boards">
               {data.map((item,index) => (
-                  
                   <>
                   {index > 2 &&
                   <Board
