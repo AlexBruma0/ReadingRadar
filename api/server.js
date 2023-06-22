@@ -9,10 +9,6 @@ mongoose.connect(
   `mongodb+srv://bruma:Canuckhead22@cluster0.egeqpgy.mongodb.net/test?retryWrites=true&w=majority`
 );
 
-
-
-
-
 var db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "connection error"));

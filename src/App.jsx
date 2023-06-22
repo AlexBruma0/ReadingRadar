@@ -139,7 +139,7 @@ function App() {
 
           <div className="main_container">
             <div className="app_boards">
-            {loading && <SpinnerCircular color='pink' size='20vw' />}
+            {loading && <div className="spinner-container"><SpinnerCircular color='pink' size='20vw' /></div> }
             {!loading && <>
               {data.map((item,index) => (
                 

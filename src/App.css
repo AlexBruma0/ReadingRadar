@@ -29,6 +29,9 @@ body {
   width: calc(var(--bw)* 0.25);
   border-radius: 0.5rem;
 }
+.spinner-container{
+  margin: auto;
+}
 .app_boards {
   --mainBoardWidth: calc((var(--topLeftBoardWidth) * 2) + var(--topLeftBoardGap) + 3px);
   --mainBoardHeight: calc((var(--topLeftBoardHeight) * 2) + var(--topLeftBoardGapY) );
