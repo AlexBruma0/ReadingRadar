@@ -100,34 +100,80 @@ function App() {
     tempData.splice(index, 1);
     setData(tempData);
   };
+  const reorder = async( index,startIndex, endIndex) => {
+    const temp = data
+    const [removed] = temp[index].card?.splice(startIndex, 1);
+    temp[index].card?.splice(endIndex, 0, removed);
+    console.log(temp)
+    setlocalData(temp)
 
-  const onDragEnd = (result) => {
-    const { source, destination } = result;
-    if (!destination) return;
-
-    if (source.droppableId === destination.droppableId) return;
-    dragCardInBoard(source, destination).then((data) => {
-      const sindex = data.findIndex((item) => item._id === source.droppableId);
-      fetch(`${uri}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: source.droppableId,
-          board: data[sindex],
-        }),
-      });
-      const dindex = data.findIndex(
-        (item) => item._id === destination.droppableId
-      );
-      fetch(`${uri}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: destination.droppableId,
-          board: data[dindex],
-        }),
-      });
+    await fetch(`${uri}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: temp[index]._id,
+        card: temp[index].card,
+      }),
     });
+  };
+
+  const onDragEnd =  (result) => {
+    const { source, destination } = result;
+    console.log(source,destination)
+
+    if (!destination) {
+        return;
+    }
+
+    if (source.droppableId === destination.droppableId) {
+       const  boardIndex = data.findIndex((e) => {
+        return e._id === destination.droppableId
+      })
+      console.log(boardIndex)
+        reorder(
+            boardIndex,
+            source.index,
+            destination.index
+        );
+    } 
+    // else {
+    //     const result = move(
+    //         this.getList(source.droppableId),
+    //         this.getList(destination.droppableId),
+    //         source,
+    //         destination
+    //     );
+
+    //     this.setState({
+    //         items: result.droppable,
+    //         selected: result.droppable2
+    //     });
+    // }
+    // if (!destination) return;
+
+    // if (source.droppableId === destination.droppableId) return;
+    // dragCardInBoard(source, destination).then((data) => {
+    //   const sindex = data.findIndex((item) => item._id === source.droppableId);
+    //   fetch(`${uri}`, {
+    //     method: "PUT",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       id: source.droppableId,
+    //       board: data[sindex],
+    //     }),
+    //   });
+    //   const dindex = data.findIndex(
+    //     (item) => item._id === destination.droppableId
+    //   );
+    //   fetch(`${uri}`, {
+    //     method: "PUT",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       id: destination.droppableId,
+    //       board: data[dindex],
+    //     }),
+    //   });
+    // });
   };
 
   const updateCard = (bid, cid, card) => {
@@ -145,6 +191,7 @@ function App() {
   };
 
   useEffect(() => {
+    //console.log(data)
     if(localData){
       setData(localData)
     }
@@ -156,36 +203,41 @@ function App() {
   }, [data]);
 
   return (
-    <>
-    <DragDropContext onDragEnd={onDragEnd}>
+    
+     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
           <div className="main_container">
             <div className="app_boards">
             {loading && <div className="spinner-container"><SpinnerCircular color='pink' size='20vw' /></div> }
             {!loading && <>
-              {data.map((item,index) => (
-                <>
-                {index < 3 &&
-                <Board
-                    cn = "custom__card"
-                    key={item._id}
-                    id={item._id}
-                    localData={data}
-                    setlocalData = {setlocalData}
-                    index={index}
-                    className = {`board${index}`}
-                    waitingAPI = {index === 0 ? waitingAPI0: index ===1 ? waitingAPI1: waitingAPI2}
-                    name={item.boardName}
-                    card={item.card}
-                    setName={setName}
-                    addCard={addCard}
-                    removeCard={removeCard}
-                    removeBoard={removeBoard}
-                    updateCard={updateCard}
-                  />}
-              </>
-              ))}
+             
+                {data.map((item,index) => (
+                  <>
+                  {index < 3 &&
+
+                  <Board
+                      cn = "custom__card"
+                      key={item._id}
+                      id={item._id}
+                      localData={data}
+                      setlocalData = {setlocalData}
+                      index={index}
+                      className = {`board${index}`}
+                      waitingAPI = {index === 0 ? waitingAPI0: index ===1 ? waitingAPI1: waitingAPI2}
+                      name={item.boardName}
+                      card={item.card}
+                      setName={setName}
+                      addCard={addCard}
+                      removeCard={removeCard}
+                      removeBoard={removeBoard}
+                      updateCard={updateCard}
+                    />
+                  }</>
+                  // </Droppable>
+                ))}
+
+
             </>
               }
             </div>
@@ -215,11 +267,10 @@ function App() {
           </div>
  
       </div>
-    </DragDropContext>
     
     
     
-    </>
+      </DragDropContext>
 
   );
 }

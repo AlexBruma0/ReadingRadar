@@ -82,7 +82,6 @@ export default function Board(props) {
           </div>
         )}
       </div>
-      <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={props.id.toString()}>
           {(provided) => (
             <div
@@ -115,16 +114,15 @@ export default function Board(props) {
             </div>
           )}
         </Droppable>
-        <div className="board__footer">
-          <Editable
+         <div className="board__footer">
+           <Editable
             name={"Add Book"}
             btnName={"Add Book"}
             placeholder={"Enter ISBN/ASIN"}
             onSubmit={(value) => props.addCard(value, props.id)}
           />
         </div>
-      </DragDropContext>
       
-    </div>
+     </div>
   );
 }
