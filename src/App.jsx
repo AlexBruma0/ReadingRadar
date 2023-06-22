@@ -11,7 +11,10 @@ function App() {
 
   const local = "http://localhost:8081/";
   const [loading, setLoading] = useState(true);
-  const [waitingAPI, setWaitingAPI] = useState(false)
+  const [waitingAPI0, setWaitingAPI0] = useState(false)
+  const [waitingAPI1, setWaitingAPI1] = useState(false)
+  const [waitingAPI2, setWaitingAPI2] = useState(false)
+
   var uri = local;
   const get = async () => {
     const response = await fetch(uri);
@@ -47,9 +50,21 @@ function App() {
   };
 
   const addCard = async (title, bid) => {
+    console.log(bid)
     await new Promise((resolve) =>{
-        setWaitingAPI(true)
-        resolve(null)
+        if(bid === '64711f3eb05f463a0ccfd027'){
+          setWaitingAPI0(true)
+          resolve(null)
+        }
+        if(bid === '64711f52b05f463a0ccfd028'){
+          setWaitingAPI1(true)
+          resolve(null)
+        }
+        if(bid === '647289ed971a4bc678762595'){
+          setWaitingAPI2(true)
+          resolve(null)
+        }
+
     })
     await fetch(`${uri}${bid}`, {
       method: "PUT",
@@ -63,7 +78,9 @@ function App() {
         },
       }),
     });
-    setWaitingAPI(false)
+    setWaitingAPI0(false)
+    setWaitingAPI1(false)
+    setWaitingAPI2(false)
   };
 
   const removeCard = async (boardId, cardId) => {
@@ -127,7 +144,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(waitingAPI)
     get().then((data) => {
       setData(data);
       setLoading(false)
@@ -153,7 +169,7 @@ function App() {
                     id={item._id}
                     index={index}
                     className = {`board${index}`}
-                    waitingAPI = {waitingAPI}
+                    waitingAPI = {index === 0 ? waitingAPI0: index ===1 ? waitingAPI1: waitingAPI2}
                     name={item.boardName}
                     card={item.card}
                     setName={setName}

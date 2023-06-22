@@ -99,10 +99,11 @@ app.put("/:id", async (req, res) => {
   req.body.card.title= response.data.product.title
   req.body.card.title=response.data.product.title
   req.body.card.img_url= response.data.product.main_image.link
-  req.body.card.author= response.data.product.publisher
+  req.body.card.author= response.data.product.authors[0].name
   req.body.card.publication_date= response.data.product.publication_date
   req.body.card.rating= response.data.product.rating
   req.body.card.ratings_total= response.data.product.ratings_total
+  req.body.card.numberOfPages = response.data.product.specifications[2].value
   console.log(req.body.card)
   await Item.updateOne(
     { _id: req.params.id },

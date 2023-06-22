@@ -32,7 +32,7 @@
 }
 
 .author-container{
-  font-size: calc(var(--card-font-size)* (1/2));
+  font-size: calc(var(--card-font-size)* (2/3));
 }
 img{
   width: calc(var(--cardHeight) * 0.70);

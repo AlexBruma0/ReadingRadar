@@ -7,7 +7,7 @@ import { SpinnerCircular } from 'spinners-react';
 export default function Board(props) {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    //console.log(props.waitingAPI)
+    console.log(props.waitingAPI)
     document.addEventListener("keypress", (e) => {
       if (e.code === "Enter") setShow(false);
     });
