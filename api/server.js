@@ -48,46 +48,23 @@ app.delete("/:id", async (req, res) => {
     { $pull: { card: { id: req.body.cardId } } }
   );
 });
-// app.put("/:id", async (req, res) => {
-//   await getBookData(req.body.card.title,req.body.card, req.params.id)
-//   // await Item.updateOne(
-//   //   { _id: req.params.id },
-//   //   { $push: { card: req.body.card } }
-//   // );
-// });
-app.put("/", async (req, res) => {
-  await Item.updateOne({ _id: req.body.id }, { $set: req.body.board });
+app.put("rearrange-cards/:id", async (req, res) => {
+  console.log(req.params.id, req.body.card);
+  await Item.updateOne(
+    { _id: req.params.id },
+    { $set: { card: req.body.card } }
+  );
 });
-const getBookData = async (asin,card,id) => {
-  console.log(asin)
-  const params = {
-    api_key: "5C34E3D2794B4C448573F4E730AA68E9",
-      amazon_domain: "amazon.ca",
-      asin: asin,
-      type: "product"
-    }
-    axios.get('https://api.asindataapi.com/request', { params })
-    .then(response => {
-        card.title= response.data.product.title
-        card.title=response.data.product.title
-        card.img_url= response.data.product.main_image.link
-        card.author= response.data.product.publisher
-        card.publication_date= response.data.product.publication_date
-        card.rating= response.data.product.rating
-        card.ratings_total= response.data.product.ratings_total
 
-      }).then(() => {
-        app.put("/:id", async (req, res) => {
-          Item.updateOne(
-            { _id: id },
-            { $push: { card: card } }
-          );
-        });
+app.put("/", async (req, res) => {
+  //await Item.updateOne({ _id: req.body.id }, { $set: req.body.board });
+  console.log(req.body.id, req.body.card);
+  await Item.updateOne(
+    { _id: req.body.id },
+    { $set: { card: req.body.card } }
+  );
+});
 
-      }).catch(error => {
-    console.log(error);
-    })
-}
 app.put("/:id", async (req, res) => {
   const params = {
     api_key: "5C34E3D2794B4C448573F4E730AA68E9",

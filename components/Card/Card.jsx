@@ -8,6 +8,10 @@ import "./Card.css";
 import CardDetails from "./CardDetails/CardDetails";
 
 const Card = (props) => {
+  const getItemStyle = (draggableStyle) => ({
+    ...draggableStyle
+  });
+
   const [dropdown, setDropdown] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   // useEffect(() =>{
@@ -21,7 +25,7 @@ const Card = (props) => {
       draggableId={props.id.toString()}
       index={props.index}
     >
-      {(provided) => (
+      {(provided, snapshot) => (
         <>
           {modalShow && (
             <CardDetails
@@ -34,14 +38,17 @@ const Card = (props) => {
           )}
 
           <div
-            className={props.cn}
-            style={{ marginLeft: '100vw'}}
-            onClick={() => {
-              setModalShow(true);
-            }}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
+            className={props.cn}
+            style={getItemStyle(
+              provided.draggableProps.style
+            )}
+            onClick={() => {
+              setModalShow(true);
+            }}
+
 
           >
             <div className="image">

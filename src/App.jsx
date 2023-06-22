@@ -14,6 +14,7 @@ function App() {
   const [waitingAPI0, setWaitingAPI0] = useState(false)
   const [waitingAPI1, setWaitingAPI1] = useState(false)
   const [waitingAPI2, setWaitingAPI2] = useState(false)
+  const [localData, setlocalData] = useState(null)
 
   var uri = local;
   const get = async () => {
@@ -144,9 +145,12 @@ function App() {
   };
 
   useEffect(() => {
+    if(localData){
+      setData(localData)
+    }
     get().then((data) => {
-      setData(data);
-      setLoading(false)
+        setData(data);
+        setLoading(false)
     });
 
   }, [data]);
@@ -167,6 +171,8 @@ function App() {
                     cn = "custom__card"
                     key={item._id}
                     id={item._id}
+                    localData={data}
+                    setlocalData = {setlocalData}
                     index={index}
                     className = {`board${index}`}
                     waitingAPI = {index === 0 ? waitingAPI0: index ===1 ? waitingAPI1: waitingAPI2}
