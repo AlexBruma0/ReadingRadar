@@ -188,10 +188,13 @@ function App() {
     }
   };
 
-  const updateCard = (bid, cid, card) => {
-    const index = data.findIndex((item) => item.id === bid);
-    if (index < 0) return;
+  const updateCard = async (bid, cid, card) => {
+    console.log(bid,cid, card)
+    const  index = data.findIndex((e) => {
+      return e._id === bid})
+    console.log(index)
 
+    if (index < 0) return;
     const tempBoards = [...data];
     const cards = tempBoards[index].card;
 
@@ -199,7 +202,18 @@ function App() {
     if (cardIndex < 0) return;
 
     tempBoards[index].card[cardIndex] = card;
-    setData(tempBoards);
+    setlocalData(tempBoards);
+
+    await fetch(`${uri}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: bid,
+        card: tempBoards[index].card,
+      }),
+    });
+
+  
   };
 
   useEffect(() => {

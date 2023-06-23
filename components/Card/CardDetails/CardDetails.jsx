@@ -84,8 +84,8 @@ export default function CardDetails(props) {
     };
   });
   useEffect(() => {
-    console.log(values)
-    //if (props.updateCard) props.updateCard(props.bid, values.id, values);
+    console.log(props.bid, values.id, values)
+    props.updateCard(props.bid, values.id, values);
   }, [values]);
 
   return (
