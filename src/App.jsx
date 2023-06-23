@@ -144,13 +144,17 @@ function App() {
 
   const onDragEnd =  (result) => {
     const { source, destination } = result;
-    console.log(source,destination)
+    console.log('source',source,'destination',destination)
 
     if (!destination) {
         return;
     }
 
     if (source.droppableId === destination.droppableId) {
+       if(source.droppableId === '647289ed971a4bc6787625951'){
+        source.droppableId = '647289ed971a4bc678762595'
+        destination.droppableId = '647289ed971a4bc678762595'
+       }
        const  boardIndex = data.findIndex((e) => {
         return e._id === destination.droppableId
       })
