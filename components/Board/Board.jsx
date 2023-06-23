@@ -10,7 +10,7 @@ export default function Board(props) {
 
   const local = "http://localhost:8081/";
   var uri = local;
-
+  const sizeArr = [...Array(Math.ceil(props.card.length * (1/2))  ).keys()]
   const reorder = async( startIndex, endIndex) => {
     const [removed] = props.card?.splice(startIndex, 1);
     props.card?.splice(endIndex, 0, removed);
@@ -42,6 +42,12 @@ export default function Board(props) {
 
 
   useEffect(() => {
+    if (props.index == 2){
+      const temp0 = props.card
+      const temp1 = props.card
+      temp0.filter((element) => element.index % 2 == 0)
+
+    }
     //if(props.index == 0) console.log(props.card)
     document.addEventListener("keypress", (e) => {
       if (e.code === "Enter") setShow(false);
@@ -82,39 +88,153 @@ export default function Board(props) {
           </div>
         )}
       </div>
-        <Droppable droppableId={props.id.toString()}>
-          {(provided) => (
-            <div
-              className="board__cards"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {props.waitingAPI && <div className="spinner-container"><SpinnerCircular color='pink' size='5vw'/></div>}
-              {!props.waitingAPI && <>
-                {props.card?.map((items, index) => (
-                <Card
-                  cn = {props.cn}
-                  bid={props.id}
-                  id={items.id}
-                  index={index}
-                  key={items.id}
-                  author={items.author}
-                  title={items.title}
-                  img_url={items.img_url}
-                  tags={items.tags}
-                  updateCard={props.updateCard}
-                  removeCard={props.removeCard}
-                  card={items}
-                />
-              ))}
-              {provided.placeholder}
-              
-              </>}
+        {props.index < 2 && 
+               <Droppable droppableId={props.id.toString()}>
+               {(provided) => (
+                 <div
+                   className="board__cards"
+                   ref={provided.innerRef}
+                   {...provided.droppableProps}
+                 >
+                   {props.waitingAPI && <div className="spinner-container"><SpinnerCircular color='pink' size='5vw'/></div>}
+                   {!props.waitingAPI && <>
+                     {props.card?.map((items, index) => (
+                     <Card
+                       cn = {props.cn}
+                       bid={props.id}
+                       id={items.id}
+                       index={index}
+                       key={items.id}
+                       author={items.author}
+                       title={items.title}
+                       img_url={items.img_url}
+                       tags={items.tags}
+                       updateCard={props.updateCard}
+                       removeCard={props.removeCard}
+                       card={items}
+                     />
+                   ))}
+                   {provided.placeholder}
+                   
+                   </>}
+     
+                 </div>
+               )}
+             </Droppable>     
+        }
+        {props.index === 2 &&
+        <div className="board2-cards-container">
+          <div>
+            <Droppable droppableId={props.id.toString()}>
+              {(provided) => (
+                <div
+                  className="board__cards"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {props.waitingAPI && <div className="spinner-container"><SpinnerCircular color='pink' size='5vw'/></div>}
+                  {!props.waitingAPI && <>
+                    {props.card?.map((items,index) => (
+                      <>
+                      {index < Math.ceil(props.card.length /2) &&
+                      <Card
+                      cn = {props.cn}
+                      bid={props.id}
+                      id={items.id}
+                      index={index}
+                      key={items.id}
+                      author={items.author}
+                      title={items.title}
+                      img_url={items.img_url}
+                      tags={items.tags}
+                      updateCard={props.updateCard}
+                      removeCard={props.removeCard}
+                      card={items}
+                 />
+                      }
+                      </>
+                  ))}
+                  {provided.placeholder}
+                </>}
+              </div>
+            )}
+            </Droppable>    
+          </div>
+          <div>
+            <Droppable droppableId={props.id.toString()}>
+                {(provided) => (
+                  <div
+                    className="board__cards"
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {props.waitingAPI && <div className="spinner-container"><SpinnerCircular color='pink' size='5vw'/></div>}
+                    {!props.waitingAPI && <>
+                      {props.card?.map((items,index) => (
+                        <>
+                        {index >= Math.ceil(props.card.length /2) &&
+                        <Card
+                        cn = {props.cn}
+                        bid={props.id}
+                        id={items.id}
+                        index={index}
+                        key={items.id}
+                        author={items.author}
+                        title={items.title}
+                        img_url={items.img_url}
+                        tags={items.tags}
+                        updateCard={props.updateCard}
+                        removeCard={props.removeCard}
+                        card={items}
+                  />
+                        }
+                        </>
+                    ))}
+                    {provided.placeholder}
+                  </>}
+                </div>
+              )}
+              </Droppable>  
+          </div>
 
-            </div>
-          )}
-        </Droppable>
-         <div className="board__footer">
+        </div>
+            
+          /* <div className="board2-collumn1-container">
+            <Droppable droppableId={props.id.toString()}>
+              {(provided) => (
+                <div
+                  className="board__cards"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {props.waitingAPI && <div className="spinner-container"><SpinnerCircular color='pink' size='5vw'/></div>}
+                  {!props.waitingAPI && <>
+                  {sizeArr.map((items,index) => (
+
+                    <Card
+                      cn = {props.cn}
+                      bid={props.id}
+                      id={props.card[sizeArr.length + items]?.id}
+                      index={index}
+                      key={props.card[sizeArr.length + items]?.id}
+                      author={props.card[sizeArr.length + items]?.author}
+                      title={props.card[sizeArr.length + items]?.title}
+                      img_url={props.card[sizeArr.length + items]?.img_url}
+                      tags={props.card[sizeArr.length + items]?.tags}
+                      updateCard={props.updateCard}
+                      removeCard={props.removeCard}
+                      card={props.card[sizeArr.length + items]}
+                    />
+                    ))}
+                  {provided.placeholder}
+                </>}
+              </div>
+            )}
+            </Droppable>     
+          </div> */}
+        
+        
+          <div className="board__footer">
            <Editable
             name={"Add Book"}
             btnName={"Add Book"}

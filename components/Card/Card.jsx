@@ -21,8 +21,8 @@ const Card = (props) => {
   // })
   return (
     <Draggable
-      key={props.id.toString()}
-      draggableId={props.id.toString()}
+      key={props.id?.toString()}
+      draggableId={props.id?.toString()}
       index={props.index}
     >
       {(provided, snapshot) => (

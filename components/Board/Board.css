@@ -21,15 +21,19 @@
   overflow-y: scroll;
   margin: auto;
 }
-
-#board2 .board__cards{
-  display: grid;
-  column-gap: calc(var(--topLeftBoardGap)* 2.4);
-  grid-template-columns: repeat(2, 1fr);
+ .board2-cards-container{
+  display: flex;
+  box-sizing: border-box;
+  padding-left: 1%;
+  padding-right: 1%;
   overflow-y: scroll;
-  margin-right: 1rem;
-  overflow-x: hidden;
 }
+
+#board2  .board__cards{
+  display: flex;
+  flex-direction: row;
+  overflow-y: visible;
+} 
 #board2 {
   --bottomLeftBoardWidth: calc(var(--topLeftBoardWidth) * 2 + var(--topLeftBoardGap));
   width: var(--bottomLeftBoardWidth);
