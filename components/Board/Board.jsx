@@ -198,40 +198,7 @@ export default function Board(props) {
           </div>
 
         </div>
-            
-          /* <div className="board2-collumn1-container">
-            <Droppable droppableId={props.id.toString()}>
-              {(provided) => (
-                <div
-                  className="board__cards"
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  {props.waitingAPI && <div className="spinner-container"><SpinnerCircular color='pink' size='5vw'/></div>}
-                  {!props.waitingAPI && <>
-                  {sizeArr.map((items,index) => (
-
-                    <Card
-                      cn = {props.cn}
-                      bid={props.id}
-                      id={props.card[sizeArr.length + items]?.id}
-                      index={index}
-                      key={props.card[sizeArr.length + items]?.id}
-                      author={props.card[sizeArr.length + items]?.author}
-                      title={props.card[sizeArr.length + items]?.title}
-                      img_url={props.card[sizeArr.length + items]?.img_url}
-                      tags={props.card[sizeArr.length + items]?.tags}
-                      updateCard={props.updateCard}
-                      removeCard={props.removeCard}
-                      card={props.card[sizeArr.length + items]}
-                    />
-                    ))}
-                  {provided.placeholder}
-                </>}
-              </div>
-            )}
-            </Droppable>     
-          </div> */}
+}
         
         
           <div className="board__footer">

@@ -27,7 +27,7 @@ export default function CardDetails(props) {
   const [labelShow, setLabelShow] = useState(false);
   const Input = (props) => {
     return (
-      <div className="">
+      <div className="input">
         <input
           autoFocus
           defaultValue={text}
@@ -69,32 +69,6 @@ export default function CardDetails(props) {
     setValues({ ...values, title: value });
   };
 
-  const calculatePercent = () => {
-    const totalTask = values.task.length;
-    const completedTask = values.task.filter(
-      (item) => item.completed === true
-    ).length;
-
-    return Math.floor((completedTask * 100) / totalTask) || 0;
-  };
-
-  const removeTag = (id) => {
-    const tempTag = values.tags.filter((item) => item.id !== id);
-    setValues({
-      ...values,
-      tags: tempTag,
-    });
-  };
-
-  const addTag = (value, color) => {
-    values.tags.push({
-      id: uuidv4(),
-      tagName: value,
-      color: color,
-    });
-
-    setValues({ ...values });
-  };
 
   const handelClickListner = (e) => {
     if (e.code === "Enter") {
@@ -110,92 +84,31 @@ export default function CardDetails(props) {
     };
   });
   useEffect(() => {
-    if (props.updateCard) props.updateCard(props.bid, values.id, values);
+    console.log(values)
+    //if (props.updateCard) props.updateCard(props.bid, values.id, values);
   }, [values]);
 
   return (
     <Modal onClose={props.onClose}>
-      <div className="local__bootstrap">
-        <div
-          className="container"
-          style={{ minWidth: "650px", position: "relative" }}
-        >
-          <div className="row pb-4">
-            <div className="col-12">
-              <div className="d-flex align-items-center pt-3 gap-2">
-                <CreditCard className="icon__md" />
-                {input ? (
-                  <Input title={values.title} />
-                ) : (
-                  <h5
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setInput(true)}
-                  >
-                    {values.title}
-                  </h5>
-                )}
-              </div>
-            </div>
+      <div className="modal-container">
+        <div className="title">
+          {input ? (
+                <Input title={values.title} />
+              ) : (
+                <h5
+                  onClick={() => setInput(true)}
+                >
+                  {values.title}
+                </h5>
+              )}
           </div>
-          <div className="row">
-            <div className="col-8">
-              <h6 className="text-justify">Label</h6>
-              <div
-                className="d-flex label__color flex-wrap"
-                style={{ width: "500px", paddingRight: "10px" }}
-              >
-                {values.tags.length !== 0 ? (
-                  values.tags.map((item) => (
-                    <span
-                      className="d-flex justify-content-between align-items-center gap-2"
-                      style={{ backgroundColor: item.color }}
-                    >
-                      {item.tagName.length > 10
-                        ? item.tagName.slice(0, 6) + "..."
-                        : item.tagName}
-                      <X
-                        onClick={() => removeTag(item.id)}
-                        style={{ width: "15px", height: "15px" }}
-                      />
-                    </span>
-                  ))
-                ) : (
-                  <span
-                    style={{ color: "#ccc" }}
-                    className="d-flex justify-content-between align-items-center gap-2"
-                  >
-                    <i> No Labels</i>
-                  </span>
-                )}
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="d-flex card__action__btn flex-column gap-2">
-                <button onClick={() => setLabelShow(true)}>
-                  <span className="icon__sm">
-                    <Tag />
-                  </span>
-                  Add Label
-                </button>
-                {labelShow && (
-                  <Label
-                    color={colors}
-                    addTag={addTag}
-                    tags={values.tags}
-                    onClose={setLabelShow}
-                  />
-                )}
-
-                <button onClick={() => props.removeCard(props.bid, values.id)}>
-                  <span className="icon__sm">
-                    <Trash />
-                  </span>
-                  Delete Book
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+          <img src={values.img_url} alt="" />
+          <button onClick={() => props.removeCard(props.bid, values.id)}>
+            <span className="icon__sm">
+              <Trash />
+            </span>
+            Delete Book
+          </button>
       </div>
     </Modal>
   );
