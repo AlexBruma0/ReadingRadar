@@ -119,7 +119,7 @@ function App() {
   const move = async(sourceBoardIndex, destinationBoardIndex,sourceCardIndex, destinationCardIndex) => {
     const temp= data
     const [removed] = temp[sourceBoardIndex].card.splice(sourceCardIndex, 1);
-    temp[destinationBoardIndex].card.splice(destinationCardIndex.index, 0, removed);
+    temp[destinationBoardIndex].card.splice(destinationCardIndex, 0, removed);
   
     console.log(temp)
     setlocalData(temp)
