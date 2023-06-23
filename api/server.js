@@ -63,6 +63,7 @@ app.put("/", async (req, res) => {
     { _id: req.body.id },
     { $set: { card: req.body.card } }
   );
+  res.send('done')
 });
 
 app.put("/:id", async (req, res) => {

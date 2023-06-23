@@ -116,6 +116,31 @@ function App() {
       }),
     });
   };
+  const move = async(sourceBoardIndex, destinationBoardIndex,sourceCardIndex, destinationCardIndex) => {
+    const temp= data
+    const [removed] = temp[sourceBoardIndex].card.splice(sourceCardIndex, 1);
+    temp[destinationBoardIndex].card.splice(destinationCardIndex.index, 0, removed);
+  
+    console.log(temp)
+    setlocalData(temp)
+    await fetch(`${uri}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: temp[destinationBoardIndex]._id,
+        card: temp[destinationBoardIndex].card,
+      }),
+    });
+    await fetch(`${uri}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: temp[sourceBoardIndex]._id,
+        card: temp[sourceBoardIndex].card,
+      }),
+    });
+
+  };
 
   const onDragEnd =  (result) => {
     const { source, destination } = result;
@@ -136,44 +161,21 @@ function App() {
             destination.index
         );
     } 
-    // else {
-    //     const result = move(
-    //         this.getList(source.droppableId),
-    //         this.getList(destination.droppableId),
-    //         source,
-    //         destination
-    //     );
+    else {
+      const  sourceBoardIndex = data.findIndex((e) => {
+        return e._id === source.droppableId
+      })
+      const  destinationBoardIndex = data.findIndex((e) => {
+        return e._id === destination.droppableId
+      })
 
-    //     this.setState({
-    //         items: result.droppable,
-    //         selected: result.droppable2
-    //     });
-    // }
-    // if (!destination) return;
-
-    // if (source.droppableId === destination.droppableId) return;
-    // dragCardInBoard(source, destination).then((data) => {
-    //   const sindex = data.findIndex((item) => item._id === source.droppableId);
-    //   fetch(`${uri}`, {
-    //     method: "PUT",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       id: source.droppableId,
-    //       board: data[sindex],
-    //     }),
-    //   });
-    //   const dindex = data.findIndex(
-    //     (item) => item._id === destination.droppableId
-    //   );
-    //   fetch(`${uri}`, {
-    //     method: "PUT",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       id: destination.droppableId,
-    //       board: data[dindex],
-    //     }),
-    //   });
-    // });
+         move(
+          sourceBoardIndex,
+          destinationBoardIndex,
+          source.index,
+          destination.index
+        );
+    }
   };
 
   const updateCard = (bid, cid, card) => {
@@ -194,11 +196,13 @@ function App() {
     //console.log(data)
     if(localData){
       setData(localData)
-    }
-    get().then((data) => {
+    }else{
+      get().then((data) => {
         setData(data);
         setLoading(false)
     });
+    }
+
 
   }, [data]);
 
