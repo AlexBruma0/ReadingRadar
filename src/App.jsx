@@ -204,13 +204,14 @@ function App() {
 
   useEffect(() => {
     //console.log(data)
-    if(localData){
-      setData(localData)
-    }else{
+    if(!localData){
       get().then((data) => {
         setData(data);
         setLoading(false)
     });
+    }else{
+      setData(localData)
+
     }
 
 
