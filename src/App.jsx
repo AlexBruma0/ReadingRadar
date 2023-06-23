@@ -166,6 +166,12 @@ function App() {
         );
     } 
     else {
+      
+      if(source.droppableId === '647289ed971a4bc6787625951'){
+        source.droppableId = '647289ed971a4bc678762595'}
+
+      if(destination.droppableId === '647289ed971a4bc6787625951'){
+        destination.droppableId = '647289ed971a4bc678762595'}
       const  sourceBoardIndex = data.findIndex((e) => {
         return e._id === source.droppableId
       })
