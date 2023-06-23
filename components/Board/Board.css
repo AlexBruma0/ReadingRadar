@@ -24,8 +24,8 @@
  .board2-cards-container{
   display: flex;
   box-sizing: border-box;
-  padding-left: 1%;
-  padding-right: 1%;
+  padding-left: 0.7%;
+  padding-right: 0.7%;
   overflow-y: scroll;
 }
 
