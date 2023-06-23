@@ -14,7 +14,6 @@
 
 h5 {
   cursor: pointer;
-
 }
 .input {
   margin: auto;
@@ -22,4 +21,16 @@ max-width: calc(var(--topLeftBoardWidth)* 0.9);
 }
 input{
   width: calc(var(--topLeftBoardWidth)* 0.8);
+}
+.model-content-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.item {
+  background-color: white;
+  border: none;
+}
+.title{
+  font-size: calc(var(--card-font-size) * 2);
+  font-family: 'Times New Roman', Times, serif;
 }

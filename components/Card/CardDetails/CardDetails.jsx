@@ -10,6 +10,7 @@ export default function CardDetails(props) {
 
   const [values, setValues] = useState({ ...props.card });
   const [input, setInput] = useState(false);
+  const [author_input, setAuthor_input] = useState(false);
   const [text, setText] = useState(values.title);
   const Input = (props) => {
     return (
@@ -51,24 +52,47 @@ export default function CardDetails(props) {
   return (
     <Modal onClose={props.onClose}>
       <div className="modal-container">
-        <div className="title">
+        <div >
           {input ? (
                 <Input title={values.title} />
               ) : (
-                <h5
+                <div
+                  className="title"
                   onClick={() => setInput(true)}
                 >
                   {values.title}
-                </h5>
+                </div>
               )}
           </div>
-          <img src={values.img_url} alt="" />
-          <button onClick={() => props.removeCard(props.bid, values.id)}>
-            <span className="icon__sm">
-              <Trash />
-            </span>
-            Delete Book
-          </button>
+
+          <div className="model-content-container">
+
+            <div className="col1-container">
+              <img src={values.img_url} alt="" />
+            </div>
+
+            <div className="col2-container">
+              <div className="item">
+                {author_input ? (
+                  <Input title={'hi'} />
+                ) : (
+                  <h5
+                    onClick={() => setAuthor_input(true)}
+                  >
+                    {values.author}
+                  </h5>
+                )}
+              </div>
+              <button onClick={() => props.removeCard(props.bid, values.id)}>
+                <span className="icon__sm">
+                  <Trash />
+                </span>
+                Delete Book
+              </button>
+            </div>
+          </div>
+  
+
       </div>
     </Modal>
   );
