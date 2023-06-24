@@ -22,11 +22,11 @@ body {
   display: flex;
 }
 .leader_boards{
-  display: none;
+  display: block;
   flex-wrap: wrap;
   flex-direction: column;
   height: calc(var(--boardsHeight)* 0.95 );
-  width: calc(var(--bw)* 0.25);
+  width: 1vw;
   border-radius: 0.5rem;
 }
 .spinner-container{

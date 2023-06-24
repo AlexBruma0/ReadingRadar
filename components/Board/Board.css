@@ -43,10 +43,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: var(--topLeftBoardWidth);
-  height: var(--topLeftBoardHeight);
+  width: calc(var(--topLeftBoardWidth)* 0.69);
+  height: calc(var(--topLeftBoardHeight)*2.035);
   background-color: var(--pink);
   overflow-x: hidden;
+  margin-left: var(--topLeftBoardGap);
 
 }
  #board4 .board__cards{

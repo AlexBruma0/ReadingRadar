@@ -30,26 +30,7 @@ function App() {
     tempData[index].boardName = title;
     setData(tempData);
   };
-
-  const dragCardInBoard = async (source, destination) => {
-    let tempData = [...data];
-    console.log(tempData);
-    const destinationBoardIdx = tempData.findIndex(
-      (item) => item._id.toString() === destination.droppableId
-    );
-
-    const sourceBoardIdx = tempData.findIndex(
-      (item) => item._id.toString() === source.droppableId
-    );
-    tempData[destinationBoardIdx].card.splice(
-      destination.index,
-      0,
-      tempData[sourceBoardIdx].card[source.index]
-    );
-    tempData[sourceBoardIdx].card.splice(source.index, 1);
-    return tempData;
-  };
-
+  
   const addCard = async (title, bid) => {
     console.log(bid)
     await new Promise((resolve) =>{
@@ -272,7 +253,7 @@ function App() {
             <div className="leader_boards">
               {data.map((item,index) => (
                   <>
-                  {index > 2 &&
+                  {index == 3 &&
                   <Board
                       cn = "lb"
                       key={item._id}
