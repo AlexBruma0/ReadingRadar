@@ -1,50 +1,50 @@
-.modal-container{
+.modal-container {
   width: max(var(--topLeftBoardWidth), 300px);
   max-height: 60vh;
-
 }
 .modal-container img {
   border-radius: 0;
-  width: calc(var(--topLeftBoardWidth)* (1/3));
+  width: calc(var(--topLeftBoardWidth) * (1 / 3));
   height: calc(var(--topLeftBoardheight));
   box-sizing: border-box;
   padding-left: var(--topLeftBoardGap);
-
 }
 .input {
   margin: auto;
-max-width: calc(var(--topLeftBoardWidth)* 0.9);
+  max-width: calc(var(--topLeftBoardWidth) * 0.9);
 }
-input{
-  width: calc(var(--topLeftBoardWidth)* 0.8);
+input {
+  width: calc(var(--topLeftBoardWidth) * 0.8);
 }
-.model-content-container{
+.model-content-container {
   display: grid;
-  grid-template-columns: calc(var(--topLeftBoardWidth)* (.35)) calc(var(--topLeftBoardWidth)* (3/5));
+  grid-template-columns: calc(var(--topLeftBoardWidth) * (0.35)) calc(
+      var(--topLeftBoardWidth) * (3 / 5)
+    );
   gap: 0vw;
 }
 .item {
   background-color: white;
   border: none;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: calc(var(--card-font-size) * (1));
   font-weight: 100;
 }
-.col2-container{
-  width: max(calc(var(--topLeftBoardWidth)* 0.5), 300px);
+.col2-container {
+  width: max(calc(var(--topLeftBoardWidth) * 0.5), 300px);
 }
-.modal-title{
+.modal-title {
   font-size: calc(var(--card-font-size) * 2);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   text-align: center;
   background-color: var(--pink);
 }
-.title-input-wrapper{
+.title-input-wrapper {
   text-align: center;
 }
-.title-input{
+.title-input {
   font-size: calc(var(--card-font-size) * 2);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   text-align: center;
   border: none !important;
 }
@@ -56,12 +56,11 @@ button {
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-weight: bold;
 }
 @media screen and (max-width: 800px) {
-  .col1-container{
+  .col1-container {
     display: none;
   }
-  
 }

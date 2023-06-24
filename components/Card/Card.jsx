@@ -9,7 +9,7 @@ import CardDetails from "./CardDetails/CardDetails";
 
 const Card = (props) => {
   const getItemStyle = (draggableStyle) => ({
-    ...draggableStyle
+    ...draggableStyle,
   });
 
   const [dropdown, setDropdown] = useState(false);
@@ -42,27 +42,20 @@ const Card = (props) => {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
             className={props.cn}
-            style={getItemStyle(
-              provided.draggableProps.style
-            )}
+            style={getItemStyle(provided.draggableProps.style)}
             onClick={() => {
               setModalShow(true);
             }}
-
-
           >
             <div className="image">
-              <img src={props.img_url} alt=""  />
+              <img src={props.img_url} alt="" />
             </div>
             <div className="text-container">
               {props.title}
-              <div className="author-container">  
+              <div className="author-container">
                 <i>{props.author}</i>
-              
               </div>
             </div>
-            
-     
           </div>
         </>
       )}

@@ -21,20 +21,24 @@ body {
 
   display: flex;
 }
-.leader_boards{
+.leader_boards {
   display: block;
   flex-wrap: wrap;
   flex-direction: column;
-  height: calc(var(--boardsHeight)* 0.95 );
+  height: calc(var(--boardsHeight) * 0.95);
   width: 1vw;
   border-radius: 0.5rem;
 }
-.spinner-container{
+.spinner-container {
   margin: auto;
 }
 .app_boards {
-  --mainBoardWidth: calc((var(--topLeftBoardWidth) * 2) + var(--topLeftBoardGap) + 3px);
-  --mainBoardHeight: calc((var(--topLeftBoardHeight) * 2) + var(--topLeftBoardGapY) );
+  --mainBoardWidth: calc(
+    (var(--topLeftBoardWidth) * 2) + var(--topLeftBoardGap) + 3px
+  );
+  --mainBoardHeight: calc(
+    (var(--topLeftBoardHeight) * 2) + var(--topLeftBoardGapY)
+  );
   background-clip: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -80,8 +84,7 @@ body {
     flex-wrap: nowrap;
     flex-direction: column;
   }
-  .leader_boards{
+  .leader_boards {
     display: none;
   }
 }
-

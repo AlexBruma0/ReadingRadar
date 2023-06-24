@@ -1,15 +1,15 @@
 .navbar {
-  --navbarHeight: calc(var(--topLeftBoardHeight)* (1/6));
+  --navbarHeight: calc(var(--topLeftBoardHeight) * (1 / 6));
   height: var(--navbarHeight);
   color: var(--text-color);
   font-family: "Times New Roman", Times, serif;
   background-color: var(--pink);
+  width: 100%;
 }
 
-
 .title {
-  --navbarHeight: calc(var(--topLeftBoardHeight)* (1/6));
-  font-size: calc(var(--navbarHeight)* 0.8);
+  --navbarHeight: calc(var(--topLeftBoardHeight) * (1 / 6));
+  font-size: calc(var(--navbarHeight) * 0.8);
   text-align: center;
   margin: auto;
 }

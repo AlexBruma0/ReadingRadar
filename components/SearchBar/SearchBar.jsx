@@ -1,5 +1,5 @@
-import { useState,useEffect } from "react";
-import "./SearchBar.css"
+import { useState, useEffect } from "react";
+import "./SearchBar.css";
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
 
@@ -7,12 +7,11 @@ const SearchBar = () => {
   const local = "http://localhost:8081/";
   var uri = remote;
 
-
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
-    
-    return json.result[0].card.concat(json.result[1].card,json.result[2].card);
+
+    return json.result[0].card.concat(json.result[1].card, json.result[2].card);
   };
   const [data, setData] = useState([]);
 
@@ -21,13 +20,15 @@ const SearchBar = () => {
     setSearchInput(e.target.value);
   };
   useEffect(() => {
-      get().then((data) => {
-        setData(data.filter((book) =>{
-          return (book.title.match(new RegExp(searchInput, "i")) && searchInput != '')
-        }))
-      })
-
-
+    get().then((data) => {
+      setData(
+        data.filter((book) => {
+          return (
+            book.title.match(new RegExp(searchInput, "i")) && searchInput != ""
+          );
+        })
+      );
+    });
   }, [data]);
 
   return (
@@ -35,16 +36,15 @@ const SearchBar = () => {
       <input
         className="input"
         type="search"
-        placeholder="Search for book:" 
+        placeholder="Search for book:"
         onChange={handleChange}
         value={searchInput}
       />
 
       <div className="table">
         {data.map((book) => (
-            <div className="item">{book.title}</div>
+          <div className="item">{book.title}</div>
         ))}
-
       </div>
     </div>
   );

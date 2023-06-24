@@ -1,17 +1,15 @@
 .editable {
   width: var(--topLeftBoardWidth);
   height: var(--boardFooterHeight);
- 
 }
 .editable > p {
   position: absolute;
-  bottom: calc(var(--boardFooterHeight) *(-0.35));
+  bottom: calc(var(--boardFooterHeight) * (-0.35));
   display: flex;
-  height: calc(var(--boardFooterHeight) *(1/2));
-  width: calc(var(--card-font-size)* 8);
+  height: calc(var(--boardFooterHeight) * (1 / 2));
+  width: calc(var(--card-font-size) * 8);
   font-size: calc(var(--card-font-size));
   border-radius: var(--border-radius);
-
 }
 .editable > p:hover {
   background-color: #ccc;
@@ -19,18 +17,17 @@
 }
 .editable__input {
   display: flex;
-  gap: var(--topLeftBoardGap)
+  gap: var(--topLeftBoardGap);
 }
 .editable__input > textarea {
-  height: calc(var(--boardFooterHeight) * (3/5));
-  width: calc(var(--topLeftBoardWidth) * (1/2));
+  height: calc(var(--boardFooterHeight) * (3 / 5));
+  width: calc(var(--topLeftBoardWidth) * (1 / 2));
   border-radius: var(--border-radius);
   box-sizing: border-box;
   font-size: calc(var(--card-font-size));
   background-color: #fafbfc;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   margin-top: 2vh;
- 
 }
 .editable__input > textarea:focus {
   border: none;
@@ -40,9 +37,8 @@
   display: flex;
 }
 .btn__control > button {
-  
-  height: calc(var(--boardFooterHeight) * (3/5));
-  width: calc(var(--topLeftBoardWidth) * (1/4));
+  height: calc(var(--boardFooterHeight) * (3 / 5));
+  width: calc(var(--topLeftBoardWidth) * (1 / 4));
   border-radius: var(--border-radius);
   font-size: min(calc(var(--card-font-size)), 1.6vw);
   background-color: var(--pink);
@@ -56,7 +52,6 @@
 .close:hover {
   cursor: pointer;
 }
-.close{
-  margin-top: max(1vw,1.5vh);
+.close {
+  margin-top: max(1vw, 1.5vh);
 }
-

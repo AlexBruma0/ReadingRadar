@@ -4,41 +4,39 @@
   border-radius: var(--border-radius);
   box-shadow: 0px 2px var(--card-box-shadow);
   height: var(--cardHeight);
-  font-family: 'Times New Roman', Times, serif;
-  font-weight:600;
-  margin-bottom: calc( var(--cardHeight) * 0.1);
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 600;
+  margin-bottom: calc(var(--cardHeight) * 0.1);
   width: calc(var(--topLeftBoardWidth) * (0.97));
   font-size: var(--card-font-size);
   display: flex;
   align-items: center;
 }
- .lb {
+.lb {
   border-radius: 3px;
   background-color: rgb(23, 21, 21);
   color: var(--pink);
   height: var(--cardHeight);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-weight: bold;
-  padding-top: calc( var(--cardHeight) * 0.5);
-  margin-bottom: calc( var(--cardHeight) * 0.2);
+  padding-top: calc(var(--cardHeight) * 0.5);
+  margin-bottom: calc(var(--cardHeight) * 0.2);
   padding-left: 0.2vw;
   width: calc(var(--bw) * 0.18);
-} 
-.image{
+}
+.image {
   display: flex;
   align-items: center;
   margin-inline: var(--topLeftBoardGap);
-
 }
 
-.author-container{
-  font-size: calc(var(--card-font-size)* (2/3));
+.author-container {
+  font-size: calc(var(--card-font-size) * (2 / 3));
 }
-img{
-  width: calc(var(--cardHeight) * 0.70);
-  height: calc(var(--cardHeight) * 0.70);
+img {
+  width: calc(var(--cardHeight) * 0.7);
+  height: calc(var(--cardHeight) * 0.7);
   border-radius: 10vw;
-  
 }
 
 @media screen and (max-width: 800px) {
@@ -46,6 +44,3 @@ img{
     width: calc(var(--bw) * 1.17);
   }
 }
-
-
-

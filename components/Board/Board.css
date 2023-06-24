@@ -8,20 +8,20 @@
   height: var(--topLeftBoardHeight);
   border: var(--border-width) solid black;
 }
-#board0{
+#board0 {
   margin-right: var(--topLeftBoardGap);
 }
-#board0 .board__cards{
+#board0 .board__cards {
   display: block;
   overflow-y: scroll;
   margin: auto;
 }
-#board1 .board__cards{
+#board1 .board__cards {
   display: block;
   overflow-y: scroll;
   margin: auto;
 }
- .board2-cards-container{
+.board2-cards-container {
   display: flex;
   box-sizing: border-box;
   padding-left: 0.7%;
@@ -29,28 +29,30 @@
   overflow-y: scroll;
 }
 
-#board2  .board__cards{
+#board2 .board__cards {
   display: flex;
   flex-direction: row;
   overflow-y: visible;
   height: max-content;
-} 
+}
 #board2 {
-  --bottomLeftBoardWidth: calc(var(--topLeftBoardWidth) * 2 + var(--topLeftBoardGap));
+  --bottomLeftBoardWidth: calc(
+    var(--topLeftBoardWidth) * 2 + var(--topLeftBoardGap)
+  );
   width: var(--bottomLeftBoardWidth);
 }
-#board3, #board4 {
+#board3,
+#board4 {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: calc(var(--topLeftBoardWidth)* 0.69);
-  height: calc(var(--topLeftBoardHeight)*2.035);
+  width: calc(var(--topLeftBoardWidth) * 0.69);
+  height: calc(var(--topLeftBoardHeight) * 2.035);
   background-color: var(--pink);
   overflow-x: hidden;
   margin-left: var(--topLeftBoardGap);
-
 }
- #board4 .board__cards{
+#board4 .board__cards {
   max-height: 90%;
   margin-left: 1vw;
   flex-wrap: nowrap;
@@ -58,16 +60,15 @@
   background-color: var(--pink);
   width: 110%;
   margin-right: 1rem;
-
 }
 .board__top {
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
   padding-left: 1vw;
-  height: calc(var(--topLeftBoardHeight) * (2/15));
+  height: calc(var(--topLeftBoardHeight) * (2 / 15));
   width: var(--topLeftBoardWidth);
-  font-size: calc(var(--topLeftBoardHeight) * (1/20));
+  font-size: calc(var(--topLeftBoardHeight) * (1 / 20));
 }
 
 .board__cards {
@@ -77,18 +78,16 @@
   height: var(--topLeft_board_card_height);
   overflow-y: scroll;
   border-radius: var(--border-radius);
-
 }
-.spinner-container{
+.spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-.board__footer { 
+.board__footer {
   display: flex;
-  align-items:flex-end;
+  align-items: flex-end;
   height: var(--boardFooterHeight);
   margin-bottom: 0;
 }
@@ -105,9 +104,8 @@
   font-weight: bolder;
 }
 .total__cards {
-
-  font-size: calc(var(--card-font-size)* (2/3));
-  border-radius: calc(var(--border-radius)*4);
+  font-size: calc(var(--card-font-size) * (2 / 3));
+  border-radius: calc(var(--border-radius) * 4);
   padding-inline: 0.4vw;
   border: 0.5px solid var(--card-box-shadow);
   background-color: var(--card-color);
@@ -117,10 +115,9 @@
   font-weight: bold;
   /* padding-inline: 0.5rem; */
   height: var(--boardFooterHeight);
-  width: calc(var(--topLeftBoardWidth)* (1/3));
+  width: calc(var(--topLeftBoardWidth) * (1 / 3));
   border-radius: var(--border-radius);
 }
-
 
 @media screen and (max-width: 800px) {
   .board {
