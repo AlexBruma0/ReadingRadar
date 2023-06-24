@@ -34,7 +34,7 @@ const SearchBar = () => {
   return (
     <div className="searchBar">
       <input
-        className="input"
+        className="searchBar-input"
         type="search"
         placeholder="Search for book:"
         onChange={handleChange}

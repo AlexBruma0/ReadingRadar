@@ -7,9 +7,6 @@ export default function Navbar(props) {
       <div className="navbar">
         <h2 className="title">Hannah's Books</h2>
       </div>
-      <div className="searchbar">
-        <SearchBar></SearchBar>
-      </div>
     </>
   );
 }
