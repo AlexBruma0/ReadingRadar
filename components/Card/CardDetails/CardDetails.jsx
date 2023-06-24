@@ -18,10 +18,10 @@ export default function CardDetails(props) {
       <div className="input">
         <input
           autoFocus
-          defaultValue={props.text === title? title : author}
+          defaultValue={props.title === true? title : author}
           type={"text"}
           onChange={(e) => {
-            props.text === title? setTitle(e.target.value) : setAuthor(e.target.value)
+            props.title === true? setTitle(e.target.value) : setAuthor(e.target.value)
             
           }}
         />
@@ -29,7 +29,11 @@ export default function CardDetails(props) {
     );
   };
   const updateTitle = (value) => {
-    setValues({ ...values, title: value });
+    console.log(value)
+    const temp = values
+    values.title = value
+    setValues(temp);
+    console.log(value)
   };
   const updateAuthor = (value) => {
     setValues({ ...values, author: value });
@@ -38,6 +42,7 @@ export default function CardDetails(props) {
 
   const handelClickListner = (e) => {
     if (e.code === "Enter") {
+      console.log(title)
       setInput(false);
       setAuthor_input(false)
       updateTitle(title === "" ? values.title : title);
@@ -61,7 +66,7 @@ export default function CardDetails(props) {
       <div className="modal-container">
         <div >
           {input ? (
-                <Input text={values.title} />
+                <Input title={true} />
               ) : (
                 <div
                   className="title"
@@ -81,7 +86,7 @@ export default function CardDetails(props) {
             <div className="col2-container">
               <div className="item">
                 {author_input ? (
-                  <Input text={values.author} />
+                  <Input title={false} />
                 ) : (
                   <h5
                     onClick={() => setAuthor_input(true)}
