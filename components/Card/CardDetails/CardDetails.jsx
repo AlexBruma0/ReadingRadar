@@ -11,16 +11,18 @@ export default function CardDetails(props) {
   const [values, setValues] = useState({ ...props.card });
   const [input, setInput] = useState(false);
   const [author_input, setAuthor_input] = useState(false);
-  const [text, setText] = useState(values.title);
+  const [title, setTitle] = useState(values.title);
+  const [author, setAuthor] = useState(values.author);
   const Input = (props) => {
     return (
       <div className="input">
         <input
           autoFocus
-          defaultValue={text}
+          defaultValue={props.text === title? title : author}
           type={"text"}
           onChange={(e) => {
-            setText(e.target.value);
+            props.text === title? setTitle(e.target.value) : setAuthor(e.target.value)
+            
           }}
         />
       </div>
@@ -29,12 +31,17 @@ export default function CardDetails(props) {
   const updateTitle = (value) => {
     setValues({ ...values, title: value });
   };
+  const updateAuthor = (value) => {
+    setValues({ ...values, author: value });
+  };
 
 
   const handelClickListner = (e) => {
     if (e.code === "Enter") {
       setInput(false);
-      updateTitle(text === "" ? values.title : text);
+      setAuthor_input(false)
+      updateTitle(title === "" ? values.title : title);
+      updateAuthor(author === "" ? values.author : author);
     } else return;
   };
 
