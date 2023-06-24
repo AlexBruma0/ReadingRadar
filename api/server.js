@@ -82,6 +82,7 @@ app.put("/:id", async (req, res) => {
   req.body.card.rating= response.data.product.rating
   req.body.card.ratings_total= response.data.product.ratings_total
   req.body.card.numberOfPages = response.data.product.specifications[2].value
+  req.body.card.myRating = 0
   console.log(req.body.card)
   await Item.updateOne(
     { _id: req.params.id },

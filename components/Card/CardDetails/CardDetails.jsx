@@ -6,23 +6,28 @@ import Modal from "../../Modal/Modal";
 import "./CardDetails.css";
 
 export default function CardDetails(props) {
-  const colors = ["#61bd4f", "#f2d600", "#ff9f1a", "#eb5a46", "#c377e0"];
 
   const [values, setValues] = useState({ ...props.card });
+
   const [input, setInput] = useState(false);
-  const [author_input, setAuthor_input] = useState(false);
   const [title, setTitle] = useState(values.title);
+
+  const [author_input, setAuthor_input] = useState(false);
   const [author, setAuthor] = useState(values.author);
+
+  const [rating_input, setRating_input] = useState(false);
+  const [rating, setRating] = useState(values.myRating);
+
   const Input = (props) => {
     return (
       <div className={props.title === true? 'title-input-wrapper' : 'author-input-wrapper'}>
         <input
         className={props.title === true? 'title-input' : 'author-input'}
           autoFocus
-          defaultValue={props.title === true? title : author}
+          defaultValue={props.title === true? title : props.rating === true? rating: author}
           type={"text"}
           onChange={(e) => {
-            props.title === true? setTitle(e.target.value) : setAuthor(e.target.value)
+            props.title === true? setTitle(e.target.value) :props.rating === true ? setRating(e.target.value): setAuthor(e.target.value)
             
           }}
         />
@@ -37,7 +42,19 @@ export default function CardDetails(props) {
     console.log(value)
   };
   const updateAuthor = (value) => {
-    setValues({ ...values, author: value });
+    console.log(value)
+    const temp = values
+    values.author = value
+    setValues(temp);
+    console.log(value)
+  };
+
+  const updateRating = (value) => {
+    console.log(value)
+    const temp = values
+    values.myRating = value
+    setValues(temp);
+    console.log(value)
   };
 
 
@@ -46,8 +63,10 @@ export default function CardDetails(props) {
       console.log(title)
       setInput(false);
       setAuthor_input(false)
+      setRating_input(false)
       updateTitle(title === "" ? values.title : title);
       updateAuthor(author === "" ? values.author : author);
+      updateRating(rating === "" ? values.myRating : rating);
     } else return;
   };
 
@@ -78,11 +97,18 @@ export default function CardDetails(props) {
               )}
           </div>
 
+
           <div className="model-content-container">
 
             <div className="col1-container">
               <img src={values.img_url} alt="" />
+              <button onClick={() => props.removeCard(props.bid, values.id)}>
+                <span className="icon__sm">
+                </span>
+                Delete Book
+              </button>
             </div>
+
 
             <div className="col2-container">
               <div className="item">
@@ -102,17 +128,17 @@ export default function CardDetails(props) {
                 </div>
             
               </div>
-              {/* <div className="item">
-                {author_input ? (
-                  <Input title={false} />
+              <div className="item">
+                {rating_input ? (
+                  <Input rating={true} />
                 ) : (
                   <div
-                    onClick={() => setAuthor_input(true)}
+                    onClick={() => setRating_input(true)}
                   >
-                    My rating: <i>{values.author}</i>
+                    My rating: <i>{values.myRating? values.myRating: 'click to set rating'}</i>
                   </div>
                 )}
-              </div> */}
+              </div>
               <div className="item">
                 <div>
                 Amazon rating: <i>{values.rating} </i>
@@ -131,12 +157,7 @@ export default function CardDetails(props) {
                 </div>
             
               </div>
-              <button onClick={() => props.removeCard(props.bid, values.id)}>
-                <span className="icon__sm">
-                  <Trash />
-                </span>
-                Delete Book
-              </button>
+              
             </div>
           </div>
   

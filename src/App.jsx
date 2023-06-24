@@ -189,10 +189,9 @@ function App() {
   };
 
   const updateCard = async (bid, cid, card) => {
-    console.log(bid,cid, card)
+    console.log(card)
     const  index = data.findIndex((e) => {
       return e._id === bid})
-    console.log(index)
 
     if (index < 0) return;
     const tempBoards = [...data];
@@ -203,7 +202,7 @@ function App() {
 
     tempBoards[index].card[cardIndex] = card;
     setlocalData(tempBoards);
-
+    console.log(tempBoards[index].card)
     await fetch(`${uri}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
