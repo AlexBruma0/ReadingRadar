@@ -61,7 +61,7 @@ export default function CardDetails(props) {
       <div className="modal-container">
         <div >
           {input ? (
-                <Input title={values.title} />
+                <Input text={values.title} />
               ) : (
                 <div
                   className="title"
@@ -81,7 +81,7 @@ export default function CardDetails(props) {
             <div className="col2-container">
               <div className="item">
                 {author_input ? (
-                  <Input title={'hi'} />
+                  <Input text={values.author} />
                 ) : (
                   <h5
                     onClick={() => setAuthor_input(true)}
