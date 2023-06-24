@@ -15,8 +15,9 @@ export default function CardDetails(props) {
   const [author, setAuthor] = useState(values.author);
   const Input = (props) => {
     return (
-      <div className="input">
+      <div className={props.title === true? 'title-input-wrapper' : 'author-input-wrapper'}>
         <input
+        className={props.title === true? 'title-input' : 'author-input'}
           autoFocus
           defaultValue={props.title === true? title : author}
           type={"text"}
@@ -69,7 +70,7 @@ export default function CardDetails(props) {
                 <Input title={true} />
               ) : (
                 <div
-                  className="title"
+                  className="modal-title"
                   onClick={() => setInput(true)}
                 >
                   {values.title}
@@ -88,12 +89,47 @@ export default function CardDetails(props) {
                 {author_input ? (
                   <Input title={false} />
                 ) : (
-                  <h5
+                  <div
                     onClick={() => setAuthor_input(true)}
                   >
-                    {values.author}
-                  </h5>
+                    Author: <i>{values.author}</i>
+                  </div>
                 )}
+              </div>
+              <div className="item">
+                <div>
+                Publication Date: <i>{values.publication_date}</i>
+                </div>
+            
+              </div>
+              {/* <div className="item">
+                {author_input ? (
+                  <Input title={false} />
+                ) : (
+                  <div
+                    onClick={() => setAuthor_input(true)}
+                  >
+                    My rating: <i>{values.author}</i>
+                  </div>
+                )}
+              </div> */}
+              <div className="item">
+                <div>
+                Amazon rating: <i>{values.rating} </i>
+                </div>
+            
+              </div>
+              <div className="item">
+                <div>
+                Number of ratings: <i>{values.ratings_total} </i>
+                </div>
+            
+              </div>
+              <div className="item">
+                <div>
+                Number of Pages: <i>{values.numberOfPages} </i>
+                </div>
+            
               </div>
               <button onClick={() => props.removeCard(props.bid, values.id)}>
                 <span className="icon__sm">
