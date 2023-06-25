@@ -131,7 +131,7 @@ export default function CardDetails(props) {
                   My rating:{" "}
                   <i>
                     {values.myRating ? values.myRating : "click to set rating"}
-                  </i>
+                  </i> /5
                 </div>
               )}
             </div>
