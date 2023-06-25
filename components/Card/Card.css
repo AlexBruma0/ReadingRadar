@@ -30,7 +30,7 @@
   /* background-color: var(--pink); */
   background-color: black;
   /* color: rgb(0, 0, 0); */
-  color: var(--pink);
+  color: white;
   border-radius: var(--border-radius);
   box-shadow: 0px 2px var(--card-box-shadow);
   height: var(--cardHeight);

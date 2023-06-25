@@ -8,6 +8,7 @@
   height: var(--topLeftBoardHeight);
   border: var(--border-width) solid black;
   background-color: var(--board-color);
+  font-family: 'Times New Roman', Times, serif;
 }
 #board0 {
   margin-right: var(--topLeftBoardGap);

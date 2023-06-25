@@ -4,7 +4,7 @@
 }
 .modal-container img {
   border-radius: 0;
-  width: calc(var(--topLeftBoardWidth) * (1 / 3));
+  width: max(calc(var(--topLeftBoardWidth) * 0.1), 150px);
   height: calc(var(--topLeftBoardheight));
   box-sizing: border-box;
   padding-left: var(--topLeftBoardGap);
@@ -32,6 +32,9 @@ input {
   font-size: calc(var(--card-font-size) * (1));
   font-weight: 100;
   width: calc(var(--topLeftBoardWidth) * 0.5);
+}
+.col1-container{
+  width: max(calc(var(--topLeftBoardWidth) * 0.2), 150px);
 }
 .col2-container {
   width: max(calc(var(--topLeftBoardWidth) * 0.5), 300px);
