@@ -1,52 +1,16 @@
 .modal-container {
-  width: max(var(--topLeftBoardWidth), 300px);
-  max-height: 60vh;
+ 
 }
-.modal-container img {
-  border-radius: 0;
-  width: max(calc(var(--topLeftBoardWidth) * 0.1), 150px);
-  height: calc(var(--topLeftBoardheight));
-  box-sizing: border-box;
-  padding-left: var(--topLeftBoardGap);
-  aspect-ratio: 0.7;
 
-}
-.input {
-  margin: auto;
-  max-width: calc(var(--topLeftBoardWidth) * 0.9);
-}
-input {
-  width: calc(var(--topLeftBoardWidth) * 0.8);
-}
-.model-content-container {
-  display: grid;
-  grid-template-columns: calc(var(--topLeftBoardWidth) * (0.35)) calc(
-      var(--topLeftBoardWidth) * (3 / 5)
-    );
-  gap: 0vw;
-}
-.item {
-  background-color: white;
-  border: none;
-  font-family: "Times New Roman", Times, serif;
-  font-size: calc(var(--card-font-size) * (1));
-  font-weight: 100;
-  width: calc(var(--topLeftBoardWidth) * 0.5);
-}
-.col1-container{
-  width: max(calc(var(--topLeftBoardWidth) * 0.2), 150px);
-}
-.col2-container {
-  width: max(calc(var(--topLeftBoardWidth) * 0.5), 300px);
-}
 .modal-title {
-  font-size: calc(var(--card-font-size) * 2);
+  font-size: clamp(1.7rem, 1.1vw + 1rem, 6rem);
   font-family: "Times New Roman", Times, serif;
   text-align: center;
   background-color: var(--pink);
-}
-.title-input-wrapper {
-  text-align: center;
+  padding: 2px;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
+  margin-bottom: 2px;
 }
 .title-input {
   font-size: calc(var(--card-font-size) * 2);
@@ -54,6 +18,35 @@ input {
   text-align: center;
   border: none !important;
 }
+.modal-container img {
+  border-radius: 0;
+  width: clamp(9rem, 20.75vw + 6rem, 8rem);;
+  height: calc(var(--topLeftBoardheight));
+  box-sizing: border-box;
+  padding-left: var(--topLeftBoardGap);
+  aspect-ratio: 0.7;
+}
+.input {
+  margin: auto;
+  max-width: calc(var(--topLeftBoardWidth) * 0.9);
+}
+.model-content-container {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  gap: 1vw;
+}
+.item-item{
+  overflow-x: hidden;
+  font-size: clamp(1.5rem, 1vw + .5rem, 6rem);
+}
+.col1-container{
+  margin: auto;
+  text-align: center;
+
+}
+.col2-container {
+}
+
 .author-input {
   font-size: calc(var(--card-font-size) * (0.9));
   width: max(calc(var(--topLeftBoardWidth) * 0.5), 300px);
@@ -61,9 +54,6 @@ input {
   border: none !important;
 }
 button {
-  max-height: 1.5vw;
-  font-size: 1.1vw;
-  margin-left: 2.9vw;
   background-color: var(--pink);
   border: none;
   border-radius: var(--border-radius);

@@ -106,6 +106,7 @@ export default function CardDetails(props) {
         <div className="model-content-container">
           <div className="col1-container">
             <img src={values.img_url} alt="" />
+            
             <button onClick={() => props.removeCard(props.bid, values.id)}>
               <span className="icon__sm"></span>
               Delete Book
@@ -117,7 +118,7 @@ export default function CardDetails(props) {
               {author_input ? (
                 <Input title={false} />
               ) : (
-                <div onClick={() => setAuthor_input(true)}>
+                <div className="item-item" onClick={() => setAuthor_input(true)}>
                   Author: <i>{values.author}</i>
                 </div>
               )}
@@ -127,7 +128,7 @@ export default function CardDetails(props) {
               {rating_input ? (
                 <Input rating={true} />
               ) : (
-                <div onClick={() => setRating_input(true)}>
+                <div className="item-item" onClick={() => setRating_input(true)}>
                   My rating:{" "}
                   <i>
                     {values.myRating ? values.myRating : "click to set rating"}
