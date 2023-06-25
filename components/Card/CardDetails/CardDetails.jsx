@@ -122,11 +122,7 @@ export default function CardDetails(props) {
                 </div>
               )}
             </div>
-            <div className="item">
-              <div>
-                Publication Date: <i>{values.publication_date}</i>
-              </div>
-            </div>
+
             <div className="item">
               {rating_input ? (
                 <Input rating={true} />
@@ -139,21 +135,8 @@ export default function CardDetails(props) {
                 </div>
               )}
             </div>
-            <div className="item">
-              <div>
-                Amazon rating: <i>{values.rating} </i>
-              </div>
-            </div>
-            <div className="item">
-              <div>
-                Number of ratings: <i>{values.ratings_total} </i>
-              </div>
-            </div>
-            <div className="item">
-              <div>
-                Number of Pages: <i>{values.numberOfPages} </i>
-              </div>
-            </div>
+
+
           </div>
         </div>
       </div>

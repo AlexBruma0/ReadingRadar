@@ -9,7 +9,7 @@
 .searchBar-input {
     width: 96vw;
     border-radius: var(--border-radius);
-    border: 0.001vw solid black;
+    border: var(--border-width) solid black;
     height: 4vh;
     font-size: 2vh;
     margin-top: 0.5vw;
