@@ -7,6 +7,7 @@
   border-radius: var(--border-radius);
   height: var(--topLeftBoardHeight);
   border: var(--border-width) solid black;
+  background-color: var(--board-color);
 }
 #board0 {
   margin-right: var(--topLeftBoardGap);
@@ -52,13 +53,11 @@
   overflow-x: hidden;
   margin-left: var(--topLeftBoardGap);
 }
-#board4 .board__cards {
-  max-height: 90%;
+#board3 .board__cards {
+  height: calc(var(--topLeftBoardHeight) * 1.8);
   margin-left: 1vw;
   flex-wrap: nowrap;
   overflow-y: scroll;
-  background-color: var(--pink);
-  width: 110%;
   margin-right: 1rem;
 }
 .board__top {

@@ -1,18 +1,21 @@
-.searchBar-input {
-    width: 96vw;
 
-    height: 5vh;
-    font-size: 3.7vh;
-    margin-top: 1vw;
-    margin-bottom: 1vw;
-
-
-}
 .searchBar{
     width: 9vw;
     box-sizing: border-box;
     padding-left: 2%;
     padding-right: 2%;
+    border-radius: var(--border-radius);
+}
+.searchBar-input {
+    width: 96vw;
+    border-radius: var(--border-radius);
+    border: 0.001vw solid black;
+    height: 4vh;
+    font-size: 2vh;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    font-family: 'Times New Roman', Times, serif;
+    
 }
 @media screen and (max-width: 800px) {
   .search {

@@ -162,6 +162,7 @@ export default function Board(props) {
                   )}
                 </div>
               )}
+
             </Droppable>
           </div>
           <div>
@@ -207,6 +208,44 @@ export default function Board(props) {
             </Droppable>
           </div>
         </div>
+      )}
+        {props.index === 3  && (
+        <Droppable droppableId={props.id.toString()}>
+          {(provided) => (
+            <div
+              className="board__cards"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {props.waitingAPI && (
+                <div className="spinner-container">
+                  <SpinnerCircular color="pink" size="5vw" />
+                </div>
+              )}
+              {!props.waitingAPI && (
+                <>
+                  {props.card?.map((items, index) => (
+                    <Card
+                      cn={props.cn}
+                      bid={props.id}
+                      id={items.id}
+                      index={index}
+                      key={items.id}
+                      author={items.author}
+                      title={items.title}
+                      img_url={items.img_url}
+                      tags={items.tags}
+                      updateCard={props.updateCard}
+                      removeCard={props.removeCard}
+                      card={items}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </>
+              )}
+            </div>
+          )}
+        </Droppable>
       )}
 
       <div className="board__footer">

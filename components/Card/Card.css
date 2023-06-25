@@ -1,6 +1,9 @@
 .custom__card {
-  background-color: rgb(218, 218, 218);
-  color: rgb(0, 0, 0);
+  /* background-color: rgb(218, 218, 218);  */
+  background-color: var(--pink);
+  /* background-color: black; */
+  /* color: rgb(0, 0, 0); */
+  /* color: var(--pink); */
   border-radius: var(--border-radius);
   box-shadow: 0px 2px var(--card-box-shadow);
   height: var(--cardHeight);
@@ -13,7 +16,7 @@
   align-items: center;
 }
 .lb {
-  border-radius: 3px;
+  /* border-radius: 3px;
   background-color: rgb(23, 21, 21);
   color: var(--pink);
   height: var(--cardHeight);
@@ -22,7 +25,22 @@
   padding-top: calc(var(--cardHeight) * 0.5);
   margin-bottom: calc(var(--cardHeight) * 0.2);
   padding-left: 0.2vw;
-  width: calc(var(--bw) * 0.18);
+  width: calc(var(--bw) * 0.18); */
+    /* background-color: rgb(218, 218, 218); */
+  /* background-color: var(--pink); */
+  background-color: black;
+  /* color: rgb(0, 0, 0); */
+  color: var(--pink);
+  border-radius: var(--border-radius);
+  box-shadow: 0px 2px var(--card-box-shadow);
+  height: var(--cardHeight);
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 600;
+  margin-bottom: calc(var(--cardHeight) * 0.1);
+  width: calc(var(--topLeftBoardWidth) * 0.6);
+  font-size: var(--card-font-size);
+  display: flex;
+  align-items: center;
 }
 .image {
   display: flex;
