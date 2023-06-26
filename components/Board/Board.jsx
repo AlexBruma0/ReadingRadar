@@ -99,6 +99,7 @@ export default function Board(props) {
                 <>
                   {props.card?.map((items, index) => (
                     <Card
+                      cardColor={props.cardColor}
                       cn={props.cn}
                       bid={props.id}
                       id={items.id}
@@ -141,6 +142,7 @@ export default function Board(props) {
                         <>
                           {index < Math.ceil(props.card.length / 2) && (
                             <Card
+                              cardColor={props.cardColor}
                               cn={props.cn}
                               bid={props.id}
                               id={items.id}
@@ -184,6 +186,7 @@ export default function Board(props) {
                         <>
                           {index >= Math.ceil(props.card.length / 2) && (
                             <Card
+                              cardColor={props.cardColor}
                               cn={props.cn}
                               bid={props.id}
                               id={items.id}
@@ -226,6 +229,7 @@ export default function Board(props) {
                 <>
                   {props.card?.map((items, index) => (
                     <Card
+                      cardColor={props.cardColor}
                       cn={props.cn}
                       bid={props.id}
                       id={items.id}

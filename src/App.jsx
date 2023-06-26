@@ -17,7 +17,7 @@ function App() {
   const [waitingAPI2, setWaitingAPI2] = useState(false);
   const [localData, setlocalData] = useState(null);
 
-  var uri = local;
+  var uri = remote;
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
@@ -227,6 +227,7 @@ function App() {
                     {index < 3 && (
                       <Board
                         cn="custom__card"
+                        cardColor="black"
                         key={item._id}
                         id={item._id}
                         localData={data}
@@ -258,9 +259,10 @@ function App() {
           <div className="leader_boards">
             {data.map((item, index) => (
               <>
-                {index == 3 && (
+                {index === 3 && (
                   <Board
                     cn="lb"
+                    cardColor="pink"
                     key={item._id}
                     id={item._id}
                     index={index}

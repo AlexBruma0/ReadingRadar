@@ -58,7 +58,7 @@ const Card = (props) => {
               <div className="author-container">
                 <i>{props.author}</i>
                 <div className="stars">
-                   <Rating onClick={handleRating} initialValue='4' size= '13px' fillColor="gold" emptyColor='#f2f2f3'/>
+                   <Rating onClick={handleRating} initialValue='4' size= '13px' fillColor={props.cardColor} emptyColor='#f2f2f3'/>
                 </div>
               </div>
             </div>
