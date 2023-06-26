@@ -6,6 +6,11 @@
     padding-right: 2%;
     border-radius: var(--border-radius);
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+  font-weight: bold;
+}
 .searchBar-input {
     width: 96vw;
     border-radius: var(--border-radius);
@@ -16,6 +21,7 @@
     margin-bottom: 0.5vw;
     font-family: 'Times New Roman', Times, serif;
     background-color: var(--pink);
+    color: black;
     
 }
 @media screen and (max-width: 800px) {
