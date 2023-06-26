@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { Calendar, CheckSquare, Clock, MoreHorizontal } from "react-feather";
-import Dropdown from "../Dropdown/Dropdown";
-import Modal from "../Modal/Modal";
-import Tag from "../Tags/Tag";
+import { Rating } from 'react-simple-star-rating'
+
 import "./Card.css";
 import CardDetails from "./CardDetails/CardDetails";
 
 const Card = (props) => {
+  const [ratingValue, setRatingValue] = useState(0)
   const getItemStyle = (draggableStyle) => ({
     ...draggableStyle,
   });
@@ -19,6 +18,9 @@ const Card = (props) => {
   //     console.log(props.img_url)
 
   // })
+  const handleRating = (rate) => {
+    setRatingValue(rate)
+  }
   return (
     <Draggable
       key={props.id?.toString()}
@@ -50,12 +52,17 @@ const Card = (props) => {
             <div className="image">
               <img src={props.img_url} alt="" />
             </div>
+
             <div className="text-container">
               {props.title}
               <div className="author-container">
                 <i>{props.author}</i>
+                <div className="stars">
+                   <Rating onClick={handleRating} initialValue='4' size= '13px' fillColor="gold" emptyColor='#f2f2f3'/>
+                </div>
               </div>
             </div>
+            
           </div>
         </>
       )}
