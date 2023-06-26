@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Rating } from 'react-simple-star-rating'
-
 import "./Card.css";
 import CardDetails from "./CardDetails/CardDetails";
 
@@ -11,16 +10,9 @@ const Card = (props) => {
     ...draggableStyle,
   });
 
-  const [dropdown, setDropdown] = useState(false);
   const [modalShow, setModalShow] = useState(false);
-  // useEffect(() =>{
 
-  //     console.log(props.img_url)
 
-  // })
-  const handleRating = (rate) => {
-    setRatingValue(rate)
-  }
   return (
     <Draggable
       key={props.id?.toString()}
@@ -58,7 +50,7 @@ const Card = (props) => {
               <div className="author-container">
                 <i>{props.author}</i>
                 <div className="stars">
-                   <Rating onClick={handleRating} initialValue='4' size= '13px' fillColor={props.cardColor} emptyColor='#f2f2f3'/>
+                   <Rating  readonly='true' initialValue={props.card.myRating} allowFraction='true' size= '13px' fillColor={props.cardColor} emptyColor='#f2f2f3'/>
                 </div>
               </div>
             </div>

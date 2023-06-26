@@ -12,6 +12,9 @@
   border-top-right-radius: 1vw;
   margin-bottom: 2px;
 }
+.stars{
+  margin-left: 2px;
+}
 .title-input {
   font-size: calc(var(--card-font-size) * 2);
   font-family: "Times New Roman", Times, serif;

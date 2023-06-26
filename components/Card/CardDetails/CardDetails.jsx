@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Trash } from "react-feather";
+import { Rating } from 'react-simple-star-rating'
+import { Trash } from "react-feather"
 import Modal from "../../Modal/Modal";
 import "./CardDetails.css";
 
 export default function CardDetails(props) {
   const [values, setValues] = useState({ ...props.card });
-
+  const [ratingValue, setRatingValue] = useState(0)
   const [input, setInput] = useState(false);
   const [title, setTitle] = useState(values.title);
 
@@ -14,6 +15,10 @@ export default function CardDetails(props) {
 
   const [rating_input, setRating_input] = useState(false);
   const [rating, setRating] = useState(values.myRating);
+
+  const handleRating = (rate) => {
+    setRatingValue(rate)
+  }
 
   const Input = (props) => {
     return (
@@ -128,11 +133,14 @@ export default function CardDetails(props) {
               {rating_input ? (
                 <Input rating={true} />
               ) : (
-                <div className="item-item" onClick={() => setRating_input(true)}>
-                  My rating:{" "}
-                  <i>
+                <div className="item-item" >
+                  
+                  {/* <i>
                     {values.myRating ? values.myRating : "click to set rating"}
-                  </i> /5
+                  </i> /5 */}
+                  <div className="stars">
+                  My rating:{" "}<Rating onClick={updateRating} allowFraction='true' initialValue={values.myRating} size= '20px' fillColor='pink' emptyColor='#f2f2f3'/>
+                </div>
                 </div>
               )}
             </div>
