@@ -1,6 +1,4 @@
-.modal-container {
- 
-}
+
 
 .modal-title {
   font-size: clamp(1.7rem, 1.1vw + 1rem, 6rem);
@@ -47,8 +45,6 @@
   text-align: center;
 
 }
-.col2-container {
-}
 
 .author-input {
   font-size: calc(var(--card-font-size) * (0.9));
@@ -64,8 +60,3 @@ button {
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
 }
-/* @media screen and (max-width: 800px) {
-  .col1-container {
-    /* display: none; */
-  /* }
-}  */

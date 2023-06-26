@@ -12,8 +12,6 @@
 #board0 {
   margin-right: var(--topLeftBoardGap);
 }
-#board1, #board2{
-}
 #board0 .board__cards {
   display: block;
   overflow-y: scroll;
@@ -31,6 +29,8 @@
   padding-left: 0.7%;
   padding-right: 0.7%;
   overflow-y: scroll;
+  overflow-x: hidden;
+
 }
 
 #board2 .board__cards {
@@ -38,12 +38,16 @@
   flex-direction: row;
   overflow-y: visible;
   height: max-content;
+  margin-right: 1.7vw;
+  overflow-x: hidden;
 }
 #board2 {
   --bottomLeftBoardWidth: calc(
     var(--topLeftBoardWidth) * 2 + var(--topLeftBoardGap)
   );
   width: var(--bottomLeftBoardWidth);
+  overflow-x: hidden;
+
 }
 #board3,
 #board4 {
