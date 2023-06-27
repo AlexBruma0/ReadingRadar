@@ -13,6 +13,21 @@
 .stars{
   margin-left: 2px;
 }
+::placeholder {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 100;
+  opacity: 0.7;
+  font-style: italic;
+  border: none !important;
+
+}
+#notes {
+  margin-right: 1rem;
+  font-family: 'Times New Roman', Times, serif;
+
+  border-color: var(--pink) !important;
+
+}
 .title-input {
   font-size: calc(var(--card-font-size) * 2);
   font-family: "Times New Roman", Times, serif;

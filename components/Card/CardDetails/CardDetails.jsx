@@ -8,17 +8,12 @@ export default function CardDetails(props) {
   const [values, setValues] = useState({ ...props.card });
   const [ratingValue, setRatingValue] = useState(0)
   const [input, setInput] = useState(false);
+  const [notes, setNotes] = useState(values.notes)
   const [title, setTitle] = useState(values.title);
-
   const [author_input, setAuthor_input] = useState(false);
   const [author, setAuthor] = useState(values.author);
-
   const [rating_input, setRating_input] = useState(false);
   const [rating, setRating] = useState(values.myRating);
-
-  const handleRating = (rate) => {
-    setRatingValue(rate)
-  }
 
   const Input = (props) => {
     return (
@@ -63,11 +58,17 @@ export default function CardDetails(props) {
     setValues(temp);
     console.log(value);
   };
-
   const updateRating = (value) => {
     console.log(value);
     const temp = values;
     values.myRating = value;
+    setValues(temp);
+    console.log(value);
+  };
+  const updateNotes = (value) => {
+    console.log(value);
+    const temp = values;
+    values.notes = value;
     setValues(temp);
     console.log(value);
   };
@@ -81,6 +82,7 @@ export default function CardDetails(props) {
       updateTitle(title === "" ? values.title : title);
       updateAuthor(author === "" ? values.author : author);
       updateRating(rating === "" ? values.myRating : rating);
+      updateNotes(notes === "" ? values.notes : notes)
     } else return;
   };
 
@@ -134,16 +136,22 @@ export default function CardDetails(props) {
                 <Input rating={true} />
               ) : (
                 <div className="item-item" >
-                  
-                  {/* <i>
-                    {values.myRating ? values.myRating : "click to set rating"}
-                  </i> /5 */}
                   <div className="stars">
                   My rating:{" "}<Rating onClick={updateRating} allowFraction='true' initialValue={values.myRating} size= '20px' fillColor='pink' emptyColor='#f2f2f3'/>
                 </div>
                 </div>
               )}
             </div>
+            <div className="item-item" >
+              Notes:
+            </div>
+            <textarea placeholder="click to add notes" name="notes" id="notes" cols="30" rows="8"
+              onChange={(e) => {
+                setNotes(e.target.value);
+              }}  
+              >
+                {values.notes}
+            </textarea>
 
 
           </div>

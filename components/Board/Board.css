@@ -120,13 +120,12 @@
   background-color: var(--pink);
 }
 #board3 .total__cards{
-  background-color: black;
-  color: white;
-  border: 1px solid white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
 }
 .title__input {
   font-weight: bold;
-  /* padding-inline: 0.5rem; */
   height: var(--boardFooterHeight);
   width: calc(var(--topLeftBoardWidth) * (1 / 3));
   border-radius: var(--border-radius);
