@@ -44,6 +44,7 @@ const Editable = (props) => {
         </form>
       ) : (
         <p
+          className={props.board3}
           onClick={() => {
             setShow(true);
           }}

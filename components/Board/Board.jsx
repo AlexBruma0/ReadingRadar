@@ -57,30 +57,15 @@ export default function Board(props) {
   return (
     <div className="board" id={`board${props.index}`}>
       <div className="board__top">
-        {show ? (
-          <div>
-            <input
-              className="title__input"
-              type={"text"}
-              defaultValue={props.name}
-              onChange={(e) => {
-                props.setName(e.target.value, props.id);
-              }}
-            />
-          </div>
-        ) : (
           <div>
             <p
-              onClick={() => {
-                setShow(true);
-              }}
               className="board__title"
             >
-              {props?.name || "Name of Board"}
+              <span className="board-title">{props?.name}</span>
               <span className="total__cards">{props.card?.length}</span>
             </p>
           </div>
-        )}
+
       </div>
       {props.index < 2 && (
         <Droppable droppableId={props.id.toString()}>
@@ -254,6 +239,7 @@ export default function Board(props) {
 
       <div className="board__footer">
         <Editable
+          board3={props.index === 3 ? "board3" : ""}
           name={"Add Book"}
           btnName={"Add Book"}
           placeholder={"Enter ISBN/ASIN"}

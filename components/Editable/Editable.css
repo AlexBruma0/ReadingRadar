@@ -10,10 +10,16 @@
   width: calc(var(--card-font-size) * 8);
   font-size: calc(var(--card-font-size));
   border-radius: var(--border-radius);
+  background-color: var(--pink);
 }
 .editable > p:hover {
-  background-color: #ccc;
+  background-color: pink;
+
   cursor: pointer;
+}
+.editable > p.board3{
+  background-color: black;
+  color: white;
 }
 .editable__input {
   display: flex;
@@ -21,7 +27,7 @@
 }
 .editable__input > textarea {
   height: calc(var(--boardFooterHeight) * (3 / 5));
-  width: calc(var(--topLeftBoardWidth) * (1 / 2));
+  width: calc(var(--topLeftBoardWidth) * (1 / 3));
   border-radius: var(--border-radius);
   box-sizing: border-box;
   font-size: calc(var(--card-font-size));
