@@ -4,9 +4,16 @@ import SearchBar from "../SearchBar/SearchBar";
 export default function Navbar(props) {
   return (
     <>
-      <div className="navbar">
+      <header className="navbar">
         <h2 className="title">Hannah's Books</h2>
-      </div>
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+        </nav>
+      </header>
     </>
   );
 }

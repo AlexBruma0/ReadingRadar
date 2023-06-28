@@ -110,8 +110,6 @@ export default function CardDetails(props) {
               >
                 {values.notes}
             </textarea>
-
-
           </div>
         </div>
       </div>
