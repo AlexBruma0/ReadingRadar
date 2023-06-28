@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Rating } from 'react-simple-star-rating'
-import { Trash } from "react-feather"
 import Modal from "../../Modal/Modal";
 import "./CardDetails.css";
 
@@ -15,39 +14,8 @@ export default function CardDetails(props) {
   const [rating_input, setRating_input] = useState(false);
   const [rating, setRating] = useState(values.myRating);
 
-  const Input = (props) => {
-    return (
-      <div
-        className={
-          props.title === true ? "title-input-wrapper" : "author-input-wrapper"
-        }
-      >
-        <input
-          className={props.title === true ? "title-input" : "author-input"}
-          autoFocus
-          defaultValue={
-            props.title === true
-              ? title
-              : props.rating === true
-              ? rating
-              : author
-          }
-          type={"text"}
-          onChange={(e) => {
-            props.title === true
-              ? setTitle(e.target.value)
-              : props.rating === true
-              ? setRating(e.target.value)
-              : setAuthor(e.target.value);
-          }}
-        />
-      </div>
-    );
-  };
   const updateTitle = (value) => {
-    const temp = values;
-    values.title = value;
-    setValues(temp);
+    setValues({ ...values, title: value });
   };
   const updateAuthor = (value) => {
     const temp = values;
@@ -55,9 +23,7 @@ export default function CardDetails(props) {
     setValues(temp);
   };
   const updateRating = (value) => {
-    const temp = values;
-    values.myRating = value;
-    setValues(temp);
+    setValues({...values, myRating:value})
   };
   const updateNotes = (value) => {
     const temp = values;
@@ -76,6 +42,10 @@ export default function CardDetails(props) {
       updateNotes(notes === "" ? values.notes : notes)
     } else return;
   };
+  useEffect(() => {
+    console.log(values)
+    if (props.updateCard) props.updateCard(props.bid, values.id, values);
+  }, [values]);
 
   useEffect(() => {
     document.addEventListener("keypress", handelClickListner);
@@ -83,16 +53,14 @@ export default function CardDetails(props) {
       document.removeEventListener("keypress", handelClickListner);
     };
   });
-  useEffect(() => {
-    props.updateCard(props.bid, values.id, values);
-  }, [values]);
+
 
   return (
     <Modal onClose={props.onClose}>
       <div className="modal-container">
         <div>
           {input ? (
-            <Input title={true} />
+              <input className="title-input" defaultValue= {props.card.title} type="text" name="" id="" onChange={(e) => {setValues({...values,title:e.target.value})}}/>
           ) : (
             <div className="modal-title" onClick={() => setInput(true)}>
               {values.title}
@@ -113,7 +81,7 @@ export default function CardDetails(props) {
           <div className="col2-container">
             <div className="item">
               {author_input ? (
-                <Input title={false} />
+                <input className="author-input" defaultValue= {props.card.author} type="text" name="" id="" onChange={(e) => {setValues({...values,author:e.target.value})}}/>
               ) : (
                 <div className="item-item" onClick={() => setAuthor_input(true)}>
                   Author: <i>{values.author}</i>
@@ -123,7 +91,7 @@ export default function CardDetails(props) {
 
             <div className="item">
               {rating_input ? (
-                <Input rating={true} />
+                <></>
               ) : (
                 <div className="item-item" >
                   <div className="stars">
@@ -137,7 +105,7 @@ export default function CardDetails(props) {
             </div>
             <textarea placeholder="click to add notes" name="notes" id="notes" cols="30" rows="8"
               onChange={(e) => {
-                setNotes(e.target.value);
+                setValues({...values, notes:e.target.value})
               }}  
               >
                 {values.notes}

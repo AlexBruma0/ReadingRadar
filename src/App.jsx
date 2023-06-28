@@ -82,7 +82,6 @@ function App() {
   };
   const reorder = async (index, startIndex, endIndex) => {
     const temp = [...data];
-    console.log(temp)
     const [removed] = temp[index].card?.splice(startIndex, 1);
     temp[index].card?.splice(endIndex, 0, removed);
     setlocalData(temp);
@@ -168,7 +167,6 @@ function App() {
   };
 
   const updateCard = async (bid, cid, card) => {
-    console.log('update')
     const index = data.findIndex((e) => {
       return e._id === bid;
     });
@@ -193,7 +191,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(localData)
     if (!localData) {
       get().then((data) => {
         setData(data);

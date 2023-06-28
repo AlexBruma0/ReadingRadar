@@ -6,9 +6,7 @@ import { SpinnerCircular } from "spinners-react";
 import { Droppable } from "react-beautiful-dnd";
 
 export default function Board(props) {
-  useEffect(() =>{
-    console.log(props.index)
-  })
+
 
   return (
     <div className="board" id={`board${props.index}`}>
