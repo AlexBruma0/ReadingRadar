@@ -1,0 +1,90 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.App {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--background-color);
+  transition: all 350ms;
+}
+.app_outer {
+  width: 100%;
+}
+
+.main_container {
+  --padding: 2%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+
+  display: flex;
+}
+.leader_boards {
+  display: block;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: calc(var(--boardsHeight) * 0.95);
+  width: 1vw;
+  border-radius: 0.5rem;
+}
+.spinner-container {
+  margin: auto;
+}
+.app_boards {
+  --mainBoardWidth: calc(
+    (var(--topLeftBoardWidth) * 2) + var(--topLeftBoardGap) + 3px
+  );
+  --mainBoardHeight: calc(
+    (var(--topLeftBoardHeight) * 2) + var(--topLeftBoardGapY)
+  );
+  background-clip: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  height: var(--mainBoardHeight);
+  width: var(--mainBoardWidth);
+  margin-right: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.11px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 20px 20px 20px 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(195, 195, 195);
+}
+.add__board > textarea {
+  border: 0.5px solid rgb(167, 167, 167) !important;
+  height: 2rem !important;
+}
+.card_detail > textarea {
+  border: 0.5px solid rgb(167, 167, 167) !important;
+}
+.card__values > p {
+  background: #ccc !important;
+}
+.cardinfo__editable {
+  width: fit-content;
+}
+@media screen and (max-width: 800px) {
+  .app_boards {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  .leader_boards {
+    display: none;
+  }
+}
