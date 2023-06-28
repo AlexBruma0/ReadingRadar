@@ -33,7 +33,6 @@ function App() {
   };
 
   const addCard = async (title, bid) => {
-    console.log(bid);
     await new Promise((resolve) => {
       if (bid === "64711f3eb05f463a0ccfd027") {
         setWaitingAPI0(true);
@@ -82,10 +81,10 @@ function App() {
     setData(tempData);
   };
   const reorder = async (index, startIndex, endIndex) => {
-    const temp = data;
+    const temp = [...data];
+    console.log(temp)
     const [removed] = temp[index].card?.splice(startIndex, 1);
     temp[index].card?.splice(endIndex, 0, removed);
-    console.log(temp);
     setlocalData(temp);
 
     await fetch(`${uri}`, {
@@ -103,11 +102,10 @@ function App() {
     sourceCardIndex,
     destinationCardIndex
   ) => {
-    const temp = data;
+    const temp = [...data];
     const [removed] = temp[sourceBoardIndex].card.splice(sourceCardIndex, 1);
     temp[destinationBoardIndex].card.splice(destinationCardIndex, 0, removed);
 
-    console.log(temp);
     setlocalData(temp);
     await fetch(`${uri}`, {
       method: "PUT",
@@ -129,7 +127,6 @@ function App() {
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
-    console.log("source", source, "destination", destination);
 
     if (!destination) {
       return;
@@ -143,7 +140,6 @@ function App() {
       const boardIndex = data.findIndex((e) => {
         return e._id === destination.droppableId;
       });
-      console.log(boardIndex);
       reorder(boardIndex, source.index, destination.index);
     } else {
       if (source.droppableId === "647289ed971a4bc6787625951") {
@@ -167,10 +163,12 @@ function App() {
         destination.index
       );
     }
+    setData(data)
+
   };
 
   const updateCard = async (bid, cid, card) => {
-    console.log(card);
+    console.log('update')
     const index = data.findIndex((e) => {
       return e._id === bid;
     });
@@ -184,7 +182,6 @@ function App() {
 
     tempBoards[index].card[cardIndex] = card;
     setlocalData(tempBoards);
-    console.log(tempBoards[index].card);
     await fetch(`${uri}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -196,7 +193,7 @@ function App() {
   };
 
   useEffect(() => {
-    //console.log(data)
+    console.log(localData)
     if (!localData) {
       get().then((data) => {
         setData(data);
@@ -205,7 +202,9 @@ function App() {
     } else {
       setData(localData);
     }
-  }, [data]);
+  }, [localData]);
+
+ 
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -251,7 +250,6 @@ function App() {
                       />
                     )}
                   </>
-                  // </Droppable>
                 ))}
               </>
             )}

@@ -45,37 +45,28 @@ export default function CardDetails(props) {
     );
   };
   const updateTitle = (value) => {
-    console.log(value);
     const temp = values;
     values.title = value;
     setValues(temp);
-    console.log(value);
   };
   const updateAuthor = (value) => {
-    console.log(value);
     const temp = values;
     values.author = value;
     setValues(temp);
-    console.log(value);
   };
   const updateRating = (value) => {
-    console.log(value);
     const temp = values;
     values.myRating = value;
     setValues(temp);
-    console.log(value);
   };
   const updateNotes = (value) => {
-    console.log(value);
     const temp = values;
     values.notes = value;
     setValues(temp);
-    console.log(value);
   };
 
   const handelClickListner = (e) => {
     if (e.code === "Enter") {
-      console.log(title);
       setInput(false);
       setAuthor_input(false);
       setRating_input(false);
@@ -93,7 +84,6 @@ export default function CardDetails(props) {
     };
   });
   useEffect(() => {
-    console.log(props.bid, values.id, values);
     props.updateCard(props.bid, values.id, values);
   }, [values]);
 

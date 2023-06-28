@@ -3,56 +3,12 @@ import Card from "../Card/Card";
 import "./Board.css";
 import Editable from "../Editable/Editable";
 import { SpinnerCircular } from "spinners-react";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 
 export default function Board(props) {
-  const [show, setShow] = useState(false);
-
-  const local = "http://localhost:8081/";
-  var uri = local;
-  const sizeArr = [...Array(Math.ceil(props.card.length * (1 / 2))).keys()];
-  const reorder = async (startIndex, endIndex) => {
-    const [removed] = props.card?.splice(startIndex, 1);
-    props.card?.splice(endIndex, 0, removed);
-    //console.log(props.card)
-
-    const temp = props.localData;
-    temp[props.index].card = props.card;
-    props.setlocalData(temp);
-
-    await fetch(`${uri}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: props.id,
-        card: props.card,
-      }),
-    });
-  };
-
-  const onDragEnd = (result) => {
-    if (!result.destination) {
-      return;
-    }
-    reorder(result.source.index, result.destination.index);
-  };
-
-  useEffect(() => {
-    if (props.index == 2) {
-      const temp0 = props.card;
-      const temp1 = props.card;
-      temp0.filter((element) => element.index % 2 == 0);
-    }
-    //if(props.index == 0) console.log(props.card)
-    document.addEventListener("keypress", (e) => {
-      if (e.code === "Enter") setShow(false);
-    });
-    return () => {
-      document.removeEventListener("keypress", (e) => {
-        if (e.code === "Enter") setShow(false);
-      });
-    };
-  });
+  useEffect(() =>{
+    console.log(props.index)
+  })
 
   return (
     <div className="board" id={`board${props.index}`}>

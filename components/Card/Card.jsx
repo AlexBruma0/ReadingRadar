@@ -5,7 +5,6 @@ import "./Card.css";
 import CardDetails from "./CardDetails/CardDetails";
 
 const Card = (props) => {
-  const [ratingValue, setRatingValue] = useState(0)
   const getItemStyle = (draggableStyle) => ({
     ...draggableStyle,
   });
@@ -19,7 +18,7 @@ const Card = (props) => {
       draggableId={props.id?.toString()}
       index={props.index}
     >
-      {(provided, snapshot) => (
+      {(provided) => (
         <>
           {modalShow && (
             <CardDetails
