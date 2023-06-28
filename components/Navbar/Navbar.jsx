@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import SearchBar from "../SearchBar/SearchBar";
+import { Outlet, Link } from "react-router-dom";
 export default function Navbar(props) {
   return (
     <>
@@ -8,9 +8,9 @@ export default function Navbar(props) {
         <h2 className="title">Hannah's Books</h2>
         <nav>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Sign Up</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/login">Sign Up</Link></li>
           </ul>
         </nav>
       </header>

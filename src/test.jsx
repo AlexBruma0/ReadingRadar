@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const getItemStyle = (draggableStyle) => ({

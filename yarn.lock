@@ -281,6 +281,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@remix-run/router@1.7.0":
+  "integrity" "sha512-Eu1V3kz3mV0wUpVTiFHuaT8UD1gj/0VnoFHQYX35xlslQUpe8CuYoKFn9d4WZFHm3yDywz6ALZuGdnUPKrNeAw=="
+  "resolved" "https://registry.npmjs.org/@remix-run/router/-/router-1.7.0.tgz"
+  "version" "1.7.0"
+
 "@rollup/pluginutils@^4.2.1":
   "integrity" "sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ=="
   "resolved" "https://registry.npmjs.org/@rollup/pluginutils/-/pluginutils-4.2.1.tgz"
@@ -746,6 +751,21 @@
   "integrity" "sha512-XP8A9BT0CpRBD+NYLLeIhld/RqG9+gktUjW1FkE+Vm7OCinbG1SshcK5tb9ls4kzvjZr9mOQc7HYgBngEyPAXg=="
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.13.0.tgz"
   "version" "0.13.0"
+
+"react-router-dom@^6.14.0":
+  "integrity" "sha512-YEwlApKwzMMMbGbhh+Q7MsloTldcwMgHxUY/1g0uA62+B1hZo2jsybCWIDCL8zvIDB1FA0pBKY9chHbZHt+2dQ=="
+  "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.14.0.tgz"
+  "version" "6.14.0"
+  dependencies:
+    "@remix-run/router" "1.7.0"
+    "react-router" "6.14.0"
+
+"react-router@6.14.0":
+  "integrity" "sha512-OD+vkrcGbvlwkspUFDgMzsu1RXwdjNh83YgG/28lBnDzgslhCgxIqoExLlxsfTpIygp7fc+Hd3esloNwzkm2xA=="
+  "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.14.0.tgz"
+  "version" "6.14.0"
+  dependencies:
+    "@remix-run/router" "1.7.0"
 
 "react-simple-star-rating@^5.1.7":
   "integrity" "sha512-NTFkW8W3uwvI82Fv7JW5i7gmDjEZKxJmj+Z9vn+BjYIXT6ILdnU9qnSUP2cWrWN/WAUlue81f9SgM4CQcenltQ=="
