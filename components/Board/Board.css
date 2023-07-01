@@ -112,14 +112,34 @@
   font-weight: bolder;
 
 }
-#board3 .board-title{
-  text-decoration: underline black !important;
-  text-decoration-thickness: 0.2rem !important;
+#board3 .board-title::after{
+
+    position: absolute;
+    content: '';
+    height: 3px;
+    bottom: -4px; 
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: 90%;
+    background: black;
+  
+}
+.board-title{
+  text-decoration: none; 
+  position: relative; 
 }
 
-.board-title{
-  text-decoration: underline var(--pink) !important;
-  text-decoration-thickness: 0.2rem !important;
+.board-title::after{
+  position: absolute;
+  content: '';
+  height: 3px;
+  bottom: -4px; 
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 90%;
+  background: var(--pink);
 }
 .total__cards {
   font-size: calc(var(--card-font-size) * (2 / 3));
