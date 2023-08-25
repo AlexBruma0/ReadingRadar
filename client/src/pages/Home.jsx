@@ -206,8 +206,6 @@ function Home() {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
-        <SearchBar/>
-
           <div className="grid-container">
             {loading && (
               <div className="spinner-container">

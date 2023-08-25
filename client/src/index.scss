@@ -2,6 +2,7 @@
   --primary-color: rgb(161, 194, 206);
   --secondary-color: #082D0F;
   --active-color: hotpink;
+  --accent-color: #d9d9df;
 }
 [data-theme="dark"] {
   --background-color: #212121;
@@ -15,24 +16,44 @@ body,html{
 .small-container {
   background:var(--primary-color);
   border: 1pt solid black;
-  
+  margin: 0.1rem;
+  padding: 0.5rem;
+  border-radius: 5pt;
 }
 .small-container:active{
   background: var(--active-color);
 }
 
 img{
-  display: none;
+  max-width: 5rem;
+}
+
+::-webkit-scrollbar {
+  background-color: var(--accent-color);
+}
+
+h1{
+  font-size: 3rem;
+}
+
+.space-between{
+  display: flex;
+  justify-content: space-between;
+
 }
 
 .large-container{
   border: 1pt solid black;
-  background-color: white;
+  background-color: var(--accent-color);
+  padding: 1rem;
+  max-height: 100vh;
+  overflow-y: scroll;
 }
+
 
 .grid-container{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   gap: 1rem;
 }
 

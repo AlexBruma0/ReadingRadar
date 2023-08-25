@@ -34,24 +34,25 @@ const Card = (props) => {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
             //className={props.cn}
-            className="small-container"
+            className="small-container space-between "
             style={getItemStyle(provided.draggableProps.style)}
             onClick={() => {
               setModalShow(true);
             }}
           >
-            <div className="image">
-              <img src={props.img_url} alt="" />
-            </div>
 
             <div className="text-container">
-              {props.title}
+              <h2>{props.title}</h2>
               <div className="author-container">
                 <i>{props.author}</i>
                 <div className="stars">
                    <Rating  readonly='true' initialValue={props.card.myRating} allowFraction='true' size= '13px' fillColor={props.cardColor} emptyColor='#f2f2f3'/>
                 </div>
               </div>
+            </div>
+
+            <div className="image">
+              <img src={props.img_url} alt="" />
             </div>
             
           </div>

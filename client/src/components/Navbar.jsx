@@ -1,10 +1,12 @@
 import React from "react";
+import SearchBar from "./SearchBar";
 import { Outlet, Link } from "react-router-dom";
 export default function Navbar(props) {
   return (
     <>
-      <header className="flexbox secondary-backround-color">
+      <header className="secondary-backround-color">
         <h1 className="center-text">Hannah's Books</h1>
+        <SearchBar></SearchBar>
         {/* <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
