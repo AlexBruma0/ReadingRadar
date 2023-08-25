@@ -1,0 +1,65 @@
+name: Client pipeline
+run-name: Client pipeline
+on: [push]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm run install:client
+    
+    - name: Build 
+      run: npm run build:client
+      env:
+        VITE_API_SERVER_URL: https://myproject-382821.uc.r.appspot.com/
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        name: build-artifact
+        retention-days: 7
+        path: client/dist
+
+
+  deploy:
+    name: Deploy client
+    runs-on: ubuntu-latest
+    needs: [build]
+    env:
+      SURGE_DOMAIN: https://hannahs-books.surge.sh/
+    steps:
+    - name: Setup Node JS
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    
+    - name: Download Build Artifact
+      uses: actions/download-artifact@v3.0.1
+      with:
+        name: build-artifact
+    
+    - name: Install Surge
+      run: npm install --global surge
+      
+    - name: Deploy to Surge
+      run: |
+        cp index.html 200.html
+        surge ./ ${{ env.SURGE_DOMAIN }}
+      env:
+        SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+
