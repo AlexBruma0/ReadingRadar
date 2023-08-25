@@ -8,14 +8,15 @@ export default function Board(props) {
 
 
   return (
-    <div className="board" id={`board${props.index}`}>
+    <div className="large-container">
       <div className="board__top">
           <div>
             <p
               className="board__title"
             >
-              <span className="board-title">{props?.name}</span>
-              <span className="total__cards">{props.card?.length}</span>
+              <h2>{props?.name}</h2>
+              {/* <span className="board-title">{props?.name}</span>
+              <span className="total__cards">{props.card?.length}</span> */}
             </p>
           </div>
 

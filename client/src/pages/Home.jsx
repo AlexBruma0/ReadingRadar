@@ -208,8 +208,7 @@ function Home() {
         <Navbar />
         <SearchBar/>
 
-        <div className="main_container">
-          <div className="app_boards">
+          <div className="grid-container">
             {loading && (
               <div className="spinner-container">
                 <SpinnerCircular color="pink" size="20vw" />
@@ -250,31 +249,7 @@ function Home() {
               </>
             )}
           </div>
-          <div className="leader_boards">
-            {data.map((item, index) => (
-              <>
-                {index === 3 && (
-                  <Board
-                    cn="lb"
-                    cardColor="pink"
-                    key={item._id}
-                    id={item._id}
-                    index={index}
-                    className={`board${index}`}
-                    name={item.boardName}
-                    card={item.card}
-                    setName={setName}
-                    addCard={addCard}
-                    removeCard={removeCard}
-                    removeBoard={removeBoard}
-                    updateCard={updateCard}
-                  />
-                )}
-              </>
-            ))}
-          </div>
         </div>
-      </div>
     </DragDropContext>
   );
 }

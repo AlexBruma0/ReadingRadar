@@ -1,22 +1,51 @@
 :root {
-  --backgroud-color: rgb(235, 182, 208);
+  --primary-color: rgb(161, 194, 206);
+  --secondary-color: #082D0F;
+  --active-color: hotpink;
 }
 [data-theme="dark"] {
   --background-color: #212121;
 }
 
-body {
+body,html{
+  box-sizing: border-box;
+  background-color: var(--secondary-color);
+}
 
-}
-.small-container{
-  background-color: var(--backgroud-color);
+.small-container {
+  background:var(--primary-color);
   border: 1pt solid black;
+  
 }
+.small-container:active{
+  background: var(--active-color);
+}
+
 img{
   display: none;
 }
 
-
-body,html{
-  box-sizing: border-box;
+.large-container{
+  border: 1pt solid black;
+  background-color: white;
 }
+
+.grid-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  gap: 1rem;
+}
+
+.center-text{
+  margin: auto;
+}
+
+.flexbox{
+  display: flex;
+}
+
+.secondary-backround-color{
+  background-color: var(--secondary-color);
+  color: white;
+}
+
