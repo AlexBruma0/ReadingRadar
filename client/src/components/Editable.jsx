@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Plus, X } from "react-feather";
-import "./Editable.css";
 
 const Editable = (props) => {
   const [show, setShow] = useState(props?.handler || false);

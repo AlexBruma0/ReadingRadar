@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Rating } from 'react-simple-star-rating'
-import Modal from "../../Modal/Modal";
-import "./CardDetails.css";
+import Modal from "./Modal";
 
 export default function CardDetails(props) {
   const [values, setValues] = useState({ ...props.card });

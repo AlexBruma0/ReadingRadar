@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Card from "../Card/Card";
-import "./Board.css";
-import Editable from "../Editable/Editable";
+import Card from "./Card";
+import Editable from "./Editable";
 import { SpinnerCircular } from "spinners-react";
 import { Droppable } from "react-beautiful-dnd";
 

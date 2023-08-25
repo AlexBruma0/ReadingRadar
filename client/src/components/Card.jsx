@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Rating } from 'react-simple-star-rating'
-import "./Card.css";
-import CardDetails from "./CardDetails/CardDetails";
+import CardDetails from "./CardDetails";
 
 const Card = (props) => {
   const getItemStyle = (draggableStyle) => ({
@@ -34,7 +33,8 @@ const Card = (props) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            className={props.cn}
+            //className={props.cn}
+            className="small-container"
             style={getItemStyle(provided.draggableProps.style)}
             onClick={() => {
               setModalShow(true);

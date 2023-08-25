@@ -2,7 +2,6 @@ import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { Check, X } from "react-feather";
-import "./Label.css";
 export default function (props) {
   const input = useRef();
   const [selectedColor, setSelectedColor] = useState("");

@@ -19,11 +19,8 @@ const Login = () =>{
       </nav>
 
       <Outlet />
-    
 
     </>
-
-
     )
 }
 export default Login
