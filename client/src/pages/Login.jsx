@@ -1,26 +1,23 @@
 import { Outlet, Link } from "react-router-dom";
 
-const Login = () =>{
-    return (<>
-            <form action="">
-            <input type="text" name="" id="" placeholder="Enter username:"/>
-            <input type="text" placeholder="Enter passwork:" />
+const Login = () => {
+  return (
+    <>
+      <form action="">
+        <input type="text" name="" id="" placeholder="Enter username:" />
+        <input type="text" placeholder="Enter passwork:" />
+      </form>
 
-
-        </form>
-
-        <nav>
+      <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
           </li>
- 
         </ul>
       </nav>
 
       <Outlet />
-
     </>
-    )
-}
-export default Login
+  );
+};
+export default Login;

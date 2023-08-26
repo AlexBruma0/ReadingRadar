@@ -5,8 +5,8 @@ export default function Navbar(props) {
   return (
     <>
       <header className="secondary-backround-color">
-        <h1 className="center-text">Hannah's Books</h1>
-        <SearchBar></SearchBar>
+        <h1>Hannah's Books</h1>
+        {/* <SearchBar></SearchBar> */}
         {/* <nav>
           <ul>
             <li><Link to="/">Home</Link></li>

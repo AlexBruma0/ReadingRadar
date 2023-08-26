@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Rating } from 'react-simple-star-rating'
+import { Rating } from "react-simple-star-rating";
 import Modal from "./Modal";
 
 export default function CardDetails(props) {
   const [values, setValues] = useState({ ...props.card });
-  const [ratingValue, setRatingValue] = useState(0)
+  const [ratingValue, setRatingValue] = useState(0);
   const [input, setInput] = useState(false);
-  const [notes, setNotes] = useState(values.notes)
+  const [notes, setNotes] = useState(values.notes);
   const [title, setTitle] = useState(values.title);
   const [author_input, setAuthor_input] = useState(false);
   const [author, setAuthor] = useState(values.author);
@@ -22,7 +22,7 @@ export default function CardDetails(props) {
     setValues(temp);
   };
   const updateRating = (value) => {
-    setValues({...values, myRating:value})
+    setValues({ ...values, myRating: value });
   };
   const updateNotes = (value) => {
     const temp = values;
@@ -38,11 +38,11 @@ export default function CardDetails(props) {
       updateTitle(title === "" ? values.title : title);
       updateAuthor(author === "" ? values.author : author);
       updateRating(rating === "" ? values.myRating : rating);
-      updateNotes(notes === "" ? values.notes : notes)
+      updateNotes(notes === "" ? values.notes : notes);
     } else return;
   };
   useEffect(() => {
-    console.log(values)
+    console.log(values);
     if (props.updateCard) props.updateCard(props.bid, values.id, values);
   }, [values]);
 
@@ -53,13 +53,21 @@ export default function CardDetails(props) {
     };
   });
 
-
   return (
     <Modal onClose={props.onClose}>
       <div className="modal-container">
         <div>
           {input ? (
-              <input className="title-input" defaultValue= {props.card.title} type="text" name="" id="" onChange={(e) => {setValues({...values,title:e.target.value})}}/>
+            <input
+              className="title-input"
+              defaultValue={props.card.title}
+              type="text"
+              name=""
+              id=""
+              onChange={(e) => {
+                setValues({ ...values, title: e.target.value });
+              }}
+            />
           ) : (
             <div className="modal-title" onClick={() => setInput(true)}>
               {values.title}
@@ -70,7 +78,7 @@ export default function CardDetails(props) {
         <div className="model-content-container">
           <div className="col1-container">
             <img src={values.img_url} alt="" />
-            
+
             <button onClick={() => props.removeCard(props.bid, values.id)}>
               <span className="icon__sm"></span>
               Delete Book
@@ -80,9 +88,21 @@ export default function CardDetails(props) {
           <div className="col2-container">
             <div className="item">
               {author_input ? (
-                <input className="author-input" defaultValue= {props.card.author} type="text" name="" id="" onChange={(e) => {setValues({...values,author:e.target.value})}}/>
+                <input
+                  className="author-input"
+                  defaultValue={props.card.author}
+                  type="text"
+                  name=""
+                  id=""
+                  onChange={(e) => {
+                    setValues({ ...values, author: e.target.value });
+                  }}
+                />
               ) : (
-                <div className="item-item" onClick={() => setAuthor_input(true)}>
+                <div
+                  className="item-item"
+                  onClick={() => setAuthor_input(true)}
+                >
                   Author: <i>{values.author}</i>
                 </div>
               )}
@@ -92,22 +112,33 @@ export default function CardDetails(props) {
               {rating_input ? (
                 <></>
               ) : (
-                <div className="item-item" >
+                <div className="item-item">
                   <div className="stars">
-                  My rating:{" "}<Rating onClick={updateRating} allowFraction='true' initialValue={values.myRating} size= '20px' fillColor='pink' emptyColor='#f2f2f3'/>
-                </div>
+                    My rating:{" "}
+                    <Rating
+                      onClick={updateRating}
+                      allowFraction="true"
+                      initialValue={values.myRating}
+                      size="20px"
+                      fillColor="pink"
+                      emptyColor="#f2f2f3"
+                    />
+                  </div>
                 </div>
               )}
             </div>
-            <div className="item-item" >
-              Notes:
-            </div>
-            <textarea placeholder="click to add notes" name="notes" id="notes" cols="30" rows="8"
+            <div className="item-item">Notes:</div>
+            <textarea
+              placeholder="click to add notes"
+              name="notes"
+              id="notes"
+              cols="30"
+              rows="8"
               onChange={(e) => {
-                setValues({...values, notes:e.target.value})
-              }}  
-              >
-                {values.notes}
+                setValues({ ...values, notes: e.target.value });
+              }}
+            >
+              {values.notes}
             </textarea>
           </div>
         </div>

@@ -1,6 +1,6 @@
 :root {
   --primary-color: rgb(161, 194, 206);
-  --secondary-color: #082D0F;
+  --secondary-color: #082d0f;
   --active-color: hotpink;
   --accent-color: #d9d9df;
 }
@@ -8,65 +8,96 @@
   --background-color: #212121;
 }
 
-body,html{
+body,
+html {
   box-sizing: border-box;
   background-color: var(--secondary-color);
 }
 
+h2 {
+  margin-bottom: 2px;
+  font-size: 2rem;
+  position: relative;
+}
+
+.exciting-text::after {
+  position: absolute;
+  content: "";
+  height: 5px;
+  bottom: 7px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 90%;
+  background: var(--secondary-color);
+}
+
+.boring-text::after {
+  content: " <- BORING";
+  color: red;
+}
+
 .small-container {
-  background:var(--primary-color);
+  background: var(--primary-color);
   border: 1pt solid black;
   margin: 0.1rem;
   padding: 0.5rem;
-  border-radius: 5pt;
 }
-.small-container:active{
+.small-container:active {
   background: var(--active-color);
 }
 
-img{
+.border-radius {
+  border-radius: 5pt;
+}
+
+img {
   max-width: 5rem;
+}
+
+.padding {
+  padding: 1rem;
+}
+.margin {
+  margin: 1rem;
 }
 
 ::-webkit-scrollbar {
   background-color: var(--accent-color);
+  width: 0px;
 }
 
-h1{
+h1 {
   font-size: 3rem;
 }
 
-.space-between{
+.space-between {
   display: flex;
   justify-content: space-between;
-
 }
 
-.large-container{
-  border: 1pt solid black;
+.large-container {
   background-color: var(--accent-color);
   padding: 1rem;
-  max-height: 100vh;
+  max-height: 80vh;
   overflow-y: scroll;
 }
 
-
-.grid-container{
+.grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   gap: 1rem;
 }
 
-.center-text{
+.center-text {
   margin: auto;
 }
 
-.flexbox{
+.flexbox {
   display: flex;
 }
 
-.secondary-backround-color{
+.secondary-backround-color {
   background-color: var(--secondary-color);
   color: white;
 }
-

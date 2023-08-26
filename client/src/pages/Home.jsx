@@ -161,8 +161,7 @@ function Home() {
         destination.index
       );
     }
-    setData(data)
-
+    setData(data);
   };
 
   const updateCard = async (bid, cid, card) => {
@@ -200,54 +199,52 @@ function Home() {
     }
   }, [localData]);
 
- 
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
-          <div className="grid-container">
-            {loading && (
-              <div className="spinner-container">
-                <SpinnerCircular color="pink" size="20vw" />
-              </div>
-            )}
-            {!loading && (
-              <>
-                {data.map((item, index) => (
-                  <>
-                    {index < 3 && (
-                      <Board
-                        cn="custom__card"
-                        cardColor="black"
-                        key={item._id}
-                        id={item._id}
-                        localData={data}
-                        setlocalData={setlocalData}
-                        index={index}
-                        className={`board${index}`}
-                        waitingAPI={
-                          index === 0
-                            ? waitingAPI0
-                            : index === 1
-                            ? waitingAPI1
-                            : waitingAPI2
-                        }
-                        name={item.boardName}
-                        card={item.card}
-                        setName={setName}
-                        addCard={addCard}
-                        removeCard={removeCard}
-                        removeBoard={removeBoard}
-                        updateCard={updateCard}
-                      />
-                    )}
-                  </>
-                ))}
-              </>
-            )}
-          </div>
+        <div className="grid-container">
+          {loading && (
+            <div className="spinner-container">
+              <SpinnerCircular color="pink" size="20vw" />
+            </div>
+          )}
+          {!loading && (
+            <>
+              {data.map((item, index) => (
+                <>
+                  {index < 3 && (
+                    <Board
+                      cn="custom__card"
+                      cardColor="black"
+                      key={item._id}
+                      id={item._id}
+                      localData={data}
+                      setlocalData={setlocalData}
+                      index={index}
+                      className={`board${index}`}
+                      waitingAPI={
+                        index === 0
+                          ? waitingAPI0
+                          : index === 1
+                          ? waitingAPI1
+                          : waitingAPI2
+                      }
+                      name={item.boardName}
+                      card={item.card}
+                      setName={setName}
+                      addCard={addCard}
+                      removeCard={removeCard}
+                      removeBoard={removeBoard}
+                      updateCard={updateCard}
+                    />
+                  )}
+                </>
+              ))}
+            </>
+          )}
         </div>
+      </div>
     </DragDropContext>
   );
 }
