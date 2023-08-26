@@ -1,6 +1,8 @@
 name: Client pipeline
 run-name: Client pipeline
-on: [push]
+on:
+  push:
+    branches: [ main ]
 jobs:
   build:
 
