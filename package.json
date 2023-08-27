@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/AlexBruma0/hannahs-books/issues"
   },
-  "homepage": "https://github.com/AlexBruma0/hannahs-books#readme"
+  "homepage": "https://github.com/AlexBruma0/hannahs-books#readme",
+  "dependencies": {
+    "lorem-ipsum": "^2.0.8",
+    "react-lorem-ipsum": "^1.4.10"
+  }
 }

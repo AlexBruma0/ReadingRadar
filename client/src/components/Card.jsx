@@ -26,7 +26,13 @@ const Card = (props) => {
             onClick={() =>
               navigate(`/book/${props.id}`, {
                 state: {
-                  card: {title: props.title, author: props.author, rating: props.card.myRating, cover_img: props.img_url, notes: props.card.notes}
+                  card: {
+                    title: props.title,
+                    author: props.author,
+                    rating: props.card.myRating,
+                    cover_img: props.img_url,
+                    notes: props.card.notes,
+                  },
                 },
               })
             }
