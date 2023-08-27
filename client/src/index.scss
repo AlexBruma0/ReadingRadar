@@ -78,10 +78,14 @@ h1 {
   overflow-y: scroll;
 }
 
-.grid-container {
+.grid-container--small {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   gap: 1rem;
+}
+.grid-container--large {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
 }
 
 .center-text {
@@ -91,6 +95,10 @@ h1 {
 
 .flexbox {
   display: flex;
+}
+
+.border{
+  border: 1pt solid black;
 }
 
 .secondary-backround-color {
@@ -103,5 +111,9 @@ h1 {
 }
 
 .large-img {
-  width: 20rem;
+  width: clamp(20rem, 60%,40rem);
+}
+
+p {
+  font-size: x-large;
 }

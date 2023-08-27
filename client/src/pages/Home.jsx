@@ -202,7 +202,7 @@ function Home() {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
-        <div className="grid-container">
+        <div className="grid-container--small">
           {loading && (
             <div className="spinner-container">
               <SpinnerCircular color="pink" size="20vw" />

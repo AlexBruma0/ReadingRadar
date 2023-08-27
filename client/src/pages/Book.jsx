@@ -7,16 +7,15 @@ function Book() {
   return (
     <>
       <Navbar></Navbar>
-      <div className="large-container">
+      <div className="large-container" style={{maxHeight:100000}}>
         <h1 className="underline center-text"> {book.title}</h1>
-        <div className="space-between">
-          <div className="margin">
-            <img src={book.cover_img} className="large-img" alt="" />
-            <h2>
-              <i>{book.author}</i>
-            </h2>
-            <div>
-              <Rating
+        <div className="grid-container--large ">
+  
+          <div className=" border-radius">
+          <div>
+              <h1><span style={{fontSize:100}}>{book.rating}</span> / 5</h1>
+            </div>
+            <Rating
                 readonly="true"
                 allowFraction="true"
                 initialValue={book.rating}
@@ -24,11 +23,7 @@ function Book() {
                 fillColor="var(--secondary-color)"
                 emptyColor="#f2f2f3"
               />
-            </div>
-          </div>
-          <div className="primary-backround-color border-radius">
             <p >
-              {" "}
               Lorem ipsum odor amet, consectetuer adipiscing elit. Felis lectus
               per ipsum efficitur sodales donec aptent feugiat nostra. Sociosqu
               ridiculus nisl lobortis integer metus neque ipsum. Lobortis
@@ -52,6 +47,12 @@ function Book() {
               rutrum a; maximus erat. Tincidunt adipiscing hac hendrerit sem at
               magnis.
             </p>
+          </div>
+          <div className=" padding center-text">
+            <img src={book.cover_img} className="large-img" alt="" />
+            <h2>
+              <i>{book.author}</i>
+            </h2>
           </div>
         </div>
       </div>
