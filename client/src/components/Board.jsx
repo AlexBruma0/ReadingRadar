@@ -9,8 +9,8 @@ export default function Board(props) {
       <div className="space-between">
         <h2 className="underline"> {props?.name}</h2>
 
-        <button className="small-container margin border-radius secondary-backround-color">
-          <Plus></Plus>
+        <button className="small-container margin border-radius secondary-backround-color" >
+          <Plus size='20px'></Plus>
         </button>
       </div>
       {props.index < 3 && (

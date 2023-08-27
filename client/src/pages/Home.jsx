@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "../components/Navbar";
-import SearchBar from "../components/SearchBar";
 import Board from "../components/Board";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";

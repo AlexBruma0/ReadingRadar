@@ -14,27 +14,18 @@ html {
   background-color: var(--secondary-color);
 }
 
+button:hover{
+  cursor: pointer;
+}
+
 h2 {
   margin-bottom: 2px;
   font-size: 2rem;
   position: relative;
 }
 
-.underline::after {
-  position: absolute;
-  content: "";
-  height: 5px;
-  bottom: 7px;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  width: 90%;
-  background: var(--secondary-color);
-}
-
-.boring-text::after {
-  content: " <- BORING";
-  color: red;
+.underline {
+  border-bottom: 6px solid var(--secondary-color);
 }
 
 .small-container {
@@ -58,6 +49,7 @@ img {
 .padding {
   padding: 1rem;
 }
+
 .margin {
   margin: 1rem;
 }
@@ -91,6 +83,7 @@ h1 {
 
 .center-text {
   margin: auto;
+  text-align: center;
 }
 
 .flexbox {
