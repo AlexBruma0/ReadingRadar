@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Rating } from "react-simple-star-rating";
-import CardDetails from "./CardDetails";
 import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
@@ -27,7 +26,7 @@ const Card = (props) => {
             onClick={() =>
               navigate(`/book/${props.id}`, {
                 state: {
-                  card: {title: props.title, author: props.author, rating: props.card.myRating, cover_img: props.img_url, notes: props.notes}
+                  card: {title: props.title, author: props.author, rating: props.card.myRating, cover_img: props.img_url, notes: props.card.notes}
                 },
               })
             }
