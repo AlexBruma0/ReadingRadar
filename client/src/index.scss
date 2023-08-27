@@ -1,8 +1,12 @@
 :root {
-  --primary-color: rgb(161, 194, 206);
+  // --primary-color: rgb(161, 194, 206);
+  // --primary-color: rgb(235, 182, 208);
+  --primary-color: #a9b9bf;
   --secondary-color: #082d0f;
+  // --secondary-color: rgb(161, 194, 206);
   --active-color: hotpink;
   --accent-color: #d9d9df;
+
 }
 [data-theme="dark"] {
   --background-color: #212121;
@@ -30,7 +34,6 @@ h2 {
 
 .small-container {
   background: var(--primary-color);
-  border: 1pt solid black;
   margin: 0.1rem;
   padding: 0.5rem;
 }
@@ -93,6 +96,10 @@ h1 {
 .secondary-backround-color {
   background-color: var(--secondary-color);
   color: white;
+}
+
+.primary-backround-color{
+  background-color: var(--primary-color);
 }
 
 .large-img {

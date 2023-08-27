@@ -26,8 +26,8 @@ function Book() {
               />
             </div>
           </div>
-          <div>
-            <p>
+          <div className="primary-backround-color border-radius">
+            <p >
               {" "}
               Lorem ipsum odor amet, consectetuer adipiscing elit. Felis lectus
               per ipsum efficitur sodales donec aptent feugiat nostra. Sociosqu
