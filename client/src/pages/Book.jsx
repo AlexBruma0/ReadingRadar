@@ -73,13 +73,7 @@ function Book() {
       </div>
       <Modal open={open} setOpen={setOpen}>
         <Form
-          data={[
-            { key: "title", value: book.title },
-            { key: "author", value: book.author },
-            { key: "rating", value: book.rating },
-            { key: "notes", value: book.notes },
-            { key: "Cover image url", value: book.cover_img },
-          ]}
+          data={book}
         />
       </Modal>
     </>

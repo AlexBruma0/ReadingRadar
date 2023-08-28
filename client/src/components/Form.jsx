@@ -4,8 +4,8 @@ export default function Form(props) {
   const [data, setData] = useState(props.data);
 
   const handleChange = (event) => {
-    const { key, value } = event.target;
-    setData({ ...data, [key]: value });
+    const { name, value } = event.target;
+    setData({ ...data, [name]: value });
   };
 
   const handleSubmit = (event) => {
@@ -17,23 +17,24 @@ export default function Form(props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {data.map((formItem) => (
+        {Object.keys(data).map((key) => (
+
           <div>
-            <label htmlFor="">{formItem.key}</label>
-            {formItem.key == "notes" ? (
+            <label htmlFor="">{key}</label>
+            {key == "notes" ? (
               <textarea
+                key={key}
                 type="text"
-                name=""
-                id=""
-                value={formItem.value}
+                name={key}
+                value={data[key]}
                 onChange={handleChange}
               ></textarea>
             ) : (
               <input
                 type="text"
-                name=""
-                id=""
-                value={formItem.value}
+                key={key}
+                name={key}
+                value={data[key]}
                 onChange={handleChange}
               />
             )}
