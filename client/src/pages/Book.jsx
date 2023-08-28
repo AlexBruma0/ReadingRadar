@@ -1,10 +1,22 @@
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Rating } from "react-simple-star-rating";
-import { MessageCircle, Edit} from "react-feather";
+import { MessageCircle, Edit } from "react-feather";
+import { useEffect, useState } from "react";
+import Modal from "../components/Modal";
 function Book() {
   const location = useLocation();
+  const [open, setOpen] = useState(false);
   const book = location.state?.card;
+
+  useEffect(() => {
+    if (open) {
+      setOpen(true);
+    }
+    if (!open) {
+      setOpen(false);
+    }
+  }, [open]);
   return (
     <>
       <Navbar></Navbar>
@@ -50,16 +62,23 @@ function Book() {
         </div>
       </div>
       <div className="flexbox">
-      <button className="large-text full-width border-radius primary-backround-color" style={{marginTop:20}}>
+        <button
+          className="large-text full-width border-radius primary-backround-color"
+          style={{ marginTop: 20 }}
+        >
           <MessageCircle></MessageCircle> <i>Comment</i>
         </button>
-        <button className="large-text full-width border-radius primary-backround-color" style={{marginTop:20}}>
+        <button
+          className="large-text full-width border-radius primary-backround-color"
+          style={{ marginTop: 20 }}
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
           <Edit></Edit> <i>Edit</i>
         </button>
       </div>
-
-
-
+      <Modal open={open} setOpen = {setOpen}></Modal>
     </>
   );
 }
