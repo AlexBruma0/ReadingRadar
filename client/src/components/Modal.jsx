@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useEffect, useState } from "react";
-import { Form } from "./Form";
+import Form from "./Form";
 
 const Modal = (props) => {
   const dialogRef = useRef(null);
@@ -16,6 +16,7 @@ const Modal = (props) => {
   return (
     <>
       <dialog ref={dialogRef}>
+        {props.children}
         <button onClick={() => props.setOpen(false)}>close</button>
       </dialog>
     </>

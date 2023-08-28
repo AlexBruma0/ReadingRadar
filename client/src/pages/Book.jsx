@@ -4,6 +4,7 @@ import { Rating } from "react-simple-star-rating";
 import { MessageCircle, Edit } from "react-feather";
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
+import Form from "../components/Form";
 function Book() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -70,14 +71,16 @@ function Book() {
           <Edit></Edit> <i>Edit</i>
         </button>
       </div>
-      <Modal 
-      
-      open={open} setOpen={setOpen}>
-
-      <Form 
-        data={book}
-        handleUpdate = {props.handleUpdate}
-        ></Form>
+      <Modal open={open} setOpen={setOpen}>
+        <Form
+          data={[
+            { key: "title", value: book.title },
+            { key: "author", value: book.author },
+            { key: "rating", value: book.rating },
+            { key: "notes", value: book.notes },
+            { key: "Cover image url", value: book.cover_img },
+          ]}
+        />
       </Modal>
     </>
   );
