@@ -1,5 +1,7 @@
 import React from "react";
 import { useRef, useEffect, useState } from "react";
+import { Form } from "./Form";
+
 const Modal = (props) => {
   const dialogRef = useRef(null);
 
@@ -14,10 +16,8 @@ const Modal = (props) => {
   return (
     <>
       <dialog ref={dialogRef}>
-        dialog
         <button onClick={() => props.setOpen(false)}>close</button>
       </dialog>
-      <div style={{color:'white'}}>modal is open: {String(props.open)}</div>
     </>
   );
 };

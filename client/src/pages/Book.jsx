@@ -9,14 +9,6 @@ function Book() {
   const [open, setOpen] = useState(false);
   const book = location.state?.card;
 
-  useEffect(() => {
-    if (open) {
-      setOpen(true);
-    }
-    if (!open) {
-      setOpen(false);
-    }
-  }, [open]);
   return (
     <>
       <Navbar></Navbar>
@@ -78,7 +70,15 @@ function Book() {
           <Edit></Edit> <i>Edit</i>
         </button>
       </div>
-      <Modal open={open} setOpen = {setOpen}></Modal>
+      <Modal 
+      
+      open={open} setOpen={setOpen}>
+
+      <Form 
+        data={book}
+        handleUpdate = {props.handleUpdate}
+        ></Form>
+      </Modal>
     </>
   );
 }
