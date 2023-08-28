@@ -1,10 +1,5 @@
 import React from "react";
-import {
-
-  Link,
-  useNavigate,
-  Link as RouterLink,
-} from "react-router-dom";
+import { Link, useNavigate, Link as RouterLink } from "react-router-dom";
 export default function Navbar(props) {
   return (
     <>

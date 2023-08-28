@@ -6,7 +6,6 @@
   // --secondary-color: rgb(161, 194, 206);
   --active-color: hotpink;
   --accent-color: #d9d9df;
-
 }
 [data-theme="dark"] {
   --background-color: #212121;
@@ -97,7 +96,7 @@ h1 {
   display: flex;
 }
 
-.border{
+.border {
   border: 1pt solid black;
 }
 
@@ -106,14 +105,30 @@ h1 {
   color: white;
 }
 
-.primary-backround-color{
+.accent-backround-color{
+  background-color: var(--accent-color);
+}
+
+.primary-backround-color {
   background-color: var(--primary-color);
 }
 
 .large-img {
-  width: clamp(20rem, 60%,40rem);
+  width: clamp(20rem, 60%, 40rem);
 }
 
 p {
   font-size: x-large;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.large-text {
+  font-size: xx-large;
+}
+
+button{
+  font-family: serif;
 }

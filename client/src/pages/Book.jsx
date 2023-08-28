@@ -1,29 +1,33 @@
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Rating } from "react-simple-star-rating";
+import { MessageCircle, Edit} from "react-feather";
 function Book() {
   const location = useLocation();
   const book = location.state?.card;
   return (
     <>
       <Navbar></Navbar>
-      <div className="large-container" style={{maxHeight:100000}}>
-        <h1 className="underline center-text"> {book.title}</h1>
+      <div className="large-container" style={{ maxHeight: 100000 }}>
+        <h1 className="underline center-text">
+          {book.title} -- <i>{book.author}</i>
+        </h1>
         <div className="grid-container--large ">
-  
           <div className=" border-radius">
-          <div>
-              <h1><span style={{fontSize:100}}>{book.rating}</span> / 5</h1>
+            <div>
+              <h1>
+                <span style={{ fontSize: 100 }}>{book.rating}</span> / 5
+              </h1>
             </div>
             <Rating
-                readonly="true"
-                allowFraction="true"
-                initialValue={book.rating}
-                size="50px"
-                fillColor="var(--secondary-color)"
-                emptyColor="#f2f2f3"
-              />
-            <p >
+              readonly="true"
+              allowFraction="true"
+              initialValue={book.rating}
+              size="50px"
+              fillColor="var(--secondary-color)"
+              emptyColor="#f2f2f3"
+            />
+            <p>
               Lorem ipsum odor amet, consectetuer adipiscing elit. Felis lectus
               per ipsum efficitur sodales donec aptent feugiat nostra. Sociosqu
               ridiculus nisl lobortis integer metus neque ipsum. Lobortis
@@ -38,24 +42,24 @@ function Book() {
               adipiscing potenti nibh ultrices efficitur quam! Lorem dolor fusce
               senectus; porta congue ac tortor dui scelerisque. Cursus maximus
               leo facilisis scelerisque convallis. Pretium aenean in tellus
-              sagittis ultricies curabitur libero. Nam platea euismod iaculis
-              ipsum lectus orci purus! Laoreet platea per litora litora cras
-              fringilla curae. Etiam dictum pulvinar senectus quisque et.
-              Egestas dictum facilisi rhoncus condimentum nisi. Risus himenaeos
-              leo sem elit enim senectus. Pellentesque class hac vulputate
-              sapien torquent curae cras purus. Inceptos condimentum consequat
-              rutrum a; maximus erat. Tincidunt adipiscing hac hendrerit sem at
-              magnis.
             </p>
           </div>
           <div className=" padding center-text">
             <img src={book.cover_img} className="large-img" alt="" />
-            <h2>
-              <i>{book.author}</i>
-            </h2>
           </div>
         </div>
       </div>
+      <div className="flexbox">
+      <button className="large-text full-width border-radius primary-backround-color" style={{marginTop:20}}>
+          <MessageCircle></MessageCircle> <i>Comment</i>
+        </button>
+        <button className="large-text full-width border-radius primary-backround-color" style={{marginTop:20}}>
+          <Edit></Edit> <i>Edit</i>
+        </button>
+      </div>
+
+
+
     </>
   );
 }
