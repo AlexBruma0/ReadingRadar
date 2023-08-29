@@ -3,13 +3,22 @@ import Card from "./Card";
 import { SpinnerCircular } from "spinners-react";
 import { Droppable } from "react-beautiful-dnd";
 import { Plus, X } from "react-feather";
+import Modal from "./Modal";
+import Form from "./Form";
 export default function Board(props) {
+  const [open, setOpen] = useState(false)
+
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
+
+  const bookFields = {title: '', author: '', img_url: '', myRating: '', notes: '', ASIN: ''}
   return (
     <div className="large-container border-radius">
       <div className="space-between">
         <h2 className="underline"> {props?.name}</h2>
 
-        <button className="small-container margin border-radius secondary-backround-color">
+        <button className="small-container margin border-radius secondary-backround-color" onClick={toggleOpen}>
           <Plus size="20px"></Plus>
         </button>
       </div>
@@ -52,6 +61,14 @@ export default function Board(props) {
           )}
         </Droppable>
       )}
+            <Modal open={open} setOpen={setOpen} formTitle="Add book">
+        <Form
+          data={bookFields}
+          bid={props.id}
+
+          toggleOpen={toggleOpen}
+        />
+      </Modal>
     </div>
   );
 }
