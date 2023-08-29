@@ -50,13 +50,13 @@ function Book() {
           <div className=" border-radius">
             <div>
               <h1>
-                <span style={{ fontSize: 100 }}>{book.rating}</span> / 5
+                <span style={{ fontSize: 100 }}>{book.myRating}</span> / 5
               </h1>
             </div>
             <Rating
               readonly="true"
               allowFraction="true"
-              initialValue={book.rating}
+              initialValue={book.myRating}
               size="50px"
               fillColor="var(--secondary-color)"
               emptyColor="#f2f2f3"
@@ -79,7 +79,7 @@ function Book() {
             </p>
           </div>
           <div className=" padding center-text">
-            <img src={book.cover_img} className="large-img" alt="" />
+            <img src={book.img_url} className="large-img" alt="" />
           </div>
         </div>
       </div>
