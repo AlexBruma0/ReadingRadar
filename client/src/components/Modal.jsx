@@ -18,13 +18,16 @@ const Modal = (props) => {
       <dialog ref={dialogRef}>
         <div className="space-between">
           <h2 className="underline">{props.formTitle}</h2>
-          <button
-            className="margin border-radius secondary-backround-color"
+          <div
+            className="margin border-radius cursor-pointer "
             onClick={() => props.setOpen(false)}
           >
             {" "}
-            <X />
-          </button>
+            <X 
+            color="#082d0f"
+            size={40}
+            />
+          </div>
         </div>
         {props.children}
       </dialog>
