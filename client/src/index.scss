@@ -137,26 +137,26 @@ button {
   font-family: serif;
 }
 
-label{
+label {
   font-size: xx-large;
 }
 
-input[type="text"]
-{
-    font-size:large; 
-    height: 2rem;
-    width: 100%;
-    background-color: var(--accent-color);
-    border: none ;
-    
-
+input[type="text"] {
+  font-size: large;
+  height: 2rem;
+  width: 100%;
+  background-color: var(--accent-color);
+  border: none;
 }
 
-textarea
-{    
-    background-color: var(--accent-color);
-    border: none ;
-    font-size: large;
-    font-family: serif;
-    font-weight: 0;
+.large-font {
+  font-size: large;
+}
+
+textarea {
+  background-color: var(--accent-color);
+  border: none;
+  font-size: large;
+  font-family: serif;
+  font-weight: 0;
 }

@@ -11,17 +11,17 @@ export default function Form(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (props.handleUpdate) props.handleUpdate(props.bid, data);
-    if(props.toggleOpen) props.toggleOpen()
+    if (props.toggleOpen) props.toggleOpen();
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {Object.keys(data).map((key) => ( 
+        {Object.keys(data).map((key) => (
           <div>
-            <div>{key == 'id'? '': key}</div>
+            <div>{key == "id" ? "" : key}</div>
             {key == "notes" ? (
-              <textarea 
+              <textarea
                 className="margin-bottom"
                 key={key}
                 type="text"
@@ -31,20 +31,26 @@ export default function Form(props) {
                 value={data[key]}
                 onChange={handleChange}
               ></textarea>
-            ) : key == 'id' ? (
+            ) : key == "id" ? (
               <></>
-            ) :
-            <input
-            className="margin-bottom"
-            type="text"
-            key={key}
-            name={key}
-            value={data[key]}
-            onChange={handleChange}
-          />}
+            ) : (
+              <input
+                className="margin-bottom"
+                type="text"
+                key={key}
+                name={key}
+                value={data[key]}
+                onChange={handleChange}
+              />
+            )}
           </div>
         ))}
-        <button type="submit">save</button>
+        <button
+          className="large-text full-width border-radius secondary-backround-color"
+          type="submit"
+        >
+          save
+        </button>
       </form>
     </>
   );

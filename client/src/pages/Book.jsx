@@ -8,24 +8,23 @@ import Form from "../components/Form";
 function Book() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [book,setBook] = useState(location.state?.card);
+  const [book, setBook] = useState(location.state?.card);
   const bid = location.state?.bid;
   const uri = "https://myproject-382821.uc.r.appspot.com/";
 
   const updateCard = async (bid, card) => {
-    setBook(card)
+    setBook(card);
     const response = await fetch(uri);
     const json = await response.json();
-    const boards = json.result
+    const boards = json.result;
+    const bindex = boards.findIndex((board) => {
+      return board._id == bid;
+    });
 
-    const bindex = boards.findIndex((board) =>{
-      return board._id == bid
-    })
-
-    const cid = boards[bindex].card.findIndex((c) =>{
-      return c.id == card.id
-    })
-    boards[bindex].card[cid] = card
+    const cid = boards[bindex].card.findIndex((c) => {
+      return c.id == card.id;
+    });
+    boards[bindex].card[cid] = card;
     await fetch(`${uri}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -36,13 +35,13 @@ function Book() {
     });
   };
 
-  const toggleOpen = () =>{
-    setOpen(!open)
-  }
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className="large-container" style={{ maxHeight: 100000 }}>
         <h1 className="underline center-text">
           {book.title} -- <i>{book.author}</i>
@@ -99,12 +98,12 @@ function Book() {
           <Edit></Edit> <i>Edit</i>
         </button>
       </div>
-      <Modal open={open} setOpen={setOpen}>
+      <Modal open={open} setOpen={setOpen} formTitle="Edit book">
         <Form
           data={book}
-          bid = {bid}
+          bid={bid}
           handleUpdate={updateCard}
-          toggleOpen = {toggleOpen}
+          toggleOpen={toggleOpen}
         />
       </Modal>
     </>
