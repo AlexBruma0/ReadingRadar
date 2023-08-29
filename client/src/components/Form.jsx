@@ -73,7 +73,7 @@ export default function Form(props) {
                       value={data[key]}
                       onChange={handleChange}
                     />
-                    <button onClick={handleFetch}>Enter</button>
+                    <button onClick={handleFetch}>Fetch from Amazon</button>
                   </div>
                 ) : (
                   <input

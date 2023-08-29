@@ -23,45 +23,6 @@ function Home() {
   };
   const [data, setData] = useState([]);
 
-  const setName = (title, bid) => {
-    const index = data.findIndex((item) => item.id === bid);
-    const tempData = [...data];
-    tempData[index].boardName = title;
-    setData(tempData);
-  };
-
-  const addCard = async (title, bid) => {
-    await new Promise((resolve) => {
-      if (bid === "64711f3eb05f463a0ccfd027") {
-        setWaitingAPI0(true);
-        resolve(null);
-      }
-      if (bid === "64711f52b05f463a0ccfd028") {
-        setWaitingAPI1(true);
-        resolve(null);
-      }
-      if (bid === "647289ed971a4bc678762595") {
-        setWaitingAPI2(true);
-        resolve(null);
-      }
-    });
-    await fetch(`${uri}${bid}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        card: {
-          id: uuidv4(),
-          title: title,
-          tags: [],
-          task: [],
-        },
-      }),
-    });
-    setWaitingAPI0(false);
-    setWaitingAPI1(false);
-    setWaitingAPI2(false);
-  };
-
   const removeCard = async (boardId, cardId) => {
     await fetch(`${uri}${boardId}`, {
       method: "DELETE",
@@ -72,12 +33,6 @@ function Home() {
     });
   };
 
-  const removeBoard = (bid) => {
-    const tempData = [...data];
-    const index = data.findIndex((item) => item.id === bid);
-    tempData.splice(index, 1);
-    setData(tempData);
-  };
   const reorder = async (index, startIndex, endIndex) => {
     const temp = [...data];
     const [removed] = temp[index].card?.splice(startIndex, 1);
@@ -231,10 +186,7 @@ function Home() {
                       }
                       name={item.boardName}
                       card={item.card}
-                      setName={setName}
-                      addCard={addCard}
                       removeCard={removeCard}
-                      removeBoard={removeBoard}
                       updateCard={updateCard}
                     />
                   )}
