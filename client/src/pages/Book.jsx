@@ -8,11 +8,12 @@ import Form from "../components/Form";
 function Book() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const book = location.state?.card;
+  const [book,setBook] = useState(location.state?.card);
   const bid = location.state?.bid;
   const uri = "https://myproject-382821.uc.r.appspot.com/";
 
   const updateCard = async (bid, card) => {
+    setBook(card)
     const response = await fetch(uri);
     const json = await response.json();
     const boards = json.result

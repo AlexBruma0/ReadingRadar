@@ -19,11 +19,14 @@ export default function Form(props) {
       <form onSubmit={handleSubmit}>
         {Object.keys(data).map((key) => ( 
           <div>
-            <label htmlFor="">{key == 'id'? '': key}</label>
+            <div>{key == 'id'? '': key}</div>
             {key == "notes" ? (
-              <textarea
+              <textarea 
+                className="margin-bottom"
                 key={key}
                 type="text"
+                rows={10}
+                cols={50}
                 name={key}
                 value={data[key]}
                 onChange={handleChange}
@@ -32,6 +35,7 @@ export default function Form(props) {
               <></>
             ) :
             <input
+            className="margin-bottom"
             type="text"
             key={key}
             name={key}

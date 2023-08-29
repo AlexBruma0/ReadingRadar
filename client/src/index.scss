@@ -56,6 +56,10 @@ img {
   margin: 1rem;
 }
 
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
 ::-webkit-scrollbar {
   background-color: var(--accent-color);
   width: 0px;
@@ -139,10 +143,20 @@ label{
 
 input[type="text"]
 {
-    font-size:xx-large;
+    font-size:large; 
+    height: 2rem;
+    width: 100%;
+    background-color: var(--accent-color);
+    border: none ;
+    
+
 }
 
 textarea
-{
-    font-size:xx-large;
+{    
+    background-color: var(--accent-color);
+    border: none ;
+    font-size: large;
+    font-family: serif;
+    font-weight: 0;
 }
