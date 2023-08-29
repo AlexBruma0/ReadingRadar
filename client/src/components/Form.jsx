@@ -10,17 +10,15 @@ export default function Form(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(data);
-    if (props.handleUpdate) props.handleUpdate(data);
+    if (props.handleUpdate) props.handleUpdate(props.bid, data);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {Object.keys(data).map((key) => (
-
+        {Object.keys(data).map((key) => ( 
           <div>
-            <label htmlFor="">{key}</label>
+            <label htmlFor="">{key == 'id'? '': key}</label>
             {key == "notes" ? (
               <textarea
                 key={key}
@@ -29,15 +27,16 @@ export default function Form(props) {
                 value={data[key]}
                 onChange={handleChange}
               ></textarea>
-            ) : (
-              <input
-                type="text"
-                key={key}
-                name={key}
-                value={data[key]}
-                onChange={handleChange}
-              />
-            )}
+            ) : key == 'id' ? (
+              <></>
+            ) :
+            <input
+            type="text"
+            key={key}
+            name={key}
+            value={data[key]}
+            onChange={handleChange}
+          />}
           </div>
         ))}
         <button type="submit">save</button>

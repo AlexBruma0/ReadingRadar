@@ -9,10 +9,37 @@ function Book() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const book = location.state?.card;
+  const bid = location.state?.bid;
+  const uri = "https://myproject-382821.uc.r.appspot.com/";
+
+  const updateCard = async (bid, card) => {
+    const response = await fetch(uri);
+    const json = await response.json();
+    const boards = json.result
+
+    const bindex = boards.findIndex((board) =>{
+      return board._id == bid
+    })
+
+    const cid = boards[bindex].card.findIndex((c) =>{
+      return c.id == card.id
+    })
+    card.img_url = card.cover_img
+    card.myRating = card.rating
+    boards[bindex].card[cid] = card
+    await fetch(`${uri}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: bid,
+        card: boards[bindex].card,
+      }),
+    });
+  };
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar/>
       <div className="large-container" style={{ maxHeight: 100000 }}>
         <h1 className="underline center-text">
           {book.title} -- <i>{book.author}</i>
@@ -74,6 +101,8 @@ function Book() {
       <Modal open={open} setOpen={setOpen}>
         <Form
           data={book}
+          bid = {bid}
+          handleUpdate={updateCard}
         />
       </Modal>
     </>

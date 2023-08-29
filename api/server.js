@@ -65,7 +65,7 @@ app.put("/", async (req, res) => {
 
 app.put("/:id", async (req, res) => {
   const params = {
-    api_key: "5C34E3D2794B4C448573F4E730AA68E9",
+    api_key: "2E2AFA563FC44228B52BFD7D5C12F546",
     amazon_domain: "amazon.ca",
     asin: req.body.card.title,
     type: "product",
