@@ -1,6 +1,5 @@
 import React from "react";
 import { useRef, useEffect, useState } from "react";
-import Form from "./Form";
 import { X } from "react-feather";
 const Modal = (props) => {
   const dialogRef = useRef(null);
@@ -16,7 +15,7 @@ const Modal = (props) => {
   return (
     <>
       <dialog ref={dialogRef}>
-        <div className="space-between">
+        <div className="space-between margin-bottom">
           <h2 className="underline">{props.formTitle}</h2>
           <div
             className="margin border-radius cursor-pointer "

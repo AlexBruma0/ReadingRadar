@@ -64,7 +64,7 @@ export default function Form(props) {
                 ) : key == "id" ? (
                   <></>
                 ) : key == "asin" ? (
-                  <div className="flexbox">
+                  <div className="flexbox margin-bottom">
                     <input
                       className="margin-bottom"
                       type="text"

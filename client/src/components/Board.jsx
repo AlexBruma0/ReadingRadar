@@ -8,7 +8,7 @@ import Form from "./Form";
 
 export default function Board(props) {
   const [open, setOpen] = useState(false);
-  const uri = "http://localhost:8081/";
+  const uri =  "https://myproject-382821.uc.r.appspot.com/";
 
   const toggleOpen = () => {
     setOpen(!open);
