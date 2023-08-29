@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Rating } from "react-simple-star-rating";
 import { MessageCircle, Edit } from "react-feather";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../components/Modal";
 import Form from "../components/Form";
 function Book() {
@@ -24,8 +24,6 @@ function Book() {
     const cid = boards[bindex].card.findIndex((c) =>{
       return c.id == card.id
     })
-    card.img_url = card.cover_img
-    card.myRating = card.rating
     boards[bindex].card[cid] = card
     await fetch(`${uri}`, {
       method: "PUT",
