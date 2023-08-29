@@ -66,7 +66,6 @@ export default function Board(props) {
                       title={items.title}
                       img_url={items.img_url}
                       tags={items.tags}
-                      updateCard={props.updateCard}
                       removeCard={props.removeCard}
                       card={items}
                     />

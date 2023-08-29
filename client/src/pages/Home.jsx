@@ -3,7 +3,6 @@ import "./App.css";
 import Navbar from "../components/Navbar";
 import Board from "../components/Board";
 import { DragDropContext } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
 import { SpinnerCircular } from "spinners-react";
 function Home() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
@@ -118,29 +117,6 @@ function Home() {
     setData(data);
   };
 
-  const updateCard = async (bid, cid, card) => {
-    const index = data.findIndex((e) => {
-      return e._id === bid;
-    });
-
-    if (index < 0) return;
-    const tempBoards = [...data];
-    const cards = tempBoards[index].card;
-
-    const cardIndex = cards.findIndex((item) => item.id === cid);
-    if (cardIndex < 0) return;
-
-    tempBoards[index].card[cardIndex] = card;
-    setlocalData(tempBoards);
-    await fetch(`${uri}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: bid,
-        card: tempBoards[index].card,
-      }),
-    });
-  };
 
   useEffect(() => {
     if (!localData) {
@@ -187,7 +163,6 @@ function Home() {
                       name={item.boardName}
                       card={item.card}
                       removeCard={removeCard}
-                      updateCard={updateCard}
                     />
                   )}
                 </>
