@@ -37,6 +37,10 @@ function Book() {
     });
   };
 
+  const toggleOpen = () =>{
+    setOpen(!open)
+  }
+
   return (
     <>
       <Navbar/>
@@ -91,9 +95,7 @@ function Book() {
         <button
           className="large-text full-width border-radius primary-backround-color"
           style={{ marginTop: 20 }}
-          onClick={() => {
-            setOpen(true);
-          }}
+          onClick={toggleOpen}
         >
           <Edit></Edit> <i>Edit</i>
         </button>
@@ -103,6 +105,7 @@ function Book() {
           data={book}
           bid = {bid}
           handleUpdate={updateCard}
+          toggleOpen = {toggleOpen}
         />
       </Modal>
     </>

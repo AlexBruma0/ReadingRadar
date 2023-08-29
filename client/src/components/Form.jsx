@@ -11,6 +11,7 @@ export default function Form(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (props.handleUpdate) props.handleUpdate(props.bid, data);
+    if(props.toggleOpen) props.toggleOpen()
   };
 
   return (
