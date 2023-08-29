@@ -5,20 +5,37 @@ import { Droppable } from "react-beautiful-dnd";
 import { Plus, X } from "react-feather";
 import Modal from "./Modal";
 import Form from "./Form";
+
 export default function Board(props) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const uri = "http://localhost:8081/";
 
   const toggleOpen = () => {
     setOpen(!open);
   };
+  const fetchFromAmazon = async (asin) => {
+    const response = await fetch(`${uri}asin/${asin}`);
+    const json = await response.json();
+    return json
+  };
 
-  const bookFields = {title: '', author: '', img_url: '', myRating: '', notes: '', ASIN: ''}
+  const bookFields = {
+    title: "",
+    author: "",
+    img_url: "",
+    myRating: "",
+    notes: "",
+    asin: "",
+  };
   return (
     <div className="large-container border-radius">
       <div className="space-between">
         <h2 className="underline"> {props?.name}</h2>
 
-        <button className="small-container margin border-radius secondary-backround-color" onClick={toggleOpen}>
+        <button
+          className="small-container margin border-radius secondary-backround-color"
+          onClick={toggleOpen}
+        >
           <Plus size="20px"></Plus>
         </button>
       </div>
@@ -61,11 +78,11 @@ export default function Board(props) {
           )}
         </Droppable>
       )}
-            <Modal open={open} setOpen={setOpen} formTitle="Add book">
+      <Modal open={open} setOpen={setOpen} formTitle="Add book">
         <Form
           data={bookFields}
           bid={props.id}
-
+          handleFetch={fetchFromAmazon}
           toggleOpen={toggleOpen}
         />
       </Modal>

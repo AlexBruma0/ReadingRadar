@@ -57,7 +57,6 @@ app.put("rearrange-cards/:id", async (req, res) => {
 });
 
 app.put("/", async (req, res) => {
-  //await Item.updateOne({ _id: req.body.id }, { $set: req.body.board });
   console.log(req.body.id, req.body.card);
   await Item.updateOne({ _id: req.body.id }, { $set: { card: req.body.card } });
   res.send("done");
@@ -82,13 +81,26 @@ app.put("/:id", async (req, res) => {
   req.body.card.ratings_total = response.data.product.ratings_total;
   req.body.card.numberOfPages = response.data.product.specifications[2].value;
   req.body.card.myRating = 0;
-  console.log(req.body.card);
   await Item.updateOne(
     { _id: req.params.id },
     { $push: { card: req.body.card } }
   );
   res.send("done");
 });
+
+app.get("/asin/:id", async (req,res) =>{
+  const params = {
+    api_key: "2E2AFA563FC44228B52BFD7D5C12F546",
+    amazon_domain: "amazon.ca",
+    asin: req.params.id,
+    type: "product",
+  };
+  const response = await axios.get("https://api.asindataapi.com/request", {
+    params,
+  });
+  const data = {title: response.data.product.title, img_url: response.data.product.main_image.link, author: response.data.product.authors[0].name};
+  res.json(data);
+})
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {

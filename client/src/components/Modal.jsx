@@ -23,10 +23,7 @@ const Modal = (props) => {
             onClick={() => props.setOpen(false)}
           >
             {" "}
-            <X 
-            color="#082d0f"
-            size={40}
-            />
+            <X color="#082d0f" size={40} />
           </div>
         </div>
         {props.children}

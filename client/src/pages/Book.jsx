@@ -10,7 +10,7 @@ function Book() {
   const [open, setOpen] = useState(false);
   const [book, setBook] = useState(location.state?.card);
   const bid = location.state?.bid;
-  const uri = "https://myproject-382821.uc.r.appspot.com/";
+  const uri = "http://localhost:8081/";
 
   const updateCard = async (bid, card) => {
     setBook(card);
