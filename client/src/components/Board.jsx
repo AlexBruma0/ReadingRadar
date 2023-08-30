@@ -51,7 +51,7 @@ export default function Board(props) {
   return (
     <div className="large-container border-radius">
       <div className="space-between">
-        <h2 className="underline"> {props?.name}</h2>
+        <h2 className="underline"> {props?.name} <span className= 'border'style={{backgroundColor: 'hotpink',fontSize:'large', borderRadius:'1000px', padding:'0.1rem'}}>{props.card?.length}</span></h2>
 
         <button
           className="small-container margin border-radius secondary-backround-color"

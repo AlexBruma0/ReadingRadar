@@ -65,24 +65,7 @@ function Book() {
   return (
     <>
       <Navbar />
-      <div className="flexbox">
-        <button
-         
-        >
-          <MessageCircle></MessageCircle> <i></i>
-        </button>
-        <button
-          
-          onClick={toggleOpen}
-        >
-          <Edit></Edit> <i></i>
-        </button>
-        <button  onClick={() => {
-          handleDelete(bid,cid)
-          }}>
-          <Trash></Trash> <i></i>
-        </button>
-      </div>
+     
       <div className="large-container" style={{ maxHeight: 100000 }}>
         <h1 className="underline center-text">
           {book.title} -- <i>{book.author}</i>
@@ -103,26 +86,28 @@ function Book() {
               emptyColor="#f2f2f3"
             />
             <p>
-              Lorem ipsum odor amet, consectetuer adipiscing elit. Felis lectus
-              per ipsum efficitur sodales donec aptent feugiat nostra. Sociosqu
-              ridiculus nisl lobortis integer metus neque ipsum. Lobortis
-              habitant dignissim dictum lacus pellentesque eget euismod at.
-              Rutrum nisi lobortis natoque commodo dis dui facilisis aenean.
-              Ornare a iaculis scelerisque fringilla mi dui. Vivamus per
-              habitant integer conubia hendrerit finibus nec; quam tellus.
-              Pharetra interdum consectetur proin natoque volutpat sollicitudin
-              lacus magna. Vehicula montes ullamcorper montes euismod vel
-              posuere gravida ut nunc. Primis vel taciti litora ipsum semper
-              elit. Fusce iaculis quam turpis dapibus ipsum. Dolor mattis
-              adipiscing potenti nibh ultrices efficitur quam! Lorem dolor fusce
-              senectus; porta congue ac tortor dui scelerisque. Cursus maximus
-              leo facilisis scelerisque convallis. Pretium aenean in tellus
+              {book.notes}
             </p>
           </div>
           <div className=" padding center-text">
             <img src={book.img_url} className="large-img" alt="" />
           </div>
         </div>
+      </div>
+      <div className="flexbox margin-top">
+        <button
+          className="full-width"
+          onClick={toggleOpen}
+        >
+          <Edit></Edit> <i></i>
+        </button>
+        <button 
+                  className="full-width"
+        onClick={() => {
+          handleDelete(bid,cid)
+          }}>
+          <Trash></Trash> <i></i>
+        </button>
       </div>
       
       <Modal open={open} setOpen={setOpen} formTitle="Edit book">
