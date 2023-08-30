@@ -47,6 +47,7 @@ app.delete("/:id", async (req, res) => {
     { _id: req.params.id },
     { $pull: { card: { id: req.body.cardId } } }
   );
+  res.send('done')
 });
 app.put("rearrange-cards/:id", async (req, res) => {
   console.log(req.params.id, req.body.card);
@@ -61,6 +62,14 @@ app.put("/", async (req, res) => {
   await Item.updateOne({ _id: req.body.id }, { $set: { card: req.body.card } });
   res.send("done");
 });
+
+app.put("/book/:id", async (req,res) =>{
+  await Item.updateOne(
+    {_id: req.params.id},
+    {$push: {card: req.body.card}}
+  )
+  res.send("done")
+})
 
 app.put("/:id", async (req, res) => {
   const params = {

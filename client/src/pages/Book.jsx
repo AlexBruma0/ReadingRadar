@@ -1,16 +1,20 @@
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Rating } from "react-simple-star-rating";
-import { MessageCircle, Edit } from "react-feather";
+import { MessageCircle, Edit, Trash } from "react-feather";
 import { useState } from "react";
 import Modal from "../components/Modal";
 import Form from "../components/Form";
+import { useNavigate } from "react-router-dom";
+
 function Book() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [book, setBook] = useState(location.state?.card);
   const bid = location.state?.bid;
-  const uri = "https://myproject-382821.uc.r.appspot.com/";
+  const cid = location.state?.card.id;
+  const uri = "http://localhost:8081/";
 
   const updateCard = async (bid, card) => {
     setBook(card);
@@ -35,6 +39,25 @@ function Book() {
     });
   };
 
+  const handleDelete = async (bid, cid) =>{
+    console.log(bid,cid)
+    try {
+      await fetch(`${uri}${bid}`,{
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cardId: cid
+        }),
+
+      })
+    navigate("/")
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
   const toggleOpen = () => {
     setOpen(!open);
   };
@@ -42,6 +65,24 @@ function Book() {
   return (
     <>
       <Navbar />
+      <div className="flexbox">
+        <button
+         
+        >
+          <MessageCircle></MessageCircle> <i></i>
+        </button>
+        <button
+          
+          onClick={toggleOpen}
+        >
+          <Edit></Edit> <i></i>
+        </button>
+        <button  onClick={() => {
+          handleDelete(bid,cid)
+          }}>
+          <Trash></Trash> <i></i>
+        </button>
+      </div>
       <div className="large-container" style={{ maxHeight: 100000 }}>
         <h1 className="underline center-text">
           {book.title} -- <i>{book.author}</i>
@@ -83,21 +124,7 @@ function Book() {
           </div>
         </div>
       </div>
-      <div className="flexbox">
-        <button
-          className="large-text full-width border-radius primary-backround-color"
-          style={{ marginTop: 20 }}
-        >
-          <MessageCircle></MessageCircle> <i>Comment</i>
-        </button>
-        <button
-          className="large-text full-width border-radius primary-backround-color"
-          style={{ marginTop: 20 }}
-          onClick={toggleOpen}
-        >
-          <Edit></Edit> <i>Edit</i>
-        </button>
-      </div>
+      
       <Modal open={open} setOpen={setOpen} formTitle="Edit book">
         <Form
           data={book}

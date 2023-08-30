@@ -5,10 +5,12 @@ import { Droppable } from "react-beautiful-dnd";
 import { Plus, X } from "react-feather";
 import Modal from "./Modal";
 import Form from "./Form";
+import {v4 as uuid, v4} from "uuid"
 
 export default function Board(props) {
   const [open, setOpen] = useState(false);
-  const uri =  "https://myproject-382821.uc.r.appspot.com/";
+  const [books, setBooks] = useState(props.card)
+  const uri =  props.uri;
 
   const toggleOpen = () => {
     setOpen(!open);
@@ -18,6 +20,25 @@ export default function Board(props) {
     const json = await response.json();
     return json
   };
+
+  const handleAdd = async(bid,book) => {
+    book.id = uuid()
+    console.log(bid,book)
+  
+    try {
+      await fetch(`${uri}book/${props.id}`,{
+        headers: { "Content-Type": "application/json" },
+        method: "PUT",
+        body: JSON.stringify({
+          card: book
+        }),
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    setBooks([...books,book])
+
+  }
 
   const bookFields = {
     title: "",
@@ -54,7 +75,7 @@ export default function Board(props) {
               )}
               {!props.waitingAPI && (
                 <>
-                  {props.card?.map((items, index) => (
+                  {books?.map((items, index) => (
                     <Card
                       cardColor={props.cardColor}
                       cn={props.cn}
@@ -83,6 +104,7 @@ export default function Board(props) {
           bid={props.id}
           handleFetch={fetchFromAmazon}
           toggleOpen={toggleOpen}
+          handleUpdate={handleAdd}
         />
       </Modal>
     </div>
