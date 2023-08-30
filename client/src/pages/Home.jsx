@@ -14,7 +14,7 @@ function Home() {
   const [waitingAPI2, setWaitingAPI2] = useState(false);
   const [localData, setlocalData] = useState(null);
 
-  var uri = local;
+  var uri = remote;
   const get = async () => {
     const response = await fetch(uri);
     const json = await response.json();
