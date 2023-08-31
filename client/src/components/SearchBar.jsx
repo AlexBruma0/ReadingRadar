@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
+import Card from "./Card";
 export default function SearchBar(props) {
   const [input, setInput] = useState('')
   const [books, setBooks] = useState(null)
@@ -32,7 +33,7 @@ export default function SearchBar(props) {
       <div>
         {books && books.map((book)=> (
          <>
-         {book.title.includes(input) ? (<div key={book.id}>{book.title}</div>): (<></>)}
+         {book.title.includes(input) ? (<Card title={book.title} author={book.author} myRating={book.myRating} img_url={book.img_url} notes={book.notes} id={props.id}/>): (<></>)}
 
          </>
         ))}

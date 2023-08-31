@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import Drag from "./Drag";
 import { SpinnerCircular } from "spinners-react";
 import { Droppable } from "react-beautiful-dnd";
 import { Plus, X } from "react-feather";
@@ -95,7 +95,7 @@ export default function Board(props) {
               {!props.waitingAPI && (
                 <>
                   {books?.map((items, index) => (
-                    <Card
+                    <Drag
                       cardColor={props.cardColor}
                       cn={props.cn}
                       bid={props.id}
