@@ -16,7 +16,7 @@ function Book() {
   const cid = location.state?.card.id;
   var uri = "https://myproject-382821.uc.r.appspot.com/";
   const local = "http://localhost:8081/";
-  //uri = local
+ // uri = local
   const updateCard = async (bid, card) => {
     setBook(card);
     const response = await fetch(uri);
@@ -110,7 +110,6 @@ function Book() {
           bid={board_id}
           handleUpdate={updateCard}
           toggleOpen={toggleOpen}
-          refresh="true"
         />
       </Modal>
     </>
