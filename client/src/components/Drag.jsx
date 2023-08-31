@@ -29,6 +29,7 @@ const Drag = (props) => {
               myRating={props.card.myRating}
               img_url={props.img_url}
               id={props.id}
+              bid={props.bid}
               notes={props.card.notes}
             />
           </div>
