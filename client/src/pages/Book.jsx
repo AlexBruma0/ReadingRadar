@@ -12,10 +12,11 @@ function Book() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [book, setBook] = useState(location.state?.card);
-  const bid = location.state?.bid;
+  const board_id = location.state?.bid;
   const cid = location.state?.card.id;
-  const uri = "https://myproject-382821.uc.r.appspot.com/";
-
+  var uri = "https://myproject-382821.uc.r.appspot.com/";
+  const local = "http://localhost:8081/";
+  //uri = local
   const updateCard = async (bid, card) => {
     setBook(card);
     const response = await fetch(uri);
@@ -40,9 +41,9 @@ function Book() {
   };
 
   const handleDelete = async (bid, cid) => {
-    console.log(bid, cid);
+    console.log(board_id, cid);
     try {
-      await fetch(`${uri}${bid}`, {
+      await fetch(`${uri}${board_id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -96,7 +97,7 @@ function Book() {
         <button
           className="full-width"
           onClick={() => {
-            handleDelete(bid, cid);
+            handleDelete(board_id, cid);
           }}
         >
           <Trash></Trash> <i></i>
@@ -106,7 +107,7 @@ function Book() {
       <Modal open={open} setOpen={setOpen} formTitle="Edit book">
         <Form
           data={book}
-          bid={bid}
+          bid={board_id}
           handleUpdate={updateCard}
           toggleOpen={toggleOpen}
           refresh="true"
