@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import Navbar from "../components/Navbar/Navbar";
-import SearchBar from "../components/SearchBar/SearchBar";
-import Board from "../components/Board/Board";
+import Navbar from "../components/Navbar";
+import Board from "../components/Board";
 import { DragDropContext } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
 import { SpinnerCircular } from "spinners-react";
 function Home() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
@@ -24,45 +21,6 @@ function Home() {
   };
   const [data, setData] = useState([]);
 
-  const setName = (title, bid) => {
-    const index = data.findIndex((item) => item.id === bid);
-    const tempData = [...data];
-    tempData[index].boardName = title;
-    setData(tempData);
-  };
-
-  const addCard = async (title, bid) => {
-    await new Promise((resolve) => {
-      if (bid === "64711f3eb05f463a0ccfd027") {
-        setWaitingAPI0(true);
-        resolve(null);
-      }
-      if (bid === "64711f52b05f463a0ccfd028") {
-        setWaitingAPI1(true);
-        resolve(null);
-      }
-      if (bid === "647289ed971a4bc678762595") {
-        setWaitingAPI2(true);
-        resolve(null);
-      }
-    });
-    await fetch(`${uri}${bid}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        card: {
-          id: uuidv4(),
-          title: title,
-          tags: [],
-          task: [],
-        },
-      }),
-    });
-    setWaitingAPI0(false);
-    setWaitingAPI1(false);
-    setWaitingAPI2(false);
-  };
-
   const removeCard = async (boardId, cardId) => {
     await fetch(`${uri}${boardId}`, {
       method: "DELETE",
@@ -73,12 +31,6 @@ function Home() {
     });
   };
 
-  const removeBoard = (bid) => {
-    const tempData = [...data];
-    const index = data.findIndex((item) => item.id === bid);
-    tempData.splice(index, 1);
-    setData(tempData);
-  };
   const reorder = async (index, startIndex, endIndex) => {
     const temp = [...data];
     const [removed] = temp[index].card?.splice(startIndex, 1);
@@ -161,32 +113,7 @@ function Home() {
         destination.index
       );
     }
-    setData(data)
-
-  };
-
-  const updateCard = async (bid, cid, card) => {
-    const index = data.findIndex((e) => {
-      return e._id === bid;
-    });
-
-    if (index < 0) return;
-    const tempBoards = [...data];
-    const cards = tempBoards[index].card;
-
-    const cardIndex = cards.findIndex((item) => item.id === cid);
-    if (cardIndex < 0) return;
-
-    tempBoards[index].card[cardIndex] = card;
-    setlocalData(tempBoards);
-    await fetch(`${uri}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: bid,
-        card: tempBoards[index].card,
-      }),
-    });
+    setData(data);
   };
 
   useEffect(() => {
@@ -200,79 +127,47 @@ function Home() {
     }
   }, [localData]);
 
- 
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <Navbar />
-        <SearchBar/>
-
-        <div className="main_container">
-          <div className="app_boards">
-            {loading && (
-              <div className="spinner-container">
-                <SpinnerCircular color="pink" size="20vw" />
-              </div>
-            )}
-            {!loading && (
-              <>
-                {data.map((item, index) => (
-                  <>
-                    {index < 3 && (
-                      <Board
-                        cn="custom__card"
-                        cardColor="black"
-                        key={item._id}
-                        id={item._id}
-                        localData={data}
-                        setlocalData={setlocalData}
-                        index={index}
-                        className={`board${index}`}
-                        waitingAPI={
-                          index === 0
-                            ? waitingAPI0
-                            : index === 1
-                            ? waitingAPI1
-                            : waitingAPI2
-                        }
-                        name={item.boardName}
-                        card={item.card}
-                        setName={setName}
-                        addCard={addCard}
-                        removeCard={removeCard}
-                        removeBoard={removeBoard}
-                        updateCard={updateCard}
-                      />
-                    )}
-                  </>
-                ))}
-              </>
-            )}
-          </div>
-          <div className="leader_boards">
-            {data.map((item, index) => (
-              <>
-                {index === 3 && (
-                  <Board
-                    cn="lb"
-                    cardColor="pink"
-                    key={item._id}
-                    id={item._id}
-                    index={index}
-                    className={`board${index}`}
-                    name={item.boardName}
-                    card={item.card}
-                    setName={setName}
-                    addCard={addCard}
-                    removeCard={removeCard}
-                    removeBoard={removeBoard}
-                    updateCard={updateCard}
-                  />
-                )}
-              </>
-            ))}
-          </div>
+        <div className="grid-container--small">
+          {loading && (
+            <div className="spinner-container">
+              <SpinnerCircular color="pink" size="20vw" />
+            </div>
+          )}
+          {!loading && (
+            <>
+              {data.map((item, index) => (
+                <>
+                  {index < 3 && (
+                    <Board
+                      cn="custom__card"
+                      cardColor="black"
+                      key={item._id}
+                      id={item._id}
+                      localData={data}
+                      setlocalData={setlocalData}
+                      index={index}
+                      className={`board${index}`}
+                      waitingAPI={
+                        index === 0
+                          ? waitingAPI0
+                          : index === 1
+                          ? waitingAPI1
+                          : waitingAPI2
+                      }
+                      name={item.boardName}
+                      card={item.card}
+                      removeCard={removeCard}
+                      uri={uri}
+                    />
+                  )}
+                </>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </DragDropContext>

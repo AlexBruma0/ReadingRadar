@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:client": "cd client && npm ci",
     "build:client": "cd client && npm run build",
-    "client": "cd client && npm run dev"
+    "client": "cd client && npm run dev",
+    "prettier": "cd client && npm run prettier"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/AlexBruma0/hannahs-books/issues"
   },
-  "homepage": "https://github.com/AlexBruma0/hannahs-books#readme"
+  "homepage": "https://github.com/AlexBruma0/hannahs-books#readme",
+  "dependencies": {
+    "lorem-ipsum": "^2.0.8",
+    "react-lorem-ipsum": "^1.4.10"
+  }
 }
