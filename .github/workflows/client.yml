@@ -3,9 +3,6 @@ run-name: Client pipeline
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-    
 jobs:
   build:
 
