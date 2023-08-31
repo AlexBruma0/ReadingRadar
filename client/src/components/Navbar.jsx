@@ -5,7 +5,6 @@ import { Search } from "react-feather";
 export default function Navbar(props) {
   const [searching, setSearching] = useState(false);
   const toggleSearching = () => {
-    console.log("navbar search", searching);
     setSearching(!searching);
   };
   return (
