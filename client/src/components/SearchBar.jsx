@@ -33,7 +33,7 @@ export default function SearchBar(props) {
       <div className="margin-top">
         {books && books.map((book)=> (
          <>
-         {book.title.includes(input) ? (<Card title={book.title} author={book.author} myRating={book.myRating} img_url={book.img_url} notes={book.notes} id={props.id}/>): (<></>)}
+         {book.title.toLowerCase().includes(input.toLowerCase()) ? (<Card title={book.title} author={book.author} myRating={book.myRating} img_url={book.img_url} notes={book.notes} id={props.id}/>): (<></>)}
 
          </>
         ))}
