@@ -106,7 +106,6 @@ h1 {
 
 .secondary-backround-color {
   background-color: var(--secondary-color);
-  color: white;
 }
 
 .accent-backround-color {
@@ -119,6 +118,10 @@ h1 {
 
 .large-img {
   width: clamp(20rem, 60%, 40rem);
+}
+
+.almost-full-width{
+  width: 90%;
 }
 
 p {
@@ -136,14 +139,19 @@ p {
   margin-top: 1rem;
 }
 
-// dialog{
-//   position: fixed;
-//   top: -90%;
-//   left: 50%;
-// }
+
+.search-bar{
+  position: fixed;
+  top: 6%;
+  left: 0%;
+}
 
 .opacity {
   opacity: 0.5;
+}
+
+.sticky{
+  position: sticky !important;
 }
 
 .absolute {

@@ -20,7 +20,7 @@ const Modal = (props) => {
   }, [props.open]);
   return (
     <>
-      <dialog ref={dialogRef} id="my-dialog">
+      <dialog ref={dialogRef} className={props.className}>
         {props.search ? (
           <></>
         ) : (

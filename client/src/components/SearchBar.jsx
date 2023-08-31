@@ -26,11 +26,11 @@ export default function SearchBar(props) {
     <Modal
       open={props.open}
       setOpen={props.setOpen}
-      className="full-width secondary-backround-color searchBar"
+      className="almost-full-width search-bar secondary-backround-color border-radius"
       search="true"
     >
-      <input placeholder="🔎 Search for book" type="text" onChange={handleChange}/>
-      <div>
+      <input placeholder="🔎 Search for book" type="text" onChange={handleChange} className="sticky"/>
+      <div className="margin-top">
         {books && books.map((book)=> (
          <>
          {book.title.includes(input) ? (<Card title={book.title} author={book.author} myRating={book.myRating} img_url={book.img_url} notes={book.notes} id={props.id}/>): (<></>)}
