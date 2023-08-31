@@ -9,9 +9,11 @@ export default function Form(props) {
     setData({ ...data, [name]: value });
   };
 
-  const handleSubmit = (event) => {
-    if (props.refresh) event.preventDefault();
-    if (props.handleUpdate) props.handleUpdate(props.bid, data);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (props.handleUpdate) await props.handleUpdate(props.bid, data);
+    if (props.refresh) {
+      location.reload()};
     if (props.toggleOpen) props.toggleOpen();
   };
 

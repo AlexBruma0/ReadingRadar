@@ -31,18 +31,16 @@ export default function Board(props) {
     };
     console.log(bid, book);
 
-    try {
-      await fetch(`${uri}book/${props.id}`, {
-        headers: { "Content-Type": "application/json" },
-        method: "PUT",
-        body: JSON.stringify({
-          card: book,
-        }),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    setBooks([...books, book]);
+
+    await fetch(`${uri}book/${props.id}`, {
+      headers: { "Content-Type": "application/json" },
+      method: "PUT",
+      body: JSON.stringify({
+        card: book,
+      }),
+    });
+    return
+    //setBooks([...books, book]);
   };
 
   const bookFields = {
@@ -124,6 +122,7 @@ export default function Board(props) {
           handleFetch={fetchFromAmazon}
           toggleOpen={toggleOpen}
           handleUpdate={handleAdd}
+          refresh="true"
         />
       </Modal>
     </div>
