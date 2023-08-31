@@ -10,7 +10,7 @@ export default function Form(props) {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    if (props.refresh) event.preventDefault();
     if (props.handleUpdate) props.handleUpdate(props.bid, data);
     if (props.toggleOpen) props.toggleOpen();
   };
@@ -18,7 +18,7 @@ export default function Form(props) {
   const handleFetch = async () => {
     console.log("handleFetch", data);
     if (props.handleFetch) {
-      setFetching(true)
+      setFetching(true);
       const response = await props.handleFetch(data.asin);
       setData({
         ...data,
@@ -26,7 +26,7 @@ export default function Form(props) {
         author: response.author,
         img_url: response.img_url,
       });
-      setFetching(false)
+      setFetching(false);
     }
   };
 
@@ -35,15 +35,8 @@ export default function Form(props) {
       <form onSubmit={handleSubmit}>
         {fetching ? (
           <div className="center-text">
-            <div className="large-text">
-                Fetching data from amazon...
-
-            </div>
-            <SpinnerCircular 
-            color="pink"
-            size='30vh'
-            />
-            
+            <div className="large-text">Fetching data from amazon...</div>
+            <SpinnerCircular color="pink" size="30vh" />
           </div>
         ) : (
           <div>

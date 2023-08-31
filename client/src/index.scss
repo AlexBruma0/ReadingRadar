@@ -132,8 +132,22 @@ p {
 .large-text {
   font-size: xx-large;
 }
-.margin-top{
+.margin-top {
   margin-top: 1rem;
+}
+
+// dialog{
+//   position: fixed;
+//   top: -90%;
+//   left: 50%;
+// }
+
+.opacity {
+  opacity: 0.5;
+}
+
+.absolute {
+  position: absolute;
 }
 
 button {
@@ -143,7 +157,7 @@ button {
   padding: 0rem 1rem;
   text-align: center;
   text-decoration: none;
-  font-size:1rem;
+  font-size: 1rem;
   border-radius: 5pt;
   transition-duration: 0.4s;
 }
@@ -180,5 +194,3 @@ textarea {
 .cursor-pointer {
   cursor: pointer;
 }
-
-

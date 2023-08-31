@@ -117,7 +117,6 @@ function Home() {
     setData(data);
   };
 
-
   useEffect(() => {
     if (!localData) {
       get().then((data) => {
@@ -163,7 +162,7 @@ function Home() {
                       name={item.boardName}
                       card={item.card}
                       removeCard={removeCard}
-                      uri = {uri}
+                      uri={uri}
                     />
                   )}
                 </>

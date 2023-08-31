@@ -5,12 +5,12 @@ import { Droppable } from "react-beautiful-dnd";
 import { Plus, X } from "react-feather";
 import Modal from "./Modal";
 import Form from "./Form";
-import {v4 as uuid, v4} from "uuid"
+import { v4 as uuid, v4 } from "uuid";
 
 export default function Board(props) {
   const [open, setOpen] = useState(false);
-  const [books, setBooks] = useState(props.card)
-  const uri =  props.uri;
+  const [books, setBooks] = useState(props.card);
+  const uri = props.uri;
 
   const toggleOpen = () => {
     setOpen(!open);
@@ -18,27 +18,32 @@ export default function Board(props) {
   const fetchFromAmazon = async (asin) => {
     const response = await fetch(`${uri}asin/${asin}`);
     const json = await response.json();
-    return json
+    return json;
   };
 
-  const handleAdd = async(bid,book) => {
-    book.id = uuid()
-    console.log(bid,book)
-  
+  const handleAdd = async (bid, book) => {
+    book = {
+      title: book.title,
+      id: uuid(),
+      author: book.author,
+      myRating: book.myRating,
+      img_url: book.img_url,
+    };
+    console.log(bid, book);
+
     try {
-      await fetch(`${uri}book/${props.id}`,{
+      await fetch(`${uri}book/${props.id}`, {
         headers: { "Content-Type": "application/json" },
         method: "PUT",
         body: JSON.stringify({
-          card: book
+          card: book,
         }),
-      })
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    setBooks([...books,book])
-
-  }
+    setBooks([...books, book]);
+  };
 
   const bookFields = {
     title: "",
@@ -51,7 +56,21 @@ export default function Board(props) {
   return (
     <div className="large-container border-radius">
       <div className="space-between">
-        <h2 className="underline"> {props?.name} <span className= 'border'style={{backgroundColor: 'hotpink',fontSize:'large', borderRadius:'1000px', padding:'0.1rem'}}>{props.card?.length}</span></h2>
+        <h2 className="underline">
+          {" "}
+          {props?.name}{" "}
+          <span
+            className="border"
+            style={{
+              backgroundColor: "hotpink",
+              fontSize: "large",
+              borderRadius: "1000px",
+              padding: "0.1rem",
+            }}
+          >
+            {props.card?.length}
+          </span>
+        </h2>
 
         <button
           className="small-container margin border-radius secondary-backround-color"

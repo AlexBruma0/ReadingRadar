@@ -4,6 +4,13 @@ import { X } from "react-feather";
 const Modal = (props) => {
   const dialogRef = useRef(null);
 
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      console.log("Escape key pressed");
+      props.setOpen(false);
+    }
+  });
+
   useEffect(() => {
     if (props.open) {
       dialogRef.current?.showModal();
@@ -14,18 +21,23 @@ const Modal = (props) => {
   }, [props.open]);
   return (
     <>
-      <dialog ref={dialogRef}>
-        <div className="space-between margin-bottom">
-          <h2 className="underline">{props.formTitle}</h2>
-          <div
-            className="margin border-radius cursor-pointer "
-            onClick={() => props.setOpen(false)}
-          >
-            {" "}
-            <X color="#082d0f" size={40} />
+      <dialog ref={dialogRef} id="my-dialog">
+        {props.search ? (
+          <></>
+        ) : (
+          <div className="space-between margin-bottom">
+            <h2 className="underline">{props.formTitle}</h2>
+            <div
+              className="margin border-radius cursor-pointer "
+              onClick={() => props.setOpen(false)}
+            >
+              {" "}
+              <X color="#082d0f" size={40} />
+            </div>
           </div>
-        </div>
-        {props.children}
+        )}
+
+        <div style={{ opacity: 100 }}>{props.children}</div>
       </dialog>
     </>
   );

@@ -39,24 +39,21 @@ function Book() {
     });
   };
 
-  const handleDelete = async (bid, cid) =>{
-    console.log(bid,cid)
+  const handleDelete = async (bid, cid) => {
+    console.log(bid, cid);
     try {
-      await fetch(`${uri}${bid}`,{
+      await fetch(`${uri}${bid}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          cardId: cid
+          cardId: cid,
         }),
-
-      })
-    navigate("/")
-
+      });
+      navigate("/");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
+  };
 
   const toggleOpen = () => {
     setOpen(!open);
@@ -65,7 +62,7 @@ function Book() {
   return (
     <>
       <Navbar />
-     
+
       <div className="large-container" style={{ maxHeight: 100000 }}>
         <h1 className="underline center-text">
           {book.title} -- <i>{book.author}</i>
@@ -85,9 +82,7 @@ function Book() {
               fillColor="var(--secondary-color)"
               emptyColor="#f2f2f3"
             />
-            <p>
-              {book.notes}
-            </p>
+            <p>{book.notes}</p>
           </div>
           <div className=" padding center-text">
             <img src={book.img_url} className="large-img" alt="" />
@@ -95,27 +90,26 @@ function Book() {
         </div>
       </div>
       <div className="flexbox margin-top">
-        <button
-          className="full-width"
-          onClick={toggleOpen}
-        >
+        <button className="full-width" onClick={toggleOpen}>
           <Edit></Edit> <i></i>
         </button>
-        <button 
-                  className="full-width"
-        onClick={() => {
-          handleDelete(bid,cid)
-          }}>
+        <button
+          className="full-width"
+          onClick={() => {
+            handleDelete(bid, cid);
+          }}
+        >
           <Trash></Trash> <i></i>
         </button>
       </div>
-      
+
       <Modal open={open} setOpen={setOpen} formTitle="Edit book">
         <Form
           data={book}
           bid={bid}
           handleUpdate={updateCard}
           toggleOpen={toggleOpen}
+          refresh="true"
         />
       </Modal>
     </>
