@@ -20,7 +20,7 @@ const Modal = (props) => {
   }, [props.open]);
   return (
     <>
-      <dialog ref={dialogRef} className={props.className}>
+      <dialog ref={dialogRef} className={props.dialog_class_name}>
         {props.search ? (
           <></>
         ) : (
@@ -35,8 +35,15 @@ const Modal = (props) => {
             </div>
           </div>
         )}
-
-        <div style={{ opacity: 100 }}>{props.children}</div>
+        {props.search ? (
+          <div className="height-0">
+            <div className={props.search ? "sticky almost-full-width" : ""}>
+              {props.children}
+            </div>
+          </div>
+        ) : (
+          <div>{props.children}</div>
+        )}
       </dialog>
     </>
   );

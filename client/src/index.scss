@@ -96,6 +96,9 @@ h1 {
   text-align: center;
 }
 
+.active-backround-color{
+  background-color: var(--active-color);
+}
 .flexbox {
   display: flex;
 }
@@ -120,8 +123,8 @@ h1 {
   width: clamp(20rem, 60%, 40rem);
 }
 
-.almost-full-width{
-  width: 90%;
+.almost-full-width {
+  width: 90vw;
 }
 
 p {
@@ -139,19 +142,35 @@ p {
   margin-top: 1rem;
 }
 
+.full-height {
+  height: 90vh;
+}
 
-.search-bar{
+.relative {
+  position: relative;
+  margin: 0 auto;
+}
+
+.height-0 {
+  height: 0;
+}
+
+.top-8{
   position: fixed;
-  top: 6%;
-  left: 0%;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sticky {
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .opacity {
   opacity: 0.5;
-}
-
-.sticky{
-  position: sticky !important;
 }
 
 .absolute {

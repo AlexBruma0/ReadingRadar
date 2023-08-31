@@ -8,8 +8,6 @@ const Drag = (props) => {
     ...draggableStyle,
   });
 
-
-
   const navigate = useNavigate();
   return (
     <Draggable
@@ -25,13 +23,13 @@ const Drag = (props) => {
             ref={provided.innerRef}
             style={getItemStyle(provided.draggableProps.style)}
           >
-            <Card 
-            title = {props.title}
-            author = {props.author}
-            myRating = {props.card.myRating}
-            img_url = {props.img_url}
-            id = {props.id}
-            notes = {props.card.notes}
+            <Card
+              title={props.title}
+              author={props.author}
+              myRating={props.card.myRating}
+              img_url={props.img_url}
+              id={props.id}
+              notes={props.card.notes}
             />
           </div>
         </>
