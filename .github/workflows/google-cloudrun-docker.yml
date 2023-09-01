@@ -93,6 +93,7 @@ jobs:
           registry: '${{ env.GAR_LOCATION }}-docker.pkg.dev'
 
       - name: Build and Push Container
+        working-directory: /api_new/src
         run: |-
           docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
