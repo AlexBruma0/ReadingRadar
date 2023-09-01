@@ -88,8 +88,8 @@ jobs:
         id: docker-auth
         uses: 'docker/login-action@v1'
         with:
-          username: 'alexbruma0'
-          password: 'Canuckhead@22'
+          username: '_json_key'
+          password: '${{ secrets.GCR_JSON_KEY }}' # Use the secret you added
           registry: '${{ env.GAR_LOCATION }}-docker.pkg.dev'
 
       - name: Build and Push Container
