@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:18
+FROM node:14
 
 # Set the working directory in the container
 WORKDIR /src
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8080
 
 # Start the application when the container starts
-CMD ["node", "app.js"]
+CMD ["node", "./app.js"]
