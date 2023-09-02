@@ -51,4 +51,17 @@ jobs:
         image: ${{ env.IMAGE_URL }}
 
     - name: Output
-      run: 'curl "${{ steps.cloud-run-deploy.outputs.url }}"'
+      run: |
+          # Replace the following line with your actual server URL and JSON data
+          SERVER_URL="https://hb2-uqmjgfhwqa-uc.a.run.app"
+          JSON_DATA='{
+            "userName": "newuser",
+            "password": "password123",
+            "email": "newuser@example.com"
+          }'
+
+          # Make the POST request to your server using curl
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d "$JSON_DATA" \
+            "$SERVER_URL/api/users/register"
