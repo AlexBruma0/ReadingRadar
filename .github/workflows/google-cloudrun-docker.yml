@@ -34,6 +34,7 @@ jobs:
 
     - name: Build and tag Docker image
       run: |
+        cd ./api_new/src
         docker build -t "$IMAGE_TAG" api/
         docker tag "$IMAGE_TAG" "$IMAGE_URL"
 
