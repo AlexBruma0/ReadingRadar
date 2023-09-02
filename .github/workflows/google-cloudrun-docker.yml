@@ -48,7 +48,7 @@ jobs:
         service: 'hb2'
         region: ${{ env.GCP_REGION }}
         project_id: ${{ env.GCP_PROJECT_ID }}
-        image: "$IMAGE_URL"
+        image: ${{ env.IMAGE_URL }}
 
     - name: Output
       run: 'curl "${{ steps.cloud-run-deploy.outputs.url }}"'
