@@ -13,7 +13,7 @@ jobs:
       GCP_REGION: us-central1
       GCP_REPOSITORY: hb2
       GCP_PROJECT_ID: hannahsbooks
-      IMAGE_TAG: ${{ format('api:{0}', github.sha) }}
+      IMAGE_TAG: ${{ format('hb2:{0}', github.sha) }}
 
     steps:
     - uses: actions/checkout@v3
@@ -45,10 +45,10 @@ jobs:
       id: cloud-run-deploy
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
-        service: hb2
+        service: 'hb2'
         region: ${{ env.GCP_REGION }}
         project_id: ${{ env.GCP_PROJECT_ID }}
-        image: $IMAGE_URL
+        image: "$IMAGE_URL"
 
     - name: Output
       run: 'curl "${{ steps.cloud-run-deploy.outputs.url }}"'
