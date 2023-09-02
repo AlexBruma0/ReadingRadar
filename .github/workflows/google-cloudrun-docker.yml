@@ -45,7 +45,7 @@ jobs:
       id: cloud-run-deploy
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
-        service: 'hb2'
+        service: 'hb'
         region: ${{ env.GCP_REGION }}
         project_id: ${{ env.GCP_PROJECT_ID }}
         image: ${{ env.IMAGE_URL }}
