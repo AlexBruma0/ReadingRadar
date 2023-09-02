@@ -53,7 +53,7 @@ jobs:
     - name: Output
       run: |
           # Replace the following line with your actual server URL and JSON data
-          SERVER_URL="https://hb2-uqmjgfhwqa-uc.a.run.app"
+          SERVER_URL="https://hb-uqmjgfhwqa-uc.a.run.app"
           JSON_DATA='{
             "userName": "newuser",
             "password": "password123",
