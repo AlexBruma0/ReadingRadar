@@ -25,7 +25,7 @@ export const registerUser = (userData) => async (dispatch) => {
   dispatch(registerRequest());
 
   try {
-    const response = await fetch('http://your-api-url/register', {
+    const response = await fetch(`${API_URL}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,6 +38,8 @@ export const registerUser = (userData) => async (dispatch) => {
     }
 
     const user = await response.json(); // Assuming your API returns user data upon successful registration
+    // Store the JWT token in local storage after a successful registration
+    localStorage.setItem('jwtToken', user.token);    
     dispatch(registerSuccess(user));
   } catch (error) {
     dispatch(registerFailure(error.message));

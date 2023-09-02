@@ -11,7 +11,7 @@ export default function Form(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (props.handleUpdate) await props.handleUpdate(props.bid, data);
+    if (props.handleUpdate) await props.handleUpdate(data);
     if (props.refresh) {
       location.reload()};
     if (props.toggleOpen) props.toggleOpen();
