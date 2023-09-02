@@ -1,18 +1,18 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Book from "./pages/Book";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
+import BookPage from "./pages/BookPage";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<LoginPage/>} />
+        <Route path="login" element={<LoginPage/>} />
         <Route path='register' element ={ <RegisterPage/>}/>
-        {/* <Route index element={<Home />} />
-        <Route path="book/:id" element={<Book />} /> */}
+        <Route index element={<HomePage />} />
+        <Route path="book/:id" element={<BookPage />} />
       </Routes>
     </BrowserRouter>
   );

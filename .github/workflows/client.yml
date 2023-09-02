@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     env:
-      SURGE_DOMAIN: https://hannahs-books.surge.sh/
+      SURGE_DOMAIN: https://hannahsbooks.surge.sh/
     steps:
     - name: Setup Node JS
       uses: actions/setup-node@v3

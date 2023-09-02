@@ -23,14 +23,7 @@ export const loginFailure = (error) => ({
 // Login action that makes an API request to your server using fetch
 export const loginUser = (userData) => async (dispatch) => {
   dispatch(loginRequest());
-
   try {
-    const storedToken = localStorage.getItem('jwtToken');
-
-    if (storedToken) {
-      // Attach the JWT token as a bearer token in the headers
-      axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
-    }
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
       method: 'POST',
@@ -47,8 +40,13 @@ export const loginUser = (userData) => async (dispatch) => {
     const user = await response.json(); // Assuming your API returns user data upon successful login
     // Store the JWT token in local storage after a successful login
     console.log(user)
-    localStorage.setItem('jwtToken', user.token);    
+    localStorage.setItem('jwtToken', user.token);
+
     dispatch(loginSuccess(user));
+    if(response.ok){
+      return user
+    }
+
   } catch (error) {
     dispatch(loginFailure(error.message));
     console.log(error.message)

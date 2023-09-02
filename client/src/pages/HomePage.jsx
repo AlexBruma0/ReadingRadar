@@ -3,7 +3,8 @@ import Navbar from "../components/Navbar";
 import Board from "../components/Board";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SpinnerCircular } from "spinners-react";
-function Home() {
+import { useSelector } from 'react-redux';
+export default function HomePage() {
   const remote = "https://myproject-382821.uc.r.appspot.com/";
 
   const local = "http://localhost:8081/";
@@ -174,4 +175,4 @@ function Home() {
   );
 }
 
-export default Home;
+

@@ -25,7 +25,7 @@ export const registerUser = (userData) => async (dispatch) => {
   dispatch(registerRequest());
 
   try {
-    const response = await fetch(`${API_URL}/users/login`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

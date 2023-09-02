@@ -15,8 +15,8 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { userName, password } = req.body;
   try {
-    const token = await userController.loginUser(userName, password);
-    res.json({ token });
+    const {token,userId} = await userController.loginUser(userName, password);
+    res.json({ token,userId });
   } catch (error) {
     res.status(401).json({ error: 'Invalid login credentials.' });
   }

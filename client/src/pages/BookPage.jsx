@@ -2,12 +2,12 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Rating } from "react-simple-star-rating";
 import { MessageCircle, Edit, Trash } from "react-feather";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import Form from "../components/Form";
 import { useNavigate } from "react-router-dom";
 
-function Book() {
+export default function BookPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -115,4 +115,4 @@ function Book() {
     </>
   );
 }
-export default Book;
+

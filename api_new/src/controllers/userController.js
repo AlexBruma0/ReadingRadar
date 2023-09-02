@@ -17,7 +17,8 @@ async function loginUser(userName, password) {
   }
 
   const token = jwt.sign({ userId: user._id }, process.env.jwt_secret_key); // Replace with your secret key
-  return token;
+  const userId = user._id
+  return {token,userId};
 }
 
 module.exports = {
