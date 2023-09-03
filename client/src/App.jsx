@@ -1,19 +1,21 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import HomePage from "./pages/HomePage";
-import BookPage from "./pages/BookPage";
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute'
+import LoginPage from './pages/LoginPage'
+import HomePage from './pages/HomePage'
 
-export default function App() {
+
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="login" element={<LoginPage/>} />
-        <Route path='register' element ={ <RegisterPage/>}/>
-        <Route index element={<HomePage />} />
-        <Route path="book/:id" element={<BookPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <Switch>
+        <Route path="/login" component={LoginPage} />
+        <PrivateRoute index component={HomePage} />
+        {/* Other public routes */}
+      </Switch>
+    </Router>
   );
 }
+
+export default App;

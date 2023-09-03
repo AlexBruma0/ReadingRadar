@@ -1,22 +1,22 @@
 import { Rating } from "react-simple-star-rating";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 export default function Card(props) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/book/${props.id}`, {
-      state: {
-        bid: props.bid,
-        card: {
-          title: props.title,
-          id: props.id,
-          author: props.author,
-          myRating: props.myRating,
-          img_url: props.img_url,
-          notes: props.notes,
-        },
-      },
-    });
+    // navigate(`/book/${props.id}`, {
+    //   state: {
+    //     bid: props.bid,
+    //     card: {
+    //       title: props.title,
+    //       id: props.id,
+    //       author: props.author,
+    //       myRating: props.myRating,
+    //       img_url: props.img_url,
+    //       notes: props.notes,
+    //     },
+    //   },
+    // });
   };
   return (
     <div

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, Link as RouterLink } from "react-router-dom";
+import { Link, Link as RouterLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { Search } from "react-feather";
 export default function Navbar(props) {

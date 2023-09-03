@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../redux/authActions/Login';
 import Form from '../components/Form';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const dispatch = useDispatch();
   const data = {userName: '', password: ''}
   const isAuthenticated = useSelector((state) => state.auth.login.isAuthenticated);
@@ -20,7 +20,7 @@ const LoginPage = () => {
   const handleLogin = async (userData) => {
     try {
         const res = await dispatch(loginUser(userData)); // Dispatch the login action with user data
-        if (res) navigate('/home')
+        // if (res) navigate('/home')
     } catch (error) {
         console.log(error)
     }
