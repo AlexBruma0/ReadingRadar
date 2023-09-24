@@ -99,7 +99,7 @@ app.put("/:id", async (req, res) => {
 
 app.get("/asin/:id", async (req,res) =>{
   const params = {
-    api_key: "2E2AFA563FC44228B52BFD7D5C12F546",
+    api_key: API_KEy
     amazon_domain: "amazon.ca",
     asin: req.params.id,
     type: "product",
