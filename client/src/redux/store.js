@@ -1,13 +1,13 @@
-// store.js
-import { legacy_createStore as createStore, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import authReducer from './authReducer'; // Your authentication reducer
+import { configureStore } from '@reduxjs/toolkit';
+import loginReducer from './authActions/Login';
+import registrationReducer from './authActions/Register';
 
-const rootReducer = combineReducers({
-  auth: authReducer,
-  // Add other reducers here if needed
+const store = configureStore({
+  reducer: {
+    login: loginReducer,
+    registration: registrationReducer,
+  },
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
 export default store;
+

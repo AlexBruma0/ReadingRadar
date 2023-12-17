@@ -1,54 +1,66 @@
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Action types
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+// Async action using createAsyncThunk
+export const loginUser = createAsyncThunk(
+  'login/userLogin',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
 
-// Action creators
-export const loginRequest = () => ({
-  type: LOGIN_REQUEST,
-});
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
 
-export const loginSuccess = (user) => ({
-  type: LOGIN_SUCCESS,
-  payload: user,
-});
-
-export const loginFailure = (error) => ({
-  type: LOGIN_FAILURE,
-  payload: error,
-});
-
-// Login action that makes an API request to your server using fetch
-export const loginUser = (userData) => async (dispatch) => {
-  dispatch(loginRequest());
-  try {
-
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Login failed');
+      const user = await response.json();
+      localStorage.setItem('jwtToken', user.token);
+      return user;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
-
-    const user = await response.json(); // Assuming your API returns user data upon successful login
-    // Store the JWT token in local storage after a successful login
-    console.log(user)
-    localStorage.setItem('jwtToken', user.token);
-
-    dispatch(loginSuccess(user));
-    if(response.ok){
-      return user
-    }
-
-  } catch (error) {
-    dispatch(loginFailure(error.message));
-    console.log(error.message)
   }
-};
+);
+
+// createSlice for login
+const loginSlice = createSlice({
+  name: 'login',
+  initialState: {
+    user: null,
+    isLoading: false,
+    error: null,
+    isAuthenticated: false
+  },
+  reducers: {
+    // Reducer for logout
+    logout: (state) => {
+      state.user = null;
+      state.isAuthenticated = false;
+      state.error = null;
+      state.isLoading = false;
+      localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+    },
+  },
+  extraReducers: {
+    [loginUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [loginUser.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    },
+    [loginUser.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+  },
+});
+
+// Export the reducer and actions
+export const { logout } = loginSlice.actions;
+export default loginSlice.reducer;

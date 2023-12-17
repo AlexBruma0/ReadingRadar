@@ -1,47 +1,53 @@
-// actions/authActions.js
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Action types
-export const REGISTER_REQUEST = 'REGISTER_REQUEST';
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+// Async action for registration using createAsyncThunk
+export const registerUser = createAsyncThunk(
+  'auth/registerUser',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
 
-// Action creators
-export const registerRequest = () => ({
-  type: REGISTER_REQUEST,
-});
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
 
-export const registerSuccess = (user) => ({
-  type: REGISTER_SUCCESS,
-  payload: user,
-});
-
-export const registerFailure = (error) => ({
-  type: REGISTER_FAILURE,
-  payload: error,
-});
-
-// Registration action that makes an API request to your server using fetch
-export const registerUser = (userData) => async (dispatch) => {
-  dispatch(registerRequest());
-
-  try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Registration failed');
+      const user = await response.json();
+      localStorage.setItem('jwtToken', user.token);
+      return user;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
-
-    const user = await response.json(); // Assuming your API returns user data upon successful registration
-    // Store the JWT token in local storage after a successful registration
-    localStorage.setItem('jwtToken', user.token);    
-    dispatch(registerSuccess(user));
-  } catch (error) {
-    dispatch(registerFailure(error.message));
   }
-};
+);
+
+// createSlice for registration
+const registrationSlice = createSlice({
+  name: 'registration',
+  initialState: {
+    user: null,
+    isLoading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: {
+    [registerUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [registerUser.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    [registerUser.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+  },
+});
+
+export default registrationSlice.reducer;

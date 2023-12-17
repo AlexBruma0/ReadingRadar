@@ -11,9 +11,8 @@ const LoginPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const data = {userName: '', password: ''}
-  const isAuthenticated = useSelector((state) => state.auth.login.isAuthenticated);
-  const user = useSelector((state) => state.auth.login.user);
-
+  const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
+  const user = useSelector((state) => state.login.user);
 
   console.log(isAuthenticated,user)
 
@@ -29,8 +28,7 @@ const LoginPage = () => {
   return (
     <>
     {isAuthenticated? <div> alraedy logged in</div>: 
-    <Form data={data} handleUpdate={handleLogin}/>
-    
+      <Form data={data} handleUpdate={handleLogin}/>
     }
     </>
   );
