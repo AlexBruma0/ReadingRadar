@@ -1,8 +1,6 @@
-// Login.js
-// Registration.js
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/authActions/Login';
+import { loginUser } from '../redux/slices/Login';
 import Form from '../components/Form';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -15,8 +13,8 @@ const LoginPage = () => {
   const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
   const user = useSelector((state) => state.login.user);
 
-
   console.log(isAuthenticated,user)
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/home'); 
@@ -25,7 +23,7 @@ const LoginPage = () => {
 
   const handleLogin = (userData) => {
       setLoading(true)
-      dispatch(loginUser(userData)); // Dispatch the login action with user data
+      dispatch(loginUser(userData)); 
   };
 
   return (

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchBooks } from './Books';
 
 // Async action using createAsyncThunk
 export const loginUser = createAsyncThunk(
@@ -53,6 +54,7 @@ const loginSlice = createSlice({
       state.isLoading = false;
       state.isAuthenticated = true;
       state.user = action.payload;
+      fetchBooks(state.user.userId);
     },
     [loginUser.rejected]: (state, action) => {
       state.isLoading = false;

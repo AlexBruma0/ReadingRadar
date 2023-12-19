@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import loginReducer from './authActions/Login';
-import registrationReducer from './authActions/Register';
+import loginReducer from './slices/Login';
+import registrationReducer from './slices/Register';
+import booksReducer from './slices/Books'
 
 const store = configureStore({
   reducer: {
     login: loginReducer,
     registration: registrationReducer,
+    books: booksReducer
   },
 });
 

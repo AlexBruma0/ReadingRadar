@@ -25,9 +25,10 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
 });
 
 // Get all books
-router.get('/', async (req, res) => {
+router.get('/:ownerId', async (req, res) => {
+  const ownerId = req.params.ownerId;
   try {
-    const books = await bookController.getBooks();
+    const books = await bookController.getBooks(ownerId);
     res.json(books);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching books.' });

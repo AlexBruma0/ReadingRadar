@@ -13,8 +13,8 @@ async function createBook(title, author, rating, notes, img_url, category, owner
   return newBook.save();
 }
 
-async function getBooks() {
-  return Book.find();
+async function getBooks(ownerId) {
+  return Book.find({ ownerId: ownerId });
 }
 
 async function getBookById(bookId) {
