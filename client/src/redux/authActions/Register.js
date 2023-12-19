@@ -33,6 +33,7 @@ const registrationSlice = createSlice({
     user: null,
     isLoading: false,
     error: null,
+    isAuthenticated: false
   },
   reducers: {},
   extraReducers: {
@@ -41,6 +42,7 @@ const registrationSlice = createSlice({
     },
     [registerUser.fulfilled]: (state, action) => {
       state.isLoading = false;
+      state.isAuthenticated = true;
       state.user = action.payload;
     },
     [registerUser.rejected]: (state, action) => {

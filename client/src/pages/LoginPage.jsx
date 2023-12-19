@@ -11,24 +11,31 @@ const LoginPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const data = {userName: '', password: ''}
+  const [loading, setLoading] = useState(false);
   const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
   const user = useSelector((state) => state.login.user);
 
-  console.log(isAuthenticated,user)
 
-  const handleLogin = async (userData) => {
-    try {
-        const res = await dispatch(loginUser(userData)); // Dispatch the login action with user data
-        if (res) navigate('/home')
-    } catch (error) {
-        console.log(error)
+  console.log(isAuthenticated,user)
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/home'); 
     }
+  }, [isAuthenticated, navigate]);
+
+  const handleLogin = (userData) => {
+      setLoading(true)
+      dispatch(loginUser(userData)); // Dispatch the login action with user data
   };
 
   return (
     <>
-    {isAuthenticated? <div> alraedy logged in</div>: 
-      <Form data={data} handleUpdate={handleLogin}/>
+    {isAuthenticated ? <div> already logged in</div>: 
+      loading ? <div> loading... </div> :
+      <>
+        <Form data={data} handleUpdate={handleLogin}/>
+        <button onClick={() => navigate('/register')}>Sign up</button>
+      </>
     }
     </>
   );

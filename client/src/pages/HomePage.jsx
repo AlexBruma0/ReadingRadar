@@ -19,7 +19,6 @@ export default function HomePage() {
     </div>
     <button onClick={handleLogout}>Logout</button>
     </>
-
   );
 }
 
