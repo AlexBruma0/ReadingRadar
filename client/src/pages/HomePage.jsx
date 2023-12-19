@@ -10,22 +10,15 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const books = useSelector((state) => state.books.items);
-  // const userId = useSelector(state => state.login.user.userId)
-  // console.log(userId)
+  const userId = localStorage.getItem('userId');
+  console.log(userId)
+  dispatch(fetchBooks(userId))
+  console.log(books)
 
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
   };
-
-  // useEffect(() =>{
-  //   if(userId){
-  //     //dispatch(fetchBooks(userId))
-  //     console.log(books)
-  //   }
- 
-  // },[userId])
-
 
   return (
     <>

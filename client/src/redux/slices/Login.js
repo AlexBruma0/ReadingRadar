@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchBooks } from './Books';
 
 // Async action using createAsyncThunk
 export const loginUser = createAsyncThunk(
@@ -20,6 +19,7 @@ export const loginUser = createAsyncThunk(
 
       const user = await response.json();
       localStorage.setItem('jwtToken', user.token);
+      localStorage.setItem('userId', user.userId)
       return user;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -43,7 +43,8 @@ const loginSlice = createSlice({
       state.isAuthenticated = false;
       state.error = null;
       state.isLoading = false;
-      localStorage.removeItem('jwtToken'); // Remove the token from localStorage
+      localStorage.removeItem('jwtToken');
+      localStorage.removeItem('userId')
     },
   },
   extraReducers: {
@@ -54,7 +55,6 @@ const loginSlice = createSlice({
       state.isLoading = false;
       state.isAuthenticated = true;
       state.user = action.payload;
-      fetchBooks(state.user.userId);
     },
     [loginUser.rejected]: (state, action) => {
       state.isLoading = false;
