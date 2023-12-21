@@ -1,6 +1,6 @@
 const Book = require('../models/Book');
 
-async function createBook(title, author, rating, notes, img_url, category, ownerId) {
+async function createBook(title, author, rating, notes, img_url, category, ownerId, order) {
   const newBook = new Book({
     title,
     author,
@@ -9,6 +9,7 @@ async function createBook(title, author, rating, notes, img_url, category, owner
     img_url,
     category,
     ownerId,
+    order
   });
   return newBook.save();
 }

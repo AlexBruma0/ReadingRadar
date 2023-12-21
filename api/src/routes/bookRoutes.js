@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 // Create a new book
 router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
-  const { title, author, rating, notes, img_url, category } = req.body;
+  const { title, author, rating, notes, img_url, category, order } = req.body;
   const ownerId = req.user.userId;
 
   try {
@@ -16,7 +16,8 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
       notes,
       img_url,
       category,
-      ownerId
+      ownerId, 
+      order
     );
     res.status(201).json(newBook);
   } catch (error) {
@@ -53,7 +54,7 @@ router.get('/:id', async (req, res) => {
 // Update a book
 router.put('/:id', authMiddleware.authenticateToken, async (req, res) => {
   const bookId = req.params.id;
-  const { title, author, rating, notes, img_url, category } = req.body;
+  const { title, author, rating, notes, img_url, category, order } = req.body;
   const ownerId = req.user.userId;
 
   const updatedFields = {
@@ -64,6 +65,7 @@ router.put('/:id', authMiddleware.authenticateToken, async (req, res) => {
     img_url,
     category,
     ownerId,
+    order
   };
 
   try {
@@ -77,42 +79,43 @@ router.put('/:id', authMiddleware.authenticateToken, async (req, res) => {
   }
 });
 
-// Update all books
-router.put('/', async (req, res) => {
-  console.log("updating all")
-  const newBooks = req.body.books; // Array of new books
-  const ownerId = req.body.userId;
+// // Update all books
+// router.put('/', async (req, res) => {
+//   console.log("updating all")
+//   const newBooks = req.body.books; // Array of new books
+//   const ownerId = req.body.userId;
 
-  try {
-    // Step 1: Delete all existing books
-    await bookController.deleteAllBooks(ownerId);
+//   try {
+//     // Step 1: Delete all existing books
+//     await bookController.deleteAllBooks(ownerId);
 
-    // Step 2: Add each new book
-    const addedBooks = [];
-    for (const book of newBooks) {
-      try {
-        await bookController.createBook(
-          book.title,
-          book.author,
-          book.rating,
-          book.notes,
-          book.img_url,
-          book.category,
-          ownerId
-        );
-        console.log("added book")
-      } catch (error) {
-        console.log(error.message)
-        res.status(500).json({ error: 'Could not create book.' });
-      }
-    }
-    console.log("All books updated successfully")
-    res.json({ message: 'All books updated successfully' });
-  } catch (error) {
-    console.log(error.message)
-    res.status(500).json({ error: 'Error updating books.' });
-  }
-});
+//     // Step 2: Add each new book
+//     const addedBooks = [];
+//     for (const book of newBooks) {
+//       try {
+//         await bookController.createBook(
+//           book.title,
+//           book.author,
+//           book.rating,
+//           book.notes,
+//           book.img_url,
+//           book.category,
+//           ownerId,
+//           order
+//         );
+//         console.log("added book")
+//       } catch (error) {
+//         console.log(error.message)
+//         res.status(500).json({ error: 'Could not create book.' });
+//       }
+//     }
+//     console.log("All books updated successfully")
+//     res.json({ message: 'All books updated successfully' });
+//   } catch (error) {
+//     console.log(error.message)
+//     res.status(500).json({ error: 'Error updating books.' });
+//   }
+// });
 
 // Delete a book
 router.delete('/:id', authMiddleware.authenticateToken, async (req, res) => {

@@ -3,7 +3,7 @@ import { logout } from '../redux/slices/Login'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { fetchBooks, updateBoards, updateAPIBooks } from '../redux/slices/Books';
+import { fetchBooks, updateBoards, updateAPIBook } from '../redux/slices/Books';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export default function HomePage() {
@@ -22,10 +22,10 @@ export default function HomePage() {
 
   useEffect(() => {
     if(boards){
-      let books = [];
+      // let books = [];
       console.log("updateing books in front end")
-      books.concat(boards.toBeRead, boards.reading, boards.read)
-      dispatch(updateAPIBooks(userId, userId))
+      // books.concat(boards.toBeRead, boards.reading, boards.read)
+      // dispatch(updateAPIBooks(userId, userId))
     }
   }, [boards, dispatch])
 

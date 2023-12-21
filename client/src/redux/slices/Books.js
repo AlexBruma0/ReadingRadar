@@ -8,15 +8,16 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', async (userId, th
 });
 
 // Async thunk for updating all books
-export const updateAPIBooks = createAsyncThunk( 'books/updateAllBooks', async (books, ownerId, thunkAPI) => {
+export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (updatedBook, bookId, jwtToken, thunkAPI) => {
     // Replace with your actual API call
-    await fetch(`${import.meta.env.VITE_API_URL}/books/`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/books/${bookId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`
           // Add your auth headers if needed
         },
-        body: JSON.stringify({ books: books, ownerId: ownerId }),
+        body: JSON.stringify({ book: updatedBook }),
       });
     console.log('donee')
     }
@@ -36,24 +37,40 @@ const booksSlice = createSlice({
   reducers: {
     updateBoards: (state, action) => {
         const { toBeRead, reading, read } = action.payload;
-        state.boards.toBeRead = toBeRead || state.boards.toBeRead;
-        state.boards.reading = reading || state.boards.reading;
-        state.boards.read = read || state.boards.read;
+        state.boards.toBeRead = toBeRead.sort((a, b) => {
+            if (a.order < b.order) {
+                return -1;
+            }
+            if (a.order > b.order) {
+                return 1;
+            }
+            return 0;
+        });
+        state.boards.reading = reading.sort((a, b) => a.id - b.id);
+        state.boards.read = read.sort((a, b) => {
+            if (a.order < b.order) {
+                return -1;
+            }
+            if (a.order > b.order) {
+                return 1;
+            }
+            return 0;
+        });
       },
   },
   extraReducers: {
-    [updateAPIBooks.pending]: (state, action) => {
+    [updateAPIBook.pending]: (state, action) => {
         console.log('updatepending')
         state.status = 'loading';
       },
-    [updateAPIBooks.fulfilled]: (state, action) => {
+    [updateAPIBook.fulfilled]: (state, action) => {
         console.log('updatescss')
     state.status = 'succeeded';
 
     // Update the state with the new books
     // state.boards = action.payload.addedBooks;
     },
-    [updateAPIBooks.rejected]: (state, action) => {
+    [updateAPIBook.rejected]: (state, action) => {
         console.log("updatefail")
     state.status = 'failed';
     state.error = action.error.message;
@@ -65,9 +82,9 @@ const booksSlice = createSlice({
       // Add books to the state array
       const books = action.payload
       const boards = {
-        toBeRead: books.filter(book => book.category === "To Be Read"),
-        reading: books.filter(book => book.category === "Reading"),
-        read: books.filter(book => book.category === "Read")
+        toBeRead: books.filter(book => book.category === "To Be Read").sort((a, b) => a.order - b.order),
+        reading: books.filter(book => book.category === "Reading").sort((a, b) => a.order - b.order),
+        read: books.filter(book => book.category === "Read").sort((a, b) => a.order - b.order)
       };
       state.boards = boards
     },
