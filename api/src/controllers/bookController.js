@@ -29,10 +29,22 @@ async function deleteBook(bookId) {
   return Book.findByIdAndDelete(bookId);
 }
 
+const deleteAllBooks = async (ownerId) => {
+  try {
+    await Book.deleteMany({ ownerId: ownerId });
+    console.log("deletted all books")
+    return true;
+  } catch (error) {
+    console.log('Error deleting all books:', error.message);
+    throw error;
+  }
+};
+
 module.exports = {
   createBook,
   getBooks,
   getBookById,
   updateBook,
   deleteBook,
+  deleteAllBooks,
 };
