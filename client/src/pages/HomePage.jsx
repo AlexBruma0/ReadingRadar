@@ -73,8 +73,17 @@ export default function HomePage() {
     navigate("/");
   };
 
-  return (
+  if(loadingStatus === "pending") {
+    return (
+      <div className="spinner-container">
+        <SpinnerCircular color="pink" size="20vw" />
+      </div>
+    )
+  }
+
+  else return (
   <DragDropContext onDragEnd={handleDragEnd}>
+    <button onClick={handleLogout}> logout </button>
     <div>
       {Object.entries(boards).map(([boardId, books]) => (
         <Droppable droppableId={boardId} key={boardId}>
@@ -100,7 +109,6 @@ export default function HomePage() {
           )}
         </Droppable>
       ))}
-      
     </div>
     
   </DragDropContext>
