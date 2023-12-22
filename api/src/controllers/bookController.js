@@ -1,4 +1,5 @@
-const Book = require('../models/Book');
+const Book = require('../models/BookModel');
+const mongoose = require('mongoose');
 
 async function createBook(title, author, rating, notes, img_url, category, ownerId, order) {
   const newBook = new Book({
@@ -50,6 +51,61 @@ async function reorderBook(currentOrder, newOrder, currentOrderId) {
     console.error('Error reordering books:', error.message);
   }
 }
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const moveBookToNewCategory = async (currentOrder, newOrder, currentOrderId, currentCategory, newCategory) => {
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    currentCategory = capitalizeFirstLetter(currentCategory);
+    newCategory = capitalizeFirstLetter(newCategory);
+
+    const bookToMove = await Book.findOne({ _id: currentOrderId, category: currentCategory }).session(session);
+    console.log('Book fetched for moving:', bookToMove);
+
+    if (!bookToMove) {
+      throw new Error('Book not found');
+    }
+
+    await Book.updateMany(
+      { category: currentCategory, order: { $gt: currentOrder } },
+      { $inc: { order: -1 } },
+      { session }
+    );
+    console.log('Decremented order of books in current category');
+
+    await Book.updateMany(
+      { category: newCategory, order: { $gte: newOrder } },
+      { $inc: { order: 1 } },
+      { session }
+    );
+    console.log('Incremented order of books in new category');
+
+    bookToMove.order = newOrder;
+    bookToMove.category = newCategory;
+    await bookToMove.save({ session });
+    console.log('Moved book to new category and order');
+
+    await session.commitTransaction();
+    console.log('Transaction committed');
+
+    session.endSession();
+    console.log('Session ended');
+
+    return bookToMove;
+  } catch (error) {
+    console.log('Error occurred:', error);
+    await session.abortTransaction();
+    console.log('Transaction aborted');
+
+    session.endSession();
+    console.log('Session ended after error');
+
+    throw error;
+  }
+};
 
 
 
@@ -75,5 +131,6 @@ module.exports = {
   updateBook,
   deleteBook,
   deleteAllBooks,
-  reorderBook
+  reorderBook,
+  moveBookToNewCategory
 };

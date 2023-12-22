@@ -63,6 +63,19 @@ router.put('/reorder', authMiddleware.authenticateToken, async (req, res) => {
   }
 });
 
+router.put('/move', authMiddleware.authenticateToken, async (req, res) => {
+  const { currentOrder, newOrder, currentOrderId, currentCategory, newCategory } = req.body;
+
+  try {
+    const movedBook = await bookController.moveBookToNewCategory(currentOrder, newOrder, currentOrderId, currentCategory, newCategory);
+    res.status(200).json({ success: 'Book moved successfully', book: movedBook });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ error: 'Error moving book to new category.' });
+  }
+});
+
+
 // // Update a book
 router.put('/:id', authMiddleware.authenticateToken, async (req, res) => {
   const bookId = req.params.id;

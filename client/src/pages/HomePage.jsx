@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { logout } from '../redux/slices/Login'
+import { logout } from '../redux/slices/LoginSlice'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { fetchBooks, updateBoards, updateAPIBook, reorderAPIBook } from '../redux/slices/Books';
+import { fetchBooks, updateBoards, updateAPIBook, reorderAPIBook, moveBookToCategoryAPI } from '../redux/slices/BooksSlice';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export default function HomePage() {
@@ -46,7 +46,6 @@ export default function HomePage() {
       };
   
       dispatch(updateBoards(newBoards))
-      // console.log("dest.inex" , destination.index)
       const order = {
         new: destination.index,
         current: source.index,
@@ -66,6 +65,8 @@ export default function HomePage() {
       [destination.droppableId]: finishBooks,
     };
     dispatch(updateBoards(newBoards))
+    // console.log(source.droppableId, destination.droppableId)
+    dispatch(moveBookToCategoryAPI({currentOrder: source.index, newOrder: destination.index, currentOrderId: movedItem._id, currentCategory: source.droppableId, newCategory: destination.droppableId}))
   };
 
   const handleLogout = () => {
