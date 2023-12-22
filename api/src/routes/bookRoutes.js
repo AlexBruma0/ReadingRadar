@@ -104,56 +104,15 @@ router.put('/:id', authMiddleware.authenticateToken, async (req, res) => {
 });
 
 
-// // Update all books
-// router.put('/', async (req, res) => {
-//   console.log("updating all")
-//   const newBooks = req.body.books; // Array of new books
-//   const ownerId = req.body.userId;
-
-//   try {
-//     // Step 1: Delete all existing books
-//     await bookController.deleteAllBooks(ownerId);
-
-//     // Step 2: Add each new book
-//     const addedBooks = [];
-//     for (const book of newBooks) {
-//       try {
-//         await bookController.createBook(
-//           book.title,
-//           book.author,
-//           book.rating,
-//           book.notes,
-//           book.img_url,
-//           book.category,
-//           ownerId,
-//           order
-//         );
-//         console.log("added book")
-//       } catch (error) {
-//         console.log(error.message)
-//         res.status(500).json({ error: 'Could not create book.' });
-//       }
-//     }
-//     console.log("All books updated successfully")
-//     res.json({ message: 'All books updated successfully' });
-//   } catch (error) {
-//     console.log(error.message)
-//     res.status(500).json({ error: 'Error updating books.' });
-//   }
-// });
-
 // Delete a book
 router.delete('/:id', authMiddleware.authenticateToken, async (req, res) => {
   const bookId = req.params.id;
 
   try {
-    const deletedBook = await bookController.deleteBook(bookId);
-    if (!deletedBook) {
-      return res.status(404).json({ error: 'Book not found.' });
-    }
+    await bookController.deleteBook(bookId);
     res.json({ message: 'Book deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Error deleting book.' });
+    res.status(500).json({ error: error.message });
   }
 });
 

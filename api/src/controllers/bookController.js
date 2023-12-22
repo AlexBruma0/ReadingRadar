@@ -6,7 +6,7 @@ async function createBook(title, author, rating, notes, img_url, category, owner
   session.startTransaction();
 
   try {
-    await Book.updateMany({}, { $inc: { order: 1 } }, { session });
+    await Book.updateMany({category: category}, { $inc: { order: 1 } }, { session });
     const newBook = new Book({
       title,
       author,
@@ -123,9 +123,22 @@ const moveBookToNewCategory = async (currentOrder, newOrder, currentOrderId, cur
 };
 
 
-
 async function deleteBook(bookId) {
-  return Book.findByIdAndDelete(bookId);
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const bookToDelete = await Book.findOne({ _id: bookId}).session(session)
+    const orderOfDeletedBook = bookToDelete.order;
+    await Book.deleteOne({ _id: bookId }).session(session);
+    await Book.updateMany({ order: { $gt: orderOfDeletedBook }, category: bookToDelete.category }, { $inc: { order: -1 } }).session(session);
+    await session.commitTransaction();
+    session.endSession();
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw error;
+  }
 }
 
 const deleteAllBooks = async (ownerId) => {
