@@ -26,6 +26,33 @@ async function updateBook(bookId, updatedFields) {
   return Book.findByIdAndUpdate(bookId, updatedFields, { new: true });
 }
 
+async function reorderBook(currentOrder, newOrder, currentOrderId) {
+  try {
+
+    if (newOrder < currentOrder) {
+      const increaseOrderResult = await Book.updateMany(
+        { order: { $gte: newOrder, $lt: currentOrder } },
+        { $inc: { order: 1 } }
+      );
+      console.log('Books reordered successfully: Increased order.', increaseOrderResult);
+    } else if (newOrder > currentOrder) {
+      const decreaseOrderResult = await Book.updateMany(
+        { order: { $gt: currentOrder, $lte: newOrder } },
+        { $inc: { order: -1 } }
+      );
+      console.log('Books reordered successfully: Decreased order.', decreaseOrderResult);
+    }
+
+    const updateResult = await Book.updateOne({ _id: currentOrderId }, { order: newOrder });
+    console.log('Book order update result:', updateResult);
+
+  } catch (error) {
+    console.error('Error reordering books:', error.message);
+  }
+}
+
+
+
 async function deleteBook(bookId) {
   return Book.findByIdAndDelete(bookId);
 }
@@ -48,4 +75,5 @@ module.exports = {
   updateBook,
   deleteBook,
   deleteAllBooks,
+  reorderBook
 };

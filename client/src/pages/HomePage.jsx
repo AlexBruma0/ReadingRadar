@@ -3,7 +3,7 @@ import { logout } from '../redux/slices/Login'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { fetchBooks, updateBoards, updateAPIBook } from '../redux/slices/Books';
+import { fetchBooks, updateBoards, updateAPIBook, reorderAPIBook } from '../redux/slices/Books';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export default function HomePage() {
@@ -20,16 +20,8 @@ export default function HomePage() {
 
   const boards = useSelector((state) => state.books.boards);
 
-  useEffect(() => {
-    if(boards){
-      // let books = [];
-      console.log("updateing books in front end")
-      // books.concat(boards.toBeRead, boards.reading, boards.read)
-      // dispatch(updateAPIBooks(userId, userId))
-    }
-  }, [boards, dispatch])
 
-  const handleDragEnd = (result) => {
+  const handleDragEnd = async (result) => {
     const { source, destination } = result;
     if (!destination) {
       return;
@@ -44,7 +36,8 @@ export default function HomePage() {
     const finishBoard = boards[destination.droppableId];
     if (startBoard === finishBoard) {
       const newBooks = Array.from(startBoard);
-      const [reorderedItem] = newBooks.splice(source.index, 1);
+      const reorderedItem = { ...newBooks[source.index], order: destination.index };
+      newBooks.splice(source.index, 1);
       newBooks.splice(destination.index, 0, reorderedItem);
   
       const newBoards = {
@@ -53,6 +46,13 @@ export default function HomePage() {
       };
   
       dispatch(updateBoards(newBoards))
+      // console.log("dest.inex" , destination.index)
+      const order = {
+        new: destination.index,
+        current: source.index,
+        id: reorderedItem._id
+      }
+      dispatch(reorderAPIBook(order))
       return;
     }
     const startBooks = Array.from(startBoard);

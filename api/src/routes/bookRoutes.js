@@ -50,11 +50,23 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: 'Error fetching book.' });
   }
 });
+// reorder a book reorder
+router.put('/reorder', authMiddleware.authenticateToken, async (req, res) => {
+  const { currentOrder, newOrder, currentOrderId } = req.body;
+  console.log(currentOrderId)
+  try {
+    await bookController.reorderBook(currentOrder, newOrder, currentOrderId);
+    res.status(200).json({ success: 'Books reorderd' });
+  } catch (error) {
+    console.log(error.message)
+    res.status(500).json({ error: 'Error reordering books.' });
+  }
+});
 
-// Update a book
+// // Update a book
 router.put('/:id', authMiddleware.authenticateToken, async (req, res) => {
   const bookId = req.params.id;
-  const { title, author, rating, notes, img_url, category, order } = req.body;
+  const { title, author, rating, notes, img_url, category, order } = req.body.book;
   const ownerId = req.user.userId;
 
   const updatedFields = {
@@ -78,6 +90,7 @@ router.put('/:id', authMiddleware.authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Error updating book.' });
   }
 });
+
 
 // // Update all books
 // router.put('/', async (req, res) => {

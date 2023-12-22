@@ -7,10 +7,28 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', async (userId, th
   return response.json();
 });
 
-// Async thunk for updating all books
-export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (updatedBook, bookId, jwtToken, thunkAPI) => {
+export const reorderAPIBook = createAsyncThunk( 'books/updateBook', async (order, thunkAPI) => {
     // Replace with your actual API call
-    await fetch(`${import.meta.env.VITE_API_URL}/books/${bookId}`, {
+    const jwtToken = localStorage.getItem('jwtToken')
+    console.log("neworder: ", order.new, " currorder: ", order.current)
+    await fetch(`${import.meta.env.VITE_API_URL}/books/reorder`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`
+        },
+        body: JSON.stringify({ currentOrder: order.current, newOrder: order.new, currentOrderId: order.id }),
+      });
+    console.log('donee')
+    }
+  );
+
+// Async thunk for updating all books
+export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (updatedBook, thunkAPI) => {
+    // Replace with your actual API call
+    const jwtToken = localStorage.getItem('jwtToken')
+    console.log(updatedBook)
+    await fetch(`${import.meta.env.VITE_API_URL}/books/${updatedBook._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -22,6 +40,8 @@ export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (update
     console.log('donee')
     }
   );
+
+
 
 const booksSlice = createSlice({
   name: 'books',
