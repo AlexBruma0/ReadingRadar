@@ -55,6 +55,32 @@ export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (update
     }
   );
 
+  export const createBookAPI = createAsyncThunk(
+    'books/createBook',
+    async (newBook, thunkAPI) => {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/books`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newBook),
+      });
+      return response.json();
+    }
+  );
+
+  export const deleteBookAPI = createAsyncThunk(
+    'books/deleteBook',
+    async (bookId, thunkAPI) => {
+      await fetch(`${import.meta.env.VITE_API_URL}/books/${bookId}`, {
+        method: 'DELETE',
+      });
+      return bookId;
+    }
+  );
+  
+  
+
 const booksSlice = createSlice({
   name: 'books',
   initialState: {
@@ -73,21 +99,33 @@ const booksSlice = createSlice({
         state.boards.reading = reading
         state.boards.read = read
       },
+      createBook: (state, action) => {
+        const category = action.payload.category;
+        state.boards[category].push(action.payload);
+      },
+      deleteBook: (state, action) => {
+        Object.keys(state.boards).forEach(category => {
+          state.boards[category] = state.boards[category].filter(book => book._id !== action.payload);
+        });
+      },
+      updateBook: (state, action) => {
+        const { _id, category, ...updatedData } = action.payload;
+        const bookIndex = state.boards[category].findIndex(book => book._id === _id);
+        if (bookIndex !== -1) {
+          state.boards[category][bookIndex] = { ...state.boards[category][bookIndex], ...updatedData };
+        }
+      },
   },
   extraReducers: {
     [updateAPIBook.pending]: (state, action) => {
-        console.log('updatepending')
         state.status = 'loading';
       },
     [updateAPIBook.fulfilled]: (state, action) => {
-        console.log('updatescss')
-    state.status = 'succeeded';
+        state.status = 'succeeded';
     },
     [updateAPIBook.rejected]: (state, action) => {
-    console.log("updatefail")
-    state.status = 'failed';
-    state.error = action.error.message;
-    console.log(state.error)
+      state.status = 'failed';
+      state.error = action.error.message;
     },
     [fetchBooks.fulfilled]: (state, action) => {
       state.status = 'succeeded';
@@ -105,4 +143,4 @@ const booksSlice = createSlice({
 
 export default booksSlice.reducer;
 
-export const { updateBoards } = booksSlice.actions;
+export const { updateBoards, createBook, deleteBook, updateBook } = booksSlice.actions;

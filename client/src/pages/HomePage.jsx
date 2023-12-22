@@ -3,7 +3,8 @@ import { logout } from '../redux/slices/LoginSlice'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { fetchBooks, updateBoards, updateAPIBook, reorderAPIBook, moveBookToCategoryAPI } from '../redux/slices/BooksSlice';
+import { SpinnerCircular } from "spinners-react";
+import { updateBoards, createBook, deleteBook, updateBook, deleteBookAPI, createBookAPI, moveBookToCategoryAPI, updateAPIBook, reorderAPIBook, fetchBooks } from '../redux/slices/BooksSlice';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export default function HomePage() {
@@ -13,13 +14,12 @@ export default function HomePage() {
 
   useEffect(() => {
     if (userId) {
-      console.log("fetching books in front end")
       dispatch(fetchBooks(userId));
     }
   }, [userId, dispatch]); 
 
   const boards = useSelector((state) => state.books.boards);
-
+  const loadingStatus = useSelector(state => state.books.status)
 
   const handleDragEnd = async (result) => {
     const { source, destination } = result;
@@ -65,7 +65,6 @@ export default function HomePage() {
       [destination.droppableId]: finishBooks,
     };
     dispatch(updateBoards(newBoards))
-    // console.log(source.droppableId, destination.droppableId)
     dispatch(moveBookToCategoryAPI({currentOrder: source.index, newOrder: destination.index, currentOrderId: movedItem._id, currentCategory: source.droppableId, newCategory: destination.droppableId}))
   };
 
@@ -76,30 +75,34 @@ export default function HomePage() {
 
   return (
   <DragDropContext onDragEnd={handleDragEnd}>
-    {Object.entries(boards).map(([boardId, books]) => (
-      <Droppable droppableId={boardId} key={boardId}>
-        {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps} className='large-container'>
-            {books.map((book, index) => (
-              <Draggable key={book._id} draggableId={book._id} index={index}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className='small-container'
-                  >
-                    {/* Render your book card here */}
-                    <div>{book.title}</div>
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    ))}
+    <div>
+      {Object.entries(boards).map(([boardId, books]) => (
+        <Droppable droppableId={boardId} key={boardId}>
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps} className='large-container'>
+              {books.map((book, index) => (
+                <Draggable key={book._id} draggableId={book._id} index={index}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      className='small-container'
+                    >
+                      {/* Render your book card here */}
+                      <div>{book.title}</div>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      ))}
+      
+    </div>
+    
   </DragDropContext>
 
   );
