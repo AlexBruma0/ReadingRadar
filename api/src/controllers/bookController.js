@@ -1,18 +1,33 @@
 const Book = require('../models/BookModel');
 const mongoose = require('mongoose');
 
-async function createBook(title, author, rating, notes, img_url, category, ownerId, order) {
-  const newBook = new Book({
-    title,
-    author,
-    rating,
-    notes,
-    img_url,
-    category,
-    ownerId,
-    order
-  });
-  return newBook.save();
+async function createBook(title, author, rating, notes, img_url, category, ownerId) {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    await Book.updateMany({}, { $inc: { order: 1 } }, { session });
+    const newBook = new Book({
+      title,
+      author,
+      rating,
+      notes,
+      img_url,
+      category,
+      ownerId,
+      order: 0 
+    });
+
+    await newBook.save({ session });
+
+    await session.commitTransaction();
+    session.endSession();
+    return newBook;
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw error;
+  }
 }
 
 async function getBooks(ownerId) {

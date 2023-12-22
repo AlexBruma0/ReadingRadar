@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 // Create a new book
 router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
-  const { title, author, rating, notes, img_url, category, order } = req.body;
+  const { title, author, rating, notes, img_url, category } = req.body;
   const ownerId = req.user.userId;
 
   try {
@@ -16,8 +16,7 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
       notes,
       img_url,
       category,
-      ownerId, 
-      order
+      ownerId
     );
     res.status(201).json(newBook);
   } catch (error) {
