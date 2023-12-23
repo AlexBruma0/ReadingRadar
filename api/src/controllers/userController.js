@@ -1,4 +1,4 @@
-const User = require('../models/UserSlice');
+const User = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
 
 async function registerUser(userName, password, email) {
@@ -21,7 +21,16 @@ async function loginUser(userName, password) {
   return {token,userId};
 }
 
+async function getUsers() {
+  const users = await User.find();
+  if (!users) {
+    throw new Error('no users');
+  }
+  return users
+}
+
 module.exports = {
   registerUser,
   loginUser,
+  getUsers
 };

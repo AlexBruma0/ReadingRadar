@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { logout } from '../redux/slices/LoginSlice'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -16,10 +15,10 @@ export default function HomePage() {
   const viewingId = localStorage.getItem('viewingId')
 
   useEffect(() => {
-    if (userId) {
-      dispatch(fetchBooks(userId));
+    if (viewingId) {
+      dispatch(fetchBooks(viewingId));
     }
-  }, [userId, dispatch]); 
+  }, [viewingId, dispatch]); 
 
   const boards = useSelector((state) => state.books.boards);
   const loadingStatus = useSelector(state => state.books.status)
@@ -75,11 +74,6 @@ export default function HomePage() {
     dispatch(moveBookToCategoryAPI({currentOrder: source.index, newOrder: destination.index, currentOrderId: movedItem._id, currentCategory: source.droppableId, newCategory: destination.droppableId}))
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/");
-  };
-
   if(loadingStatus === "pending") {
     return (
       <div className="spinner-container">
@@ -91,7 +85,6 @@ export default function HomePage() {
   else return (
   <DragDropContext onDragEnd={handleDragEnd}>
     <Sidebar></Sidebar>
-    <button onClick={handleLogout}> logout </button>
     <div className="grid-container--small">
       {Object.entries(boards).map(([boardId, books]) => (
         <Droppable droppableId={boardId} key={boardId}>

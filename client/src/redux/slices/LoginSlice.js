@@ -46,7 +46,7 @@ const loginSlice = createSlice({
       state.isLoading = false;
       localStorage.removeItem('jwtToken');
       localStorage.removeItem('userId')
-      localStoragel.removeItem('viewingId')
+      localStorage.removeItem('viewingId')
     },
   },
   extraReducers: {
