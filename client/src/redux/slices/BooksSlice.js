@@ -2,7 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async (userId, thunkAPI) => {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/books/${userId}`);
-  console.log('done')
+  return response.json();
+});
+
+export const fetchBookById = createAsyncThunk('books/fetchBook', async (bookId, thunkAPI) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/books/getbook/${bookId}`);
   return response.json();
 });
 
@@ -21,7 +25,6 @@ export const reorderAPIBook = createAsyncThunk( 'books/updateBook', async (order
 
 export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (updatedBook, thunkAPI) => {
     const jwtToken = localStorage.getItem('jwtToken')
-    console.log(updatedBook)
     await fetch(`${import.meta.env.VITE_API_URL}/books/${updatedBook._id}`, {
         method: 'PUT',
         headers: {
@@ -84,6 +87,7 @@ export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (update
 const booksSlice = createSlice({
   name: 'books',
   initialState: {
+    currentBook: null,
     boards: {
         toBeRead: [],
         reading: [],
@@ -137,6 +141,9 @@ const booksSlice = createSlice({
       };
       state.boards = boards
     },
+    [fetchBookById.fulfilled]: (state, action) => {
+      state.currentBook = action.payload
+    }
 
   },
 });

@@ -23,20 +23,8 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Could not create book.' });
   }
 });
-
-// Get all books
-router.get('/:ownerId', async (req, res) => {
-  const ownerId = req.params.ownerId;
-  try {
-    const books = await bookController.getBooks(ownerId);
-    res.json(books);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching books.' });
-  }
-});
-
 // Get a book by ID
-router.get('/:id', async (req, res) => {
+router.get('/getbook/:id', async (req, res) => {
   const bookId = req.params.id;
 
   try {
@@ -49,6 +37,19 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: 'Error fetching book.' });
   }
 });
+
+// Get all books
+router.get('/:ownerId', async (req, res) => {
+  const ownerId = req.params.ownerId;
+  try {
+    const books = await bookController.getBooks(ownerId);
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching books.' });
+  }
+});
+
+
 // reorder a book reorder
 router.put('/reorder', authMiddleware.authenticateToken, async (req, res) => {
   const { currentOrder, newOrder, currentOrderId } = req.body;

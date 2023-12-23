@@ -6,6 +6,7 @@ import { SpinnerCircular } from "spinners-react";
 import { updateBoards, createBook, deleteBook, updateBook, deleteBookAPI, createBookAPI, moveBookToCategoryAPI, updateAPIBook, reorderAPIBook, fetchBooks } from '../redux/slices/BooksSlice';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Sidebar from '../components/SideBar'
+import Board from '../components/Board';
 
 
 export default function HomePage() {
@@ -87,28 +88,11 @@ export default function HomePage() {
     <Sidebar></Sidebar>
     <div className="grid-container--small">
       {Object.entries(boards).map(([boardId, books]) => (
-        <Droppable droppableId={boardId} key={boardId}>
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps} className='large-container'>
-              {books.map((book, index) => (
-                <Draggable key={book._id} draggableId={book._id} index={index}>
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className='small-container'
-                    >
-                      {/* Render your book card here */}
-                      <div>{book.title}</div>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+         <Board
+         key={boardId}
+         id={boardId}
+         books={books}
+       />
       ))}
     </div>
     

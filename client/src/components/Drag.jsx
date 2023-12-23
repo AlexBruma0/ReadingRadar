@@ -11,8 +11,8 @@ const Drag = (props) => {
   const navigate = useNavigate();
   return (
     <Draggable
-      key={props.id?.toString()}
-      draggableId={props.id?.toString()}
+      key={props.id}
+      draggableId={props.id}
       index={props.index}
     >
       {(provided) => (
@@ -24,13 +24,7 @@ const Drag = (props) => {
             style={getItemStyle(provided.draggableProps.style)}
           >
             <Card
-              title={props.title}
-              author={props.author}
-              myRating={props.card.myRating}
-              img_url={props.img_url}
-              id={props.id}
-              bid={props.bid}
-              notes={props.card.notes}
+              book={props.book}
             />
           </div>
         </>

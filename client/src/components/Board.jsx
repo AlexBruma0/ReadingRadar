@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Drag from "./Drag";
-import { SpinnerCircular } from "spinners-react";
 import { Droppable } from "react-beautiful-dnd";
 import { Plus, X } from "react-feather";
 import Modal from "./Modal";
 import Form from "./Form";
 import { v4 as uuid, v4 } from "uuid";
+import { createBookAPI, createBook } from "../redux/slices/BooksSlice";
+import { useDispatch } from 'react-redux';
+
 
 export default function Board(props) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [books, setBooks] = useState(props.card);
-  const uri = props.uri;
-
   const toggleOpen = () => {
     setOpen(!open);
-  };
-  const fetchFromAmazon = async (asin) => {
-    const response = await fetch(`${uri}asin/${asin}`);
-    const json = await response.json();
-    return json;
   };
 
   const handleAdd = async (bid, book) => {
@@ -30,17 +25,8 @@ export default function Board(props) {
       img_url: book.img_url,
     };
     console.log(bid, book);
-
-
-    await fetch(`${uri}book/${props.id}`, {
-      headers: { "Content-Type": "application/json" },
-      method: "PUT",
-      body: JSON.stringify({
-        card: book,
-      }),
-    });
-    return
-    //setBooks([...books, book]);
+    dispatch(createBook(book))
+    dispatch(createBookAPI(book))
   };
 
   const bookFields = {
@@ -51,6 +37,7 @@ export default function Board(props) {
     notes: "",
     asin: "",
   };
+
   return (
     <div className="large-container border-radius">
       <div className="space-between">
@@ -66,7 +53,7 @@ export default function Board(props) {
               padding: "0.1rem",
             }}
           >
-            {props.card?.length}
+            {props.books?.length}
           </span>
         </h2>
 
@@ -77,49 +64,29 @@ export default function Board(props) {
           <Plus size="20px"></Plus>
         </button>
       </div>
-      {props.index < 3 && (
-        <Droppable droppableId={props.id.toString()}>
-          {(provided) => (
-            <div
-              className="border-radius"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {props.waitingAPI && (
-                <div className="spinner-container">
-                  <SpinnerCircular color="pink" size="5vw" />
-                </div>
-              )}
-              {!props.waitingAPI && (
-                <>
-                  {books?.map((items, index) => (
-                    <Drag
-                      cardColor={props.cardColor}
-                      cn={props.cn}
-                      bid={props.id}
-                      id={items.id}
-                      index={index}
-                      key={items.id}
-                      author={items.author}
-                      title={items.title}
-                      img_url={items.img_url}
-                      tags={items.tags}
-                      removeCard={props.removeCard}
-                      card={items}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </>
-              )}
-            </div>
-          )}
-        </Droppable>
-      )}
+      <Droppable droppableId={props.id}>
+        {(provided) => (
+          <div
+            className="border-radius"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {props.books?.map((book, index) => (
+              <Drag
+                key={book._id}
+                id={book._id}
+                book={book}
+                index={index}
+              />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <Modal open={open} setOpen={setOpen} formTitle="Add book">
         <Form
           data={bookFields}
-          bid={props.id}
-          handleFetch={fetchFromAmazon}
+          bid={props.key}
           toggleOpen={toggleOpen}
           handleUpdate={handleAdd}
           refresh="true"
