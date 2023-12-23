@@ -20,6 +20,7 @@ export const loginUser = createAsyncThunk(
       const user = await response.json();
       localStorage.setItem('jwtToken', user.token);
       localStorage.setItem('userId', user.userId)
+      localStorage.setItem('viewingId', user.userId)
       return user;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -45,6 +46,7 @@ const loginSlice = createSlice({
       state.isLoading = false;
       localStorage.removeItem('jwtToken');
       localStorage.removeItem('userId')
+      localStoragel.removeItem('viewingId')
     },
   },
   extraReducers: {

@@ -19,6 +19,8 @@ export const registerUser = createAsyncThunk(
 
       const user = await response.json();
       localStorage.setItem('jwtToken', user.token);
+      localStorage.setItem('userId', user.userId)
+      localStorage.setItem('viewingId', user.userId)
       return user;
     } catch (error) {
       return rejectWithValue(error.message);

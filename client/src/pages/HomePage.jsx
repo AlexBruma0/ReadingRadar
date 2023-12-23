@@ -6,11 +6,14 @@ import { useSelector } from 'react-redux';
 import { SpinnerCircular } from "spinners-react";
 import { updateBoards, createBook, deleteBook, updateBook, deleteBookAPI, createBookAPI, moveBookToCategoryAPI, updateAPIBook, reorderAPIBook, fetchBooks } from '../redux/slices/BooksSlice';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Sidebar from '../components/SideBar'
+
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
+  const viewingId = localStorage.getItem('viewingId')
 
   useEffect(() => {
     if (userId) {
@@ -22,6 +25,10 @@ export default function HomePage() {
   const loadingStatus = useSelector(state => state.books.status)
 
   const handleDragEnd = async (result) => {
+    if(viewingId !== userId){
+      console.log('viewingId !== userId')
+      return;
+    }
     const { source, destination } = result;
     if (!destination) {
       return;
@@ -83,8 +90,9 @@ export default function HomePage() {
 
   else return (
   <DragDropContext onDragEnd={handleDragEnd}>
+    <Sidebar></Sidebar>
     <button onClick={handleLogout}> logout </button>
-    <div>
+    <div className="grid-container--small">
       {Object.entries(boards).map(([boardId, books]) => (
         <Droppable droppableId={boardId} key={boardId}>
           {(provided) => (
