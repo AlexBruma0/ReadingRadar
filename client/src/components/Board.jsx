@@ -37,13 +37,18 @@ export default function Board(props) {
     notes: "",
     asin: "",
   };
+  const boardMap = {
+    "toBeRead": "To Be Read",
+    "read": "Read",
+    "reading": "Reading"
+  }
 
   return (
     <div className="large-container border-radius">
       <div className="space-between">
         <h2 className="underline">
           {" "}
-          {props?.name}{" "}
+          {boardMap[props.id]}{" "}
           <span
             className="border"
             style={{

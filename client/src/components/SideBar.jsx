@@ -18,7 +18,6 @@ const Sidebar = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup the event listener
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -32,34 +31,30 @@ const Sidebar = () => {
   };
 
   const handlClickHome = () =>{
-    console.log("giong home")
     localStorage.setItem('viewingId', userId);
   }
 
+  const links = [
+    { name: 'My Library', icon: '📚', link: '/home'},
+    { name: 'Friends', icon: '👥', link: '/users'},
+    { name: 'Settings', icon: '⛭', link: '/settings' },
+    { name: 'Logout', icon: '🫡', link: '/logout'}
+  ];
+
   return (
-    <div style={{ width: isOpen ? '250px' : '0', ...sidebarStyle }}>
-      <button onClick={toggleSidebar}>
-        {isOpen ? 'Close' : 'Open'}
-      </button>
-      <ul>
-        <li onClick={handlClickHome}><Link to="/home" style={linkStyle} >MyBooks</Link></li>
-        <li><Link to="/users" style={linkStyle}>Users</Link></li>
-        <li><Link to="/settings" style={linkStyle}>Settings</Link></li>
-        <li style={linkStyle} onClick={handleLogout}><button>Logout</button>  </li>
-      </ul>
+    <div className="flex-1 display-none margin-right" style={{ display: isOpen ? 'block': 'none'}}>
+      <div className="links white-text">
+        {links.map((link, index) => (
+            <Link key={index} className="link" to={link.link} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <span className="icon">{link.icon}</span>
+                <span className="name">{link.name}</span>
+            </Link>
+
+        ))}
+      </div>
     </div>
   );
 };
 
-const sidebarStyle = {
-  /* Add your styling here */
-};
-
-const linkStyle = {
-  /* Add your styling here */
-  ':hover': {
-    color: 'lightblue' // Change color on hover
-  }
-};
 
 export default Sidebar;

@@ -7,6 +7,7 @@
   --active-color: hotpink;
   --accent-color: #d9d9df;
 }
+
 [data-theme="dark"] {
   --background-color: #212121;
 }
@@ -36,6 +37,7 @@ h2 {
   margin: 0.1rem;
   padding: 0.5rem;
 }
+
 .small-container:active {
   background: var(--active-color);
 }
@@ -58,6 +60,10 @@ img {
 
 .margin-bottom {
   margin-bottom: 1rem;
+}
+
+.margin-right {
+  margin-right: 1rem;
 }
 
 ::-webkit-scrollbar {
@@ -86,6 +92,7 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   gap: 1rem;
 }
+
 .grid-container--large {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
@@ -99,12 +106,13 @@ h1 {
 .active-backround-color{
   background-color: var(--active-color);
 }
+
 .flexbox {
   display: flex;
 }
 
 .border {
-  border: 1pt solid black;
+  border: 1pt solid white;
 }
 
 .secondary-backround-color {
@@ -138,6 +146,7 @@ p {
 .large-text {
   font-size: xx-large;
 }
+
 .margin-top {
   margin-top: 1rem;
 }
@@ -221,3 +230,89 @@ textarea {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  font-size: x-large;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 20px 10px; /* Added padding for better click area */
+}
+
+.link .icon {
+  margin-right: 10px;
+}
+
+.link .name {
+  font-weight: bold;
+}
+
+/* Add this for hover effect */
+.link:hover {
+  background-color: var(--primary-color); /* Light grey background on hover */
+  color: black; /* Change text color on hover if needed */
+}
+
+.white-text {
+  color: var(--accent-color);
+}
+
+.flex-1{
+  flex:1;
+}
+
+.flex-3{
+  flex:4;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: white;
+}
+
+.menu-icon span {
+  cursor: pointer;
+  font-size: 45px; /* Adjust the size as needed */
+}
+
+.logo {
+  flex-grow: 1;
+  text-align: left;
+  margin-left: 20px; /* Space from the menu icon */
+}
+
+.search-bar {
+  display: flex;
+}
+
+.search-bar input {
+  padding: 5px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.pink-text {
+  color: var(--active-color)
+}
+/* Add more styling as per your design requirements */
+
+

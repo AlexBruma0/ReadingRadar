@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const UsersPage = () => {
     const dispatch = useDispatch();
@@ -27,10 +28,17 @@ const UsersPage = () => {
 
     return (
         <>
-        <Sidebar></Sidebar>
+        <Navbar/>
+        <div className="flexbox">
+        <Sidebar/>
+        <div className="flex-3">
             {users.map((user) => (
-                <li key={user._id} onClick={() => {handleVisitUser(user._id)}}> <button>{user.userName}</button> </li>
-            ))}
+                    <li key={user._id} onClick={() => {handleVisitUser(user._id)}}> <button>{user.userName}</button> </li>
+                ))}
+        </div>
+
+        </div>
+
         </>
     )
 }

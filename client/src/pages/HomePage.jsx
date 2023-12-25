@@ -7,6 +7,8 @@ import { updateBoards, createBook, deleteBook, updateBook, deleteBookAPI, create
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Sidebar from '../components/SideBar'
 import Board from '../components/Board';
+import Navbar from '../components/Navbar';
+import { Scissors } from 'react-feather';
 
 
 export default function HomePage() {
@@ -84,19 +86,27 @@ export default function HomePage() {
   }
 
   else return (
-  <DragDropContext onDragEnd={handleDragEnd}>
-    <Sidebar></Sidebar>
-    <div className="grid-container--small">
-      {Object.entries(boards).map(([boardId, books]) => (
-         <Board
-         key={boardId}
-         id={boardId}
-         books={books}
-       />
-      ))}
+  <>
+    <Navbar/>
+    <div className="flexbox">
+      <Sidebar/>
+      <div className='flex-3'>
+        <DragDropContext onDragEnd={handleDragEnd}>
+            <div className="grid-container--small">
+              {Object.entries(boards).map(([boardId, books]) => (
+                <Board
+                key={boardId}
+                id={boardId}
+                books={books}
+              />
+              ))}
+            </div>
+        </DragDropContext>
+      </div>
+
     </div>
-    
-  </DragDropContext>
+  </>
+
 
   );
 }
