@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import { SpinnerCircular } from "spinners-react";
+import { fetchAmazonBooks } from "../redux/slices/BooksSlice";
+import { useDispatch } from 'react-redux';
+import Card from "./Card";
+
+
 export default function Form(props) {
   const [data, setData] = useState(props.data);
   const [fetching, setFetching] = useState(false);
+  const [externalData, setExternalData] = useState();
+  const dispatch = useDispatch();
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,18 +27,25 @@ export default function Form(props) {
 
   const handleFetch = async () => {
     console.log("handleFetch", data);
-    if (props.handleFetch) {
-      setFetching(true);
-      const response = await props.handleFetch(data.asin);
-      setData({
-        ...data,
-        title: response.title,
-        author: response.author,
-        img_url: response.img_url,
-      });
-      setFetching(false);
-    }
+    setFetching(true);
+    const response = await dispatch(fetchAmazonBooks(data.title));
+    console.log(response.payload);
+    setExternalData(response.payload);
+    setFetching(false);
   };
+
+  const handleRadioChange = (event) => {
+    const author = event.target.value;
+    const selectedBook = externalData.find(book => book.author === author);
+    setData({
+      ...data,
+      title: selectedBook.title,
+      author: selectedBook.author,
+      img_url: selectedBook.img_url,
+    });
+    setExternalData(null);
+  };
+
 
   return (
     <>
@@ -58,7 +73,7 @@ export default function Form(props) {
                   ></textarea>
                 ) : key == "id" ? (
                   <></>
-                ) : key == "asin" ? (
+                ) : key == "title" ? (
                   <div className="flexbox margin-bottom">
                     <input
                       className="margin-bottom"
@@ -68,7 +83,7 @@ export default function Form(props) {
                       value={data[key]}
                       onChange={handleChange}
                     />
-                    <button onClick={handleFetch}>Fetch from Amazon</button>
+                    <button onClick={handleFetch}>Search</button>
                   </div>
                 ) : (
                   <input
@@ -84,12 +99,34 @@ export default function Form(props) {
             ))}
           </div>
         )}
+        <div>
+          {externalData && externalData.length > 0 && (
+            <div>
+              {externalData.map((book, index) => (
+                <label key={index}>
+                  <input
+
+                    type="radio"
+                    value={book.author}
+                    onChange={handleRadioChange}
+                  />
+                <Card
+                  book={book}
+                  navigate={'false'}
+                />
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+
+
 
         <button
           className="large-text full-width border-radius secondary-backround-color"
           type="submit"
         >
-          save
+          Submit
         </button>
       </form>
     </>

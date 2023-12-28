@@ -35,7 +35,6 @@ export default function Board(props) {
     img_url: "",
     myRating: "",
     notes: "",
-    asin: "",
   };
   const boardMap = {
     "toBeRead": "To Be Read",

@@ -4,7 +4,12 @@ export default function Card(props) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/book/${props.book._id}`);
+    if(props.navigate == 'false'){
+      return;
+    } else {
+      navigate(`/book/${props.book._id}`);
+    }
+    
   };
   return (
     <div

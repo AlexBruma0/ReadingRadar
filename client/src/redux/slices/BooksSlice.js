@@ -5,6 +5,11 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', async (userId, th
   return response.json();
 });
 
+export const fetchAmazonBooks = createAsyncThunk('books/searchBooks', async (query, thunkAPI) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/books/searchbooks/${query}`);
+  return response.json();
+});
+
 export const fetchBookById = createAsyncThunk('books/fetchBook', async (bookId, thunkAPI) => {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/books/getbook/${bookId}`);
   return response.json();

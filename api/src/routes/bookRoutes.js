@@ -23,6 +23,22 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Could not create book.' });
   }
 });
+
+// Define the route
+router.get('/searchbooks/:query', async (req, res) => {
+  const queryString = req.params.query;
+
+  try {
+      const books = await bookController.fetchBooksFromAmazon(queryString);
+      if (!books || books.length === 0) {
+          return res.status(404).json({ error: 'No books found for this query.' });
+      }
+      res.json(books);
+  } catch (error) {
+      res.status(500).json({ error: error.message});
+  }
+});
+
 // Get a book by ID
 router.get('/getbook/:id', async (req, res) => {
   const bookId = req.params.id;
@@ -37,6 +53,8 @@ router.get('/getbook/:id', async (req, res) => {
     res.status(500).json({ error: 'Error fetching book.' });
   }
 });
+
+
 
 // Get all books
 router.get('/:ownerId', async (req, res) => {
