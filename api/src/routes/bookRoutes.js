@@ -18,8 +18,10 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
       category,
       ownerId
     );
+    // console.log(newBook)
     res.status(201).json(newBook);
   } catch (error) {
+    console.log(error.message)
     res.status(500).json({ error: 'Could not create book.' });
   }
 });

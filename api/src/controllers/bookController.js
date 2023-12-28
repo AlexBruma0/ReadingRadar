@@ -2,11 +2,14 @@ const Book = require('../models/BookModel');
 const mongoose = require('mongoose');
 const  puppeteer = require("puppeteer-core");
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 async function createBook(title, author, rating, notes, img_url, category, ownerId) {
   const session = await mongoose.startSession();
   session.startTransaction();
-
+  category = capitalizeFirstLetter(category);
   try {
     await Book.updateMany({category: category}, { $inc: { order: 1 } }, { session });
     const newBook = new Book({
@@ -20,12 +23,15 @@ async function createBook(title, author, rating, notes, img_url, category, owner
       order: 0 
     });
 
-    await newBook.save({ session });
+    const response = await newBook.save({ session });
+    console.log('response', response)
 
     await session.commitTransaction();
     session.endSession();
+    // console.log('added successfully')
     return newBook;
   } catch (error) {
+    console.log(error.message)
     await session.abortTransaction();
     session.endSession();
     throw error;
@@ -68,9 +74,7 @@ async function reorderBook(currentOrder, newOrder, currentOrderId) {
     console.error('Error reordering books:', error.message);
   }
 }
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+
 
 const moveBookToNewCategory = async (currentOrder, newOrder, currentOrderId, currentCategory, newCategory) => {
   const session = await mongoose.startSession();

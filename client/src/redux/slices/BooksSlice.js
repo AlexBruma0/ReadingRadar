@@ -65,11 +65,16 @@ export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (update
 
   export const createBookAPI = createAsyncThunk(
     'books/createBook',
+     
     async (newBook, thunkAPI) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/books`, {
+      const jwtToken = localStorage.getItem('jwtToken')
+
+      console.log(newBook)
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/books/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`
         },
         body: JSON.stringify(newBook),
       });

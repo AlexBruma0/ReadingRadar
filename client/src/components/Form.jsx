@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { SpinnerCircular } from "spinners-react";
 import { fetchAmazonBooks } from "../redux/slices/BooksSlice";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux'
 import Card from "./Card";
-
 
 export default function Form(props) {
   const [data, setData] = useState(props.data);
+  const [search, setSearch] = useState("")
   const [fetching, setFetching] = useState(false);
   const [externalData, setExternalData] = useState();
   const dispatch = useDispatch();
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setData({ ...data, [name]: value });
   };
+  const handleSearchChange = (event) =>{
+    setSearch(event.target.value)
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +30,7 @@ export default function Form(props) {
   const handleFetch = async () => {
     console.log("handleFetch", data);
     setFetching(true);
-    const response = await dispatch(fetchAmazonBooks(data.title));
+    const response = await dispatch(fetchAmazonBooks(search));
     console.log(response.payload);
     setExternalData(response.payload);
     setFetching(false);
@@ -46,17 +48,51 @@ export default function Form(props) {
     setExternalData(null);
   };
 
-
   return (
     <>
       <form onSubmit={handleSubmit}>
         {fetching ? (
           <div className="center-text">
-            <div className="large-text">Fetching data from amazon...</div>
+            <div className="large-text">Searching...</div>
             <SpinnerCircular color="pink" size="30vh" />
           </div>
         ) : (
           <div>
+            {props.search && (
+              <div>
+                <div>Search</div>
+                <input
+                className="margin-bottom"
+                type="text"
+                key={"search"}
+                name={"search"}
+                placeholder="search for book, eg: The Legacy by Elle Kennedy"
+                value={search}
+                onChange={handleSearchChange}/>
+                <button 
+                className="large-text full-width border-radius"
+                onClick={handleFetch}>Search</button>
+              </div>
+            )}
+            {externalData && externalData.length > 0 && (
+              <div>
+                {externalData.map((book, index) => (
+                  <label key={index}>
+                    <input
+
+                      type="radio"
+                      value={book.author}
+                      onChange={handleRadioChange}
+                    />
+                  <Card
+                    book={book}
+                    navigate={'false'}
+                  />
+                  </label>
+                  
+                ))}
+              </div>
+            )}
             {Object.keys(data).map((key) => (
               <div>
                 <div>{key == "id" ? "" : key}</div>
@@ -73,18 +109,6 @@ export default function Form(props) {
                   ></textarea>
                 ) : key == "id" ? (
                   <></>
-                ) : key == "title" ? (
-                  <div className="flexbox margin-bottom">
-                    <input
-                      className="margin-bottom"
-                      type="text"
-                      key={key}
-                      name={key}
-                      value={data[key]}
-                      onChange={handleChange}
-                    />
-                    <button onClick={handleFetch}>Search</button>
-                  </div>
                 ) : (
                   <input
                     className="margin-bottom"
@@ -97,37 +121,15 @@ export default function Form(props) {
                 )}
               </div>
             ))}
+          <button
+            className="large-text full-width border-radius secondary-backround-color"
+            type="submit"
+          >
+            Submit
+          </button>
           </div>
         )}
-        <div>
-          {externalData && externalData.length > 0 && (
-            <div>
-              {externalData.map((book, index) => (
-                <label key={index}>
-                  <input
 
-                    type="radio"
-                    value={book.author}
-                    onChange={handleRadioChange}
-                  />
-                <Card
-                  book={book}
-                  navigate={'false'}
-                />
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
-
-
-
-        <button
-          className="large-text full-width border-radius secondary-backround-color"
-          type="submit"
-        >
-          Submit
-        </button>
       </form>
     </>
   );

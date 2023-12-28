@@ -16,15 +16,15 @@ export default function Board(props) {
     setOpen(!open);
   };
 
-  const handleAdd = async (bid, book) => {
+  const handleAdd = async (book) => {
     book = {
       title: book.title,
       id: uuid(),
       author: book.author,
       myRating: book.myRating,
       img_url: book.img_url,
+      category: props.id
     };
-    console.log(bid, book);
     dispatch(createBook(book))
     dispatch(createBookAPI(book))
   };
@@ -93,7 +93,9 @@ export default function Board(props) {
           bid={props.key}
           toggleOpen={toggleOpen}
           handleUpdate={handleAdd}
-          refresh="true"
+          refresh={false}
+          search = {true}
+
         />
       </Modal>
     </div>
