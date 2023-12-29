@@ -1,19 +1,22 @@
 import Sidebar from "../components/SideBar"
 import Navbar from "../components/Navbar"
 import ThemeSwitcher from "../ThemeSwitcher"
+import { ThemeContext } from "../components/ThemeContext"
+import { useContext } from "react"
 const SettingsPage = () =>{
+    const { theme } = useContext(ThemeContext);
     return (
         <>
-        <Navbar/>
-        <div className="flexbox">
-        <Sidebar/>
-
-        <div className="flex-3">
-            <ThemeSwitcher/>
-        </div>
-
-        </div>
-
+            <Navbar/>
+            <div>
+                <Sidebar/>
+                <div className={`bg-${theme}-primary `}>
+                    Choose a theme!
+                </div>
+                <div>
+                    <ThemeSwitcher/>
+                </div>
+            </div>
         </>
  
     )

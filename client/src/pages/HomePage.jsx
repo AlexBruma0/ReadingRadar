@@ -94,7 +94,6 @@ export default function HomePage() {
       <Sidebar/>
       <div className=''>
       <div className={`bg-${theme}-primary `}>
-      {/* component content */}
       testing themes
       </div>
         <DragDropContext onDragEnd={handleDragEnd}>
