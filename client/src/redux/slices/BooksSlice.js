@@ -85,8 +85,13 @@ export const updateAPIBook = createAsyncThunk( 'books/updateBook', async (update
   export const deleteBookAPI = createAsyncThunk(
     'books/deleteBook',
     async (bookId, thunkAPI) => {
+      const jwtToken = localStorage.getItem('jwtToken')
       await fetch(`${import.meta.env.VITE_API_URL}/books/${bookId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`
+        },
       });
       return bookId;
     }

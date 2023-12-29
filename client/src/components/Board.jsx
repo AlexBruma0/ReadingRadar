@@ -21,7 +21,7 @@ export default function Board(props) {
       title: book.title,
       id: uuid(),
       author: book.author,
-      myRating: book.myRating,
+      rating: book.rating,
       img_url: book.img_url,
       category: props.id
     };
@@ -33,7 +33,7 @@ export default function Board(props) {
     title: "",
     author: "",
     img_url: "",
-    myRating: "",
+    rating: "",
     notes: "",
   };
   const boardMap = {

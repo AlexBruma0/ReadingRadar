@@ -43,7 +43,7 @@ export default function SearchBar(props) {
                 <Card
                   title={book.title}
                   author={book.author}
-                  myRating={book.myRating}
+                  rating={book.rating}
                   img_url={book.img_url}
                   notes={book.notes}
                   id={props.id}

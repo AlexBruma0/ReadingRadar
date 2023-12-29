@@ -92,7 +92,7 @@ export default function HomePage() {
       <Sidebar/>
       <div className='flex-3'>
         <DragDropContext onDragEnd={handleDragEnd}>
-            <div className="grid-container--small">
+            <div className="">
               {Object.entries(boards).map(([boardId, books]) => (
                 <Board
                 key={boardId}

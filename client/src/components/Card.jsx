@@ -20,17 +20,20 @@ export default function Card(props) {
         <h2>{props.book.title}</h2>
         <div className="author-container">
           <i>{props.book.author}</i>
-          <div className="stars">
-            <Rating
-              readonly="true"
-              initialValue={props.book.myRating}
-              allowFraction="true"
-              size="20px"
-              fillColor="black"
-              emptyColor="#f2f2f3"
-            />
-          </div>
         </div>
+        {props.book.rating > 0 ?
+          (<div className="stars">
+          <Rating
+            readonly="true"
+            initialValue={props.book.rating}
+            allowFraction="true"
+            size="20px"
+            fillColor="black"
+            emptyColor="#f2f2f3"
+          />
+        </div>) :
+        (<i>no rating</i> )
+          }
       </div>
       <div className="image">
         <img src={props.book.img_url} alt="" />

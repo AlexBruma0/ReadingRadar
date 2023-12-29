@@ -171,7 +171,6 @@ async function fetchBooksFromAmazon(queryString){
     const encodedQuery = encodeURIComponent(queryString.replace(/\s/g, '+'));
     await page.goto(`https://www.amazon.ca/s?k=${encodedQuery}+book`);
     const elements = await page.$$('div[data-index="2"], div[data-index="3"], div[data-index="4"]');
-
     const booksDetails = await Promise.all(elements.map(async (element) => {
         return element.evaluate(node => {
             let title = node.querySelector('.a-size-base-plus')?.innerText || '';

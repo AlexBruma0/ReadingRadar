@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux"
 import { useSelector } from 'react-redux';
 import { fetchBookById } from "../redux/slices/BooksSlice";
 import Sidebar from "../components/SideBar";
+import Comments from "../components/Comments";
 
 import { updateBook, updateAPIBook, deleteBook, deleteBookAPI } from "../redux/slices/BooksSlice";
 
@@ -35,8 +36,8 @@ export default function BookPage() {
   };
 
   const handleDelete = async (bookId) => {
-    dispatch(deleteBook(bookId))
     dispatch(deleteBookAPI(bookId))
+    dispatch(deleteBook(bookId))
     navigate("/home")
   };
 
@@ -58,13 +59,13 @@ export default function BookPage() {
               <div className=" border-radius">
                 <div>
                   <h1>
-                    <span style={{ fontSize: 100 }}>{book.myRating}</span> / 5
+                    <span style={{ fontSize: 100 }}>{book.rating}</span> / 5
                   </h1>
                 </div>
                 <Rating
                   readonly="true"
                   allowFraction="true"
-                  initialValue={book.myRating}
+                  initialValue={book.rating}
                   size="50px"
                   fillColor="var(--secondary-color)"
                   emptyColor="#f2f2f3"
@@ -75,24 +76,24 @@ export default function BookPage() {
                 <img src={book.img_url} className="large-img" alt="" />
               </div>
             </div>
-          </div>
-          <div className="flexbox margin-top">
+            <div className="flexbox margin-top">
             <button className="full-width" onClick={toggleOpen}>
               <Edit></Edit> <i></i>
             </button>
             <button
               className="full-width"
               onClick={() => {
-                handleDelete(book);
+                handleDelete(book._id);
               }}
             >
               <Trash></Trash> <i></i>
             </button>
+            </div>
+            <Comments
+            bookId={book._id}
+            />
           </div>
         </div>
-
-
-
         <Modal open={open} setOpen={setOpen} formTitle="Edit book">
           <Form
             data={book}

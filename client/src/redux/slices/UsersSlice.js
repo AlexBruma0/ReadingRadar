@@ -23,10 +23,37 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+export const fetchUser = createAsyncThunk(
+  'users/fetchUser',
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        console.log('response not okay')
+        throw new Error('Failed to fetch users');
+      }
+
+      const user = await response.json();
+      console.log("response ok", user)
+      return user;
+    } catch (error) {
+      console.log(error.message)
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: 'users',
   initialState: {
     users: [],
+    user: null,
     isLoading: false,
     error: null,
   },
@@ -44,6 +71,9 @@ const usersSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    [fetchUser.fulfilled]: (state, action) => {
+      state.user = action.payload;
+    }
   },
 });
 

@@ -21,6 +21,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await userController.getUser(userId);
+    res.status(201).json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.post('/login', async (req, res) => {
   const { userName, password } = req.body;
   try {

@@ -29,8 +29,18 @@ async function getUsers() {
   return users
 }
 
+async function getUser(userId) {
+  console.log(userId)
+  const users = await User.findOne({ userId });
+  if (!users) {
+    throw new Error('no users');
+  }
+  return users
+}
+
 module.exports = {
   registerUser,
   loginUser,
-  getUsers
+  getUsers,
+  getUser
 };
