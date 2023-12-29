@@ -3,9 +3,9 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 router.post('/register', async (req, res) => {
-  const { userName, password, email } = req.body;
+  const { userName, password, email, theme } = req.body;
   try {
-    await userController.registerUser(userName, password, email);
+    await userController.registerUser(userName, password, email, theme);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Could not register user.' });

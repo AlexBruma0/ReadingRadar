@@ -13,16 +13,16 @@ export default function Card(props) {
   };
   return (
     <div
-      className="small-container space-between border-radius"
+      className=""
       onClick={handleNavigate}
     >
       <div>
         <h2>{props.book.title}</h2>
-        <div className="author-container">
+        <div className="">
           <i>{props.book.author}</i>
         </div>
         {props.book.rating > 0 ?
-          (<div className="stars">
+          (<div className="">
           <Rating
             readonly="true"
             initialValue={props.book.rating}
@@ -35,7 +35,7 @@ export default function Card(props) {
         (<i>no rating</i> )
           }
       </div>
-      <div className="image">
+      <div className="">
         <img src={props.book.img_url} alt="" />
       </div>
     </div>

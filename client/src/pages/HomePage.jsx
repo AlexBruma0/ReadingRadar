@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,8 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Sidebar from '../components/SideBar'
 import Board from '../components/Board';
 import Navbar from '../components/Navbar';
-import { Scissors } from 'react-feather';
+import { ThemeContext } from '../components/ThemeContext';
+
 
 
 export default function HomePage() {
@@ -16,6 +17,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
   const viewingId = localStorage.getItem('viewingId')
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (viewingId) {
@@ -79,8 +81,8 @@ export default function HomePage() {
 
   if(loadingStatus === "pending") {
     return (
-      <div className="spinner-container">
-        <SpinnerCircular color="pink" size="20vw" />
+      <div className="">
+        loading...
       </div>
     )
   }
@@ -88,11 +90,15 @@ export default function HomePage() {
   else return (
   <>
     <Navbar/>
-    <div className="flexbox">
+    <div className="">
       <Sidebar/>
-      <div className='flex-3'>
+      <div className=''>
+      <div className={`bg-${theme}-primary `}>
+      {/* component content */}
+      testing themes
+      </div>
         <DragDropContext onDragEnd={handleDragEnd}>
-            <div className="">
+            <div className="flex">
               {Object.entries(boards).map(([boardId, books]) => (
                 <Board
                 key={boardId}

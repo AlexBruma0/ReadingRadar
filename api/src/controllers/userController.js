@@ -1,11 +1,12 @@
 const User = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
 
-async function registerUser(userName, password, email) {
+async function registerUser(userName, password, email, theme) {
   const newUser = new User({
     userName,
     password, // In practice, you should hash the password before saving
     email,
+    theme
   });
   return newUser.save();
 }

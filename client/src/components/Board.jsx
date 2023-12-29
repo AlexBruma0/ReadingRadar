@@ -43,35 +43,26 @@ export default function Board(props) {
   }
 
   return (
-    <div className="large-container border-radius">
-      <div className="space-between">
-        <h2 className="underline">
-          {" "}
-          {boardMap[props.id]}{" "}
-          <span
-            className="border"
-            style={{
-              backgroundColor: "hotpink",
-              fontSize: "large",
-              borderRadius: "1000px",
-              padding: "0.1rem",
-            }}
-          >
-            {props.books?.length}
+    <div className="">
+      <div className="">
+        <h2 className="">
+          {boardMap[props.id]}
+          <span className="">
+            {props.books.length}
           </span>
         </h2>
 
         <button
-          className="small-container margin border-radius secondary-backround-color"
+          className=""
           onClick={toggleOpen}
         >
-          <Plus size="20px"></Plus>
+          <Plus></Plus>
         </button>
       </div>
       <Droppable droppableId={props.id}>
         {(provided) => (
           <div
-            className="border-radius"
+            className=""
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

@@ -1,6 +1,6 @@
 import Sidebar from "../components/SideBar"
 import Navbar from "../components/Navbar"
-
+import ThemeSwitcher from "../ThemeSwitcher"
 const SettingsPage = () =>{
     return (
         <>
@@ -9,7 +9,7 @@ const SettingsPage = () =>{
         <Sidebar/>
 
         <div className="flex-3">
-            Settings PAGE
+            <ThemeSwitcher/>
         </div>
 
         </div>
