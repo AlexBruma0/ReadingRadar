@@ -1,51 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate, Link as RouterLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { Search } from "react-feather";
 import Image from '../../resources/logo.png'
-export default function Navbar(props) {
+import { ThemeContext } from '../components/ThemeContext';
+
+export default function Navbar({ toggleSidebar }) {
   const [searching, setSearching] = useState(false);
+  const { theme } = useContext(ThemeContext);
+
   const toggleSearching = () => {
     setSearching(!searching);
   };
-  return (
-    <>
-    <nav className="navbar margin-bottom">
-      <div className="menu-icon">
-        {/* Icon placeholder, you can use an image or an icon library like FontAwesome */}
-        <span>☰</span> 
-      </div>
-      <div className="logo">
-        {/* Your logo here */}
-        <img src={Image} alt="Description" 
-        style={{
-          borderRadius: '50%', 
-          width: '50px',
-          height: '50px',
 
-       }} />
+  return (
+    <nav id="navbar" className={`fixed top-0 w-full z-10 flex items-center p-4 text-white bg-${theme}-primary`}>
+      <div className="flex items-center">
+        <span className="text-xl mr-3 cursor-pointer" onClick={toggleSidebar}>☰</span>
+        <img src={Image} className="h-10 w-10 rounded-full" alt="Logo" />
       </div>
-      <div className="search-bar">
-        <input type="text" placeholder="Search" />
-        <button type="submit">🔍</button>
+      <div className="flex-grow"></div>
+      <div>
+        <button type="submit" className={`p-2 rounded-full bg-${theme}-accent`}>
+          🔍
+        </button>
       </div>
     </nav>
-
-      {/* <header>
-        <h1 className="space-between">
-        <img src={Image} alt="Description" 
-        style={{
-          borderRadius: '50%', 
-          width: '50px',
-          height: '50px',
-
-       }} />
-          <button onClick={toggleSearching}>
-            <Search />
-          </button>
-        </h1>
-        <SearchBar open={searching} setOpen={setSearching} />
-      </header> */}
-    </>
   );
 }

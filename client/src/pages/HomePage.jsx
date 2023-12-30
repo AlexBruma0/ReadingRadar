@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -14,10 +14,22 @@ import { ThemeContext } from '../components/ThemeContext';
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
   const viewingId = localStorage.getItem('viewingId')
   const { theme } = useContext(ThemeContext);
+  const [navbarHeight, setNavbarHeight] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  useEffect(() => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+      setNavbarHeight(navbar.offsetHeight);
+    }
+  }, []);
 
   useEffect(() => {
     if (viewingId) {
@@ -88,31 +100,25 @@ export default function HomePage() {
   }
 
   else return (
-  <>
-    <Navbar/>
-    <div className="">
-      <Sidebar/>
-      <div className=''>
-      <div className={`bg-${theme}-primary `}>
-      testing themes
-      </div>
-        <DragDropContext onDragEnd={handleDragEnd}>
-            <div className="flex">
+    <>
+      <Navbar toggleSidebar={toggleSidebar} />
+      <div style={{ paddingTop: `${navbarHeight}px` }}>
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <div className={`flex flex-wrap`}>
               {Object.entries(boards).map(([boardId, books]) => (
                 <Board
-                key={boardId}
-                id={boardId}
-                books={books}
-              />
+                  key={boardId}
+                  id={boardId}
+                  books={books}
+                />
               ))}
             </div>
-        </DragDropContext>
+          </DragDropContext>
+        </div>
       </div>
-
-    </div>
-  </>
-
-
+    </>
   );
-}
+};
 
