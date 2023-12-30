@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Drag from "./Drag";
 import { Droppable } from "react-beautiful-dnd";
 import { Plus, X } from "react-feather";
@@ -7,7 +7,8 @@ import Form from "./Form";
 import { v4 as uuid, v4 } from "uuid";
 import { createBookAPI, createBook } from "../redux/slices/BooksSlice";
 import { useDispatch } from 'react-redux';
-
+import { ThemeContext } from '../components/ThemeContext';
+import { themes } from '../themes';
 
 export default function Board(props) {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ export default function Board(props) {
   const toggleOpen = () => {
     setOpen(!open);
   };
+  const { theme } = useContext(ThemeContext);
+  const currentThemeColors = themes[theme];
 
   const handleAdd = async (book) => {
     book = {
@@ -43,20 +46,21 @@ export default function Board(props) {
   }
 
   return (
-    <div className="">
-      <div className="">
-        <h2 className="">
+    <div style={{ backgroundColor: currentThemeColors.primary  }} className={`m-4 p-4 rounded-lg shadow-lg`}>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className={`text-lg font-bold`}>
           {boardMap[props.id]}
-          <span className="">
+          <span className="ml-2 text-sm">
             {props.books.length}
           </span>
         </h2>
 
         <button
-          className=""
+          style={{ backgroundColor: currentThemeColors.accent  }}
+          className={`p-2 rounded-full bg-`}
           onClick={toggleOpen}
         >
-          <Plus></Plus>
+          <Plus />
         </button>
       </div>
       <Droppable droppableId={props.id}>

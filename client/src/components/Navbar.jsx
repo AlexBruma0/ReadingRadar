@@ -17,14 +17,14 @@ export default function Navbar({ toggleSidebar }) {
   };
 
   return (
-    <nav style={{ backgroundColor: currentThemeColors.primary  }} id="navbar" className={`fixed top-0 w-full z-10 flex items-center p-4 text-white`}>
+    <nav id="navbar" className={`fixed top-0 w-full z-10 flex items-center p-4 text-white`}>
       <div className="flex items-center">
         <span className="text-xl mr-3 cursor-pointer" onClick={toggleSidebar}>☰</span>
         <img src={Image} className="h-10 w-10 rounded-full" alt="Logo" />
       </div>
       <div className="flex-grow"></div>
       <div>
-        <button type="submit" className={`p-2 rounded-full bg-${theme}-accent`}>
+        <button type="submit" className={`p-2 rounded-full `}>
           🔍
         </button>
       </div>

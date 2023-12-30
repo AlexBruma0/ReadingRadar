@@ -9,6 +9,7 @@ import Sidebar from '../components/SideBar'
 import Board from '../components/Board';
 import Navbar from '../components/Navbar';
 import { ThemeContext } from '../components/ThemeContext';
+import { themes } from '../themes';
 
 
 
@@ -17,8 +18,11 @@ export default function HomePage() {
   const userId = localStorage.getItem('userId');
   const viewingId = localStorage.getItem('viewingId')
   const { theme } = useContext(ThemeContext);
+  const currentThemeColors = themes[theme];
+
   const [navbarHeight, setNavbarHeight] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [containerHeight, setContainerHeight] = useState('100vh');
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -30,6 +34,12 @@ export default function HomePage() {
       setNavbarHeight(navbar.offsetHeight);
     }
   }, []);
+
+  useEffect(() => {
+    // Calculate the height for grid-container--small
+    const height = `calc(100vh - ${navbarHeight}px)`;
+    setContainerHeight(height);
+  }, [navbarHeight]);
 
   useEffect(() => {
     if (viewingId) {
@@ -104,9 +114,9 @@ export default function HomePage() {
       <Navbar toggleSidebar={toggleSidebar} />
       <div style={{ paddingTop: `${navbarHeight}px` }}>
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
+        <div style={{ backgroundColor: currentThemeColors.secondary  }} className={`transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} `}>
           <DragDropContext onDragEnd={handleDragEnd}>
-            <div className={`flex flex-wrap`}>
+          <div  className=" grid-container--small" style={{ height: containerHeight }} >
               {Object.entries(boards).map(([boardId, books]) => (
                 <Board
                   key={boardId}
