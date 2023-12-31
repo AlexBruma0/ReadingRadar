@@ -34,7 +34,6 @@ export default function HomePage() {
       setNavbarHeight(navbar.offsetHeight);
     }
   }, []);
-
   useEffect(() => {
     // Calculate the height for grid-container--small
     const height = `calc(100vh - ${navbarHeight}px)`;
@@ -48,7 +47,6 @@ export default function HomePage() {
   }, [viewingId, dispatch]); 
 
   const boards = useSelector((state) => state.books.boards);
-  const loadingStatus = useSelector(state => state.books.status)
 
   const handleDragEnd = async (result) => {
     if(viewingId !== userId){
@@ -101,22 +99,13 @@ export default function HomePage() {
     dispatch(moveBookToCategoryAPI({currentOrder: source.index, newOrder: destination.index, currentOrderId: movedItem._id, currentCategory: source.droppableId, newCategory: destination.droppableId}))
   };
 
-  if(loadingStatus === "pending") {
-    return (
-      <div className="">
-        loading...
-      </div>
-    )
-  }
-
-  else return (
+  return (
     <>
       <Navbar toggleSidebar={toggleSidebar} />
       <div style={{ paddingTop: `${navbarHeight}px` }}>
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div style={{ backgroundColor: currentThemeColors.secondary  }} className={`transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} `}>
+        <div style={{ backgroundColor: currentThemeColors.secondary, height: containerHeight  }} className={`grid-container--small transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} `}>
           <DragDropContext onDragEnd={handleDragEnd}>
-          <div  className=" grid-container--small" style={{ height: containerHeight }} >
               {Object.entries(boards).map(([boardId, books]) => (
                 <Board
                   key={boardId}
@@ -124,10 +113,9 @@ export default function HomePage() {
                   books={books}
                 />
               ))}
-            </div>
           </DragDropContext>
+          </div>
         </div>
-      </div>
     </>
   );
 };

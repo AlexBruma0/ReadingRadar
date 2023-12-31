@@ -17,7 +17,7 @@ export default function Navbar({ toggleSidebar }) {
   };
 
   return (
-    <nav id="navbar" className={`fixed top-0 w-full z-10 flex items-center p-4 text-white`}>
+    <nav style={{ backgroundColor: currentThemeColors.primary  }} id="navbar" className={`fixed top-0 w-full z-10 flex items-center p-4 `}>
       <div className="flex items-center">
         <span className="text-xl mr-3 cursor-pointer" onClick={toggleSidebar}>☰</span>
         <img src={Image} className="h-10 w-10 rounded-full" alt="Logo" />
