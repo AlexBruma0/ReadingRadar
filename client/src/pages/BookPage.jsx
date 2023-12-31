@@ -79,7 +79,7 @@ export default function BookPage() {
             <div className="flexbox margin-top">
             <button className="full-width" onClick={toggleOpen}>
               <Edit></Edit> <i></i>
-            </button>
+          </button>
             <button
               className="full-width"
               onClick={() => {
