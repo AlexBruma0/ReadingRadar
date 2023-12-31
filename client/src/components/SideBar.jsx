@@ -45,8 +45,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 '--hover-background': tinycolor(currentThemeColors.secondary).darken(10).toString()
               }}
               >
-                <span className="icon">{link.icon}</span>
-                <span className="ml-2 name">{link.name}</span>
+                <span className="">{link.icon}</span>
+                <span className="ml-2 text-lg font-medium">{link.name}</span>
             </Link>
         ))}
     </div>

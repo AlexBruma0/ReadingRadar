@@ -19,7 +19,7 @@ export default function Card(props) {
   }
 
   return (
-    <div style={{ backgroundColor: currentThemeColors.secondary  }} className={`flex items-center mb-1 justify-between p-4 rounded-lg shadow-md cursor-pointer`} onClick={handleNavigate}>
+    <div style={{ backgroundColor: currentThemeColors.secondary, color: currentThemeColors.text  }} className={`flex items-center mb-1 justify-between p-4 rounded-lg shadow-md cursor-pointer`} onClick={handleNavigate}>
       <div className="flex-1 mr-5">
         <h2 className="text-xl font-semibold">{props.book.title}</h2>
         <p className="text-sm italic">{props.book.author}</p>

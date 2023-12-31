@@ -7,6 +7,7 @@ import { ThemeContext } from './ThemeContext';
 export default function Layout({ children }) {
     const { theme } = useContext(ThemeContext);
     const currentThemeColors = themes[theme];
+    console.log(theme, currentThemeColors)
   
     const [navbarHeight, setNavbarHeight] = useState(0);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);

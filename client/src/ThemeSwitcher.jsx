@@ -5,49 +5,32 @@ import { useNavigate } from 'react-router-dom';
 
 const ThemeSwitcher = () => {
   const { setTheme } = useContext(ThemeContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleThemeChange = (newTheme) => {
     setTheme(newTheme);
-    navigate('/home')
+    navigate('/home');
   };
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-4 py-3 rounded-lg shadow-md bg-gray-100">
-      <button 
-        onClick={() => handleThemeChange('basic')} 
-        className="w-full px-4 py-2"
-        style={{ 
-          backgroundColor: themes.basic.primary, 
-          borderColor: themes.basic.accent,
-          color: themes.basic.secondary,
-          hover: { backgroundColor: themes.basic.secondary }
-        }}
-      >
-        Basic
-      </button>
-      <button 
-        onClick={() => handleThemeChange('ysl')} 
-        className="w-full px-4 py-2 text-white"
-        style={{ 
-          backgroundColor: themes.ysl.primary, 
-          borderColor: themes.ysl.accent,
-          ':hover': { backgroundColor: themes.ysl.secondary }
-        }}
-      >
-        YSL
-      </button>
-      <button 
-        onClick={() => handleThemeChange('gucci')} 
-        className="w-full px-4 py-2 text-white "
-        style={{ 
-          backgroundColor: themes.gucci.primary, 
-          borderColor: themes.gucci.accent,
-          ':hover': { backgroundColor: themes.gucci.secondary }
-        }}
-      >
-        Gucci
-      </button>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+      {Object.entries(themes).map(([name, theme]) => (
+        <div 
+          key={name}
+          onClick={() => handleThemeChange(name)}
+          className="cursor-pointer rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-110"
+          style={{ minHeight: '150px' }}
+        >
+          <div className="flex h-full">
+            <div className="flex-1" style={{ backgroundColor: theme.primary }}></div>
+            <div className="flex-1" style={{ backgroundColor: theme.secondary }}></div>
+            <div className="flex-1" style={{ backgroundColor: theme.accent }}></div>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 text-center p-2 bg-opacity-90 bg-white">
+            {name.charAt(0).toUpperCase() + name.slice(1)}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
