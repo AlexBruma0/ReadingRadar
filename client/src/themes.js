@@ -27,10 +27,10 @@ export const themes = {
     },
 
     dark: {
-      primary: '#ffffff',
-      secondary: '#f0f0f0',
-      accent: '#d2e8f6',
-      text: 'black'
+      primary: '#1a1a1a',
+      secondary: '#333333',
+      accent: '#333333',
+      text: 'white'
     },
   };
   //
