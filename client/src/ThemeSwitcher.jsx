@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from './components/ThemeContext';
 import { themes } from './themes'; // Importing themes
+import { useNavigate } from 'react-router-dom';
 
 const ThemeSwitcher = () => {
   const { setTheme } = useContext(ThemeContext);
+  const navigate = useNavigate()
 
   const handleThemeChange = (newTheme) => {
     setTheme(newTheme);
+    navigate('/home')
   };
 
   return (
@@ -18,7 +21,7 @@ const ThemeSwitcher = () => {
           backgroundColor: themes.basic.primary, 
           borderColor: themes.basic.accent,
           color: themes.basic.secondary,
-          ':hover': { backgroundColor: themes.basic.secondary }
+          hover: { backgroundColor: themes.basic.secondary }
         }}
       >
         Basic
