@@ -1,3 +1,4 @@
+const books_storage = require('../models/books_storageModel')
 const Book = require('../models/BookModel');
 const mongoose = require('mongoose');
 const  puppeteer = require("puppeteer-core");
@@ -5,6 +6,19 @@ const  puppeteer = require("puppeteer-core");
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+// Function to find books by title query
+const findBooksByTitle = async (titleQuery) => {
+  try {
+      const regex = new RegExp(titleQuery, 'i'); // 'i' for case-insensitive
+      const books = await books_storage.find({title: regex});
+      console.log(books)
+      return books;
+  } catch (error) {
+      console.error("Error finding books:", error);
+      throw error;
+  }
+};
 
 async function createBook(title, author, rating, notes, img_url, category, ownerId) {
   const session = await mongoose.startSession();
@@ -199,5 +213,6 @@ module.exports = {
   deleteAllBooks,
   reorderBook,
   moveBookToNewCategory,
-  fetchBooksFromAmazon
+  fetchBooksFromAmazon,
+  findBooksByTitle
 };

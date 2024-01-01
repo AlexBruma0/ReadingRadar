@@ -31,12 +31,15 @@ router.get('/searchbooks/:query', async (req, res) => {
   const queryString = req.params.query;
 
   try {
-      const books = await bookController.fetchBooksFromAmazon(queryString);
+      const books = await bookController.findBooksByTitle(queryString);
       if (!books || books.length === 0) {
+          console.log({ error: 'No books found for this query.' })
           return res.status(404).json({ error: 'No books found for this query.' });
       }
+      console.log(books)
       res.json(books);
   } catch (error) {
+      console.log(error.message)
       res.status(500).json({ error: error.message});
   }
 });
