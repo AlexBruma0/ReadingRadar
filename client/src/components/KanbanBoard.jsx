@@ -76,8 +76,8 @@ export default function KanbanBoard() {
         {Object.entries(boards).map(([boardId, books]) => (
           <Board
             key={boardId}
-            id={boardId}
-            books={books}
+            category={boardId}
+            boardBooks={books}
           />
         ))}
       </DragDropContext>

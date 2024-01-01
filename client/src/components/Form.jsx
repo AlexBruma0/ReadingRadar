@@ -28,10 +28,8 @@ export default function Form(props) {
   };
 
   const handleFetch = async () => {
-    console.log("handleFetch", data);
     setFetching(true);
     const response = await dispatch(fetchAmazonBooks(search));
-    console.log(response.payload);
     setExternalData(response.payload);
     setFetching(false);
   };
@@ -70,7 +68,6 @@ export default function Form(props) {
                 value={search}
                 onChange={handleSearchChange}/>
                 <button 
-                className="large-text full-width border-radius"
                 onClick={handleFetch}>Search</button>
               </div>
             )}
@@ -79,7 +76,6 @@ export default function Form(props) {
                 {externalData.map((book, index) => (
                   <label key={index}>
                     <input
-
                       type="radio"
                       value={book.author}
                       onChange={handleRadioChange}
@@ -98,7 +94,6 @@ export default function Form(props) {
                 <div>{key == "id" ? "" : key}</div>
                 {key == "notes" ? (
                   <textarea
-                    className="margin-bottom"
                     key={key}
                     type="text"
                     rows={10}
@@ -111,7 +106,6 @@ export default function Form(props) {
                   <></>
                 ) : (
                   <input
-                    className="margin-bottom"
                     type="text"
                     key={key}
                     name={key}
@@ -122,7 +116,6 @@ export default function Form(props) {
               </div>
             ))}
           <button
-            className="large-text full-width border-radius secondary-backround-color"
             type="submit"
           >
             Submit
