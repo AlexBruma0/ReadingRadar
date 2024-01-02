@@ -15,6 +15,7 @@ import {
   createBookAPI,
 } from "../redux/slices/BooksSlice";
 import Card from "./Card";
+import ReactStars from 'react-rating-stars-component';
 
 const SearchForm = ({ onSubmit }) => {
   const { theme } = useContext(ThemeContext);
@@ -63,14 +64,13 @@ const BookSelectionForm = ({ books, onSelect }) => {
           ))}
         </div>
       ) : (
-        <div>No results found</div>
+        <div>No results found, try searching for something different or click next to enter it in manually </div>
       )}
     </>
   );
 };
 
 const AddForm = ({ category, initialValues, setOpen }) => {
-  console.log(initialValues)
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
   const dispatch = useDispatch();
@@ -102,6 +102,9 @@ const AddForm = ({ category, initialValues, setOpen }) => {
     rating: "Rating",
     notes: "Notes"
   };
+  const onRatingChange = (newRating, form) => {
+    form.change('rating', newRating);
+  };
 
   return (
     <Form
@@ -109,7 +112,7 @@ const AddForm = ({ category, initialValues, setOpen }) => {
       onSubmit={onSubmit}
       render={({ handleSubmit, form, submitting, pristine }) => (
         <form onSubmit={handleSubmit} className="m-4">
-          {["title", "author", "img_url", "rating", "notes"].map((field) => (
+          {["title", "author", "img_url", "notes"].map((field) => (
             <div key={field} className="mb-4">
               <label className="block mb-2 text-sm font-bold text-gray-700 capitalize">
                 {feildMap[field] }
@@ -123,6 +126,21 @@ const AddForm = ({ category, initialValues, setOpen }) => {
               />
             </div>
           ))}
+          {category === "read" &&
+                    <div className="mb-4">
+                    <label className="block mb-2 text-sm font-bold text-gray-700 capitalize">
+                      Overall Rating
+                    </label>
+                    <ReactStars
+                      isHalf={true} 
+                      count={5}
+                      onChange={(newRating) => onRatingChange(newRating, form)}
+                      size={24}
+                      activeColor="#ffd700"
+                    />
+                  </div>
+          }
+
 
           <div className="flex justify-between mt-4">
             <button
@@ -166,6 +184,10 @@ export default function Board({ boardBooks, category }) {
 
   const goToNextStep = () => {
     setStep((prevStep) => (prevStep < 3 ? prevStep + 1 : prevStep));
+  };
+
+  const goToLastStep = () => {
+    setStep(3);
   };
 
   const goToPreviousStep = () => {
@@ -253,22 +275,39 @@ export default function Board({ boardBooks, category }) {
             </>
           )}
           </div>
-          <div className="mt-auto ml-5">
+
+          
+            {step > 1 ? (
+              <div className="mt-auto ml-5">
             <button
+            style={{ backgroundColor: currentThemeColors.accent }}
+            className=" font-bold py-2 px-4 rounded mr-2"
+            onClick={goToPreviousStep}
+          >
+            Back
+          </button>
+          <button
+            style={{ backgroundColor: currentThemeColors.secondary }}
+            className="font-bold py-2 px-4 rounded"
+            onClick={goToNextStep}
+          >
+            Next
+          </button>
+          </div>
+
+            ): (
+              <div className="mt-auto ml-5">
+              <button
               style={{ backgroundColor: currentThemeColors.accent }}
               className=" font-bold py-2 px-4 rounded mr-2"
-              onClick={goToPreviousStep}
+              onClick={goToLastStep}
             >
-              Back
+              Enter Manually
             </button>
-            <button
-              style={{ backgroundColor: currentThemeColors.secondary }}
-              className="font-bold py-2 px-4 rounded"
-              onClick={goToNextStep}
-            >
-              Next
-            </button>
-          </div>
+
+            </div>
+            )}
+
         </div>
       </dialog>
 
