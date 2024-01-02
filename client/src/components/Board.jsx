@@ -89,6 +89,7 @@ const AddForm = ({ category, initialValues, setOpen }) => {
       author: values.author,
       rating: values.rating,
       img_url: values.img_url,
+      notes: values.notes,
       category: category,
     };
     dispatch(createBook(book));
