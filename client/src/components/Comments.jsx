@@ -36,14 +36,22 @@ function Comments({ bookId }) {
   };
 
   return (
-    <div>
-      <h3>Comments</h3>
-      <div>
+    <div className="mt-10 mx-4">
+      <h3 className="text-2xl font-bold mb-4">Comments</h3>
+      <div className="mb-4">
         <textarea
           value={newCommentContent}
           onChange={(e) => setNewCommentContent(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          rows="3"
+          placeholder="Add a new comment..."
         />
-        <button onClick={handleAddComment}>Add Comment</button>
+        <button
+          onClick={handleAddComment}
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
+        >
+          Add Comment
+        </button>
       </div>
       {!loading && (
         <div>
@@ -51,7 +59,7 @@ function Comments({ bookId }) {
             <Comment
               key={comment._id}
               comment={comment}
-              onDelete={handleDeleteComment}
+              onDelete={() => handleDeleteComment(comment._id)}
               onEdit={handleEditComment}
             />
           ))}

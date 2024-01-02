@@ -147,7 +147,7 @@ const booksSlice = createSlice({
     },
     createBook: (state, action) => {
       const category = action.payload.category;
-      state.boards[category].push(action.payload);
+      state.boards[category].unshift(action.payload);
     },
     deleteBook: (state, action) => {
       Object.keys(state.boards).forEach((category) => {
