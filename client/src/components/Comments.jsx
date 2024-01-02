@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Comment from './Comment';
-import { 
-  fetchCommentsByBook, 
-  createCommentAPI, 
-  updateCommentAPI, 
-  deleteCommentAPI 
-} from '../redux/slices/CommentsSlice'; // Import your Redux actions
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Comment from "./Comment";
+import {
+  fetchCommentsByBook,
+  createCommentAPI,
+  updateCommentAPI,
+  deleteCommentAPI,
+} from "../redux/slices/CommentsSlice"; // Import your Redux actions
 
 function Comments({ bookId }) {
   const dispatch = useDispatch();
-  const comments = useSelector(state => state.comments.comments);
-  const [loading, setLoading] = useState(false)
-  const [newCommentContent, setNewCommentContent] = useState('');
+  const comments = useSelector((state) => state.comments.comments);
+  const [loading, setLoading] = useState(false);
+  const [newCommentContent, setNewCommentContent] = useState("");
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     dispatch(fetchCommentsByBook(bookId));
-    setLoading(false)
+    setLoading(false);
   }, [bookId, dispatch]);
 
   const handleAddComment = () => {
     const newComment = { content: newCommentContent, bookId };
     dispatch(createCommentAPI(newComment));
-    setNewCommentContent('');
+    setNewCommentContent("");
   };
 
   const handleDeleteComment = (commentId) => {
@@ -39,25 +39,24 @@ function Comments({ bookId }) {
     <div>
       <h3>Comments</h3>
       <div>
-        <textarea 
-          value={newCommentContent} 
-          onChange={e => setNewCommentContent(e.target.value)}
+        <textarea
+          value={newCommentContent}
+          onChange={(e) => setNewCommentContent(e.target.value)}
         />
         <button onClick={handleAddComment}>Add Comment</button>
       </div>
-      {!loading && 
+      {!loading && (
         <div>
-            {comments.map(comment => (
-                <Comment
-                key={comment._id}
-                comment={comment}
-                onDelete={handleDeleteComment}
-                onEdit={handleEditComment}
-                />
-            ))}
+          {comments.map((comment) => (
+            <Comment
+              key={comment._id}
+              comment={comment}
+              onDelete={handleDeleteComment}
+              onEdit={handleEditComment}
+            />
+          ))}
         </div>
-      }
-
+      )}
     </div>
   );
 }

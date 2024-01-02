@@ -1,15 +1,15 @@
 // ThemeContext.js
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from "react";
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(
-    localStorage.getItem('theme') || 'babyBlue' // Use stored theme or default
+    localStorage.getItem("theme") || "babyBlue", // Use stored theme or default
   );
 
   useEffect(() => {
-    localStorage.setItem('theme', theme); // Update local storage when theme changes
+    localStorage.setItem("theme", theme); // Update local storage when theme changes
   }, [theme]);
 
   return (

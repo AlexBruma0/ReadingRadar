@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Comment({ comment, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,10 +24,13 @@ function Comment({ comment, onDelete, onEdit }) {
 
   return (
     <div>
-       <p>{comment.user.userName}</p>
+      <p>{comment.user.userName}</p>
       {isEditing ? (
         <>
-          <textarea value={editedContent} onChange={e => setEditedContent(e.target.value)} />
+          <textarea
+            value={editedContent}
+            onChange={(e) => setEditedContent(e.target.value)}
+          />
           <button onClick={handleSave}>Save</button>
           <button onClick={handleCancel}>Cancel</button>
         </>

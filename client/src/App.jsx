@@ -7,21 +7,19 @@ import SettingsPage from "./pages/SettingsPage";
 import BookPage from "./pages/BookPage";
 import { ThemeProvider } from "./components/ThemeContext";
 
-
 export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='register' element ={ <RegistrationPage/>}/> 
+          <Route path="register" element={<RegistrationPage />} />
           <Route index element={<LoginPage />} />
           <Route path="home" element={<HomePage />} />
-          <Route path="settings" element={<SettingsPage/>} />
-          <Route path="users" element={<UsersPage/>} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="users" element={<UsersPage />} />
           <Route path="book/:id" element={<BookPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
-
   );
 }

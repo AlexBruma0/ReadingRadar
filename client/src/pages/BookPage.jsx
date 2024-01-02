@@ -5,15 +5,20 @@ import { MessageCircle, Edit, Trash } from "react-feather";
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import Form from "../components/Form";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux"
-import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { fetchBookById } from "../redux/slices/BooksSlice";
 import Sidebar from "../components/SideBar";
 import Comments from "../components/Comments";
 
-import { updateBook, updateAPIBook, deleteBook, deleteBookAPI } from "../redux/slices/BooksSlice";
+import {
+  updateBook,
+  updateAPIBook,
+  deleteBook,
+  deleteBookAPI,
+} from "../redux/slices/BooksSlice";
 
 export default function BookPage() {
   const dispatch = useDispatch();
@@ -26,31 +31,31 @@ export default function BookPage() {
     if (bookId) {
       dispatch(fetchBookById(bookId));
     }
-  }, [bookId, dispatch]); 
+  }, [bookId, dispatch]);
 
-  const book = useSelector(state => state.books.currentBook)
+  const book = useSelector((state) => state.books.currentBook);
 
   const handleUpdate = async (book) => {
-    dispatch(updateBook(book))
-    dispatch(updateAPIBook(book))
+    dispatch(updateBook(book));
+    dispatch(updateAPIBook(book));
   };
 
   const handleDelete = async (bookId) => {
-    dispatch(deleteBookAPI(bookId))
-    dispatch(deleteBook(bookId))
-    navigate("/home")
+    dispatch(deleteBookAPI(bookId));
+    dispatch(deleteBook(bookId));
+    navigate("/home");
   };
 
   const toggleOpen = () => {
     setOpen(!open);
   };
 
-  if(book){
+  if (book) {
     return (
       <>
         <Navbar />
         <div className="flexbox">
-          <Sidebar/>
+          <Sidebar />
           <div className="large-container flex-3" style={{ maxHeight: 100000 }}>
             <h1 className="underline center-text">
               {book.title} -- <i>{book.author}</i>
@@ -77,21 +82,19 @@ export default function BookPage() {
               </div>
             </div>
             <div className="flexbox margin-top">
-            <button className="full-width" onClick={toggleOpen}>
-              <Edit></Edit> <i></i>
-          </button>
-            <button
-              className="full-width"
-              onClick={() => {
-                handleDelete(book._id);
-              }}
-            >
-              <Trash></Trash> <i></i>
-            </button>
+              <button className="full-width" onClick={toggleOpen}>
+                <Edit></Edit> <i></i>
+              </button>
+              <button
+                className="full-width"
+                onClick={() => {
+                  handleDelete(book._id);
+                }}
+              >
+                <Trash></Trash> <i></i>
+              </button>
             </div>
-            <Comments
-            bookId={book._id}
-            />
+            <Comments bookId={book._id} />
           </div>
         </div>
         <Modal open={open} setOpen={setOpen} formTitle="Edit book">
@@ -105,5 +108,4 @@ export default function BookPage() {
       </>
     );
   }
-
 }

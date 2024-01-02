@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { SpinnerCircular } from "spinners-react";
 import { fetchAmazonBooks } from "../redux/slices/BooksSlice";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import Card from "./Card";
 
 export default function Form(props) {
   const [data, setData] = useState(props.data);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
   const [fetching, setFetching] = useState(false);
   const [externalData, setExternalData] = useState();
   const dispatch = useDispatch();
@@ -15,15 +15,16 @@ export default function Form(props) {
     const { name, value } = event.target;
     setData({ ...data, [name]: value });
   };
-  const handleSearchChange = (event) =>{
-    setSearch(event.target.value)
-  }
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (props.handleUpdate) await props.handleUpdate(data);
     if (props.refresh) {
-      location.reload()};
+      location.reload();
+    }
     if (props.toggleOpen) props.toggleOpen();
   };
 
@@ -36,7 +37,7 @@ export default function Form(props) {
 
   const handleRadioChange = (event) => {
     const author = event.target.value;
-    const selectedBook = externalData.find(book => book.author === author);
+    const selectedBook = externalData.find((book) => book.author === author);
     setData({
       ...data,
       title: selectedBook.title,
@@ -60,15 +61,15 @@ export default function Form(props) {
               <div>
                 <div>Search</div>
                 <input
-                className="margin-bottom"
-                type="text"
-                key={"search"}
-                name={"search"}
-                placeholder="search for book, eg: The Legacy by Elle Kennedy"
-                value={search}
-                onChange={handleSearchChange}/>
-                <button 
-                onClick={handleFetch}>Search</button>
+                  className="margin-bottom"
+                  type="text"
+                  key={"search"}
+                  name={"search"}
+                  placeholder="search for book, eg: The Legacy by Elle Kennedy"
+                  value={search}
+                  onChange={handleSearchChange}
+                />
+                <button onClick={handleFetch}>Search</button>
               </div>
             )}
             {externalData && externalData.length > 0 && (
@@ -80,12 +81,8 @@ export default function Form(props) {
                       value={book.author}
                       onChange={handleRadioChange}
                     />
-                  <Card
-                    book={book}
-                    navigate={'false'}
-                  />
+                    <Card book={book} navigate={"false"} />
                   </label>
-                  
                 ))}
               </div>
             )}
@@ -115,14 +112,9 @@ export default function Form(props) {
                 )}
               </div>
             ))}
-          <button
-            type="submit"
-          >
-            Submit
-          </button>
+            <button type="submit">Submit</button>
           </div>
         )}
-
       </form>
     </>
   );

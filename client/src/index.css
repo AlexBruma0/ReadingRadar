@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 .grid-container--small {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+}
 
 #hov:hover {
-    background-color: var(--hover-background);
+  background-color: var(--hover-background);
 }
