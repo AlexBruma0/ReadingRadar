@@ -22,4 +22,4 @@ const BookSelectionForm = ({ books, onSelect }) => {
   );
 };
 
-export default BookSelectionForm
+export default BookSelectionForm;

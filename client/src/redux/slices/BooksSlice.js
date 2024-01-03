@@ -1,5 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+function lowercaseFirstLetter(str) {
+  if(str && str.length > 0) {
+      return str.charAt(0).toLowerCase() + str.slice(1);
+  }
+  return str;
+}
+
 export const fetchBooks = createAsyncThunk(
   "books/fetchBooks",
   async (userId, thunkAPI) => {
@@ -157,8 +164,9 @@ const booksSlice = createSlice({
       });
     },
     updateBook: (state, action) => {
+      console.log(action.payload);
       const { _id, category, ...updatedData } = action.payload;
-      const bookIndex = state.boards[category].findIndex(
+      const bookIndex = state.boards[lowercaseFirstLetter(category)].findIndex(
         (book) => book._id === _id,
       );
       if (bookIndex !== -1) {

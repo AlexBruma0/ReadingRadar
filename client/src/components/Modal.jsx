@@ -2,15 +2,13 @@ import React from "react";
 import { useRef, useEffect } from "react";
 import { X } from "react-feather";
 
-const Modal = ({closeDialog, children}) => {
-  const dialogRef = useRef(null);
-
+const Modal = ({ closeDialog, children, isOpen }) => {
   return (
     <dialog
-      ref={dialogRef}
-      className="fixed inset-0 m-auto bg-white p-4 rounded-lg shadow-lg w-[600px] h-[700px] overflow-auto flex flex-col"
+      open={isOpen}
+      className="p-5 bg-white rounded-lg shadow-lg fixed inset-0 w-[600px] h-[700px] border-1"
     >
-      <div className="flex-grow">
+      <div className="flex flex-col h-full justify-between">
         <div onClick={closeDialog} className="cursor-pointer">
           <X color="#082d0f" size={40} />
         </div>
