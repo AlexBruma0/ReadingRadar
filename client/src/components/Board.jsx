@@ -6,6 +6,7 @@ import { themes } from "../themes";
 import Drag from "./Drag";
 import ModalAddForm from "./ModalAddForm";
 
+
 export default function Board({ boardBooks, category }) {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const { theme } = useContext(ThemeContext);
@@ -32,7 +33,7 @@ export default function Board({ boardBooks, category }) {
         </h2>
         <button
           style={{ backgroundColor: currentThemeColors.accent }}
-          className={`p-2 rounded-full`}
+          className={`p-2 rounded-full `}
           onClick={openDialog}
         >
           <Plus />

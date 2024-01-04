@@ -12,6 +12,7 @@ import Comments from "./Comments";
 import AddForm from "./AddForm";
 import Modal from "./Modal";
 import Book from "./Book";
+import { resetCurrentBook } from "../redux/slices/BooksSlice"; // Import the new action
 
 export default function BookPost() {
   const { id: bookId } = useParams();
@@ -23,6 +24,10 @@ export default function BookPost() {
     if (bookId) {
       dispatch(fetchBookById(bookId));
     }
+
+    return () => {
+      dispatch(resetCurrentBook());
+    };
   }, [bookId, dispatch]);
 
   const book = useSelector((state) => state.books.currentBook);

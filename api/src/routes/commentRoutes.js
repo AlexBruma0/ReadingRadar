@@ -24,6 +24,7 @@ router.get('/book/:bookId', async (req, res) => {
     const comments = await commentController.getCommentsByBook(bookId);
     res.json(comments);
   } catch (error) {
+    console.log(error.message)
     res.status(500).json({ error: 'Error fetching comments.' });
   }
 });

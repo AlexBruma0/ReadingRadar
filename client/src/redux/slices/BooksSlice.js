@@ -23,6 +23,7 @@ export const fetchAmazonBooks = createAsyncThunk(
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/books/searchbooks/${query}`,
     );
+    console.log("bookslice: ", response)
     return response.json();
   },
 );
@@ -163,6 +164,10 @@ const booksSlice = createSlice({
         );
       });
     },
+
+    resetCurrentBook: (state) => {
+      state.currentBook = null;
+    },
     updateBook: (state, action) => {
       console.log(action.payload);
       const { _id, category, ...updatedData } = action.payload;
@@ -212,5 +217,5 @@ const booksSlice = createSlice({
 
 export default booksSlice.reducer;
 
-export const { updateBoards, createBook, deleteBook, updateBook } =
+export const { updateBoards, createBook, deleteBook, updateBook, resetCurrentBook } =
   booksSlice.actions;

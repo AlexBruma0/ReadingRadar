@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
+import { FaTrashAlt } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
+// Usage: <FaEdit />
+
 
 // Book component
 const Book = ({ book, handleDelete, openDialog }) => (
@@ -8,11 +13,12 @@ const Book = ({ book, handleDelete, openDialog }) => (
       <img
         src={book.img_url}
         alt={book.title}
-        className="w-48 h-64 rounded-lg mr-8"
+        className="w-36 h-48 rounded-lg mr-8"
       />
       <div className="flex flex-col flex-1">
         <h2 className="text-4xl font-bold">{book.title}</h2>
         <p className="text-gray-700 text-xl">{book.author}</p>
+
         <div className="flex items-center my-2">
           <div className="bg-yellow-400 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-800">
             My Rating: {book.rating}
@@ -27,31 +33,26 @@ const Book = ({ book, handleDelete, openDialog }) => (
               activeColor="#ffd700"
             />
           </div>
-        </div>
-        <p className="text-gray-600 text-lg my-2">{book.notes}</p>
-        <span className="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800 my-2">
+          <span className="px-3 py-1 text-sm font-semibold rounded-full bg-green-100 text-green-800 w-24 ml-2">
           {book.category}
         </span>
+        </div>
         <div className="flex gap-4 mt-4">
           <button
             onClick={openDialog}
-            className="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-6 py-2.5"
+            className="bg-slate-500 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-full transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
           >
-            Edit Post
+            <FaEdit className="inline-block mr-2" /> Edit
           </button>
           <button
             onClick={() => handleDelete(book._id)}
-            className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-lg px-6 py-2.5"
+            className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full ml-2 transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
           >
-            Delete Post
-          </button>
-          <button
-            // Handle comment logic here
-            className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-6 py-2.5"
-          >
-            Add Comment
+            <FaTrashAlt className="inline-block mr-2" /> Delete
           </button>
         </div>
+        <p className="text-gray-600 text-lg my-2">{book.notes}</p>
+
       </div>
     </div>
   </div>

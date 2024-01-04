@@ -26,7 +26,8 @@ export default function ModalAddForm({ category, closeDialog, isOpen,  }) {
   const handleSearchSubmit = async (searchTerm) => {
     setFetching(true);
     const response = await dispatch(fetchAmazonBooks(searchTerm));
-    setBooks(response.payload);
+    console.log("usage: ", [response.payload])
+    setBooks([response.payload]);
     setFetching(false);
     setStep(2);
   };
@@ -44,6 +45,8 @@ export default function ModalAddForm({ category, closeDialog, isOpen,  }) {
     dispatch(createBook(book));
     dispatch(createBookAPI(book));
     closeDialog();
+    window.location.reload();
+    
   };
 
   const goToNextStep = () => {

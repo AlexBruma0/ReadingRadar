@@ -31,7 +31,7 @@ router.get('/searchbooks/:query', async (req, res) => {
   const queryString = req.params.query;
 
   try {
-      const books = await bookController.findBooksByTitle(queryString);
+      const books = await bookController.searchGoogleBooks(queryString);
       if (!books || books.length === 0) {
           console.log({ error: 'No books found for this query.' })
           return res.status(404).json({ error: 'No books found for this query.' });

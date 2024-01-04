@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "../components/ThemeContext";
+import { themes } from "../themes";
 
 function Comment({ comment, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment.content);
+  const { theme } = useContext(ThemeContext);
+  const currentThemeColors = themes[theme];
 
   const handleDelete = () => {
     onDelete(comment._id);
@@ -23,41 +27,45 @@ function Comment({ comment, onDelete, onEdit }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-lg mt-4">
-      <p className="text-gray-800 font-semibold">{comment.user.userName}</p>
+    <div style={{ backgroundColor: currentThemeColors.background, color: currentThemeColors.text }} className="p-4 rounded-lg shadow-lg mt-4">
+      <p style={{ color: currentThemeColors.text }} className="font-semibold">{comment.user.userName}</p>
       {isEditing ? (
         <div>
           <textarea
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+            style={{ borderColor: currentThemeColors.border, color: currentThemeColors.text }}
+            className="shadow appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline mt-2"
             rows="3"
           />
           <button
             onClick={handleSave}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
+            style={{ backgroundColor: currentThemeColors.primary }}
+            className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
           >
             Save
           </button>
           <button
             onClick={handleCancel}
-            className="ml-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            style={{ backgroundColor: currentThemeColors.secondary }}
+            className="ml-2  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Cancel
           </button>
         </div>
       ) : (
         <div>
-          <p className="text-gray-600 mt-2">{comment.content}</p>
+          <p className="mt-2">{comment.content}</p>
           <button
             onClick={handleEdit}
-            className="text-blue-500 hover:text-blue-700 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+
+            className="font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Edit
           </button>
           <button
             onClick={handleDelete}
-            className="text-red-500 hover:text-red-700 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+            className="font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2 text-red-500"
           >
             Delete
           </button>
@@ -65,6 +73,6 @@ function Comment({ comment, onDelete, onEdit }) {
       )}
     </div>
   );
-}
+};
 
 export default Comment;

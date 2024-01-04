@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Comment from "./Comment";
 import {
@@ -7,12 +7,18 @@ import {
   updateCommentAPI,
   deleteCommentAPI,
 } from "../redux/slices/CommentsSlice"; // Import your Redux actions
+import { ThemeContext } from "../components/ThemeContext";
+import { themes } from "../themes";
+import { FaPlus } from 'react-icons/fa';
 
 function Comments({ bookId }) {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comments.comments);
   const [loading, setLoading] = useState(false);
   const [newCommentContent, setNewCommentContent] = useState("");
+  const { theme } = useContext(ThemeContext);
+  const currentThemeColors = themes[theme];
+
 
   useEffect(() => {
     setLoading(true);
@@ -48,9 +54,10 @@ function Comments({ bookId }) {
         />
         <button
           onClick={handleAddComment}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
+          style={{ backgroundColor: currentThemeColors.accent }}
+          className= "font-bold py-2 px-4 rounded ml-2 transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
         >
-          Add Comment
+          <FaPlus className="inline-block mr-2" /> Add
         </button>
       </div>
       {!loading && (

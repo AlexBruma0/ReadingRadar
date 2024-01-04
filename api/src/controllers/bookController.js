@@ -2,17 +2,49 @@ const books_storage = require('../models/books_storageModel')
 const Book = require('../models/BookModel');
 const mongoose = require('mongoose');
 const  puppeteer = require("puppeteer-core");
+const { google } = require('googleapis');
+
+const API_KEY = 'AIzaSyA_oV9aCPCHYSUIV75el2GynRjFmNEMTdI';
+
+const books = google.books({
+  version: 'v1',
+  auth: API_KEY
+});
+
+// Function to search for a book
+async function searchGoogleBooks(query) {
+  try {
+    const response = await books.volumes.list({
+      q: query,
+      maxResults: 1
+    });
+
+    if (response.data.items) {
+      // Extract the information you need
+      const book = response.data.items[0];
+      const Book = {
+        title: book.volumeInfo.title,
+        author: book.volumeInfo.authors[0],
+        img_url: book.volumeInfo.imageLinks.thumbnail
+      }
+    return Book;
+
+    } else {
+      console.log("No results found");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// Function to find books by title query
-const findBooksByTitle = async (titleQuery) => {
+const findBooksByTitle = async (titleQuery, limit = 4) => { // default limit to 10
   try {
       const regex = new RegExp(titleQuery, 'i'); // 'i' for case-insensitive
-      const books = await books_storage.find({title: regex});
-      console.log(books)
+      const books = await books_storage.find({title: regex}).limit(limit);
       return books;
   } catch (error) {
       console.error("Error finding books:", error);
@@ -214,5 +246,6 @@ module.exports = {
   reorderBook,
   moveBookToNewCategory,
   fetchBooksFromAmazon,
-  findBooksByTitle
+  findBooksByTitle,
+  searchGoogleBooks
 };

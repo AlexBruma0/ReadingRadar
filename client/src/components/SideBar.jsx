@@ -7,7 +7,7 @@ import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import tinycolor from "tinycolor2";
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
+const Sidebar = ({ isOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
