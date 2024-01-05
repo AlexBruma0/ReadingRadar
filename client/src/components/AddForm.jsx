@@ -7,6 +7,8 @@ import { Form, Field } from "react-final-form";
 import { createBook, createBookAPI } from "../redux/slices/BooksSlice";
 import ReactStars from "react-rating-stars-component";
 
+        
+
 const AddForm = ({ category, initialValues, handleSubmitForm }) => {
   console.log(category, initialValues);
   const { theme } = useContext(ThemeContext);
@@ -53,6 +55,9 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
                 placeholder={"Enter " + feildMap[field]}
                 className="w-full p-2 border border-gray-300 rounded outline-none focus:bg-slate-100"
               />
+              {field === "img_url"  && form.getState().values["img_url"] && (
+                <img src={form.getState().values["img_url"]} alt="Preview" className="mt-2 w-16 h-20 rounded-md " />
+              )}
             </div>
           ))}
           {(category === "read" || category === "Read") && (
