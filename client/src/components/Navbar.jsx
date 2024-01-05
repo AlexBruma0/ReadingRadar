@@ -33,17 +33,19 @@ export default function Navbar({ toggleSidebar }) {
 
   return (
     <nav
-      style={{ backgroundColor: currentThemeColors.accent }}
-      id="navbar"
-      className={`fixed top-0 w-full z-10 flex items-center p-4 `}
-    >
+    style={{
+      backgroundColor: currentThemeColors.primary,
+      borderBottom: "0.1px solid black",
+    }}
+    id="navbar"
+    className={`fixed top-0 w-full z-10 flex items-center p-4 `}  >
       <div className="flex items-center">
         <span
           id="hov"
           className="text-xl mr-3 cursor-pointer p-4 rounded-full"
           onClick={toggleSidebar}
           style={{ 
-            "--hover-background": tinycolor(currentThemeColors.accent)
+            "--hover-background": tinycolor(currentThemeColors.primary)
             .darken(5)
             .toString(),
           }}

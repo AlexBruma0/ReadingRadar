@@ -7,7 +7,7 @@ import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import tinycolor from "tinycolor2";
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, isFullWidth }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
@@ -32,8 +32,8 @@ const Sidebar = ({ isOpen }) => {
 
   return (
     <div
-      style={{ backgroundColor: currentThemeColors.secondary }}
-      className={`fixed left-0 h-full z-2 w-64 transform ${
+      style={{ backgroundColor: currentThemeColors.primary }}
+      className={`fixed left-0 h-full z-2 ${isFullWidth ? "w-full" : "w-64"} transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out`}
     >
@@ -45,7 +45,7 @@ const Sidebar = ({ isOpen }) => {
           to={link.link}
           style={{
             color: currentThemeColors.text,
-            "--hover-background": tinycolor(currentThemeColors.secondary)
+            "--hover-background": tinycolor(currentThemeColors.primary)
               .darken(10)
               .toString(),
           }}

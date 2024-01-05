@@ -10,3 +10,13 @@
 #hov:hover {
   background-color: var(--hover-background);
 }
+
+.sidebar-fullscreen {
+  width: 100% !important;
+}
+
+@media screen and (min-width: 400px) {
+  .sidebar-fullscreen {
+    width: auto !important;
+  }
+}

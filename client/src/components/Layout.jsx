@@ -7,11 +7,11 @@ import { ThemeContext } from "./ThemeContext";
 export default function Layout({ children }) {
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
-  console.log(theme, currentThemeColors);
 
   const [navbarHeight, setNavbarHeight] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [containerHeight, setContainerHeight] = useState("100vh");
+  const [isSidebarFullscreen, setIsSidebarFullscreen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -29,11 +29,31 @@ export default function Layout({ children }) {
     setContainerHeight(height);
   }, [navbarHeight]);
 
+  useEffect(() => {
+    const checkWindowSize = () => {
+      if (window.innerWidth < 400) {
+        setIsSidebarFullscreen(true);
+        setIsSidebarOpen(false);
+      } 
+      else{
+        setIsSidebarFullscreen(false);
+        setIsSidebarOpen(true);
+      }
+    };
+
+    window.addEventListener('resize', checkWindowSize);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('resize', checkWindowSize);
+    };
+  }, []);
+
   return (
     <>
       <Navbar toggleSidebar={toggleSidebar} />
       <div style={{ paddingTop: `${navbarHeight}px` }}>
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <Sidebar isOpen={isSidebarOpen} isFullWidth={isSidebarFullscreen}  />
         <div
           style={{
             backgroundColor: currentThemeColors.primary,
