@@ -34,7 +34,7 @@ async function getUsers() {
 
 async function getUser(userId) {
   console.log(userId)
-  const users = await User.findOne({ userId });
+  const users = await User.findById(userId);
   if (!users) {
     throw new Error('no users');
   }
