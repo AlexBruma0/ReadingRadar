@@ -30,7 +30,8 @@ const RegistrationPage = () => {
     e.preventDefault();
     setLoading(true);
     console.log(email, password, userName, themeColor, profilePicture);
-    dispatch(registerUser({ userData: { userName, password, email, themeColor }, profilePicture: profilePicture }));
+    const theme = themeColor;
+    dispatch(registerUser({ userData: { userName, password, email, theme}, profilePicture: profilePicture }));
   };
 
   const handleProfilePictureChange = (e) => {
