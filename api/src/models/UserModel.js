@@ -4,7 +4,8 @@ const userSchema = new mongoose.Schema({
   userName: String,
   password: String,
   email: String,
-  theme: String
+  theme: String,
+  profilePicture: String
 });
 
 module.exports = mongoose.model('User', userSchema);

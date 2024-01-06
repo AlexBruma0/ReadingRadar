@@ -3,16 +3,21 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // Async action for registration using createAsyncThunk
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
-  async (userData, { rejectWithValue }) => {
+  async ({ userData, profilePicture }, { rejectWithValue }) => {
     try {
+      const formData = new FormData();
+      Object.keys(userData).forEach(key => formData.append(key, userData[key]));
+      formData.append('profilePicture', profilePicture);
+
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/users/register`,
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            // Don't set Content-Type header when using FormData
+            // The browser will set it for you, including the necessary boundary parameter
           },
-          body: JSON.stringify(userData),
+          body: formData,
         },
       );
 
@@ -21,7 +26,8 @@ export const registerUser = createAsyncThunk(
       }
 
       const user = await response.json();
-      localStorage.setItem("jwtToken", user.token);
+      console.log(user)
+      localStorage.setItem("jwtToken", user.jwtToken);
       localStorage.setItem("userId", user.userId);
       localStorage.setItem("viewingId", user.userId);
       return user;

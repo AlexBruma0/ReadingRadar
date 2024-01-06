@@ -29,7 +29,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
     { name: "My Library", icon: <FaBook  />, link: "/home" },
     { name: "Friends", icon: <FaUserFriends  />, link: "/users" },
     { name: "Settings", icon: <FaCog  />, link: "/settings" },
-    { name: "Logout", icon: <FaSignOutAlt  />, link: "/logout" },
+    { name: "Logout", icon: <FaSignOutAlt  />, link: "/" },
   ];
 
     return (
@@ -45,6 +45,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
             key={index}
             className="px-4 py-2 flex items-center" // Added items-center here
             to={link.link}
+            onClick={link.name === "Logout" ? handleLogout : link.name === "My Library" ? handlClickHome: null}
             style={{
               color: currentThemeColors.text,
               "--hover-background": tinycolor(currentThemeColors.primary)
