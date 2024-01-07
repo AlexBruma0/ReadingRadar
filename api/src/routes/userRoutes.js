@@ -45,6 +45,18 @@ router.post('/register', upload.single('profilePicture') ,async (req, res) => {
   }
 });
 
+router.put('/:id/profilePicture', upload.single('profilePicture'), async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const profilePicture = req.file.location;
+    await userController.updateProfilePicture(userId, profilePicture);
+    res.status(200).json({ message: 'Profile picture updated successfully.' });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ error: 'Could not update profile picture.' });
+  }
+});
+
 router.get('/', async (req, res) => {
   try {
     const users = await userController.getUsers();

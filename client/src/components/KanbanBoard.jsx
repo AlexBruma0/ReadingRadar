@@ -15,6 +15,9 @@ export default function KanbanBoard() {
   const viewingId = localStorage.getItem("viewingId");
   const dispatch = useDispatch();
 
+  // Check if the viewingId is the same as the userId
+  const isOwner = userId === viewingId;
+
   useEffect(() => {
     if (viewingId) {
       dispatch(fetchBooks(viewingId));
@@ -92,7 +95,7 @@ export default function KanbanBoard() {
     <div className={`grid-container--small`}>
       <DragDropContext onDragEnd={handleDragEnd}>
         {Object.entries(boards).map(([boardId, books]) => (
-          <Board key={boardId} category={boardId} boardBooks={books} />
+          <Board key={boardId} category={boardId} boardBooks={books} isOwner={isOwner}/>
         ))}
       </DragDropContext>
     </div>

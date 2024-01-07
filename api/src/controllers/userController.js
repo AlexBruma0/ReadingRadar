@@ -31,7 +31,19 @@ async function getUsers() {
   }
   return users
 }
-
+async function updateProfilePicture(userId, profilePicture) {
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    user.profilePicture = profilePicture;
+    await user.save();
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
 async function getUser(userId) {
   console.log(userId)
   const users = await User.findById(userId);
@@ -46,4 +58,5 @@ module.exports = {
   loginUser,
   getUsers,
   getUser,
+  updateProfilePicture
 };

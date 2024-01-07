@@ -7,7 +7,7 @@ import Drag from "./Drag";
 import ModalAddForm from "./ModalAddForm";
 
 
-export default function Board({ boardBooks, category }) {
+export default function Board({ boardBooks, category , isOwner}) {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
