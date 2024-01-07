@@ -30,12 +30,14 @@ export default function Layout({ children }) {
   }, [navbarHeight]);
 
   useEffect(() => {
+    // Force the scrollbar to always be visible
+    document.body.style.overflowY = 'scroll';
+
     const checkWindowSize = () => {
       if (window.innerWidth < 400) {
         setIsSidebarFullscreen(true);
         setIsSidebarOpen(false);
-      } 
-      else{
+      } else {
         setIsSidebarFullscreen(false);
         setIsSidebarOpen(true);
       }
@@ -46,6 +48,8 @@ export default function Layout({ children }) {
     // Cleanup function
     return () => {
       window.removeEventListener('resize', checkWindowSize);
+      // Reset the overflowY property when the component unmounts
+      document.body.style.overflowY = 'auto';
     };
   }, []);
 

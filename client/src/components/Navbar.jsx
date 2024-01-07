@@ -55,7 +55,10 @@ export default function Navbar({ toggleSidebar }) {
       <div className="p-2 flex items-center"> 
         {user ? (
           <>
+            <div className="font-bold">
             {user.userName}
+            </div>
+            
             <img src={user.profilePicture} className="h-10 w-10 rounded-full ml-2" alt="User" />
           </>
         ) : 'Not logged in'}

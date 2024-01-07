@@ -35,7 +35,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
     return (
       <div
         style={{ backgroundColor: currentThemeColors.primary }}
-        className={`fixed left-0 h-full z-2 pt-3 ${isFullWidth ? "w-full" : "w-64"} transform ${
+        className={`fixed left-0 h-full z-30 pt-3 ${isFullWidth ? "w-full" : "w-64"} transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out`}
       >
