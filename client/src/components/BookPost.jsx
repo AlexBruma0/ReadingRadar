@@ -46,6 +46,8 @@ export default function BookPost() {
     dispatch(deleteBookAPI(bookId));
     dispatch(deleteBook(bookId));
     navigate("/home");
+    window.location.reload();
+    
   };
 
   const openEditDialog = () => {

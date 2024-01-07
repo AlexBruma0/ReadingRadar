@@ -26,7 +26,7 @@ export default function Navbar({ toggleSidebar }) {
         borderBottom: "0.1px solid black",
       }}
       id="navbar"
-      className={`fixed top-0 w-full z-10 flex items-center justify-center p-4 `}  >
+      className={`fixed top-0 w-full z-10 flex items-center justify-center p-0 `}  >
       <div className="flex items-center">
         <span
           id="hov"

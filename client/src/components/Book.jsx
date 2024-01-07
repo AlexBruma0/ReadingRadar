@@ -18,25 +18,24 @@ const Book = ({ book, handleDelete, openDialog }) => (
       <div className="flex flex-col flex-1">
         <h2 className="text-4xl font-bold">{book.title}</h2>
         <p className="text-gray-700 text-xl">{book.author}</p>
+        {book.rating && (
+          <div className="flex items-center mt-2">
+            <div className="bg-yellow-400 z-0 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-800">
+              Rating: {book.rating}
+            </div>
+            <div>
+              <ReactStars
+                count={5}
+                value={book.rating}
+                size={20}
+                isHalf={true}
+                edit={false}
+                activeColor="#ffd700"
+              />
+            </div>
+          </div>
+        )}
 
-        <div className="flex items-center my-2">
-          <div className="bg-yellow-400 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-800">
-            My Rating: {book.rating}
-          </div>
-          <div>
-            <ReactStars
-              count={5}
-              value={book.rating}
-              size={20}
-              isHalf={true}
-              edit={false}
-              activeColor="#ffd700"
-            />
-          </div>
-          <span className="px-3 py-1 text-sm font-semibold rounded-full bg-green-100 text-green-800 w-24 ml-2">
-          {book.category}
-        </span>
-        </div>
         <div className="flex gap-4 mt-4">
           <button
             onClick={openDialog}
