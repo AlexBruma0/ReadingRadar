@@ -26,21 +26,21 @@ const UsersPage = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center p-4 gap-4">
+    <div className="flex flex-wrap justify-center p-4 gap-2">
       {users.map((user) => (
         <div
           key={user._id}
           className="w-48 border border-gray-300 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-shadow duration-300 hover:shadow-xl"
         >
           <img
-            className="w-full h-32 object-cover"
+            className="w-full h-44"
             src={user.profilePicture ? user.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}
             alt={user.userName}
           />
           <div className="p-4 text-center">
             <div className="font-bold">{user.userName}</div>
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs py-2 px-4 rounded mt-3"
               onClick={() => handleVisitUser(user._id)}
             >
               View Books

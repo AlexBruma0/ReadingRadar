@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import { useContext } from "react";
+import ReactStars from "react-rating-stars-component";
+
 
 export default function Card({ book, disableOnClick }) {
   const navigate = useNavigate();
@@ -23,23 +25,30 @@ export default function Card({ book, disableOnClick }) {
         backgroundColor: currentThemeColors.secondary,
         color: currentThemeColors.text,
       }}
-      className={`flex items-center mb-1 justify-between p-4 rounded-lg shadow-md cursor-pointer`}
+      className={`flex items-center mb-2 justify-between p-4 rounded-lg shadow-md cursor-pointer`}
       onClick={handleNavigate}
     >
       <div className="flex-1 mr-5">
         <h2 className="text-xl font-semibold">{book.title}</h2>
         <p className="text-sm italic">{book.author}</p>
-        <div className="flex items-center mt-2">
-          {/* <Rating
-            readonly
-            initialValue={book.rating}
-            allowFraction
-            size="20px"
-            fillColor="black"
-            emptyColor="#f2f2f3"
-            className="flex-col" // Ensures the stars are laid out in a row
-          /> */}
+        {book.rating && (
+          <div className="flex items-center mt-2">
+          <div className="bg-yellow-400 z-0 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-800">
+            Rating: {book.rating}
+          </div>
+          <div>
+            <ReactStars
+              count={5}
+              value={book.rating}
+              size={20}
+              isHalf={true}
+              edit={false}
+              activeColor="#ffd700"
+            />
+          </div>
         </div>
+          )}
+        
       </div>
       <div className="flex-none">
         <img
