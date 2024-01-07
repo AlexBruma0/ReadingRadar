@@ -49,6 +49,8 @@ export default function ModalAddForm({ category, closeDialog, isOpen }) {
         };
         dispatch(createBook(book));
         dispatch(createBookAPI(book));
+        setSelectedBook({});
+        setStep(1);
         closeDialog();
         // window.location.reload();
     };

@@ -22,8 +22,9 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
     notes: initialValues.notes,
   };
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, form) => {
     handleSubmitForm(values);
+    form.reset();
   };
 
   const feildMap = {
@@ -38,11 +39,11 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
   };
 
   return (
-    <Form
-      initialValues={bookFields}
-      onSubmit={onSubmit}
-      render={({ handleSubmit, form, submitting, pristine }) => (
-        <form onSubmit={handleSubmit} className="m-4">
+<Form
+  initialValues={bookFields}
+  onSubmit={onSubmit}
+  render={({ handleSubmit, form, submitting, pristine }) => (
+    <form onSubmit={handleSubmit} className="m-4">
           {["title", "author", "img_url", "notes"].map((field) => (
             <div key={field} className="mb-4">
               <label className="block mb-2 text-sm font-bold text-gray-700 capitalize">
