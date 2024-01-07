@@ -23,7 +23,7 @@ export default function App() {
       dispatch(fetchUser(userId));
     }
   }
-    ,[userId, dispatch]);
+    ,[user, dispatch]);
 
   return (
     <UserContext.Provider value={{ user }}>

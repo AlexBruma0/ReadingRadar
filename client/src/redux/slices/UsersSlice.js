@@ -64,12 +64,10 @@ export const fetchUser = createAsyncThunk(
       );
 
       if (!response.ok) {
-        console.log("response not okay");
         throw new Error("Failed to fetch users");
       }
 
       const user = await response.json();
-      console.log("response ok", user);
       return user;
     } catch (error) {
       console.log(error.message);

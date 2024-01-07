@@ -50,7 +50,7 @@ export default function ModalAddForm({ category, closeDialog, isOpen }) {
         dispatch(createBook(book));
         dispatch(createBookAPI(book));
         closeDialog();
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (
