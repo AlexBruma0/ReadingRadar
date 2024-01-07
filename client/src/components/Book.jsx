@@ -7,7 +7,7 @@ import { FaEdit } from 'react-icons/fa';
 
 
 // Book component
-const Book = ({ book, handleDelete, openDialog }) => (
+const Book = ({ book, handleDelete, openDialog, isOwner }) => (
   <div className="max-w-7xl mx-auto mt-10">
     <div className="bg-white p-5  flex items-start">
       <img
@@ -35,8 +35,8 @@ const Book = ({ book, handleDelete, openDialog }) => (
             </div>
           </div>
         )}
-
-        <div className="flex gap-4 mt-4">
+        {isOwner && (
+          <div className="flex gap-4 mt-4">
           <button
             onClick={openDialog}
             className="bg-slate-500 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-full transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
@@ -50,6 +50,9 @@ const Book = ({ book, handleDelete, openDialog }) => (
             <FaTrashAlt className="inline-block mr-2" /> Delete
           </button>
         </div>
+
+        )}
+
         <p className="text-gray-600 text-lg my-2">{book.notes}</p>
 
       </div>

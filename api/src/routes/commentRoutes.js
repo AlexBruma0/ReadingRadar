@@ -6,10 +6,12 @@ const authMiddleware = require('../middleware/authMiddleware');
 // Create a new comment
 router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
   const { content, bookId } = req.body;
+  console.log("req.user: ",req.user)
   const userId = req.user.userId;
 
   try {
     const newComment = await commentController.createComment(content, userId, bookId);
+    console.log("newComment from controller: ",newComment)
     res.status(201).json(newComment);
   } catch (error) {
     res.status(500).json({ error: 'Could not create comment.' });

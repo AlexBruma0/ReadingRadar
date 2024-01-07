@@ -31,13 +31,15 @@ export default function Board({ boardBooks, category , isOwner}) {
           {boardMap[category]}{" "}
           <span className="ml-2 text-sm">{boardBooks.length}</span>
         </h2>
-        <button
-          style={{ backgroundColor: currentThemeColors.accent }}
-          className={`p-2 rounded-full `}
-          onClick={openDialog}
-        >
-          <Plus />
-        </button>
+        {isOwner && (
+          <button
+            style={{ backgroundColor: currentThemeColors.accent }}
+            className={`p-2 rounded-full `}
+            onClick={openDialog}
+          >
+            <Plus />
+          </button>
+        )}
       </div>
 
       {/* Droppable Area */}

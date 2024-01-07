@@ -1,12 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
+import { fetchUser } from "../redux/slices/UsersSlice";
+import { useDispatch } from "react-redux";
 
 function Comment({ comment, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment.content);
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
+  const userId = localStorage.getItem("userId");
+  const commentUserId = comment.user._id;
+  const isOwner = userId === commentUserId;
+  console.log("comment.user", comment.user);
+  const dispatch = useDispatch();
+
+  const [commentUser, setCommentUser] = useState(null);
+
+  useEffect(() => { 
+    const fetch = async () => {
+      console.log("commentUserId: ", commentUserId);
+      const fetchedUser = await dispatch(fetchUser(commentUserId));
+      console.log("fetchedUser: ", fetchedUser);
+      setCommentUser(fetchedUser.payload);
+    };
+    fetch();
+  }, []);
+  
 
   const handleDelete = () => {
     onDelete(comment._id);
@@ -28,7 +48,19 @@ function Comment({ comment, onDelete, onEdit }) {
 
   return (
     <div style={{ backgroundColor: currentThemeColors.background, color: currentThemeColors.text }} className="p-4 rounded-lg shadow-lg mt-4">
-      <p style={{ color: currentThemeColors.text }} className="font-semibold">{comment.user.userName}</p>
+      {commentUser && (
+        <div className="flex items-center">
+                <img 
+                src={commentUser.profilePicture} 
+                alt={comment.user.userName} 
+                style={{ width: '30px', height: '30px', borderRadius: '50%' }} 
+              />
+              <p style={{ color: currentThemeColors.text }} className="font-semibold text-lg ml-2">{commentUser.userName}</p>
+              </div>
+            )
+          }
+
+      
       {isEditing ? (
         <div>
           <textarea
@@ -54,9 +86,12 @@ function Comment({ comment, onDelete, onEdit }) {
           </button>
         </div>
       ) : (
+        
         <div>
           <p className="mt-2">{comment.content}</p>
-          <button
+          {isOwner && (
+            <>
+                      <button
             onClick={handleEdit}
 
             className="font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -69,7 +104,12 @@ function Comment({ comment, onDelete, onEdit }) {
           >
             Delete
           </button>
+            </>
+            )}
         </div>
+
+
+
       )}
     </div>
   );

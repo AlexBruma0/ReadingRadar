@@ -14,7 +14,7 @@ export const createCommentAPI = createAsyncThunk(
   "comments/createComment",
   async ({ content, bookId }, thunkAPI) => {
     const jwtToken = localStorage.getItem("jwtToken");
-    const response = await fetch(
+    await fetch(
       `${import.meta.env.VITE_API_URL}/comments/create`,
       {
         method: "POST",
@@ -25,7 +25,6 @@ export const createCommentAPI = createAsyncThunk(
         body: JSON.stringify({ content, bookId }),
       },
     );
-    return response.json();
   },
 );
 

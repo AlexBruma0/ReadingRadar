@@ -14,6 +14,10 @@ export default function Navbar({ toggleSidebar }) {
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
   const { user } = useContext(UserContext); // Access user from UserContext
+  const viewingId = localStorage.getItem("viewingId");
+  const userId = localStorage.getItem("userId");
+
+
 
   const toggleSearching = () => {
     setSearching(!searching);
@@ -60,6 +64,8 @@ export default function Navbar({ toggleSidebar }) {
             </div>
             
             <img src={user.profilePicture} className="h-10 w-10 rounded-full ml-2" alt="User" />
+            <div className="ml-2">viewing id: {viewingId}</div>
+            <div className="ml-2">my id: {userId}</div>
           </>
         ) : 'Not logged in'}
       </div>

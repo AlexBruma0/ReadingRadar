@@ -10,30 +10,46 @@ import {
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import { FaPlus } from 'react-icons/fa';
+import { SpinnerCircular } from "spinners-react";
+
 
 function Comments({ bookId }) {
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.comments.comments);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newCommentContent, setNewCommentContent] = useState("");
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
-
+  const [refreshTriggered, setrefreshTriggered] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false); // Add action loading state
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchCommentsByBook(bookId));
-    setLoading(false);
-  }, [bookId, dispatch]);
+    const fetchComments = async () => {
+      setLoading(true);
+      const fetchedComments = await dispatch(fetchCommentsByBook(bookId));
+      setComments(fetchedComments.payload);
+      console.log("fetchedComments: ", fetchedComments.payload);
+      setrefreshTriggered(false);
+      setLoading(false);
+    };
 
-  const handleAddComment = () => {
+    fetchComments();
+  }, [refreshTriggered, dispatch]);
+
+  const handleAddComment = async () => {
+    setActionLoading(true); // Set action loading state to true
     const newComment = { content: newCommentContent, bookId };
-    dispatch(createCommentAPI(newComment));
+    await dispatch(createCommentAPI(newComment));
+    setrefreshTriggered(true);
     setNewCommentContent("");
+    setActionLoading(false); // Set action loading state to false
   };
 
-  const handleDeleteComment = (commentId) => {
-    dispatch(deleteCommentAPI(commentId));
+  const handleDeleteComment = async (commentId) => {
+    setActionLoading(true); // Set action loading state to true
+    await dispatch(deleteCommentAPI(commentId));
+    setrefreshTriggered(true);
+    setActionLoading(false); // Set action loading state to false
   };
 
   const handleEditComment = (commentId, content) => {
@@ -43,7 +59,16 @@ function Comments({ bookId }) {
 
   return (
     <div className="mt-10 mx-4">
-      <h3 className="text-2xl font-bold mb-4">Comments</h3>
+      {actionLoading ? (  
+        <div className="flex justify-center">
+          <SpinnerCircular
+            size={200}
+            color="black"
+          />
+        </div>
+      ) : (
+        <>
+              <h3 className="text-2xl font-bold mb-4">Comments</h3>
       <div className="mb-4">
         <textarea
           value={newCommentContent}
@@ -72,6 +97,9 @@ function Comments({ bookId }) {
           ))}
         </div>
       )}
+        </>
+      )}
+
     </div>
   );
 }

@@ -9,21 +9,26 @@ import { ThemeProvider } from "./components/ThemeContext";
 import UserContext from "./components/UserContext";
 import { fetchUser } from "./redux/slices/UsersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function App() {
 
   const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
-  const user = useSelector((state) => state.users.user);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (userId) {
-      dispatch(fetchUser(userId));
-    }
-  }
-    ,[user, dispatch]);
+    const fetchData = async () => {
+      if (userId) {
+        const u = await dispatch(fetchUser(userId));
+        setUser(u.payload);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <UserContext.Provider value={{ user }}>

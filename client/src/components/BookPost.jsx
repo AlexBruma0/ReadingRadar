@@ -20,6 +20,9 @@ export default function BookPost() {
   const dispatch = useDispatch();
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false); 
+  const userId = localStorage.getItem("userId");
+  const viewingId = localStorage.getItem("viewingId");
+  const isOwner = userId === viewingId;
 
   const [book, setBook] = useState(null);
 
@@ -71,6 +74,7 @@ export default function BookPost() {
       book={book}
       handleDelete={handleDelete}
       openDialog={openEditDialog}
+      isOwner={isOwner}
     />
     <Comments bookId={bookId} />
     <Modal closeDialog={closeEditDialog} isOpen={isEditDialogOpen} isLoading={isLoading}>
