@@ -12,42 +12,46 @@ import Comments from "./Comments";
 import AddForm from "./AddForm";
 import Modal from "./Modal";
 import Book from "./Book";
-import { resetCurrentBook } from "../redux/slices/BooksSlice"; // Import the new action
+import { SpinnerCircular } from "spinners-react";
 
 export default function BookPost() {
   const { id: bookId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
+
+  const [book, setBook] = useState(null);
 
   useEffect(() => {
-    if (bookId) {
-      dispatch(fetchBookById(bookId));
-    }
-
-    return () => {
-      dispatch(resetCurrentBook());
+    const fetchBook = async () => {
+      console.log("bookId: ", bookId);
+      if (bookId) {
+        const fetchedBook = await dispatch(fetchBookById(bookId));
+        setBook(fetchedBook.payload); 
+      }
     };
+
+    fetchBook();
+
   }, [bookId, dispatch]);
 
-  const book = useSelector((state) => state.books.currentBook);
-
   const handleUpdate = async (updatedBook) => {
+    setIsLoading(true); // Set loading state to true
     updatedBook._id = book._id;
     updatedBook.category = book.category;
-
-    dispatch(updateBook(updatedBook));
-    dispatch(updateAPIBook(updatedBook));
+    const updatedBookFromServer = await dispatch(updateAPIBook(updatedBook));
+    setBook(updatedBookFromServer.payload); 
+    setIsLoading(false); 
     setIsEditDialogOpen(false);
-    window.location.reload();
   };
-
   const handleDelete = async () => {
-    dispatch(deleteBookAPI(bookId));
-    dispatch(deleteBook(bookId));
-    navigate("/home");
-    window.location.reload();
-    
+    setIsLoading(true); 
+    await dispatch(deleteBookAPI(bookId));
+    setIsLoading(false); 
+    if (!isLoading) {
+      navigate("/home");
+    }
   };
 
   const openEditDialog = () => {
@@ -58,27 +62,35 @@ export default function BookPost() {
     setIsEditDialogOpen(false);
   };
 
-  if (!book) {
-    return <div>Loading...</div>;
-  }
-
   return (
+
     <>
-      <Book
-        book={book}
-        handleDelete={handleDelete}
-        openDialog={openEditDialog}
+    {book && !isLoading ? (
+      <>
+            <Book
+      book={book}
+      handleDelete={handleDelete}
+      openDialog={openEditDialog}
+    />
+    <Comments bookId={bookId} />
+    <Modal closeDialog={closeEditDialog} isOpen={isEditDialogOpen} isLoading={isLoading}>
+      <AddForm
+        category={book.category}
+        initialValues={book} 
+        handleSubmitForm={handleUpdate}
       />
-      <Comments bookId={bookId} />
-      <Modal closeDialog={closeEditDialog} isOpen={isEditDialogOpen}>
-        <AddForm
-          category={book.category}
-          initialValues={book} 
-          handleSubmitForm={handleUpdate}
-        />
-        {/* for layout purposes */}
-        <div className="mt-auto ml-5"></div>
-      </Modal>
+      {/* for layout purposes */}
+      <div className="mt-auto ml-5"></div>
+    </Modal> 
+      </>
+ 
+    ) : (
+      <div className="center-text" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <SpinnerCircular color="black" size="20vh" />
+      </div>
+    
+    )}
+
     </>
   );
 }

@@ -1,8 +1,9 @@
 import React from "react";
 import { useRef, useEffect } from "react";
 import { X } from "react-feather";
+import { SpinnerCircular } from "spinners-react";
 
-const Modal = ({ closeDialog, children, isOpen }) => {
+const Modal = ({ closeDialog, children, isOpen, isLoading }) => {
   return (
     <dialog
       open={isOpen}
@@ -12,7 +13,13 @@ const Modal = ({ closeDialog, children, isOpen }) => {
         <div onClick={closeDialog} className="cursor-pointer">
           <X color="#082d0f" size={40} />
         </div>
-        {children}
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <SpinnerCircular size={200} color="black"/> {/* Adjust spinner size here */}
+          </div>
+        ) : (
+          children
+        )}
       </div>
     </dialog>
   );

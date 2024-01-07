@@ -61,7 +61,7 @@ export const updateAPIBook = createAsyncThunk(
   "books/updateBook",
   async (updatedBook, thunkAPI) => {
     const jwtToken = localStorage.getItem("jwtToken");
-    await fetch(`${import.meta.env.VITE_API_URL}/books/${updatedBook._id}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/books/${updatedBook._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -69,6 +69,7 @@ export const updateAPIBook = createAsyncThunk(
       },
       body: JSON.stringify({ book: updatedBook }),
     });
+    return response.json();
   },
 );
 
@@ -134,6 +135,26 @@ export const deleteBookAPI = createAsyncThunk(
   },
 );
 
+function findKeyIgnoringSpacesAndCaps(obj, key) {
+  // Normalize the input key
+  const normalizedKey = key.replace(/\s/g, '').toLowerCase();
+
+  // Iterate over the object keys
+  for (let objKey in obj) {
+    // Normalize the object key
+    const normalizedObjKey = objKey.replace(/\s/g, '').toLowerCase();
+
+    // If the normalized keys match, return the original object key
+    if (normalizedObjKey === normalizedKey) {
+      return objKey;
+    }
+  }
+
+  // If no matching key was found, return null
+  return null;
+}
+
+
 const booksSlice = createSlice({
   name: "books",
   initialState: {
@@ -171,9 +192,12 @@ const booksSlice = createSlice({
     updateBook: (state, action) => {
       console.log(action.payload);
       const { _id, category, ...updatedData } = action.payload;
-      const bookIndex = state.boards[lowercaseFirstLetter(category)].findIndex(
+      const normalizedCategory = findKeyIgnoringSpacesAndCaps(state.boards, category);
+      console.log("normalized cat",normalizedCategory);
+      const bookIndex = state.boards[normalizedCategory].findIndex(
         (book) => book._id === _id,
       );
+      console.log("book index", bookIndex);
       if (bookIndex !== -1) {
         state.boards[category][bookIndex] = {
           ...state.boards[category][bookIndex],
