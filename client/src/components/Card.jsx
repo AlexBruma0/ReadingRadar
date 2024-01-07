@@ -33,17 +33,17 @@ export default function Card({ book, disableOnClick }) {
         <p className="text-sm italic">{book.author}</p>
         {book.rating && (
           <div className="flex items-center mt-2">
-          <div className="bg-yellow-400 z-0 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-800">
+          <div className="bg-gray-200 z-0 text-xs ßfont-semibold mr-2 px-2.5 py-0.5 rounded ">
             Rating: {book.rating}
           </div>
           <div>
             <ReactStars
               count={5}
               value={book.rating}
-              size={20}
+              size={15}
               isHalf={true}
               edit={false}
-              activeColor="#ffd700"
+              activeColor={"black"}
             />
           </div>
         </div>
