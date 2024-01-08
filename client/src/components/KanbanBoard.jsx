@@ -11,12 +11,16 @@ import {
 import { DragDropContext } from "react-beautiful-dnd";
 import Board from "../components/Board";
 import { SpinnerCircular } from "spinners-react";
+import { ThemeContext } from "../components/ThemeContext";
+import { themes } from "../themes";
 
 export default function KanbanBoard() {
   const userId = localStorage.getItem("userId");
   const viewingId = localStorage.getItem("viewingId");
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false); // Add loading state
+  const { theme } = useContext(ThemeContext);
+  const currentThemeColors = themes[theme];
 
   // Check if the viewingId is the same as the userId
   const isOwner = userId === viewingId;
@@ -107,8 +111,14 @@ export default function KanbanBoard() {
   };
 
   return (
-    <div>
-      <button onClick={createNewBoard}>Create New Category</button>
+    <div className="">
+      <button 
+        className="px-4 py-2 font-bold rounded hover:bg-opacity-80 transition-colors duration-200  mr-4"
+        style={{ backgroundColor: currentThemeColors.accent }}
+        onClick={createNewBoard}
+      >
+        Create New Category
+      </button>
 
       <div className={`grid-container--small`}>
         {loading ? (
@@ -127,7 +137,6 @@ export default function KanbanBoard() {
           <DragDropContext onDragEnd={handleDragEnd}>
             {Object.entries(boards).map(([boardId, books]) => (
               <div style={{ display: "flex", flexDirection: "column" }}>
-                {" "}
                 {/* Add this line */}
                 <Board
                   key={boardId}

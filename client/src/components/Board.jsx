@@ -8,8 +8,8 @@ import ModalAddForm from "./ModalAddForm";
 
 export default function Board({ boardBooks, category, isOwner }) {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const { theme } = useContext(ThemeContext);
-  const currentThemeColors = themes[theme];
+const { theme } = useContext(ThemeContext);
+const currentThemeColors = themes[theme];
 
   const convertCamelCaseToText = (camelCase) => {
     return camelCase
@@ -22,8 +22,8 @@ export default function Board({ boardBooks, category, isOwner }) {
 
   return (
     <div
-      style={{ backgroundColor: currentThemeColors.primary, height: "auto" }}
-      className={`m-4 p-4 rounded-lg shadow-lg h-auto`}
+      style={{ backgroundColor: currentThemeColors.primary, }}
+      className={`m-4 p-4 rounded-lg shadow-lg `}
     >
       {/* Board Header */}
       <div className="flex justify-between items-center mb-4">
