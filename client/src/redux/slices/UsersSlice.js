@@ -24,21 +24,23 @@ export const fetchUsers = createAsyncThunk(
 );
 
 export const updateUserProfilePicture = createAsyncThunk(
-  'users/updateUserProfilePicture',
+  "users/updateUserProfilePicture",
   async ({ userId, profilePicture }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
-      formData.append('profilePicture', profilePicture);
+      formData.append("profilePicture", profilePicture);
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}/profilePicture`, {
-        method: 'PUT',
-        headers: {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/${userId}/profilePicture`,
+        {
+          method: "PUT",
+          headers: {},
+          body: formData,
         },
-        body: formData,
-      });
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to update profile picture');
+        throw new Error("Failed to update profile picture");
       }
 
       const updatedUser = await response.json();

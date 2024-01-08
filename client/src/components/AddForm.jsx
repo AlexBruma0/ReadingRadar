@@ -7,8 +7,6 @@ import { Form, Field } from "react-final-form";
 import { createBook, createBookAPI } from "../redux/slices/BooksSlice";
 import ReactStars from "react-rating-stars-component";
 
-        
-
 const AddForm = ({ category, initialValues, handleSubmitForm }) => {
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
@@ -38,11 +36,11 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
   };
 
   return (
-<Form
-  initialValues={bookFields}
-  onSubmit={onSubmit}
-  render={({ handleSubmit, form, submitting, pristine }) => (
-    <form onSubmit={handleSubmit} className="m-4">
+    <Form
+      initialValues={bookFields}
+      onSubmit={onSubmit}
+      render={({ handleSubmit, form, submitting, pristine }) => (
+        <form onSubmit={handleSubmit} className="m-4">
           {["title", "author", "img_url", "notes"].map((field) => (
             <div key={field} className="mb-4">
               <label className="block mb-2 text-sm font-bold text-gray-700 capitalize">
@@ -55,8 +53,12 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
                 placeholder={"Enter " + feildMap[field]}
                 className="w-full p-2 border border-gray-300 rounded outline-none focus:bg-slate-100"
               />
-              {field === "img_url"  && form.getState().values["img_url"] && (
-                <img src={form.getState().values["img_url"]} alt="Preview" className="mt-2 w-16 h-20 rounded-md " />
+              {field === "img_url" && form.getState().values["img_url"] && (
+                <img
+                  src={form.getState().values["img_url"]}
+                  alt="Preview"
+                  className="mt-2 w-16 h-20 rounded-md "
+                />
               )}
             </div>
           ))}

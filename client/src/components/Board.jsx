@@ -6,8 +6,7 @@ import { themes } from "../themes";
 import Drag from "./Drag";
 import ModalAddForm from "./ModalAddForm";
 
-
-export default function Board({ boardBooks, category , isOwner}) {
+export default function Board({ boardBooks, category, isOwner }) {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
@@ -55,8 +54,11 @@ export default function Board({ boardBooks, category , isOwner}) {
       </Droppable>
 
       {/* Modal Form */}
-      <ModalAddForm category={category} closeDialog={closeDialog} isOpen={isAddDialogOpen}/>
-
+      <ModalAddForm
+        category={category}
+        closeDialog={closeDialog}
+        isOpen={isAddDialogOpen}
+      />
     </div>
   );
 }

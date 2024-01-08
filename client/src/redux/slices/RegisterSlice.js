@@ -6,8 +6,10 @@ export const registerUser = createAsyncThunk(
   async ({ userData, profilePicture }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
-      Object.keys(userData).forEach(key => formData.append(key, userData[key]));
-      formData.append('profilePicture', profilePicture);
+      Object.keys(userData).forEach((key) =>
+        formData.append(key, userData[key]),
+      );
+      formData.append("profilePicture", profilePicture);
 
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/users/register`,

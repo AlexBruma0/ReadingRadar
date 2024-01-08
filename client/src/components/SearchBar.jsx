@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import Card from "./Card";
 export default function SearchBar(props) {
-
-
   return (
     <Modal
       open={props.open}

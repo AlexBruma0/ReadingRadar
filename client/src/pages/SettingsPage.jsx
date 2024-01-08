@@ -9,7 +9,7 @@ const SettingsPage = () => {
     <Layout>
       <div className="font-bold my-4 text-3xl">Change Theme</div>
       <ThemeSwitcher />
-      <UpdateProfilePicture userId={userId}/>
+      <UpdateProfilePicture userId={userId} />
     </Layout>
   );
 };

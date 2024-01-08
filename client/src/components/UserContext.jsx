@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // Create a context with a default value
 const UserContext = React.createContext({

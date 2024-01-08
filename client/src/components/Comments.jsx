@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Comment from "./Comment";
 import {
@@ -9,7 +9,7 @@ import {
 } from "../redux/slices/CommentsSlice"; // Import your Redux actions
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus } from "react-icons/fa";
 
 function Comments({ bookId }) {
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ function Comments({ bookId }) {
   const [newCommentContent, setNewCommentContent] = useState("");
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
-
 
   useEffect(() => {
     setLoading(true);
@@ -55,7 +54,7 @@ function Comments({ bookId }) {
         <button
           onClick={handleAddComment}
           style={{ backgroundColor: currentThemeColors.accent }}
-          className= "font-bold py-2 px-4 rounded ml-2 transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
+          className="font-bold py-2 px-4 rounded ml-2 transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
         >
           <FaPlus className="inline-block mr-2" /> Add
         </button>
@@ -64,17 +63,15 @@ function Comments({ bookId }) {
         <div>
           {comments.map((comment) => (
             <>
-            {comment && comment.content && comment.content.length > 0 && (
-            <Comment
-              key={comment._id}
-              comment={comment}
-              onDelete={() => handleDeleteComment(comment._id)}
-              onEdit={handleEditComment
-              }
-            />              
+              {comment && comment.content && comment.content.length > 0 && (
+                <Comment
+                  key={comment._id}
+                  comment={comment}
+                  onDelete={() => handleDeleteComment(comment._id)}
+                  onEdit={handleEditComment}
+                />
               )}
             </>
-
           ))}
         </div>
       )}

@@ -101,13 +101,26 @@ export default function KanbanBoard() {
   return (
     <div className={`grid-container--small`}>
       {loading ? ( // Conditionally render SpinnerCircular
-      <div className="center-text" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <SpinnerCircular color="black" size="20vh" />
-    </div>
+        <div
+          className="center-text"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <SpinnerCircular color="black" size="20vh" />
+        </div>
       ) : (
         <DragDropContext onDragEnd={handleDragEnd}>
           {Object.entries(boards).map(([boardId, books]) => (
-            <Board key={boardId} category={boardId} boardBooks={books} isOwner={isOwner}/>
+            <Board
+              key={boardId}
+              category={boardId}
+              boardBooks={books}
+              isOwner={isOwner}
+            />
           ))}
         </DragDropContext>
       )}

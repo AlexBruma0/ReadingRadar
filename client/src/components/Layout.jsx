@@ -31,7 +31,7 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     // Force the scrollbar to always be visible
-    document.body.style.overflowY = 'scroll';
+    document.body.style.overflowY = "scroll";
 
     const checkWindowSize = () => {
       if (window.innerWidth < 400) {
@@ -43,13 +43,13 @@ export default function Layout({ children }) {
       }
     };
 
-    window.addEventListener('resize', checkWindowSize);
+    window.addEventListener("resize", checkWindowSize);
 
     // Cleanup function
     return () => {
-      window.removeEventListener('resize', checkWindowSize);
+      window.removeEventListener("resize", checkWindowSize);
       // Reset the overflowY property when the component unmounts
-      document.body.style.overflowY = 'auto';
+      document.body.style.overflowY = "auto";
     };
   }, []);
 
@@ -57,7 +57,7 @@ export default function Layout({ children }) {
     <>
       <Navbar toggleSidebar={toggleSidebar} />
       <div style={{ paddingTop: `${navbarHeight}px` }}>
-        <Sidebar isOpen={isSidebarOpen} isFullWidth={isSidebarFullscreen}  />
+        <Sidebar isOpen={isSidebarOpen} isFullWidth={isSidebarFullscreen} />
         <div
           style={{
             backgroundColor: currentThemeColors.primary,

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
-import { FaTrashAlt } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
-import { FaEdit } from 'react-icons/fa';
+import { FaTrashAlt } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 // Usage: <FaEdit />
-
 
 // Book component
 const Book = ({ book, handleDelete, openDialog, isOwner }) => (
@@ -37,24 +36,22 @@ const Book = ({ book, handleDelete, openDialog, isOwner }) => (
         )}
         {isOwner && (
           <div className="flex gap-4 mt-4">
-          <button
-            onClick={openDialog}
-            className="bg-slate-500 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-full transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
-          >
-            <FaEdit className="inline-block mr-2" /> Edit
-          </button>
-          <button
-            onClick={() => handleDelete(book._id)}
-            className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full ml-2 transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
-          >
-            <FaTrashAlt className="inline-block mr-2" /> Delete
-          </button>
-        </div>
-
+            <button
+              onClick={openDialog}
+              className="bg-slate-500 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-full transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
+            >
+              <FaEdit className="inline-block mr-2" /> Edit
+            </button>
+            <button
+              onClick={() => handleDelete(book._id)}
+              className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full ml-2 transform hover:scale-110 hover:shadow-lg transition duration-200 ease-in-out"
+            >
+              <FaTrashAlt className="inline-block mr-2" /> Delete
+            </button>
+          </div>
         )}
 
         <p className="text-gray-600 text-lg my-2">{book.notes}</p>
-
       </div>
     </div>
   </div>

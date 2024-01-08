@@ -11,9 +11,7 @@ import { fetchUser } from "./redux/slices/UsersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-
 export default function App() {
-
   const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
   const [user, setUser] = useState(null);
@@ -28,7 +26,6 @@ export default function App() {
 
     fetchData();
   }, []);
-
 
   return (
     <UserContext.Provider value={{ user }}>
@@ -45,6 +42,5 @@ export default function App() {
         </BrowserRouter>
       </ThemeProvider>
     </UserContext.Provider>
-
   );
 }

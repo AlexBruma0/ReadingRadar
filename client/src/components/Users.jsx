@@ -32,7 +32,11 @@ const UsersPage = () => {
         >
           <img
             className="w-full h-44"
-            src={user.profilePicture ? user.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}
+            src={
+              user.profilePicture
+                ? user.profilePicture
+                : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+            }
             alt={user.userName}
           />
           <div className="p-4 text-center">

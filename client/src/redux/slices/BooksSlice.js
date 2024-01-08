@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 function lowercaseFirstLetter(str) {
-  if(str && str.length > 0) {
-      return str.charAt(0).toLowerCase() + str.slice(1);
+  if (str && str.length > 0) {
+    return str.charAt(0).toLowerCase() + str.slice(1);
   }
   return str;
 }
@@ -60,14 +60,17 @@ export const updateAPIBook = createAsyncThunk(
   "books/updateBook",
   async (updatedBook, thunkAPI) => {
     const jwtToken = localStorage.getItem("jwtToken");
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/books/${updatedBook._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/books/${updatedBook._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+        body: JSON.stringify({ book: updatedBook }),
       },
-      body: JSON.stringify({ book: updatedBook }),
-    });
+    );
     return response.json();
   },
 );
@@ -135,12 +138,12 @@ export const deleteBookAPI = createAsyncThunk(
 
 function findKeyIgnoringSpacesAndCaps(obj, key) {
   // Normalize the input key
-  const normalizedKey = key.replace(/\s/g, '').toLowerCase();
+  const normalizedKey = key.replace(/\s/g, "").toLowerCase();
 
   // Iterate over the object keys
   for (let objKey in obj) {
     // Normalize the object key
-    const normalizedObjKey = objKey.replace(/\s/g, '').toLowerCase();
+    const normalizedObjKey = objKey.replace(/\s/g, "").toLowerCase();
 
     // If the normalized keys match, return the original object key
     if (normalizedObjKey === normalizedKey) {
@@ -151,7 +154,6 @@ function findKeyIgnoringSpacesAndCaps(obj, key) {
   // If no matching key was found, return null
   return null;
 }
-
 
 const booksSlice = createSlice({
   name: "books",
@@ -189,7 +191,10 @@ const booksSlice = createSlice({
     },
     updateBook: (state, action) => {
       const { _id, category, ...updatedData } = action.payload;
-      const normalizedCategory = findKeyIgnoringSpacesAndCaps(state.boards, category);
+      const normalizedCategory = findKeyIgnoringSpacesAndCaps(
+        state.boards,
+        category,
+      );
       const bookIndex = state.boards[normalizedCategory].findIndex(
         (book) => book._id === _id,
       );
@@ -236,5 +241,10 @@ const booksSlice = createSlice({
 
 export default booksSlice.reducer;
 
-export const { updateBoards, createBook, deleteBook, updateBook, resetCurrentBook } =
-  booksSlice.actions;
+export const {
+  updateBoards,
+  createBook,
+  deleteBook,
+  updateBook,
+  resetCurrentBook,
+} = booksSlice.actions;

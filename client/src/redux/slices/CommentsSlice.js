@@ -81,7 +81,6 @@ const commentsSlice = createSlice({
       state.comments = action.payload;
     },
     [createCommentAPI.fulfilled]: (state, action) => {
-      console.log("action.payload: ",action.payload);
       state.comments.push(action.payload);
     },
     [updateCommentAPI.fulfilled]: (state, action) => {

@@ -13,16 +13,18 @@ import AddForm from "./AddForm";
 import Modal from "./Modal";
 import Book from "./Book";
 import { SpinnerCircular } from "spinners-react";
+import { fetchUser } from "../redux/slices/UsersSlice";
 
 export default function BookPost() {
   const { id: bookId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const userId = localStorage.getItem("userId");
   const viewingId = localStorage.getItem("viewingId");
   const isOwner = userId === viewingId;
+  const [owner, setOwner] = useState(false);
 
   const [book, setBook] = useState(null);
 
@@ -30,27 +32,38 @@ export default function BookPost() {
     const fetchBook = async () => {
       if (bookId) {
         const fetchedBook = await dispatch(fetchBookById(bookId));
-        setBook(fetchedBook.payload); 
+        setBook(fetchedBook.payload);
       }
     };
 
     fetchBook();
-
   }, [bookId, dispatch]);
+
+  useEffect(() => {
+    const fetchOwner = async () => {
+      if (viewingId) {
+        const fetchedOwner = await dispatch(fetchUser(viewingId));
+        console.log(fetchedOwner.payload);
+        setOwner(fetchedOwner.payload);
+      }
+    }
+
+    fetchOwner();
+  }, [viewingId, dispatch]);
 
   const handleUpdate = async (updatedBook) => {
     setIsLoading(true); // Set loading state to true
     updatedBook._id = book._id;
     updatedBook.category = book.category;
     const updatedBookFromServer = await dispatch(updateAPIBook(updatedBook));
-    setBook(updatedBookFromServer.payload); 
-    setIsLoading(false); 
+    setBook(updatedBookFromServer.payload);
+    setIsLoading(false);
     setIsEditDialogOpen(false);
   };
   const handleDelete = async () => {
-    setIsLoading(true); 
+    setIsLoading(true);
     await dispatch(deleteBookAPI(bookId));
-    setIsLoading(false); 
+    setIsLoading(false);
     if (!isLoading) {
       navigate("/home");
     }
@@ -65,35 +78,59 @@ export default function BookPost() {
   };
 
   return (
-
     <>
-    {book && !isLoading ? (
-      <>
-            <Book
-      book={book}
-      handleDelete={handleDelete}
-      openDialog={openEditDialog}
-      isOwner={isOwner}
-    />
-    <Comments bookId={bookId} />
-    <Modal closeDialog={closeEditDialog} isOpen={isEditDialogOpen} isLoading={isLoading}>
-      <AddForm
-        category={book.category}
-        initialValues={book} 
-        handleSubmitForm={handleUpdate}
-      />
-      {/* for layout purposes */}
-      <div className="mt-auto ml-5"></div>
-    </Modal> 
-      </>
- 
-    ) : (
-      <div className="center-text" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-        <SpinnerCircular color="black" size="20vh" />
-      </div>
-    
-    )}
+      {book && !isLoading ? (
+        <>
+          <div className="my-4 mb-8 ">
+            <h1 className="font-bold text-2xl mr-2"
+            >
+              Post</h1>
+            {owner && (
+              <div className="flex mt-4">
+                <img
+                  src={owner.profilePicture}
+                  alt={owner.userName}
+                  style={{ width: "30px", height: "30px", borderRadius: "50%" }}/>
+                <div className="ml-2 font-bold">
+                  {owner.userName} 
+                </div>
+              </div>)}
+          </div>
 
+          <Book
+            book={book}
+            handleDelete={handleDelete}
+            openDialog={openEditDialog}
+            isOwner={isOwner}
+          />
+          <Comments bookId={bookId} />
+          <Modal
+            closeDialog={closeEditDialog}
+            isOpen={isEditDialogOpen}
+            isLoading={isLoading}
+          >
+            <AddForm
+              category={book.category}
+              initialValues={book}
+              handleSubmitForm={handleUpdate}
+            />
+            {/* for layout purposes */}
+            <div className="mt-auto ml-5"></div>
+          </Modal>
+        </>
+      ) : (
+        <div
+          className="center-text"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <SpinnerCircular color="black" size="20vh" />
+        </div>
+      )}
     </>
   );
 }

@@ -5,7 +5,6 @@ import { themes } from "../themes";
 import { useContext } from "react";
 import ReactStars from "react-rating-stars-component";
 
-
 export default function Card({ book, disableOnClick }) {
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
@@ -33,22 +32,21 @@ export default function Card({ book, disableOnClick }) {
         <p className="text-sm italic">{book.author}</p>
         {book.rating && (
           <div className="flex items-center mt-2">
-          <div className="bg-gray-200 z-0 text-xs ßfont-semibold mr-2 px-2.5 py-0.5 rounded ">
-            Rating: {book.rating}
+            <div className="bg-gray-200 z-0 text-xs ßfont-semibold mr-2 px-2.5 py-0.5 rounded ">
+              Rating: {book.rating}
+            </div>
+            <div>
+              <ReactStars
+                count={5}
+                value={book.rating}
+                size={15}
+                isHalf={true}
+                edit={false}
+                activeColor={"black"}
+              />
+            </div>
           </div>
-          <div>
-            <ReactStars
-              count={5}
-              value={book.rating}
-              size={15}
-              isHalf={true}
-              edit={false}
-              activeColor={"black"}
-            />
-          </div>
-        </div>
-          )}
-        
+        )}
       </div>
       <div className="flex-none">
         <img
