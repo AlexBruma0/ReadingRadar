@@ -7,7 +7,7 @@ import { FaEdit } from "react-icons/fa";
 
 // Book component
 const Book = ({ book, handleDelete, openDialog, isOwner }) => (
-  <div className="max-w-7xl mx-auto mt-2">
+  <div className="max-w-7xl mt-2">
     <div className="bg-white p-5  flex items-start">
       <img
         src={book.img_url}
