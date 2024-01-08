@@ -139,13 +139,16 @@ const booksSlice = createSlice({
   },
   reducers: {
     updateBoards: (state, action) => {
-      const { toBeRead, reading, read } = action.payload;
-      state.boards.toBeRead = toBeRead;
-      state.boards.reading = reading;
-      state.boards.read = read;
+      const categories = action.payload;
+      Object.keys(categories).forEach(category => {
+        state.boards[category] = categories[category];
+      });
     },
     createBook: (state, action) => {
       const category = action.payload.category;
+      if (!state.boards[category]) {
+        state.boards[category] = [];
+      }
       state.boards[category].unshift(action.payload);
     },
     resetCurrentBook: (state) => {
@@ -156,17 +159,15 @@ const booksSlice = createSlice({
     [fetchBooks.fulfilled]: (state, action) => {
       state.status = "succeeded";
       const books = action.payload;
-      const boards = {
-        toBeRead: books
-          .filter((book) => book.category === "ToBeRead")
-          .sort((a, b) => a.order - b.order),
-        reading: books
-          .filter((book) => book.category === "Reading")
-          .sort((a, b) => a.order - b.order),
-        read: books
-          .filter((book) => book.category === "Read")
-          .sort((a, b) => a.order - b.order),
-      };
+      const boards = books.reduce((acc, book) => {
+        const category = book.category;
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(book);
+        acc[category].sort((a, b) => a.order - b.order);
+        return acc;
+      }, {});
       state.boards = boards;
     },
     [fetchBookById.fulfilled]: (state, action) => {
