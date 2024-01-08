@@ -16,11 +16,10 @@ export default function HomePage() {
         console.log(fetchedOwner.payload);
         setOwner(fetchedOwner.payload);
       }
-    }
+    };
 
     fetchOwner();
-  } , [viewingId, dispatch]);
-
+  }, [viewingId, dispatch]);
 
   return (
     <Layout>
@@ -28,14 +27,21 @@ export default function HomePage() {
         <div className="flex justify-between">
           <div className="font-bold my-4 text-3xl">Library</div>
           <div className="flex items-center pe-2">
-            <img src={owner.profilePicture} alt="" style={{width:'50px', height: '50px', borderRadius:'500px', marginRight:'5px'}}/>  
+            <img
+              src={owner.profilePicture}
+              alt=""
+              style={{
+                width: "50px",
+                height: "50px",
+                borderRadius: "500px",
+                marginRight: "5px",
+              }}
+            />
             <div className="font-bold my-4 text-3xl">{owner.userName}</div>
           </div>
-          
         </div>
       )}
 
-      
       <KanbanBoard />
     </Layout>
   );

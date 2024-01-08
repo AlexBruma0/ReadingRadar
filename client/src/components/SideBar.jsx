@@ -22,13 +22,11 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
 
   const handlClickHome = () => {
     localStorage.setItem("viewingId", userId);
-    if(location.pathname === "/home"){
+    if (location.pathname === "/home") {
       window.location.reload();
-    }
-    else {
+    } else {
       navigate("/home");
     }
-    
   };
 
   const links = [

@@ -6,6 +6,7 @@ import {
   moveBookToCategoryAPI,
   reorderAPIBook,
   fetchBooks,
+  createBoard,
 } from "../redux/slices/BooksSlice";
 import { DragDropContext } from "react-beautiful-dnd";
 import Board from "../components/Board";
@@ -19,6 +20,13 @@ export default function KanbanBoard() {
 
   // Check if the viewingId is the same as the userId
   const isOwner = userId === viewingId;
+
+  const createNewBoard = () => {
+    const newBoardName = prompt("Enter new Category name");
+    if (newBoardName) {
+      dispatch(createBoard(newBoardName));
+    }
+  };
 
   useEffect(() => {
     const fetchBooksData = async () => {
@@ -99,33 +107,39 @@ export default function KanbanBoard() {
   };
 
   return (
-    <div className={`grid-container--small`}>
-      {loading ? (
-        <div
-          className="center-text"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          <SpinnerCircular color="black" size="20vh" />
-        </div>
-      ) : (
-        <DragDropContext onDragEnd={handleDragEnd}>
-          {Object.entries(boards).map(([boardId, books]) => (
-            <div style={{ display: 'flex', flexDirection: 'column' }}> {/* Add this line */}
-              <Board
-                key={boardId}
-                category={boardId}
-                boardBooks={books}
-                isOwner={isOwner}
-              />
-            </div> 
-          ))}
-        </DragDropContext>
-      )}
+    <div>
+      <button onClick={createNewBoard}>Create New Category</button>
+
+      <div className={`grid-container--small`}>
+        {loading ? (
+          <div
+            className="center-text"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <SpinnerCircular color="black" size="20vh" />
+          </div>
+        ) : (
+          <DragDropContext onDragEnd={handleDragEnd}>
+            {Object.entries(boards).map(([boardId, books]) => (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {" "}
+                {/* Add this line */}
+                <Board
+                  key={boardId}
+                  category={boardId}
+                  boardBooks={books}
+                  isOwner={isOwner}
+                />
+              </div>
+            ))}
+          </DragDropContext>
+        )}
+      </div>
     </div>
   );
 }

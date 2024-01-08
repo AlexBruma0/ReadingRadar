@@ -34,9 +34,8 @@ const Book = ({ book, handleDelete, openDialog, isOwner }) => (
                 />
               </div>
             </div>
-          )}   
-        <p className="text-gray-600 text-lg my-2">{book.notes}</p>
-
+          )}
+          <p className="text-gray-600 text-lg my-2">{book.notes}</p>
         </div>
 
         {isOwner && (
@@ -55,7 +54,6 @@ const Book = ({ book, handleDelete, openDialog, isOwner }) => (
             </button>
           </div>
         )}
-
       </div>
     </div>
   </div>

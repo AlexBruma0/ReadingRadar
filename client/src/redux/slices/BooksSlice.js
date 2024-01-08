@@ -140,9 +140,16 @@ const booksSlice = createSlice({
   reducers: {
     updateBoards: (state, action) => {
       const categories = action.payload;
-      Object.keys(categories).forEach(category => {
+      Object.keys(categories).forEach((category) => {
         state.boards[category] = categories[category];
       });
+    },
+    createBoard: (state, action) => {
+      // New reducer for creating a board
+      const newBoardName = action.payload;
+      if (!state.boards[newBoardName]) {
+        state.boards[newBoardName] = [];
+      }
     },
     createBook: (state, action) => {
       const category = action.payload.category;
@@ -184,4 +191,5 @@ export const {
   deleteBook,
   updateBook,
   resetCurrentBook,
+  createBoard,
 } = booksSlice.actions;

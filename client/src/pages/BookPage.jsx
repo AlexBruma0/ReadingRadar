@@ -5,8 +5,6 @@ import BookPost from "../components/BookPost";
 export default function BookPage() {
   return (
     <Layout>
-      
-
       <BookPost />
     </Layout>
   );

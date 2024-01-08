@@ -22,7 +22,7 @@ export default function Board({ boardBooks, category, isOwner }) {
 
   return (
     <div
-      style={{ backgroundColor: currentThemeColors.primary, height: 'auto' }}
+      style={{ backgroundColor: currentThemeColors.primary, height: "auto" }}
       className={`m-4 p-4 rounded-lg shadow-lg h-auto`}
     >
       {/* Board Header */}
@@ -43,16 +43,16 @@ export default function Board({ boardBooks, category, isOwner }) {
       </div>
 
       {/* Droppable Area */}
-        <Droppable droppableId={category}>
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {boardBooks?.map((book, index) => (
-                <Drag key={book._id} id={book._id} book={book} index={index} />
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+      <Droppable droppableId={category}>
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {boardBooks?.map((book, index) => (
+              <Drag key={book._id} id={book._id} book={book} index={index} />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       {/* Modal Form */}
       <ModalAddForm
         category={category}

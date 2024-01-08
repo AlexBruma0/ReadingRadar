@@ -12,7 +12,7 @@ import Modal from "./Modal";
 import Book from "./Book";
 import { SpinnerCircular } from "spinners-react";
 import { fetchUser } from "../redux/slices/UsersSlice";
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function BookPost() {
   const { id: bookId } = useParams();
@@ -45,7 +45,7 @@ export default function BookPost() {
         console.log(fetchedOwner.payload);
         setOwner(fetchedOwner.payload);
       }
-    }
+    };
 
     fetchOwner();
   }, [viewingId, dispatch]);
@@ -81,21 +81,29 @@ export default function BookPost() {
       {book && !isLoading ? (
         <>
           <div className="flex items-center justify-between pe-7 mt-2">
-            <div className="items-center flex font-bold text-3xl cursor-pointer" onClick={() => navigate(-1)}>
+            <div
+              className="items-center flex font-bold text-3xl cursor-pointer"
+              onClick={() => navigate(-1)}
+            >
               <IoIosArrowBack size={30} color="black" />
-              <h1>
-                Back
-                </h1>            
+              <h1>Back</h1>
             </div>
 
             {owner && (
               <div className="flex font-bold items-center">
-                <img src={owner.profilePicture} alt="" style={{width:'50px', height: '50px', borderRadius:'500px', marginRight:'5px'}}/>
-                <div className="text-3xl">
-                  {owner.userName}
-                </div>
-                
-              </div>)}
+                <img
+                  src={owner.profilePicture}
+                  alt=""
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "500px",
+                    marginRight: "5px",
+                  }}
+                />
+                <div className="text-3xl">{owner.userName}</div>
+              </div>
+            )}
           </div>
 
           <Book
