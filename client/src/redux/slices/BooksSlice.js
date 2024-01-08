@@ -23,7 +23,6 @@ export const fetchAmazonBooks = createAsyncThunk(
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/books/searchbooks/${query}`,
     );
-    console.log("bookslice: ", response)
     return response.json();
   },
 );
@@ -104,7 +103,6 @@ export const createBookAPI = createAsyncThunk(
   async (newBook, thunkAPI) => {
     const jwtToken = localStorage.getItem("jwtToken");
 
-    console.log(newBook);
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/books/create`,
       {
@@ -190,14 +188,11 @@ const booksSlice = createSlice({
       state.currentBook = null;
     },
     updateBook: (state, action) => {
-      console.log(action.payload);
       const { _id, category, ...updatedData } = action.payload;
       const normalizedCategory = findKeyIgnoringSpacesAndCaps(state.boards, category);
-      console.log("normalized cat",normalizedCategory);
       const bookIndex = state.boards[normalizedCategory].findIndex(
         (book) => book._id === _id,
       );
-      console.log("book index", bookIndex);
       if (bookIndex !== -1) {
         state.boards[category][bookIndex] = {
           ...state.boards[category][bookIndex],

@@ -13,12 +13,10 @@ const UsersPage = () => {
   useEffect(() => {
     if (userId) {
       dispatch(fetchUsers());
-      console.log(users);
     }
   }, [userId, dispatch]);
 
   const users = useSelector((state) => state.users.users);
-  console.log(users);
 
   const handleVisitUser = (viewId) => {
     localStorage.setItem("viewingId", viewId);

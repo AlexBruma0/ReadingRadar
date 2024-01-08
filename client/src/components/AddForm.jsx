@@ -10,7 +10,6 @@ import ReactStars from "react-rating-stars-component";
         
 
 const AddForm = ({ category, initialValues, handleSubmitForm }) => {
-  console.log(category, initialValues);
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
   const dispatch = useDispatch();

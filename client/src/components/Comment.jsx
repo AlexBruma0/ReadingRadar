@@ -12,16 +12,13 @@ function Comment({ comment, onDelete, onEdit }) {
   const userId = localStorage.getItem("userId");
   const commentUserId = comment.user._id;
   const isOwner = userId === commentUserId;
-  console.log("comment.user", comment.user);
   const dispatch = useDispatch();
 
   const [commentUser, setCommentUser] = useState(null);
 
   useEffect(() => { 
     const fetch = async () => {
-      console.log("commentUserId: ", commentUserId);
       const fetchedUser = await dispatch(fetchUser(commentUserId));
-      console.log("fetchedUser: ", fetchedUser);
       setCommentUser(fetchedUser.payload);
     };
     fetch();

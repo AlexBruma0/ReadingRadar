@@ -36,7 +36,6 @@ export default function KanbanBoard() {
 
   const handleDragEnd = async (result) => {
     if (viewingId !== userId) {
-      console.log("viewingId !== userId");
       return;
     }
     const { source, destination } = result;

@@ -26,7 +26,6 @@ const LoginPage = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const userData = Object.fromEntries(formData.entries());
-    console.log(userData)
     handleLogin(userData);
   };
 

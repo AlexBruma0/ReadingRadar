@@ -25,7 +25,6 @@ export default function ModalAddForm({ category, closeDialog, isOpen }) {
     const handleSearchSubmit = async (searchTerm) => {
         setFetching(true);
         const response = await dispatch(fetchAmazonBooks(searchTerm));
-        console.log("usage: ", [response.payload])
         const book = response.payload;
         setSelectedBook({
             title: book.title,

@@ -26,7 +26,6 @@ export const registerUser = createAsyncThunk(
       }
 
       const user = await response.json();
-      console.log(user)
       localStorage.setItem("jwtToken", user.jwtToken);
       localStorage.setItem("userId", user.userId);
       localStorage.setItem("viewingId", user.userId);

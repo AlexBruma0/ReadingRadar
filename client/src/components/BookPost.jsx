@@ -28,7 +28,6 @@ export default function BookPost() {
 
   useEffect(() => {
     const fetchBook = async () => {
-      console.log("bookId: ", bookId);
       if (bookId) {
         const fetchedBook = await dispatch(fetchBookById(bookId));
         setBook(fetchedBook.payload); 
