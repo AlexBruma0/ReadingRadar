@@ -22,6 +22,13 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
 
   const handlClickHome = () => {
     localStorage.setItem("viewingId", userId);
+    if(location.pathname === "/home"){
+      window.location.reload();
+    }
+    else {
+      navigate("/home");
+    }
+    
   };
 
   const links = [
@@ -61,7 +68,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
           }}
         >
           <span className="">{link.icon}</span>
-          <span className="ml-2 text-lg font-medium">{link.name}</span>
+          <span className="ml-2 text-xl font-bold">{link.name}</span>
         </Link>
       ))}
     </div>
