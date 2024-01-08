@@ -65,8 +65,6 @@ export default function Navbar({ toggleSidebar }) {
               className="h-10 w-10 rounded-full ml-2"
               alt="User"
             />
-            <div className="ml-2">viewing id: {viewingId}</div>
-            <div className="ml-2">my id: {userId}</div>
           </>
         ) : (
           "Not logged in"

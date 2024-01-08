@@ -47,7 +47,7 @@ function Comments({ bookId }) {
         <textarea
           value={newCommentContent}
           onChange={(e) => setNewCommentContent(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow rounded w-full py-2 px-3 text-gray-700 leading-tight "
           rows="3"
           placeholder="Add a new comment..."
         />

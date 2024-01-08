@@ -12,6 +12,7 @@ import Users from "../components/Users";
 const UsersPage = () => {
   return (
     <Layout>
+      <div className="font-bold my-4 text-3xl">People you may know</div>
       <Users />
     </Layout>
   );
