@@ -42,7 +42,6 @@ export default function Board({ boardBooks, category, isOwner }) {
       </div>
 
       {/* Droppable Area */}
-      <div style={{ overflow: 'auto' }}> {/* Add this line */}
         <Droppable droppableId={category}>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -53,8 +52,6 @@ export default function Board({ boardBooks, category, isOwner }) {
             </div>
           )}
         </Droppable>
-      </div> {/* Add this line */}
-
       {/* Modal Form */}
       <ModalAddForm
         category={category}
