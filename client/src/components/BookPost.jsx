@@ -14,6 +14,7 @@ import Modal from "./Modal";
 import Book from "./Book";
 import { SpinnerCircular } from "spinners-react";
 import { fetchUser } from "../redux/slices/UsersSlice";
+import { IoIosArrowBack } from 'react-icons/io';
 
 export default function BookPost() {
   const { id: bookId } = useParams();
@@ -81,19 +82,21 @@ export default function BookPost() {
     <>
       {book && !isLoading ? (
         <>
-          <div className="my-4 mb-8 ">
-            <h1 className="font-bold text-2xl mr-2"
-            >
-              Post</h1>
+          <div className="flex items-center justify-between pe-7 mt-2">
+            <div className="items-center flex font-bold text-3xl cursor-pointer" onClick={() => navigate(-1)}>
+              <IoIosArrowBack size={30} color="black" />
+              <h1>
+                Back
+                </h1>            
+            </div>
+
             {owner && (
-              <div className="flex mt-4">
-                <img
-                  src={owner.profilePicture}
-                  alt={owner.userName}
-                  style={{ width: "30px", height: "30px", borderRadius: "50%" }}/>
-                <div className="ml-2 font-bold">
-                  {owner.userName} 
+              <div className="flex font-bold items-center">
+                <img src={owner.profilePicture} alt="" style={{width:'50px', height: '50px', borderRadius:'500px', marginRight:'5px'}}/>
+                <div className="text-3xl">
+                  {owner.userName}
                 </div>
+                
               </div>)}
           </div>
 
