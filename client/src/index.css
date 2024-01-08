@@ -5,8 +5,8 @@
 .grid-container--small {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+  align-content: start; /* Add this line */
 }
-
 #hov:hover {
   background-color: var(--hover-background);
 }

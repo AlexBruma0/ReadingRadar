@@ -100,7 +100,7 @@ export default function KanbanBoard() {
 
   return (
     <div className={`grid-container--small`}>
-      {loading ? ( // Conditionally render SpinnerCircular
+      {loading ? (
         <div
           className="center-text"
           style={{
@@ -115,12 +115,14 @@ export default function KanbanBoard() {
       ) : (
         <DragDropContext onDragEnd={handleDragEnd}>
           {Object.entries(boards).map(([boardId, books]) => (
-            <Board
-              key={boardId}
-              category={boardId}
-              boardBooks={books}
-              isOwner={isOwner}
-            />
+            <div style={{ display: 'flex', flexDirection: 'column' }}> {/* Add this line */}
+              <Board
+                key={boardId}
+                category={boardId}
+                boardBooks={books}
+                isOwner={isOwner}
+              />
+            </div> 
           ))}
         </DragDropContext>
       )}
