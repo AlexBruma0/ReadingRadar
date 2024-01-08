@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchBookById,
-  updateBook,
-  deleteBook,
   updateAPIBook,
   deleteBookAPI,
 } from "../redux/slices/BooksSlice";

@@ -1,12 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-function lowercaseFirstLetter(str) {
-  if (str && str.length > 0) {
-    return str.charAt(0).toLowerCase() + str.slice(1);
-  }
-  return str;
-}
-
 export const fetchBooks = createAsyncThunk(
   "books/fetchBooks",
   async (userId, thunkAPI) => {
@@ -136,34 +129,11 @@ export const deleteBookAPI = createAsyncThunk(
   },
 );
 
-function findKeyIgnoringSpacesAndCaps(obj, key) {
-  // Normalize the input key
-  const normalizedKey = key.replace(/\s/g, "").toLowerCase();
-
-  // Iterate over the object keys
-  for (let objKey in obj) {
-    // Normalize the object key
-    const normalizedObjKey = objKey.replace(/\s/g, "").toLowerCase();
-
-    // If the normalized keys match, return the original object key
-    if (normalizedObjKey === normalizedKey) {
-      return objKey;
-    }
-  }
-
-  // If no matching key was found, return null
-  return null;
-}
-
 const booksSlice = createSlice({
   name: "books",
   initialState: {
     currentBook: null,
-    boards: {
-      toBeRead: [],
-      reading: [],
-      read: [],
-    },
+    boards: {},
     status: "idle",
     error: null,
   },
@@ -178,45 +148,11 @@ const booksSlice = createSlice({
       const category = action.payload.category;
       state.boards[category].unshift(action.payload);
     },
-    deleteBook: (state, action) => {
-      Object.keys(state.boards).forEach((category) => {
-        state.boards[category] = state.boards[category].filter(
-          (book) => book._id !== action.payload,
-        );
-      });
-    },
-
     resetCurrentBook: (state) => {
       state.currentBook = null;
     },
-    updateBook: (state, action) => {
-      const { _id, category, ...updatedData } = action.payload;
-      const normalizedCategory = findKeyIgnoringSpacesAndCaps(
-        state.boards,
-        category,
-      );
-      const bookIndex = state.boards[normalizedCategory].findIndex(
-        (book) => book._id === _id,
-      );
-      if (bookIndex !== -1) {
-        state.boards[category][bookIndex] = {
-          ...state.boards[category][bookIndex],
-          ...updatedData,
-        };
-      }
-    },
   },
   extraReducers: {
-    [updateAPIBook.pending]: (state, action) => {
-      state.status = "loading";
-    },
-    [updateAPIBook.fulfilled]: (state, action) => {
-      state.status = "succeeded";
-    },
-    [updateAPIBook.rejected]: (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
-    },
     [fetchBooks.fulfilled]: (state, action) => {
       state.status = "succeeded";
       const books = action.payload;
