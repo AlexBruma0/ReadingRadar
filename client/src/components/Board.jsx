@@ -10,10 +10,11 @@ export default function Board({ boardBooks, category, isOwner }) {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
-  const boardMap = {
-    toBeRead: "To Be Read",
-    read: "Read",
-    reading: "Reading",
+
+  const convertCamelCaseToText = (camelCase) => {
+    return camelCase
+      .replace(/([A-Z])/g, " $1")
+      .replace(/^./, (str) => str.toUpperCase());
   };
 
   const openDialog = () => setIsAddDialogOpen(true);
@@ -27,7 +28,7 @@ export default function Board({ boardBooks, category, isOwner }) {
       {/* Board Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className={`text-lg font-bold`}>
-          {boardMap[category]}{" "}
+          {convertCamelCaseToText(category)}{" "}
           <span className="ml-2 text-sm">{boardBooks.length}</span>
         </h2>
         {isOwner && (
