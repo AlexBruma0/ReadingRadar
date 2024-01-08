@@ -13,6 +13,8 @@ import Board from "../components/Board";
 import { SpinnerCircular } from "spinners-react";
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
+import { Plus } from "react-feather";
+import ModalAddForm from "../components/ModalAddForm";
 
 export default function KanbanBoard() {
   const userId = localStorage.getItem("userId");
@@ -21,9 +23,20 @@ export default function KanbanBoard() {
   const [loading, setLoading] = useState(false); // Add loading state
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Check if the viewingId is the same as the userId
   const isOwner = userId === viewingId;
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
 
   const createNewBoard = () => {
     const newBoardName = prompt("Enter new Category name");
@@ -112,13 +125,24 @@ export default function KanbanBoard() {
 
   return (
     <div className="">
-      <button 
-        className="px-4 py-2 font-bold rounded hover:bg-opacity-80 transition-colors duration-200  mr-4"
-        style={{ backgroundColor: currentThemeColors.accent }}
-        onClick={createNewBoard}
-      >
-        Create New Category
-      </button>
+      <div className="flex">
+        <button
+          className="flex px-4 py-2 font-bold rounded hover:bg-opacity-80 transition-colors duration-200  ml-4"
+          style={{ backgroundColor: currentThemeColors.accent }}
+          onClick={createNewBoard}
+        >
+          <Plus />
+          Category
+        </button>
+        <button
+          className="flex px-4 py-2 font-bold border-2 rounded hover:bg-opacity-80 transition-colors duration-200  ml-4"
+          style={{ backgroundColor: currentThemeColors.primary }}
+          onClick={openModal}
+        >
+          <Plus />
+          Book
+        </button>
+      </div>
 
       <div className={`grid-container--small`}>
         {loading ? (
@@ -149,6 +173,12 @@ export default function KanbanBoard() {
           </DragDropContext>
         )}
       </div>
+      {/* Modal Form */}
+      <ModalAddForm
+        category={null}
+        closeDialog={closeModal}
+        isOpen={isModalOpen}
+      />
     </div>
   );
 }

@@ -34,7 +34,7 @@ export default function Layout({ children }) {
     document.body.style.overflowY = "scroll";
 
     const checkWindowSize = () => {
-      if (window.innerWidth < 400) {
+      if (window.innerWidth < 700) {
         setIsSidebarFullscreen(true);
         setIsSidebarOpen(false);
       } else {

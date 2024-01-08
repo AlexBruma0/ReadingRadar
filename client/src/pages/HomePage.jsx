@@ -27,6 +27,7 @@ export default function HomePage() {
         <div className="flex justify-between">
           <div className="font-bold my-4 text-3xl">Library</div>
           <div className="flex items-center pe-2">
+          <div className="font-bold my-4 text-3xl mr-2">{owner.userName}</div>
             <img
               src={owner.profilePicture}
               alt=""
@@ -34,10 +35,8 @@ export default function HomePage() {
                 width: "50px",
                 height: "50px",
                 borderRadius: "500px",
-                marginRight: "5px",
               }}
             />
-            <div className="font-bold my-4 text-3xl">{owner.userName}</div>
           </div>
         </div>
       )}

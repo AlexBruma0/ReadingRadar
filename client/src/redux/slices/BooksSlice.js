@@ -185,6 +185,8 @@ const booksSlice = createSlice({
 
 export default booksSlice.reducer;
 
+export const selectBoardNames = (state) => Object.keys(state.books.boards);
+
 export const {
   updateBoards,
   createBook,

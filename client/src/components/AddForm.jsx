@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { v4 as uuid, v4 } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import { Form, Field } from "react-final-form";
 import { createBook, createBookAPI } from "../redux/slices/BooksSlice";
 import ReactStars from "react-rating-stars-component";
+import Select from 'react-select';
+import { selectBoardNames } from "../redux/slices/BooksSlice";
 
 const AddForm = ({ category, initialValues, handleSubmitForm }) => {
   const { theme } = useContext(ThemeContext);
@@ -19,9 +21,13 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
     notes: initialValues.notes,
   };
 
+  const categories = useSelector(selectBoardNames);
+
+
   const onSubmit = async (values, form) => {
+    console.log(values);
     handleSubmitForm(values);
-    form.reset();
+    // form.reset();
   };
 
   const feildMap = {
@@ -75,6 +81,22 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
                 size={24}
                 activeColor="#ffd700"
               />
+            </div>
+          )}
+          {category === null && (
+            <div>
+              <label>Categories</label>
+              <Field name="categories">
+                {({ input }) => (
+                  <Select
+                    {...input}
+                    isMulti
+                    onChange={(value) => input.onChange(value)}
+                    onBlur={() => input.onBlur(input.value)}
+                    options={categories.map((category) => ({ label: category, value: category }))}
+                  />
+                )}
+              </Field>
             </div>
           )}
 
