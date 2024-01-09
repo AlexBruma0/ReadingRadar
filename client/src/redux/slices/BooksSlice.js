@@ -181,12 +181,14 @@ const booksSlice = createSlice({
       state.currentBook = action.payload;
     },
     [createBookAPI.fulfilled]: (state, action) => {
-      const newBook = action.payload;
-      const category = newBook.category;
-      if (!state.boards[category]) {
-        state.boards[category] = [];
+      const newBooks = action.payload;
+      for (const newBook of newBooks) {
+        const category = newBook.category;
+        if (!state.boards[category]) {
+          state.boards[category] = [];
+        }
+        state.boards[category].unshift(newBook);
       }
-      state.boards[category].unshift(newBook);
     },
   },
 });

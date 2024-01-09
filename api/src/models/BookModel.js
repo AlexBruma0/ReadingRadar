@@ -6,8 +6,9 @@ const bookSchema = new mongoose.Schema({
   rating: Number,
   notes: String,
   img_url: String,
-  category: [String],
+  category: String,
   order: Number,
+  sharedId: mongoose.Schema.Types.ObjectId, // new field
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   timeAdded: { type: Date, default: Date.now },
 });

@@ -52,30 +52,34 @@ const findBooksByTitle = async (titleQuery, limit = 4) => { // default limit to 
   }
 };
 
-async function createBook(title, author, rating, notes, img_url, category, ownerId) {
+async function createBook(title, author, rating, notes, img_url, categories, ownerId) {
   const session = await mongoose.startSession();
   session.startTransaction();
   try {
-    console.log('category', category)
-    await Book.updateMany({category: { $in: category }}, { $inc: { order: 1 } }, { session });
-    const newBook = new Book({
-      title,
-      author,
-      rating,
-      notes,
-      img_url,
-      category,
-      ownerId,
-      order: 0 
-    });
+    const sharedId = new mongoose.Types.ObjectId(); // generate a new ObjectId
+    const newBooks = [];
+    for (let category of categories) {
+      await Book.updateMany({category: category}, { $inc: { order: 1 } }, { session });
+      const newBook = new Book({
+        title,
+        author,
+        rating,
+        notes,
+        img_url,
+        category,
+        ownerId,
+        order: 0,
+        sharedId // assign the sharedId to the book
+      });
 
-    const response = await newBook.save({ session });
-    console.log('response', response)
+      const response = await newBook.save({ session });
+      console.log('response', response)
+      newBooks.push(newBook);
+    }
 
     await session.commitTransaction();
     session.endSession();
-    // console.log('added successfully')
-    return newBook;
+    return newBooks;
   } catch (error) {
     console.log(error.message)
     await session.abortTransaction();
