@@ -57,6 +57,13 @@ async function createBook(title, author, rating, notes, img_url, categories, own
   try {
     const sharedId = new mongoose.Types.ObjectId(); // generate a new ObjectId
     const newBooks = [];
+
+    // If categories is a string, convert it to an array
+    console.log('categories before: ', categories)
+    if (typeof categories === 'string') {
+      categories = [categories];
+    }
+    console.log('categories after: ', categories)
     for (let category of categories) {
       await Book.updateMany({category: category}, { $inc: { order: 1 } }, { session });
       const newBook = new Book({
@@ -72,7 +79,7 @@ async function createBook(title, author, rating, notes, img_url, categories, own
       });
 
       const response = await newBook.save({ session });
-      console.log('response', response)
+      // console.log('response', response)
       newBooks.push(newBook);
     }
 
