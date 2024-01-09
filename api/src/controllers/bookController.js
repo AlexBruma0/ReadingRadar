@@ -96,7 +96,21 @@ async function getBookById(bookId) {
 }
 
 async function updateBook(bookId, updatedFields) {
-  return Book.findByIdAndUpdate(bookId, updatedFields, { new: true });
+  // Find the book with the given bookId
+  const bookToUpdate = await Book.findById(bookId);
+
+  // Make a copy of the updatedFields object
+  let updatedFieldsCopy = { ...updatedFields };
+
+  // Remove the "category" field from the updatedFieldsCopy object
+  delete updatedFieldsCopy.category;
+
+  // Update all books with the same sharedId, excluding the "category" field
+  await Book.updateMany({ sharedId: bookToUpdate.sharedId }, updatedFieldsCopy);
+
+  // Find and return the updated version of the book with the bookId
+  const updatedBook = await Book.findById(bookId);
+  return updatedBook;
 }
 
 async function reorderBook(currentOrder, newOrder, currentOrderId) {
@@ -227,7 +241,6 @@ module.exports = {
   deleteAllBooks,
   reorderBook,
   moveBookToNewCategory,
-  fetchBooksFromAmazon,
   findBooksByTitle,
   searchGoogleBooks
 };
