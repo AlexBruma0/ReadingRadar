@@ -66,7 +66,7 @@ export default function ModalAddForm({ category, closeDialog, isOpen }) {
           {step === 2 && (
             <AddForm
               initialValues={selectedBook}
-              category={category}
+              categoryProps={category}
               handleSubmitForm={handleAddBook}
             />
           )}

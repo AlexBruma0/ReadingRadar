@@ -120,7 +120,7 @@ export default function BookPost() {
             isLoading={isLoading}
           >
             <AddForm
-              category={book.category}
+              categoryProps={book.category}
               initialValues={book}
               handleSubmitForm={handleUpdate}
             />

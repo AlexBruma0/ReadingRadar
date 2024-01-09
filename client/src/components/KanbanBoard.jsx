@@ -182,7 +182,7 @@ export default function KanbanBoard() {
       </div>
       {/* Modal Form */}
       <ModalAddForm
-        category={null}
+        categoryProps={null}
         closeDialog={closeModal}
         isOpen={isModalOpen}
       />

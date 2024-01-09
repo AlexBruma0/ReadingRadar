@@ -9,28 +9,26 @@ import ReactStars from "react-rating-stars-component";
 import Select from 'react-select';
 import { selectBoardNames } from "../redux/slices/BooksSlice";
 
-const AddForm = ({ category, initialValues, handleSubmitForm }) => {
+const AddForm = ({ categoryProps, initialValues, handleSubmitForm }) => {
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
-  const dispatch = useDispatch();
+  const categories = useSelector(selectBoardNames);
+  console.log("categories: ", categoryProps);
   const bookFields = {
     title: initialValues.title,
     author: initialValues.author,
     img_url: initialValues.img_url,
     rating: initialValues.rating,
     notes: initialValues.notes,
+    category: categoryProps ? [categoryProps].map(cat => ({ value: 'categoryProps', label: cat })) : [],
   };
 
-  const categories = useSelector(selectBoardNames);
-
-
   const onSubmit = async (values, form) => {
-    values.category ?  values.category = values.category.map((cat) => cat.label) : values.category = null;
+    values.category = values.category.map((cat) => cat.label);
     console.log("addform values: ", values);
     handleSubmitForm(values);
     // form.reset();
   };
-
 
   const feildMap = {
     title: "Title",
@@ -39,8 +37,14 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
     rating: "Rating",
     notes: "Notes",
   };
+  
   const onRatingChange = (newRating, form) => {
     form.change("rating", newRating);
+  };
+
+  const initialCategory = {
+    value: categoryProps,
+    label: categoryProps,
   };
 
   return (
@@ -70,7 +74,7 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
               )}
             </div>
           ))}
-          {(category === "read" || category === "Read") && (
+
             <div className="mb-4">
               <label className="block mb-2 text-sm font-bold text-gray-700 capitalize">
                 Overall Rating
@@ -84,23 +88,22 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
                 activeColor="#ffd700"
               />
             </div>
-          )}
-          {category === null && (
+
             <div>
               <label>Categories</label>
               <Field name="category">
+                
                 {({ input }) => (
                   <Select
                     {...input}
                     isMulti
                     onChange={(value) => input.onChange(value)}
                     onBlur={() => input.onBlur(input.value)}
-                    options={categories.map((category) => ({ label: category, value: category }))}
+                    options={categories.map((cat) => ({ label: cat, value: cat }))}
                   />
                 )}
               </Field>
             </div>
-          )}
 
           <div className="flex justify-between mt-4">
             <button

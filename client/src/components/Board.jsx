@@ -20,6 +20,7 @@ export default function Board({ boardBooks, category, isOwner }) {
   const openDialog = () => setIsAddDialogOpen(true);
   const closeDialog = () => setIsAddDialogOpen(false);
 
+
   return (
     <div
       style={{ backgroundColor: currentThemeColors.primary }}
