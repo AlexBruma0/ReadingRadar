@@ -6,10 +6,17 @@ import { Form, Field } from "react-final-form";
 const SearchForm = ({ onSubmit }) => {
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
+  const inputRef = useRef();
 
   const handleSubmit = (values) => {
     onSubmit(values.searchTerm);
   };
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  });
 
   return (
     <Form
@@ -22,7 +29,8 @@ const SearchForm = ({ onSubmit }) => {
               component="input"
               type="text"
               placeholder="Search for book."
-              className="w-full p-2 border border-gray-300 rounded focus:bg-slate-100 outline-none"
+              className="w-full p-2 border border-gray-300 rounded outline-none focus:outline-none focus:bg-gray-100 focus:ring-1 focus:ring-black focus:border-black"
+              ref={inputRef}
             />
           </div>
           <button

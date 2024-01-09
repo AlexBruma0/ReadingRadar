@@ -7,7 +7,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
   const { title, author, rating, notes, img_url, category } = req.body;
   const ownerId = req.user.userId;
-
+  console.log('category', category)
   try {
     const newBook = await bookController.createBook(
       title,

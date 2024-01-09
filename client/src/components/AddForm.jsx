@@ -25,10 +25,12 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
 
 
   const onSubmit = async (values, form) => {
-    console.log(values);
+    values.category ?  values.category = values.category.map((cat) => cat.label) : values.category = null;
+    console.log("addform values: ", values);
     handleSubmitForm(values);
     // form.reset();
   };
+
 
   const feildMap = {
     title: "Title",
@@ -86,7 +88,7 @@ const AddForm = ({ category, initialValues, handleSubmitForm }) => {
           {category === null && (
             <div>
               <label>Categories</label>
-              <Field name="categories">
+              <Field name="category">
                 {({ input }) => (
                   <Select
                     {...input}

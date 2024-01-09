@@ -55,9 +55,9 @@ const findBooksByTitle = async (titleQuery, limit = 4) => { // default limit to 
 async function createBook(title, author, rating, notes, img_url, category, ownerId) {
   const session = await mongoose.startSession();
   session.startTransaction();
-  category = capitalizeFirstLetter(category);
   try {
-    await Book.updateMany({category: category}, { $inc: { order: 1 } }, { session });
+    console.log('category', category)
+    await Book.updateMany({category: { $in: category }}, { $inc: { order: 1 } }, { session });
     const newBook = new Book({
       title,
       author,

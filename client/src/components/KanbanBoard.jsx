@@ -36,8 +36,6 @@ export default function KanbanBoard() {
     setIsModalOpen(false);
   };
 
-
-
   const createNewBoard = () => {
     const newBoardName = prompt("Enter new Category name");
     if (newBoardName) {

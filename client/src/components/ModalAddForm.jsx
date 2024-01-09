@@ -43,14 +43,13 @@ export default function ModalAddForm({ category, closeDialog, isOpen }) {
       rating: values.rating,
       img_url: values.img_url,
       notes: values.notes,
-      category: category,
+      category: values.category ? values.category : category,
     };
-    dispatch(createBook(book));
+    console.log("book modal add form: ", book);
     dispatch(createBookAPI(book));
     setSelectedBook({});
     setStep(1);
     closeDialog();
-    // window.location.reload();
   };
 
   return (

@@ -98,7 +98,7 @@ export const createBookAPI = createAsyncThunk(
 
   async (newBook, thunkAPI) => {
     const jwtToken = localStorage.getItem("jwtToken");
-
+    console.log("data at slice: ", newBook);
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/books/create`,
       {
@@ -179,6 +179,14 @@ const booksSlice = createSlice({
     },
     [fetchBookById.fulfilled]: (state, action) => {
       state.currentBook = action.payload;
+    },
+    [createBookAPI.fulfilled]: (state, action) => {
+      const newBook = action.payload;
+      const category = newBook.category;
+      if (!state.boards[category]) {
+        state.boards[category] = [];
+      }
+      state.boards[category].unshift(newBook);
     },
   },
 });
