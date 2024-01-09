@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 .grid-container--small {
-  column-width: 26rem;
+  column-width: 30rem;
   column-gap: 1rem;
 }
 
 .item {
   break-inside: avoid;
   padding-bottom: 1rem;
-  direction: ltr;
 }
 
 #hov:hover {

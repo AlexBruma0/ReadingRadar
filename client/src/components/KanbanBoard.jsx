@@ -102,6 +102,15 @@ export default function KanbanBoard() {
       ...startBooks[source.index],
       category: destination.droppableId,
     };
+    // Check if a book with the same sharedId already exists in the destination board
+    const doesBookExist = finishBooks.some(book => book.sharedId === movedItem.sharedId);
+
+    if (doesBookExist) {
+      // If a book with the same sharedId exists, prevent the drop action
+      // You can also show a message to the user here
+      alert('A book with the same ID already exists in this category.');
+      return;
+    }
     startBooks.splice(source.index, 1);
     finishBooks.splice(destination.index, 0, movedItem);
     const newBoards = {
