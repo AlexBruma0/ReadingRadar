@@ -185,9 +185,19 @@ async function deleteBook(bookId) {
 
   try {
     const bookToDelete = await Book.findOne({ _id: bookId}).session(session)
-    const orderOfDeletedBook = bookToDelete.order;
-    await Book.deleteOne({ _id: bookId }).session(session);
-    await Book.updateMany({ order: { $gt: orderOfDeletedBook }, category: bookToDelete.category }, { $inc: { order: -1 } }).session(session);
+    const sharedId = bookToDelete.sharedId;
+
+    // Find all books with the same sharedId
+    const booksToDelete = await Book.find({ sharedId: sharedId }).session(session);
+
+    // For each book to be deleted, update the order of the remaining books in its category
+    for (let book of booksToDelete) {
+      await Book.updateMany({ order: { $gt: book.order }, category: book.category }, { $inc: { order: -1 } }).session(session);
+    }
+
+    // Delete all books with the same sharedId
+    await Book.deleteMany({ sharedId: sharedId }).session(session);
+
     await session.commitTransaction();
     session.endSession();
   } catch (error) {
