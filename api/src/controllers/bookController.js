@@ -1,7 +1,6 @@
 const books_storage = require('../models/books_storageModel')
 const Book = require('../models/BookModel');
 const mongoose = require('mongoose');
-const  puppeteer = require("puppeteer-core");
 const { google } = require('googleapis');
 
 const API_KEY = 'AIzaSyA_oV9aCPCHYSUIV75el2GynRjFmNEMTdI';
@@ -218,37 +217,6 @@ const deleteAllBooks = async (ownerId) => {
   }
 };
 
-async function fetchBooksFromAmazon(queryString){
-  let browser;
-  const auth = 'brd-customer-hl_14ee6362-zone-scraping_browser:1b7n382qvr2w'
-  try {
-    browser = await puppeteer.connect({
-      browserWSEndpoint: `wss://${auth}@brd.superproxy.io:9222`
-    })
-
-    const page = await browser.newPage();
-    page.setDefaultNavigationTimeout(2 * 60 * 1000);
-    const encodedQuery = encodeURIComponent(queryString.replace(/\s/g, '+'));
-    await page.goto(`https://www.amazon.ca/s?k=${encodedQuery}+book`);
-    const elements = await page.$$('div[data-index="2"], div[data-index="3"], div[data-index="4"]');
-    const booksDetails = await Promise.all(elements.map(async (element) => {
-        return element.evaluate(node => {
-            let title = node.querySelector('.a-size-base-plus')?.innerText || '';
-            let authorElements = Array.from(node.querySelectorAll('.a-color-secondary .a-size-base'));
-            let author = authorElements.length > 1 ? authorElements[1].innerText : '';
-            let img_url = node.querySelector('.s-image')?.src || '';
-            return { title, author, img_url };
-        });
-    }));
-
-    return booksDetails;
-  } catch (error) {
-    console.log(error)
-  }
-  finally {
-    await browser.close();
-  }
-}
 
 module.exports = {
   createBook,
