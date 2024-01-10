@@ -28,25 +28,8 @@ export default function Card({ book, disableOnClick }) {
       onClick={handleNavigate}
     >
       <div className="flex-1 mr-5">
-        <h2 className="text-xl font-semibold">{book.title}</h2>
+        <h2 className="text-2xl font-semibold font-serif">{book.title}</h2>
         <p className="text-sm italic">{book.author}</p>
-        {book.rating && (
-          <div className="flex items-center mt-2">
-            <div className="bg-gray-200 z-0 text-xs ßfont-semibold mr-2 px-2.5 py-0.5 rounded ">
-              Rating: {book.rating}
-            </div>
-            <div>
-              <ReactStars
-                count={5}
-                value={book.rating}
-                size={15}
-                isHalf={true}
-                edit={false}
-                activeColor={"black"}
-              />
-            </div>
-          </div>
-        )}
       </div>
       <div className="flex-none">
         <img

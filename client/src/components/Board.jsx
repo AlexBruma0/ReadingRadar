@@ -28,9 +28,16 @@ export default function Board({ boardBooks, category, isOwner }) {
     >
       {/* Board Header */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className={`text-lg font-bold`}>
+        <h2 className={`text-xl font-bold flex items-center`}>
+        <div className="mr-2 flex h-7 w-7 rounded-full justify-center align"style={{
+            alignItems: 'center',
+            backgroundColor: currentThemeColors.accent,
+          }}>
+            {boardBooks.length}
+          </div>
           {convertCamelCaseToText(category)}{" "}
-          <span className="ml-2 text-sm">{boardBooks.length}</span>
+
+          
         </h2>
         {isOwner && (
           <button

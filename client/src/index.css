@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .grid-container--small {
-  column-width: 30rem;
+  column-width: 26rem;
   column-gap: 1rem;
 }
 
