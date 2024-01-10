@@ -25,7 +25,7 @@ export default function HomePage() {
     <Layout>
       {owner && (
         <div className="flex justify-between">
-          <div className="font-bold my-4 text-3xl">Library</div>
+          <div className="font-bold my-4 text-3xl ml-2">Library</div>
           <div className="flex items-center pe-2">
           <div className="font-bold my-4 text-3xl mr-2">{owner.userName}</div>
             <img

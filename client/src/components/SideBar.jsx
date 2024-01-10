@@ -7,6 +7,7 @@ import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import tinycolor from "tinycolor2";
 import { FaBook, FaUserFriends, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = ({ isOpen, isFullWidth }) => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
   const userId = localStorage.getItem("userId");
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -45,30 +47,33 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out`}
     >
-      {links.map((link, index) => (
-        <Link
-          id="hov"
-          key={index}
-          className="px-4 py-2 flex items-center" // Added items-center here
-          to={link.link}
-          onClick={
-            link.name === "Logout"
-              ? handleLogout
-              : link.name === "My Library"
-                ? handlClickHome
-                : null
-          }
-          style={{
-            color: currentThemeColors.text,
-            "--hover-background": tinycolor(currentThemeColors.primary)
-              .darken(10)
-              .toString(),
-          }}
-        >
-          <span className="">{link.icon}</span>
-          <span className="ml-2 text-xl font-bold">{link.name}</span>
-        </Link>
-      ))}
+{links.map((link, index) => (
+  <Link
+    id="hov"
+    key={index}
+    className="px-4 py-2 flex items-center" // Added items-center here
+    to={link.link}
+    onClick={
+      link.name === "Logout"
+        ? handleLogout
+        : link.name === "My Library"
+          ? handlClickHome
+          : null
+    }
+    style={{
+      color: currentThemeColors.text,
+      backgroundColor: location.pathname === link.link ? tinycolor(currentThemeColors.primary)
+        .darken(10)
+        .toString() : 'transparent', // Add this line
+      "--hover-background": tinycolor(currentThemeColors.primary)
+        .darken(10)
+        .toString(),
+    }}
+  >
+    <span className="">{link.icon}</span>
+    <span className="ml-2 text-2xl font-bold">{link.name}</span>
+  </Link>
+))}
     </div>
   );
 };

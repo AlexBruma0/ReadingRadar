@@ -7,7 +7,7 @@ const SettingsPage = () => {
   const userId = localStorage.getItem("userId");
   return (
     <Layout>
-      <div className="font-bold my-4 text-3xl">Change Theme</div>
+      <div className="font-bold my-4 text-3xl ml-2">Change Theme</div>
       <ThemeSwitcher />
       <UpdateProfilePicture userId={userId} />
     </Layout>
