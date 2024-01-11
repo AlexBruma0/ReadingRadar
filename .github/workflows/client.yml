@@ -27,7 +27,7 @@ jobs:
     - name: Build 
       run: npm run build:client
       env:
-        VITE_API_SERVER_URL: https://hb-uqmjgfhwqa-uc.a.run.app
+        VITE_API_URL: https://hb-uqmjgfhwqa-uc.a.run.app
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v3.1.1
