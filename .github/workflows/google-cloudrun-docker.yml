@@ -34,7 +34,7 @@ jobs:
 
     - name: Build and tag Docker image
       run: |
-        docker build -t "$IMAGE_TAG" api_new/
+        docker build -t "$IMAGE_TAG" api/
         docker tag "$IMAGE_TAG" "$IMAGE_URL"
 
     - name: Push image to GCP Artifact Registry
