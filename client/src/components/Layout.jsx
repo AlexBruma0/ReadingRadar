@@ -43,7 +43,7 @@ export default function Layout({ children }) {
     
     const handleClick = (event) => {
       if (window.innerWidth < 700) {
-        if (event.target.children.length === 3 || event.target.id == "hov") {
+        if (event.target.children.length === 3 || event.target.id == "sidebarToggle") {
           return; 
           
         }

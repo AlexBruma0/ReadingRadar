@@ -32,8 +32,8 @@ export default function Navbar({ toggleSidebar }) {
     >
       <div className="flex items-center">
         <span
-          id="hov"
-          className="text-xl mr-3 cursor-pointer p-4 rounded-full"
+          id="sidebarToggle"
+          className="text-xl mr-3 cursor-pointer p-4 rounded-full sidebarToggle"
           onClick={toggleSidebar}
           style={{
             "--hover-background": tinycolor(currentThemeColors.primary)

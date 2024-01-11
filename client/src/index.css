@@ -17,6 +17,10 @@
   background-color: var(--hover-background);
 }
 
+#sidebarToggle:hover {
+  background-color: var(--hover-background);
+}
+
 .sidebar-fullscreen {
   width: 100% !important;
 }
