@@ -50,7 +50,7 @@ export default function Navbar({ toggleSidebar }) {
         </div>
       </div>
       <div className="flex-grow"></div>
-      <div>
+      <div >
         <button type="submit" className={`p-2 rounded-full `}>
           <IoIosSearch size={25} />
         </button>

@@ -41,8 +41,13 @@ export default function Layout({ children }) {
       }
     };
     
-    const handleClick = () => {
+    const handleClick = (event) => {
       if (window.innerWidth < 700) {
+        console.log(event.target)
+        if (event.target.children.length === 3 || event.target.id == "hov") {
+          return; 
+          
+        }
         setIsSidebarFullscreen(true);
         setIsSidebarOpen(false);
       } 
