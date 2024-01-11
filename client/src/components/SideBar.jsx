@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
             color: currentThemeColors.text,
             backgroundColor:
               location.pathname === link.link
-                ? tinycolor(currentThemeColors.accent).darken(10).toString()
+                ? currentThemeColors.accent
                 : "transparent", // Add this line
             "--hover-background": currentThemeColors.secondary
           }}
