@@ -10,7 +10,6 @@ const books = google.books({
   auth: API_KEY
 });
 
-// Function to search for a book
 async function searchGoogleBooks(query) {
   try {
     const response = await books.volumes.list({
@@ -19,7 +18,6 @@ async function searchGoogleBooks(query) {
     });
 
     if (response.data.items) {
-      // Extract the information you need
       const book = response.data.items[0];
       const Book = {
         title: book.volumeInfo.title,
@@ -46,7 +44,6 @@ const findBooksByTitle = async (titleQuery, limit = 4) => { // default limit to 
       const books = await books_storage.find({title: regex}).limit(limit);
       return books;
   } catch (error) {
-      console.error("Error finding books:", error);
       throw error;
   }
 };
@@ -55,15 +52,12 @@ async function createBook(title, author, rating, notes, img_url, categories, own
   const session = await mongoose.startSession();
   session.startTransaction();
   try {
-    const sharedId = new mongoose.Types.ObjectId(); // generate a new ObjectId
+    const sharedId = new mongoose.Types.ObjectId(); 
     const newBooks = [];
 
-    // If categories is a string, convert it to an array
-    console.log('categories before: ', categories)
     if (typeof categories === 'string') {
       categories = [categories];
     }
-    console.log('categories after: ', categories)
     for (let category of categories) {
       await Book.updateMany({category: category}, { $inc: { order: 1 } }, { session });
       const newBook = new Book({
@@ -75,11 +69,10 @@ async function createBook(title, author, rating, notes, img_url, categories, own
         category,
         ownerId,
         order: 0,
-        sharedId // assign the sharedId to the book
+        sharedId 
       });
 
       const response = await newBook.save({ session });
-      // console.log('response', response)
       newBooks.push(newBook);
     }
 
@@ -103,19 +96,11 @@ async function getBookById(bookId) {
 }
 
 async function updateBook(bookId, updatedFields) {
-  // Find the book with the given bookId
+
   const bookToUpdate = await Book.findById(bookId);
-
-  // Make a copy of the updatedFields object
   let updatedFieldsCopy = { ...updatedFields };
-
-  // Remove the "category" field from the updatedFieldsCopy object
   delete updatedFieldsCopy.category;
-
-  // Update all books with the same sharedId, excluding the "category" field
   await Book.updateMany({ sharedId: bookToUpdate.sharedId }, updatedFieldsCopy);
-
-  // Find and return the updated version of the book with the bookId
   const updatedBook = await Book.findById(bookId);
   return updatedBook;
 }
@@ -128,20 +113,17 @@ async function reorderBook(currentOrder, newOrder, currentOrderId) {
         { order: { $gte: newOrder, $lt: currentOrder } },
         { $inc: { order: 1 } }
       );
-      console.log('Books reordered successfully: Increased order.', increaseOrderResult);
     } else if (newOrder > currentOrder) {
       const decreaseOrderResult = await Book.updateMany(
         { order: { $gt: currentOrder, $lte: newOrder } },
         { $inc: { order: -1 } }
       );
-      console.log('Books reordered successfully: Decreased order.', decreaseOrderResult);
     }
 
     const updateResult = await Book.updateOne({ _id: currentOrderId }, { order: newOrder });
-    console.log('Book order update result:', updateResult);
+
 
   } catch (error) {
-    console.error('Error reordering books:', error.message);
   }
 }
 
@@ -154,7 +136,6 @@ const moveBookToNewCategory = async (currentOrder, newOrder, currentOrderId, cur
     newCategory = capitalizeFirstLetter(newCategory);
 
     const bookToMove = await Book.findOne({ _id: currentOrderId, category: currentCategory }).session(session);
-    console.log('Book fetched for moving:', bookToMove);
 
     if (!bookToMove) {
       throw new Error('Book not found');
@@ -165,35 +146,23 @@ const moveBookToNewCategory = async (currentOrder, newOrder, currentOrderId, cur
       { $inc: { order: -1 } },
       { session }
     );
-    console.log('Decremented order of books in current category');
 
     await Book.updateMany(
       { category: newCategory, order: { $gte: newOrder } },
       { $inc: { order: 1 } },
       { session }
     );
-    console.log('Incremented order of books in new category');
 
     bookToMove.order = newOrder;
     bookToMove.category = newCategory;
     await bookToMove.save({ session });
-    console.log('Moved book to new category and order');
-
     await session.commitTransaction();
-    console.log('Transaction committed');
-
     session.endSession();
-    console.log('Session ended');
-
     return bookToMove;
   } catch (error) {
-    console.log('Error occurred:', error);
     await session.abortTransaction();
-    console.log('Transaction aborted');
 
     session.endSession();
-    console.log('Session ended after error');
-
     throw error;
   }
 };
@@ -230,10 +199,8 @@ async function deleteBook(bookId) {
 const deleteAllBooks = async (ownerId) => {
   try {
     await Book.deleteMany({ ownerId: ownerId });
-    console.log("deletted all books")
     return true;
   } catch (error) {
-    console.log('Error deleting all books:', error.message);
     throw error;
   }
 };
