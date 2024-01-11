@@ -20,7 +20,6 @@ export default function Board({ boardBooks, category, isOwner }) {
   const openDialog = () => setIsAddDialogOpen(true);
   const closeDialog = () => setIsAddDialogOpen(false);
 
-
   return (
     <div
       style={{ backgroundColor: currentThemeColors.primary }}
@@ -29,15 +28,16 @@ export default function Board({ boardBooks, category, isOwner }) {
       {/* Board Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className={`text-xl font-bold flex items-center`}>
-        <div className="mr-2 flex h-7 w-7 rounded-full justify-center align"style={{
-            alignItems: 'center',
-            backgroundColor: currentThemeColors.accent,
-          }}>
+          <div
+            className="mr-2 flex h-7 w-7 rounded-full justify-center align"
+            style={{
+              alignItems: "center",
+              backgroundColor: currentThemeColors.accent,
+            }}
+          >
             {boardBooks.length}
           </div>
           {convertCamelCaseToText(category)}{" "}
-
-          
         </h2>
         {isOwner && (
           <button

@@ -43,7 +43,7 @@ export default function ModalAddForm({ category, closeDialog, isOpen }) {
       rating: values.rating,
       img_url: values.img_url,
       notes: values.notes,
-      category: values.category ? values.category : category ,
+      category: values.category ? values.category : category,
     };
     console.log("book modal add form: ", book);
     dispatch(createBookAPI(book));

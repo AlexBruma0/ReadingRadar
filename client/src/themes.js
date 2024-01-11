@@ -25,7 +25,7 @@ export const themes = {
     accent: "#d2e8f6",
     text: "black",
   },
-  
+
   aqua: {
     primary: "#e1e7e6",
     secondary: "#f0f0f0",
