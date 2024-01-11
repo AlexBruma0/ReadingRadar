@@ -60,10 +60,10 @@ export default function Layout({ children }) {
         <Sidebar isOpen={isSidebarOpen} isFullWidth={isSidebarFullscreen} />
         <div
           style={{
-            backgroundColor: currentThemeColors.primary,
+
             height: containerHeight,
           }}
-          className={`transition-all duration-300 ${
+          className={`bg-white transition-all duration-300 ${
             isSidebarOpen ? "ml-64" : "ml-0"
           }`}
         >

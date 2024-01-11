@@ -24,7 +24,7 @@ const UsersPage = () => {
   };
 
   return (
-    <div className="flex flex-wrap  p-4 gap-2">
+    <div className="flex flex-wrap  p-4 gap-2 bg-white">
       {users.map((user) => (
         <div
           key={user._id}
