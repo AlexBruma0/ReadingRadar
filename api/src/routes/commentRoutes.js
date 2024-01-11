@@ -6,12 +6,10 @@ const authMiddleware = require('../middleware/authMiddleware');
 // Create a new comment
 router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
   const { content, bookId } = req.body;
-  console.log("req.user: ",req.user)
   const userId = req.user.userId;
 
   try {
     const newComment = await commentController.createComment(content, userId, bookId);
-    console.log("newComment from controller: ",newComment)
     res.status(201).json(newComment);
   } catch (error) {
     res.status(500).json({ error: 'Could not create comment.' });
@@ -26,7 +24,6 @@ router.get('/book/:bookId', async (req, res) => {
     const comments = await commentController.getCommentsByBook(bookId);
     res.json(comments);
   } catch (error) {
-    console.log(error.message)
     res.status(500).json({ error: 'Error fetching comments.' });
   }
 });

@@ -13,7 +13,6 @@ const AddForm = ({ categoryProps, initialValues, handleSubmitForm }) => {
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
   const categories = useSelector(selectBoardNames);
-  console.log("categories: ", categoryProps);
   const bookFields = {
     title: initialValues.title,
     author: initialValues.author,
@@ -27,7 +26,6 @@ const AddForm = ({ categoryProps, initialValues, handleSubmitForm }) => {
 
   const onSubmit = async (values, form) => {
     values.category = values.category.map((cat) => cat.label);
-    console.log("addform values: ", values);
     handleSubmitForm(values);
     // form.reset();
   };

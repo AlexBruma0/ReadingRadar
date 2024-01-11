@@ -40,12 +40,10 @@ async function updateProfilePicture(userId, profilePicture) {
     user.profilePicture = profilePicture;
     await user.save();
   } catch (error) {
-    console.log(error.message);
     throw error;
   }
 }
 async function getUser(userId) {
-  console.log(userId)
   const users = await User.findById(userId);
   if (!users) {
     throw new Error('no users');

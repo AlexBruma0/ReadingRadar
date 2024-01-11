@@ -37,10 +37,8 @@ router.post('/register', upload.single('profilePicture') ,async (req, res) => {
     const profilePicture = req.file.location;
     const user = await userController.registerUser(userName, password, email, theme, profilePicture);
     const token = jwt.sign({ userId: user._id }, process.env.jwt_secret_key);
-    console.log({ jwtToken:token, userId: user._id, userName: user.userName, theme: user.theme, profilePicture: user.profilePicture })
     res.status(201).json({ jwtToken:token, userId: user._id, userName: user.userName, theme: user.theme, profilePicture: user.profilePicture });
   } catch (error) {
-    console.log(error.message);
     res.status(500).json({ error: 'Could not register user.' });
   }
 });
@@ -52,7 +50,6 @@ router.put('/:id/profilePicture', upload.single('profilePicture'), async (req, r
     await userController.updateProfilePicture(userId, profilePicture);
     res.status(200).json({ message: 'Profile picture updated successfully.' });
   } catch (error) {
-    console.log(error.message);
     res.status(500).json({ error: 'Could not update profile picture.' });
   }
 });
@@ -76,7 +73,6 @@ router.post('/login', async (req, res) => {
     res.json({ token,userId });
   
   } catch (error) {
-    console.log(error.message);
     res.status(401).json({ error: 'Invalid login credentials.' });
   }
 });
@@ -87,7 +83,6 @@ router.get('/:id', async (req, res) => {
     const user = await userController.getUser(userId);
     res.status(201).json(user);
   } catch (error) {
-    console.log(error.message);
     res.status(500).json({ error: error.message });
   }
 });

@@ -45,7 +45,6 @@ export default function ModalAddForm({ category, closeDialog, isOpen }) {
       notes: values.notes,
       category: values.category ? values.category : category,
     };
-    console.log("book modal add form: ", book);
     dispatch(createBookAPI(book));
     setSelectedBook({});
     setStep(1);

@@ -80,7 +80,6 @@ async function createBook(title, author, rating, notes, img_url, categories, own
     session.endSession();
     return newBooks;
   } catch (error) {
-    console.log(error.message)
     await session.abortTransaction();
     session.endSession();
     throw error;

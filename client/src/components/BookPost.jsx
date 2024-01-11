@@ -42,7 +42,6 @@ export default function BookPost() {
     const fetchOwner = async () => {
       if (viewingId) {
         const fetchedOwner = await dispatch(fetchUser(viewingId));
-        console.log(fetchedOwner.payload);
         setOwner(fetchedOwner.payload);
       }
     };
@@ -55,7 +54,6 @@ export default function BookPost() {
     updatedBook._id = book._id;
     updatedBook.category = book.category;
     const updatedBookFromServer = await dispatch(updateAPIBook(updatedBook));
-    console.log("bookpost: ", updatedBookFromServer.payload);
     setBook(updatedBookFromServer.payload);
     setIsLoading(false);
     setIsEditDialogOpen(false);

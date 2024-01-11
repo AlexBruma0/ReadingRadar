@@ -98,7 +98,6 @@ export const createBookAPI = createAsyncThunk(
 
   async (newBook, thunkAPI) => {
     const jwtToken = localStorage.getItem("jwtToken");
-    console.log("data at slice: ", newBook);
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/books/create`,
       {

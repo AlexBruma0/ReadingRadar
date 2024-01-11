@@ -7,7 +7,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
   const { title, author, rating, notes, img_url, category } = req.body;
   const ownerId = req.user.userId;
-  console.log('category', category)
   try {
     const newBook = await bookController.createBook(
       title,
@@ -18,10 +17,8 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
       category,
       ownerId
     );
-    // console.log(newBook)
     res.status(201).json(newBook);
   } catch (error) {
-    console.log(error.message)
     res.status(500).json({ error: 'Could not create book.' });
   }
 });
@@ -33,13 +30,10 @@ router.get('/searchbooks/:query', async (req, res) => {
   try {
       const books = await bookController.searchGoogleBooks(queryString);
       if (!books || books.length === 0) {
-          console.log({ error: 'No books found for this query.' })
           return res.status(404).json({ error: 'No books found for this query.' });
       }
-      console.log(books)
       res.json(books);
   } catch (error) {
-      console.log(error.message)
       res.status(500).json({ error: error.message});
   }
 });
@@ -76,12 +70,10 @@ router.get('/:ownerId', async (req, res) => {
 // reorder a book reorder
 router.put('/reorder', authMiddleware.authenticateToken, async (req, res) => {
   const { currentOrder, newOrder, currentOrderId } = req.body;
-  console.log(currentOrderId)
   try {
     await bookController.reorderBook(currentOrder, newOrder, currentOrderId);
     res.status(200).json({ success: 'Books reorderd' });
   } catch (error) {
-    console.log(error.message)
     res.status(500).json({ error: 'Error reordering books.' });
   }
 });
@@ -93,7 +85,6 @@ router.put('/move', authMiddleware.authenticateToken, async (req, res) => {
     const movedBook = await bookController.moveBookToNewCategory(currentOrder, newOrder, currentOrderId, currentCategory, newCategory);
     res.status(200).json({ success: 'Book moved successfully', book: movedBook });
   } catch (error) {
-    console.log(error.message);
     res.status(500).json({ error: 'Error moving book to new category.' });
   }
 });

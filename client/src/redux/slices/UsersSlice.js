@@ -72,7 +72,6 @@ export const fetchUser = createAsyncThunk(
       const user = await response.json();
       return user;
     } catch (error) {
-      console.log(error.message);
       return rejectWithValue(error.message);
     }
   },

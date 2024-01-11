@@ -13,7 +13,6 @@ export default function HomePage() {
     const fetchOwner = async () => {
       if (viewingId) {
         const fetchedOwner = await dispatch(fetchUser(viewingId));
-        console.log(fetchedOwner.payload);
         setOwner(fetchedOwner.payload);
       }
     };
