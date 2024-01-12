@@ -50,7 +50,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
         <Link
           id="hov"
           key={index}
-          className="px-4 py-2 flex items-center rounded-lg" // Added items-center here
+          className="px-4 py-2 flex items-center rounded-lg" 
           to={link.link}
           onClick={
             link.name === "Logout"
@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
             backgroundColor:
               location.pathname === link.link
                 ? currentThemeColors.accent
-                : "transparent", // Add this line
+                : "transparent", 
             "--hover-background": currentThemeColors.secondary
           }}
         >

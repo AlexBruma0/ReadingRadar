@@ -9,17 +9,10 @@ import tinycolor from "tinycolor2";
 import UserContext from "./UserContext";
 
 export default function Navbar({ toggleSidebar }) {
-  const [searching, setSearching] = useState(false);
 
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
-  const { user } = useContext(UserContext); // Access user from UserContext
-  const viewingId = localStorage.getItem("viewingId");
-  const userId = localStorage.getItem("userId");
-
-  const toggleSearching = () => {
-    setSearching(!searching);
-  };
+  const { user } = useContext(UserContext);
 
   return (
     <nav
@@ -33,7 +26,7 @@ export default function Navbar({ toggleSidebar }) {
       <div className="flex items-center">
         <span
           id="sidebarToggle"
-          className="text-2xl mr-3 cursor-pointer p-4 rounded-full sidebarToggle" // Increase the text size here
+          className="text-2xl mr-3 cursor-pointer p-4 rounded-full sidebarToggle" 
           onClick={toggleSidebar}
           style={{
             "--hover-background": tinycolor(currentThemeColors.primary)
@@ -57,7 +50,7 @@ export default function Navbar({ toggleSidebar }) {
 
             <img
               src={user.profilePicture}
-              className="h-16 w-16 rounded-full ml-2" // Increase the height and width here
+              className="h-16 w-16 rounded-full ml-2" 
               alt="User"
             />
           </>

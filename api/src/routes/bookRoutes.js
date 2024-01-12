@@ -23,7 +23,6 @@ router.post('/create', authMiddleware.authenticateToken, async (req, res) => {
   }
 });
 
-// Define the route
 router.get('/searchbooks/:query', async (req, res) => {
   const queryString = req.params.query;
 
@@ -67,7 +66,7 @@ router.get('/:ownerId', async (req, res) => {
 });
 
 
-// reorder a book reorder
+// reorder a book 
 router.put('/reorder', authMiddleware.authenticateToken, async (req, res) => {
   const { currentOrder, newOrder, currentOrderId } = req.body;
   try {

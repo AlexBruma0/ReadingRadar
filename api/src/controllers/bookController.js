@@ -39,7 +39,7 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const findBooksByTitle = async (titleQuery, limit = 4) => { // default limit to 10
+const findBooksByTitle = async (titleQuery, limit = 4) => { 
   try {
       const regex = new RegExp(titleQuery, 'i'); // 'i' for case-insensitive
       const books = await books_storage.find({title: regex}).limit(limit);
@@ -176,15 +176,12 @@ async function deleteBook(bookId) {
     const bookToDelete = await Book.findOne({ _id: bookId}).session(session)
     const sharedId = bookToDelete.sharedId;
 
-    // Find all books with the same sharedId
     const booksToDelete = await Book.find({ sharedId: sharedId }).session(session);
 
-    // For each book to be deleted, update the order of the remaining books in its category
     for (let book of booksToDelete) {
       await Book.updateMany({ order: { $gt: book.order }, category: book.category }, { $inc: { order: -1 } }).session(session);
     }
 
-    // Delete all books with the same sharedId
     await Book.deleteMany({ sharedId: sharedId }).session(session);
 
     await session.commitTransaction();

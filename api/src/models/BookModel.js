@@ -8,7 +8,7 @@ const bookSchema = new mongoose.Schema({
   img_url: String,
   category: String,
   order: Number,
-  sharedId: mongoose.Schema.Types.ObjectId, // new field
+  sharedId: mongoose.Schema.Types.ObjectId, 
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   timeAdded: { type: Date, default: Date.now },
 });

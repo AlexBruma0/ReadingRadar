@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { v4 as uuid, v4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import { Form, Field } from "react-final-form";
-import { createBook, createBookAPI } from "../redux/slices/BooksSlice";
 import ReactStars from "react-rating-stars-component";
 import Select from "react-select";
 import { selectBoardNames } from "../redux/slices/BooksSlice";
@@ -27,7 +25,6 @@ const AddForm = ({ categoryProps, initialValues, handleSubmitForm }) => {
   const onSubmit = async (values, form) => {
     values.category = values.category.map((cat) => cat.label);
     handleSubmitForm(values);
-    // form.reset();
   };
 
   const feildMap = {

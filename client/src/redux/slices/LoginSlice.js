@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Async action using createAsyncThunk
 export const loginUser = createAsyncThunk(
   "login/userLogin",
   async (userData, { rejectWithValue }) => {
@@ -31,7 +30,6 @@ export const loginUser = createAsyncThunk(
   },
 );
 
-// createSlice for login
 const loginSlice = createSlice({
   name: "login",
   initialState: {
@@ -41,7 +39,6 @@ const loginSlice = createSlice({
     isAuthenticated: false,
   },
   reducers: {
-    // Reducer for logout
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
@@ -68,6 +65,5 @@ const loginSlice = createSlice({
   },
 });
 
-// Export the reducer and actions
 export const { logout } = loginSlice.actions;
 export default loginSlice.reducer;

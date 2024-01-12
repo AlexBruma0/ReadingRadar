@@ -50,7 +50,7 @@ export default function BookPost() {
   }, [viewingId, dispatch]);
 
   const handleUpdate = async (updatedBook) => {
-    setIsLoading(true); // Set loading state to true
+    setIsLoading(true);
     updatedBook._id = book._id;
     updatedBook.category = book.category;
     const updatedBookFromServer = await dispatch(updateAPIBook(updatedBook));

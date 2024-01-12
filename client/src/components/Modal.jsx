@@ -16,7 +16,6 @@ const Modal = ({ closeDialog, children, isOpen, isLoading }) => {
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <SpinnerCircular size={200} color="black" />{" "}
-            {/* Adjust spinner size here */}
           </div>
         ) : (
           children

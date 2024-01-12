@@ -20,12 +20,11 @@ export default function KanbanBoard() {
   const userId = localStorage.getItem("userId");
   const viewingId = localStorage.getItem("viewingId");
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false); 
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Check if the viewingId is the same as the userId
   const isOwner = userId === viewingId;
 
   const openModal = () => {
@@ -45,11 +44,11 @@ export default function KanbanBoard() {
 
   useEffect(() => {
     const fetchBooksData = async () => {
-      setLoading(true); // Set loading to true before fetching
+      setLoading(true);
       if (viewingId) {
         await dispatch(fetchBooks(viewingId));
       }
-      setLoading(false); // Set loading to false after fetching
+      setLoading(false); 
     };
 
     fetchBooksData();
@@ -102,14 +101,12 @@ export default function KanbanBoard() {
       ...startBooks[source.index],
       category: destination.droppableId,
     };
-    // Check if a book with the same sharedId already exists in the destination board
     const doesBookExist = finishBooks.some(
       (book) => book.sharedId === movedItem.sharedId,
     );
 
     if (doesBookExist) {
-      // If a book with the same sharedId exists, prevent the drop action
-      // You can also show a message to the user here
+
       alert("A book with the same ID already exists in this category.");
       return;
     }

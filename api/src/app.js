@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./config/config');
-const cors = require('cors'); // Import the cors package
+const cors = require('cors'); 
 const bookRoutes = require('./routes/bookRoutes');
 const userRoutes = require('./routes/userRoutes');
 const commentRoutes = require('./routes/commentRoutes');
@@ -9,7 +9,7 @@ const commentRoutes = require('./routes/commentRoutes');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors()); // Use the cors middleware
+app.use(cors()); 
 app.use(bodyParser.json());
 
 app.use('/books', bookRoutes);

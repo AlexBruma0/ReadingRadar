@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Async action for registration using createAsyncThunk
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ userData, profilePicture }, { rejectWithValue }) => {
@@ -16,8 +15,7 @@ export const registerUser = createAsyncThunk(
         {
           method: "POST",
           headers: {
-            // Don't set Content-Type header when using FormData
-            // The browser will set it for you, including the necessary boundary parameter
+
           },
           body: formData,
         },
@@ -26,7 +24,6 @@ export const registerUser = createAsyncThunk(
       if (!response.ok) {
         throw new Error("Registration failed");
       }
-
       const user = await response.json();
       localStorage.setItem("jwtToken", user.jwtToken);
       localStorage.setItem("userId", user.userId);
@@ -38,7 +35,6 @@ export const registerUser = createAsyncThunk(
   },
 );
 
-// createSlice for registration
 const registrationSlice = createSlice({
   name: "registration",
   initialState: {

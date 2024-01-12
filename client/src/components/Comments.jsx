@@ -6,7 +6,7 @@ import {
   createCommentAPI,
   updateCommentAPI,
   deleteCommentAPI,
-} from "../redux/slices/CommentsSlice"; // Import your Redux actions
+} from "../redux/slices/CommentsSlice"; 
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import { FaPlus } from "react-icons/fa";
