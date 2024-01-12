@@ -2,12 +2,13 @@ const books_storage = require('../models/books_storageModel')
 const Book = require('../models/BookModel');
 const mongoose = require('mongoose');
 const { google } = require('googleapis');
+require('dotenv').config()
 
-const API_KEY = 'AIzaSyA_oV9aCPCHYSUIV75el2GynRjFmNEMTdI';
+
 
 const books = google.books({
   version: 'v1',
-  auth: API_KEY
+  auth: process.env.GOOGLE_API_KEY
 });
 
 async function searchGoogleBooks(query) {
