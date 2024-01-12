@@ -4,11 +4,16 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { ThemeContext } from "./ThemeContext";
+import { themes } from "../themes";
+import { useContext } from "react";
 
 const UsersPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+  const { theme } = useContext(ThemeContext);
+  const currentThemeColors = themes[theme];
 
   useEffect(() => {
     if (userId) {
@@ -42,7 +47,14 @@ const UsersPage = () => {
           <div className="p-4 text-center">
             <div className="font-bold">{user.userName}</div>
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs py-2 px-4 rounded mt-3"
+              style={
+                currentThemeColors
+                  ? {
+                      backgroundColor: currentThemeColors.accent,
+                    }
+                  : null
+              }
+              className=" font-bold text-xs py-2 px-4 rounded mt-3"
               onClick={() => handleVisitUser(user._id)}
             >
               View Books

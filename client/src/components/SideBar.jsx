@@ -60,7 +60,6 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
                 : null
           }
           style={{
-            color: currentThemeColors.text,
             backgroundColor:
               location.pathname === link.link
                 ? currentThemeColors.accent

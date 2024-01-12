@@ -45,8 +45,7 @@ function Comment({ comment, onDelete, onEdit }) {
   return (
     <div
       style={{
-        backgroundColor: currentThemeColors.background,
-        color: currentThemeColors.text,
+        backgroundColor: currentThemeColors.primary,
       }}
       className="p-4 rounded-lg shadow-lg mt-4"
     >
@@ -58,7 +57,6 @@ function Comment({ comment, onDelete, onEdit }) {
             style={{ width: "30px", height: "30px", borderRadius: "50%" }}
           />
           <p
-            style={{ color: currentThemeColors.text }}
             className="font-semibold text-lg ml-2"
           >
             {commentUser.userName}
@@ -71,10 +69,6 @@ function Comment({ comment, onDelete, onEdit }) {
           <textarea
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
-            style={{
-              borderColor: currentThemeColors.border,
-              color: currentThemeColors.text,
-            }}
             className="shadow appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline mt-2"
             rows="3"
           />

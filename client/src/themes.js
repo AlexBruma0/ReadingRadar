@@ -1,17 +1,12 @@
 // themes.js
 export const themes = {
   gucci: {
-    primary: "#ffc6d0",
-    secondary: "#117b5d",
+    primary: "#117b5d",
+    secondary: "#ffc6d0",
     accent: "#ffdf33",
-    text: "white",
+    text: "black",
   },
-  ysl: {
-    primary: "#fbb9c0",
-    secondary: "#080707",
-    accent: "#e6c200",
-    text: "white",
-  },
+  
   babyPink: {
     primary: "#ffffff",
     secondary: "#f0f0f0",
@@ -33,11 +28,5 @@ export const themes = {
     text: "black",
   },
 
-  dark: {
-    primary: "#1a1a1a",
-    secondary: "#333333",
-    accent: "#333333",
-    text: "white",
-  },
 };
 //
