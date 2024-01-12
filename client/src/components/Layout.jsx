@@ -9,7 +9,7 @@ export default function Layout({ children }) {
   const currentThemeColors = themes[theme];
 
   const [navbarHeight, setNavbarHeight] = useState(0);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [containerHeight, setContainerHeight] = useState("100vh");
   const [isSidebarFullscreen, setIsSidebarFullscreen] = useState(false);
 
