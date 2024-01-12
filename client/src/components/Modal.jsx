@@ -7,7 +7,7 @@ const Modal = ({ closeDialog, children, isOpen, isLoading }) => {
   return (
     <dialog
       open={isOpen}
-      className="p-5 bg-white rounded-lg shadow-lg fixed inset-0 w-[600px] h-[800px] border-1 z-50"
+      className="p-5 bg-white rounded-lg shadow-lg fixed inset-0 w-full h-full max-w-2xl max-h-2xl border-1 z-50 overflow-auto"
     >
       <div className="flex flex-col h-full justify-between">
         <div onClick={closeDialog} className="cursor-pointer">
