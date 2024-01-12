@@ -50,7 +50,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
         <Link
           id="hov"
           key={index}
-          className="px-4 py-2 flex items-center rounded-r-lg" // Added items-center here
+          className="px-4 py-2 flex items-center rounded-lg" // Added items-center here
           to={link.link}
           onClick={
             link.name === "Logout"
