@@ -33,7 +33,7 @@ export default function Navbar({ toggleSidebar }) {
       <div className="flex items-center">
         <span
           id="sidebarToggle"
-          className="text-xl mr-3 cursor-pointer p-4 rounded-full sidebarToggle"
+          className="text-2xl mr-3 cursor-pointer p-4 rounded-full sidebarToggle" // Increase the text size here
           onClick={toggleSidebar}
           style={{
             "--hover-background": tinycolor(currentThemeColors.primary)
@@ -45,24 +45,19 @@ export default function Navbar({ toggleSidebar }) {
         </span>
         <div className="cursor-pointer">
           <Link to="/home">
-            <img src={Image} className="h-10 w-10 rounded-full" alt="Logo" />
+            <img src={Image} className="h-16 w-16 rounded-full" alt="Logo" /> 
           </Link>
         </div>
       </div>
       <div className="flex-grow"></div>
-      <div >
-        <button type="submit" className={`p-2 rounded-full `}>
-          <IoIosSearch size={25} />
-        </button>
-      </div>
       <div className="p-2 flex items-center">
         {user ? (
           <>
-            <div className="font-bold">{user.userName}</div>
+            <div className="font-bold text-3xl">{user.userName}</div> 
 
             <img
               src={user.profilePicture}
-              className="h-10 w-10 rounded-full ml-2"
+              className="h-16 w-16 rounded-full ml-2" // Increase the height and width here
               alt="User"
             />
           </>

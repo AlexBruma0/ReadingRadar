@@ -26,13 +26,13 @@ export default function HomePage() {
         <div className="flex justify-between bg-white">
           <div className="font-bold my-4 text-3xl ml-2">Library</div>
           <div className="flex items-center pe-2">
-            <div className="font-bold my-4 text-3xl mr-2">{owner.userName}</div>
+            <div className="font-bold my-4 text-2xl mr-2">{owner.userName}</div>
             <img
               src={owner.profilePicture}
               alt=""
               style={{
-                width: "50px",
-                height: "50px",
+                width: "30px",
+                height: "30px",
                 borderRadius: "500px",
               }}
             />

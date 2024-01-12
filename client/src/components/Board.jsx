@@ -29,9 +29,8 @@ export default function Board({ boardBooks, category, isOwner }) {
       <div className="flex justify-between items-center mb-4">
         <h2 className={`text-xl font-bold flex items-center`}>
           <div
-            className="mr-2 flex h-7 w-7 rounded-full justify-center align"
+            className="mr-2 flex h-7 w-7 rounded-full justify-center items-center text-lg font-bold shadow-lg p-2"
             style={{
-              alignItems: "center",
               backgroundColor: currentThemeColors.accent,
             }}
           >
@@ -42,7 +41,7 @@ export default function Board({ boardBooks, category, isOwner }) {
         {isOwner && (
           <button
             style={{ backgroundColor: currentThemeColors.accent }}
-            className={`p-2 rounded-full `}
+            className="p-2 rounded-full text-lg font-bold shadow-lg"
             onClick={openDialog}
           >
             <Plus />
