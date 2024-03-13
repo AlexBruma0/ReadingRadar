@@ -121,9 +121,8 @@ async function reorderBook(currentOrder, newOrder, currentOrderId) {
     }
 
     const updateResult = await Book.updateOne({ _id: currentOrderId }, { order: newOrder });
-
-
   } catch (error) {
+    throw error;
   }
 }
 

@@ -4,6 +4,7 @@ import { loginUser } from "../redux/slices/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Image from "../../resources/logo.png";
+import { reorderAPIBook } from "../redux/slices/BooksSlice";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -12,10 +13,13 @@ const LoginPage = () => {
   const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/home");
-    }
-  }, [isAuthenticated, navigate]);
+    const checkToken = async () => {
+      const order = { };
+      const response = await dispatch(reorderAPIBook(order));
+      if(response.payload.error === 'Invalid token') { } else {navigate("/home") }
+    };
+    checkToken();
+  });
 
   const handleLogin = (userData) => {
     setLoading(true);

@@ -34,7 +34,7 @@ export const reorderAPIBook = createAsyncThunk(
   "books/updateBook",
   async (order, thunkAPI) => {
     const jwtToken = localStorage.getItem("jwtToken");
-    await fetch(`${import.meta.env.VITE_API_URL}/books/reorder`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/books/reorder`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -46,6 +46,7 @@ export const reorderAPIBook = createAsyncThunk(
         currentOrderId: order.id,
       }),
     });
+    return response.json();
   },
 );
 

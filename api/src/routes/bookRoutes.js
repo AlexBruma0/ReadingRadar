@@ -71,9 +71,9 @@ router.put('/reorder', authMiddleware.authenticateToken, async (req, res) => {
   const { currentOrder, newOrder, currentOrderId } = req.body;
   try {
     await bookController.reorderBook(currentOrder, newOrder, currentOrderId);
-    res.status(200).json({ success: 'Books reorderd' });
+    res.status(200).json({ status: 'Books reorderd' });
   } catch (error) {
-    res.status(500).json({ error: 'Error reordering books.' });
+    res.status(500).json({ status: 'Error' });
   }
 });
 
