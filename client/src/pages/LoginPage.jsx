@@ -10,7 +10,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
+  const [loginFailed, setLoginFailed] = useState(false);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -21,9 +21,16 @@ const LoginPage = () => {
     checkToken();
   });
 
-  const handleLogin = (userData) => {
+  const handleLogin = async (userData) => {
     setLoading(true);
-    dispatch(loginUser(userData));
+    const response = await dispatch(loginUser(userData));
+    if(response.payload === 'Login failed') {
+      setLoginFailed(true);
+      setLoading(false);
+    } else {
+      setLoginFailed(false);
+      setLoading(false);}
+
   };
 
   const handleSubmit = (event) => {
@@ -35,15 +42,6 @@ const LoginPage = () => {
 
   return (
     <>
-      {isAuthenticated ? (
-        <div> already logged in</div>
-      ) : loading ? (
-        <div>
-          {" "}
-          loading... you might have entered the wrong credentials, refresh the
-          page to try again
-        </div>
-      ) : (
         <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
@@ -55,9 +53,13 @@ const LoginPage = () => {
               Sign in to your account
             </h2>
           </div>
-
+          <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          {loginFailed && <p style={{color: 'red'}}>Username or password is incorrect</p>}
+          </div>
+          
           <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form class="space-y-6" onSubmit={handleSubmit}>
+              
               <div>
                 <label
                   for="email"
@@ -103,7 +105,8 @@ const LoginPage = () => {
                   type="submit"
                   class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Sign in
+                  {loading ? 'Loading...' : 'Sign In'}
+                  
                 </button>
               </div>
             </form>
@@ -120,7 +123,6 @@ const LoginPage = () => {
             </p>
           </div>
         </div>
-      )}
     </>
   );
 };
