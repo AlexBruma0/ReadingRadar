@@ -1,18 +1,32 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate, Link as RouterLink } from "react-router-dom";
 import Image from "../../resources/logo.png";
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
-import { IoIosSearch } from "react-icons/io";
 import { FiMenu } from "react-icons/fi";
 import tinycolor from "tinycolor2";
-import UserContext from "./UserContext";
+import { fetchUser } from "../redux/slices/UsersSlice";
+import { useDispatch } from "react-redux";
 
 export default function Navbar({ toggleSidebar }) {
 
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
-  const { user } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const userId = localStorage.getItem("userId");
+  const [owner, setOwner] = useState(null);
+
+  useEffect(() => {
+    const fetchOwner = async () => {
+      if (userId) {
+        const fetchedOwner = await dispatch(fetchUser(userId));
+        setOwner(fetchedOwner.payload);
+      }
+    };
+
+    fetchOwner();
+  }, [userId, dispatch]);
+
 
   return (
     <nav
@@ -44,12 +58,12 @@ export default function Navbar({ toggleSidebar }) {
       </div>
       <div className="flex-grow"></div>
       <div className="p-2 flex items-center">
-        {user ? (
+        {owner ? (
           <>
-            <div className="font-bold text-3xl">{user.userName}</div> 
+            <div className="font-bold text-3xl">{owner.userName}</div> 
 
             <img
-              src={user.profilePicture}
+              src={owner.profilePicture}
               className="h-16 w-16 rounded-full ml-2" 
               alt="User"
             />
