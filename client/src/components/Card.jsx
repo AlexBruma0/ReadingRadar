@@ -30,6 +30,16 @@ export default function Card({ book, disableOnClick }) {
       <div className="flex-1 mr-5">
         <h2 className="text-2xl font-semibold font-serif">{book.title}</h2>
         <p className="text-sm italic">{book.author}</p>
+        {book.rating && (
+          <ReactStars
+            count={5}
+            value={book.rating}
+            size={20}
+            activeColor="#ffd700"
+            isHalf={true}
+            edit={false}
+          />
+        )}
       </div>
       <div className="flex-none">
         <img
