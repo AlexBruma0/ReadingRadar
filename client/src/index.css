@@ -9,6 +9,10 @@
   grid-auto-flow: dense; /* Add this line */
 }
 
+.item::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari and Opera */
+}
+
 
 .item {
   padding-bottom: 1rem;

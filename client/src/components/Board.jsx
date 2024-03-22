@@ -22,8 +22,14 @@ export default function Board({ boardBooks, category, isOwner }) {
 
   return (
     <div
-      style={{ backgroundColor: currentThemeColors.primary }}
-      className={`item m-4 p-4 rounded-lg shadow-lg `}
+      style={{
+        backgroundColor: currentThemeColors.primary,
+        scrollbarWidth: 'none', /* For Firefox */
+        msOverflowStyle: 'none', /* For Internet Explorer and Edge */
+        overflowY: 'scroll',
+        maxHeight: '30rem'
+      }}
+      className={`item m-4 p-4 rounded-lg shadow-lg overflow-y-scroll`}
     >
       {/* Board Header */}
       <div className="flex justify-between items-center mb-4">
