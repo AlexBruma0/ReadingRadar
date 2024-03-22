@@ -40,7 +40,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
 
   return (
     <div
-      className={`fixed left-0 h-full z-30 pt-3 bg-white ${
+      className={`mt-4 fixed left-0 h-full z-30 pt-3 bg-white ${
         isFullWidth ? "w-full" : "w-64"
       } transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
@@ -50,7 +50,7 @@ const Sidebar = ({ isOpen, isFullWidth }) => {
         <Link
           id="hov"
           key={index}
-          className="px-4 py-2 flex items-center rounded-lg" 
+          className="px-4 py-2 flex items-center" 
           to={link.link}
           onClick={
             link.name === "Logout"
