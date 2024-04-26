@@ -32,7 +32,7 @@ export default function Board({ boardBooks, category, isOwner }) {
       className={`item m-4 p-4 rounded-lg shadow-lg overflow-y-scroll`}
     >
       {/* Board Header */}
-      <div className="shadow-md p-1 flex justify-between items-center mb-4 rounded-lg" style={{position: 'sticky', top: '0', zIndex: '1000', backgroundColor: '#fff'}}>
+      <div className="shadow-md p-1 flex justify-between items-center mb-4 rounded-lg" style={{position: 'sticky', top: '0', zIndex: '1', backgroundColor: '#fff'}}>
         <h2 className={`text-xl font-bold flex items-center `}>
           <div
             className="mr-2 flex h-7 w-7 rounded-full justify-center items-center text-lg font-bold shadow-lg p-2"
