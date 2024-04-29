@@ -34,3 +34,12 @@
     width: auto !important;
   }
 }
+.grid-layout {
+  display: grid;
+  grid-template-columns:repeat(auto-fit, minmax(26rem, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+}
+.list-layout {
+  display: block;
+}

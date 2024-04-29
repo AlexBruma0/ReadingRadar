@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { Plus } from "react-feather";
+import { Maximize2 } from 'react-feather';
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import Drag from "./Drag";
 import ModalAddForm from "./ModalAddForm";
+import { useNavigate } from "react-router-dom";
 
 export default function Board({ boardBooks, category, isOwner }) {
+  const navigate = useNavigate();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
@@ -44,7 +47,17 @@ export default function Board({ boardBooks, category, isOwner }) {
           </div>
           {convertCamelCaseToText(category)}{" "}
         </h2>
+
+        <div>
+        <button
+            style={{ backgroundColor: currentThemeColors.secondary }}
+            className="p-2 rounded-full text-lg font-bold shadow-lg mr-1"
+            onClick={() => navigate(`/board/${category}`)}
+          >
+            <Maximize2 />
+          </button>
         {isOwner && (
+
           <button
             style={{ backgroundColor: currentThemeColors.accent }}
             className="p-2 rounded-full text-lg font-bold shadow-lg"
@@ -53,6 +66,9 @@ export default function Board({ boardBooks, category, isOwner }) {
             <Plus />
           </button>
         )}
+
+        </div>
+
       </div>
 
       {/* Droppable Area */}

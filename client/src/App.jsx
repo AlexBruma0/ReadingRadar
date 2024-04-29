@@ -5,6 +5,7 @@ import RegistrationPage from "./pages/RegisterPage";
 import UsersPage from "./pages/UsersPage";
 import SettingsPage from "./pages/SettingsPage";
 import BookPage from "./pages/BookPage";
+import BoardPage from "./pages/BoardPage";
 import { ThemeProvider } from "./components/ThemeContext";
 import UserContext from "./components/UserContext";
 import { fetchUser } from "./redux/slices/UsersSlice";
@@ -38,6 +39,7 @@ export default function App() {
             <Route path="settings" element={<SettingsPage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="book/:id" element={<BookPage />} />
+            <Route path="board/:id" element={<BoardPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
