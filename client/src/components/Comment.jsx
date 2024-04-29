@@ -56,11 +56,7 @@ function Comment({ comment, onDelete, onEdit }) {
             alt={comment.user.userName}
             style={{ width: "30px", height: "30px", borderRadius: "50%" }}
           />
-          <p
-            className="font-semibold text-lg ml-2"
-          >
-            {commentUser.userName}
-          </p>
+          <p className="font-semibold text-lg ml-2">{commentUser.userName}</p>
         </div>
       )}
 

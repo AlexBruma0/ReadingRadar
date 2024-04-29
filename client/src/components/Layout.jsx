@@ -30,7 +30,6 @@ export default function Layout({ children }) {
   }, [navbarHeight]);
 
   useEffect(() => {
-
     const checkWindowSize = () => {
       if (window.innerWidth < 700) {
         setIsSidebarFullscreen(true);
@@ -40,25 +39,25 @@ export default function Layout({ children }) {
         setIsSidebarOpen(true);
       }
     };
-    
+
     const handleClick = (event) => {
       if (window.innerWidth < 700) {
-        if (event.target.children.length === 3 || event.target.id == "sidebarToggle") {
-          return; 
-          
+        if (
+          event.target.children.length === 3 ||
+          event.target.id == "sidebarToggle"
+        ) {
+          return;
         }
         setIsSidebarFullscreen(true);
         setIsSidebarOpen(false);
-      } 
-    }
+      }
+    };
 
     window.addEventListener("resize", checkWindowSize);
     window.addEventListener("load", checkWindowSize);
     window.addEventListener("orientationchange", checkWindowSize);
     window.addEventListener("beforeunload", checkWindowSize);
     window.addEventListener("click", handleClick);
-
-
   });
 
   return (
@@ -68,7 +67,6 @@ export default function Layout({ children }) {
         <Sidebar isOpen={isSidebarOpen} isFullWidth={isSidebarFullscreen} />
         <div
           style={{
-
             height: containerHeight,
           }}
           className={`bg-white transition-all duration-300 ${

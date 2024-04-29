@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { Plus } from "react-feather";
-import { Maximize2 } from 'react-feather';
+import { Maximize2 } from "react-feather";
 import { ThemeContext } from "../components/ThemeContext";
 import { themes } from "../themes";
 import Drag from "./Drag";
@@ -27,15 +27,23 @@ export default function Board({ boardBooks, category, isOwner }) {
     <div
       style={{
         backgroundColor: currentThemeColors.primary,
-        scrollbarWidth: 'none', /* For Firefox */
-        msOverflowStyle: 'none', /* For Internet Explorer and Edge */
-        overflowY: 'scroll',
-        maxHeight: '30rem'
+        scrollbarWidth: "none" /* For Firefox */,
+        msOverflowStyle: "none" /* For Internet Explorer and Edge */,
+        overflowY: "scroll",
+        maxHeight: "30rem",
       }}
       className={`item m-4 p-4 rounded-lg shadow-lg overflow-y-scroll`}
     >
       {/* Board Header */}
-      <div className="shadow-md p-1 flex justify-between items-center mb-4 rounded-lg" style={{position: 'sticky', top: '0', zIndex: '1', backgroundColor: '#fff'}}>
+      <div
+        className="shadow-md p-1 flex justify-between items-center mb-4 rounded-lg"
+        style={{
+          position: "sticky",
+          top: "0",
+          zIndex: "1",
+          backgroundColor: "#fff",
+        }}
+      >
         <h2 className={`text-xl font-bold flex items-center `}>
           <div
             className="mr-2 flex h-7 w-7 rounded-full justify-center items-center text-lg font-bold shadow-lg p-2"
@@ -49,26 +57,23 @@ export default function Board({ boardBooks, category, isOwner }) {
         </h2>
 
         <div>
-        <button
+          <button
             style={{ backgroundColor: currentThemeColors.secondary }}
             className="p-2 rounded-full text-lg font-bold shadow-lg mr-1"
             onClick={() => navigate(`/board/${category}`)}
           >
             <Maximize2 />
           </button>
-        {isOwner && (
-
-          <button
-            style={{ backgroundColor: currentThemeColors.accent }}
-            className="p-2 rounded-full text-lg font-bold shadow-lg"
-            onClick={openDialog}
-          >
-            <Plus />
-          </button>
-        )}
-
+          {isOwner && (
+            <button
+              style={{ backgroundColor: currentThemeColors.accent }}
+              className="p-2 rounded-full text-lg font-bold shadow-lg"
+              onClick={openDialog}
+            >
+              <Plus />
+            </button>
+          )}
         </div>
-
       </div>
 
       {/* Droppable Area */}

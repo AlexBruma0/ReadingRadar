@@ -4,7 +4,7 @@
 
 .grid-container--small {
   display: grid;
-  grid-template-columns:repeat(auto-fit, minmax(26rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
   grid-gap: 1rem;
   grid-auto-flow: dense; /* Add this line */
 }
@@ -12,7 +12,6 @@
 .item::-webkit-scrollbar {
   display: none; /* For Chrome, Safari and Opera */
 }
-
 
 .item {
   padding-bottom: 1rem;
@@ -36,10 +35,14 @@
 }
 .grid-layout {
   display: grid;
-  grid-template-columns:repeat(auto-fit, minmax(26rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
   grid-gap: 20px;
   padding: 20px;
 }
 .list-layout {
   display: block;
+}
+
+input:checked ~ .dot {
+  transform: translateX(100%);
 }

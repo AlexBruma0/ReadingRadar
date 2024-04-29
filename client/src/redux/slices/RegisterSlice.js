@@ -14,9 +14,7 @@ export const registerUser = createAsyncThunk(
         `${import.meta.env.VITE_API_URL}/users/register`,
         {
           method: "POST",
-          headers: {
-
-          },
+          headers: {},
           body: formData,
         },
       );

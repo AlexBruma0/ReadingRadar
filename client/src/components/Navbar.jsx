@@ -9,7 +9,6 @@ import { fetchUser } from "../redux/slices/UsersSlice";
 import { useDispatch } from "react-redux";
 
 export default function Navbar({ toggleSidebar }) {
-
   const { theme } = useContext(ThemeContext);
   const currentThemeColors = themes[theme];
   const dispatch = useDispatch();
@@ -27,7 +26,6 @@ export default function Navbar({ toggleSidebar }) {
     fetchOwner();
   }, [userId, dispatch]);
 
-
   return (
     <nav
       style={{
@@ -40,7 +38,7 @@ export default function Navbar({ toggleSidebar }) {
       <div className="flex items-center">
         <span
           id="sidebarToggle"
-          className="text-2xl mr-3 cursor-pointer p-4 rounded-full sidebarToggle" 
+          className="text-2xl mr-3 cursor-pointer p-4 rounded-full sidebarToggle"
           onClick={toggleSidebar}
           style={{
             "--hover-background": tinycolor(currentThemeColors.primary)
@@ -52,7 +50,7 @@ export default function Navbar({ toggleSidebar }) {
         </span>
         <div className="cursor-pointer">
           <Link to="/home">
-            <img src={Image} className="h-16 w-16 rounded-full" alt="Logo" /> 
+            <img src={Image} className="h-16 w-16 rounded-full" alt="Logo" />
           </Link>
         </div>
       </div>
@@ -60,11 +58,11 @@ export default function Navbar({ toggleSidebar }) {
       <div className="p-2 flex items-center">
         {owner ? (
           <>
-            <div className="font-bold text-3xl">{owner.userName}</div> 
+            <div className="font-bold text-3xl">{owner.userName}</div>
 
             <img
               src={owner.profilePicture}
-              className="h-16 w-16 rounded-full ml-2" 
+              className="h-16 w-16 rounded-full ml-2"
               alt="User"
             />
           </>

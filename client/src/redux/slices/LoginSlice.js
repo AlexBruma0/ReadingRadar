@@ -25,7 +25,7 @@ export const loginUser = createAsyncThunk(
       localStorage.setItem("viewingId", user.userId);
       return user;
     } catch (error) {
-      return error.message
+      return error.message;
     }
   },
 );

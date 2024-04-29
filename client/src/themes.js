@@ -6,7 +6,7 @@ export const themes = {
     accent: "#ffdf33",
     text: "black",
   },
-  
+
   babyPink: {
     primary: "#ffe6ea",
     secondary: "#f0f0f0",
@@ -41,6 +41,5 @@ export const themes = {
     accent: "#c6e4ee",
     text: "black",
   },
-
 };
 //
