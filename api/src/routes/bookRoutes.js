@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const bookController = require('../controllers/bookController');
@@ -55,10 +56,23 @@ router.get('/getbook/:id', async (req, res) => {
 
 
 // Get all books
+// router.get('/:ownerId', async (req, res) => {
+//   const ownerId = req.params.ownerId;
+//   try {
+//     const books = await bookController.getBooks(ownerId);
+//     res.json(books);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Error fetching books.' });
+//   }
+// });
+// Get all books
 router.get('/:ownerId', async (req, res) => {
   const ownerId = req.params.ownerId;
+  console.log(req.query)
+  const { category, titleFilter, authorFilter, sortBy } = req.query;
   try {
-    const books = await bookController.getBooks(ownerId);
+    const books = await bookController.getBooks(ownerId, category, titleFilter, authorFilter, sortBy);
+    console.log('book routes: ', books)
     res.json(books);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching books.' });

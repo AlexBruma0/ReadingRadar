@@ -1,10 +1,9 @@
+
 const books_storage = require('../models/books_storageModel')
 const Book = require('../models/BookModel');
 const mongoose = require('mongoose');
 const { google } = require('googleapis');
 require('dotenv').config()
-
-
 
 const books = google.books({
   version: 'v1',
@@ -86,9 +85,36 @@ async function createBook(title, author, rating, notes, img_url, categories, own
     throw error;
   }
 }
+// async function getBooks(ownerId) {
+//   return Book.find({ ownerId: ownerId });
+// }
+async function getBooks(ownerId, category, titleFilter, authorFilter, sortBy) {
+  console.log("category", category,"title", titleFilter, "author", authorFilter, "sort", sortBy, "ownerId", ownerId);
+  let query = { ownerId: ownerId };
 
-async function getBooks(ownerId) {
-  return Book.find({ ownerId: ownerId });
+  if (category !== 'undefined') {
+    query.category = category;
+  }
+
+  if (titleFilter !== 'undefined') {
+    query.title = { $regex: new RegExp(titleFilter, "i") };
+  }
+
+  if (authorFilter !==  'undefined') {
+    query.author = { $regex: new RegExp(authorFilter, "i") };
+  }
+
+  let sortQuery = {};
+  if (sortBy !== 'undefined') {
+    if (sortBy === 'rating') {
+      sortQuery[sortBy] = -1;
+    } else {
+      sortQuery[sortBy] = 1;
+    }
+  }
+  // console.log("book controller: ", Book.find(query).sort(sortQuery));
+
+  return Book.find(query).sort(sortQuery);
 }
 
 async function getBookById(bookId) {

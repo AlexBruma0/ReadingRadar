@@ -1,78 +1,74 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchBooks } from "../redux/slices/BooksSlice";
+import { fetchBooks2 } from "../redux/slices/BooksSlice";
 import Book from "./Book";
+import { useNavigate } from "react-router-dom";
 
 const BigBoard = () => {
   const viewingId = localStorage.getItem("viewingId");
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [books, setBooks] = useState([]);
-  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [sortBy, setSortBy] = useState("rating");
+  const [titleFilter, setTitleFilter] = useState("");
+  const [authorFilter, setAuthorFilter] = useState("");
+  const navigate = useNavigate();
+  const [groupBy, setGroupBy] = useState("none");
   const [isGridView, setIsGridView] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterBy, setFilterBy] = useState("title");
-  const allBooks = useSelector((state) => state.books);
-  const [sortBy, setSortBy] = useState("title");
+
 
   useEffect(() => {
     const fetchCategoryBooks = async () => {
       if (viewingId) {
-        await dispatch(fetchBooks(viewingId));
+        await dispatch(fetchBooks2({userId: viewingId, category: id, titleFilter: titleFilter, authorFilter: authorFilter, sortBy: sortBy}));
       }
-      let categoryBooks = allBooks.boards[id];
-      setBooks(categoryBooks);
+      
     };
     fetchCategoryBooks();
-  }, []);
+    console.log('books: ', books)
+  }, [viewingId, id, sortBy, titleFilter, authorFilter, dispatch]);
 
-  useEffect(() => {
-    let filtered = books.filter((book) =>
-      book[filterBy]?.toLowerCase().includes(searchTerm.toLowerCase()),
-    );
-    filtered.sort((a, b) => {
-      if (sortBy === "rating") {
-        return ((a[sortBy] || 0) - (b[sortBy] || 0)) * -1;
-      } else {
-        if ((a[sortBy] || "").toLowerCase() < (b[sortBy] || "").toLowerCase())
-          return -1;
-        if ((a[sortBy] || "").toLowerCase() > (b[sortBy] || "").toLowerCase())
-          return 1;
-        return 0;
-      }
-    });
-    setFilteredBooks(filtered);
-  }, [searchTerm, books, filterBy, sortBy]);
+
+  const books = useSelector((state) => state.books.boards[id]);
 
   return (
     <div>
-<div className="mt-7 flex justify-between items-center ml-7">
+    <div className="mt-7 flex justify-between items-center ml-7">
       <div className="flex">
         <input
-          type="text"
-          placeholder="Search..."
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
+            type="text"
+            placeholder="Search by title..."
+            onChange={(e) => setTitleFilter(e.target.value)}
+            className="p-2 border border-gray-300 rounded"
         />
-        <select
-          onChange={(e) => setFilterBy(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
-        >
-          <option value="title">Title</option>
-          <option value="author">Author</option>
-        </select>
+        <input
+            type="text"
+            placeholder="Search by author..."
+            onChange={(e) => setAuthorFilter(e.target.value)}
+            className="p-2 border border-gray-300 rounded"
+        />
         <div className="flex items-center space-x-2">
           <span className="ml-3">Sort By:</span>
           <select
-            onChange={(e) => setSortBy(e.target.value)}
-            className="p-2 border border-gray-300 rounded"
+            onChange={(e) => setSortBy(e.target.value.toLowerCase())}
+            className="border border-gray-300 rounded"
           >
+            <option value="rating">Rating</option>
             <option value="title">Title</option>
             <option value="author">Author</option>
-            <option value="rating">Rating</option>
           </select>
         </div>
+        <div className="flex items-center space-x-2">
+        <span className="ml-3">Group By:</span>
+        <select
+          onChange={(e) => setGroupBy(e.target.value)}
+          className="border border-gray-300 rounded"
+        >
+          <option value="none">None</option>
+          <option value="author">Author</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
       </div>
       <h1 className="text-5xl font-bold text-gray-700"> <i>{id}</i></h1>
       <div className="flex items-center">
@@ -88,10 +84,12 @@ const BigBoard = () => {
         </label>
       </div>
     </div>
-      <div className={`${isGridView ? "grid-layout" : "list-layout"}`}>
-        {filteredBooks?.map((book) => (
-          <Book key={book._id} book={book} />
-        ))}
+    <div className={`${isGridView ? "grid-layout" : "list-layout"}`}>
+          {books?.map((book) => (
+            <div className="transform transition-transform hover:scale-105" onClick={()=> navigate(`/book/${book._id}`)}>
+              <Book key={book._id} book={book} />
+            </div>
+          ))}
       </div>
     </div>
   );

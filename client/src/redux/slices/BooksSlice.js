@@ -1,12 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+// export const fetchBooks = createAsyncThunk(
+//   "books/fetchBooks",
+//   async (userId, thunkAPI) => {
+//     const response = await fetch(
+//       `${import.meta.env.VITE_API_URL}/books/${userId}`,
+//     );
+//     return response.json();
+//   },
+// );
 export const fetchBooks = createAsyncThunk(
+    "books/fetchBooks",
+    async ({userId, category, titleFilter, authorFilter, sortBy}, thunkAPI) => {
+        const params = new URLSearchParams({ category, titleFilter, authorFilter, sortBy });
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/books/${userId}?${params.toString()}`,
+        );
+        // console.log('bookslice: ', response.json());
+        return response.json();
+    },
+);
+export const fetchBooks2 = createAsyncThunk(
   "books/fetchBooks",
-  async (userId, thunkAPI) => {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/books/${userId}`,
-    );
-    return response.json();
+  async ({userId, category, titleFilter, authorFilter, sortBy}, thunkAPI) => {
+      const params = new URLSearchParams({ category, titleFilter, authorFilter, sortBy });
+      const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/books/${userId}?${params.toString()}`,
+      );
+      // console.log('bookslice: ', response.json());
+      return response.json();
   },
 );
 
@@ -176,6 +198,21 @@ const booksSlice = createSlice({
         }
         acc[category].push(book);
         acc[category].sort((a, b) => a.order - b.order);
+        return acc;
+      }, {});
+      console.log('bookslice fullfilled: ', boards);
+      state.boards = boards;
+    },
+    [fetchBooks2.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      const books = action.payload;
+      console.log('bookslice fullfilled: ', books);
+      const boards = books.reduce((acc, book) => {
+        const category = book.category;
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(book);
         return acc;
       }, {});
       state.boards = boards;

@@ -46,7 +46,7 @@ export default function KanbanBoard() {
     const fetchBooksData = async () => {
       setLoading(true);
       if (viewingId) {
-        await dispatch(fetchBooks(viewingId));
+        await dispatch(fetchBooks({userId: viewingId}));
       }
       setLoading(false);
     };

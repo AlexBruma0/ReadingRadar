@@ -24,5 +24,6 @@
   },
   "homepage": "https://github.com/AlexBruma0/hannahs-books#readme",
   "dependencies": {
+    "server": "^1.0.39"
   }
 }
