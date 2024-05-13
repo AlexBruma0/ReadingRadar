@@ -2,7 +2,7 @@
 
 ## Description
 
-Welcome to our full stack web app designed for book enthusiasts! This app offers a modern twist on book tracking, similar to Goodreads.
+Welcome to my full stack web app designed for book enthusiasts! This app offers a modern twist on book tracking, similar to Goodreads.
 
 The home page serves as a central hub where users can easily manage their books. They can organize them into categories like 'To Be Read,' 'Reading,' and 'Read,' or create custom categories to suit their needs. Users can drag and drop books between categories for seamless organization.
 
