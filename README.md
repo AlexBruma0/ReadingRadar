@@ -11,6 +11,8 @@ Clicking on a book opens its dedicated page, where owners can edit details such 
 To explore other users' libraries, simply navigate to the sidebar and click on the 'Users' tab. Here, you can browse through registered users and view the books they've added. Users can also leave comments on other users' books, fostering a sense of community among readers.
 
 Additional features include a color theme switcher in the settings, allowing users to personalize their experience. There's also a convenient grid view for each category, complete with filtering and sorting options, making it easy to find and organize books to your liking.
+![alt text](https://github.com/AlexBruma0/ReadingRadar/assets/105242355/f2d58697-352e-4ec3-b61b-b96b702585da "dashboard")
+
 
 ## Installation 
 
